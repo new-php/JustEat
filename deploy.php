@@ -34,7 +34,7 @@ add('shared_dirs', [
 add('writable_dirs', []);
 set('allow_anonymous_stats', false);
 
-inventory('hosts.yml')
+inventory('hosts.yml');
 
 // Tasks
 task('build', function () {
@@ -58,4 +58,4 @@ after('deploy:update_code', 'npm:install');
 after('npm:install', 'npm:run');
 
 // Clears Cloudflare cache after changing the symlink
-after('deploy:symlink', 'deploy:cloudflare'));
+after('deploy:symlink', 'deploy:cloudflare');
