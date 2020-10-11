@@ -1,7 +1,4 @@
 # JustEat
-
--------
-
 ## Requirements
 
 - Apache
