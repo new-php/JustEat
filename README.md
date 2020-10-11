@@ -91,6 +91,8 @@ php artisan key:generate
 php artisan migrate
 
 php artisan db:seed
+
+php artisan passport:install
 ```
 
 -------
@@ -123,7 +125,7 @@ php artisan serve
 
 ## Unit Tests
 
-### PHPUnit (TODO)
+### PHPUnit
 ```bash
 # Run all tests
 php vendor/bin/phpunit
