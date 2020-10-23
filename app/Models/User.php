@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class User extends Authenticatable
 {
-    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, CrudTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -47,10 +48,5 @@ class User extends Authenticatable
     public function addresses()
     {
         return $this->hasMany('App\Models\Address');
-    }
-
-    public function roles()
-    {
-        return $this->belongsToMany('App\Models\Role');
     }
 }
