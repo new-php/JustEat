@@ -40,4 +40,9 @@ class Address extends Model
     // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
+
+    public function user() 
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

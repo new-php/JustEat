@@ -49,4 +49,19 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Address');
     }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany('App\Models\Rating');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany('App\Models\Restaurants');
+    }
 }

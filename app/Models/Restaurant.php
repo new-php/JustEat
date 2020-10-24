@@ -53,4 +53,9 @@ class Restaurant extends Model
     // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Models\Category');
+    }
 }
