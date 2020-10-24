@@ -26,16 +26,17 @@ class RestaurantRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:5|max:255'
-            'email' => 'required|email|max:255'
-            'photo' => 'required'
-            'phone' => 'required'
-            'address' => 'required'
-            'postal_code' => 'required'
-            'city' => 'required|min:5|max:255'
-            'state' => 'required|min:5|max:255'
-            'country' => 'required|min:5|max:255'
-            'cif' => 'required'
+            'user_id' => 'required',
+            'name' => 'required|min:5|max:255',
+            'email' => 'required|email|max:255',
+            'photo' => 'required',
+            'phone' => 'required',
+            'address' => 'required|min:5|max:255',
+            'postal_code' => 'required|min:5|max:255',
+            'city' => 'required|min:5|max:255',
+            'state' => 'required|min:5|max:255',
+            'country' => 'required|min:5|max:255',
+            'cif' => 'required',
         ];
     }
 

@@ -27,8 +27,8 @@ class ProductRequest extends FormRequest
     {
         return [
             'restaurant_id' => 'required|min:5|max:255',
-            'photo' => '',
-            'description' => 'required|min:5|max:255',
+            'photo' => 'required',
+            'description' => 'required|min:5',
             'name' => 'required|min:5|max:255',
             'price' => 'required|min:5|max:255',
         ];

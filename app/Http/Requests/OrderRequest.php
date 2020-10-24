@@ -32,7 +32,7 @@ class OrderRequest extends FormRequest
             'details' => 'required|min:5|max:255',
             'shipping' => 'required',
             'total' => 'required',
-            'status' => 'required|min:5|max:255',
+            'status' => 'required',
             'rider_id' => 'required',
             'delivery_mode' => 'required|min:5|max:255',
         ];

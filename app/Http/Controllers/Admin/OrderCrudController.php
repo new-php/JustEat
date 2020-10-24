@@ -48,17 +48,17 @@ class OrderCrudController extends CrudController
         CRUD::column([
             'name' => 'user_id',
             'label' => 'User id',
-            'type' => 'number', 
+            'type' => 'relationship', 
             ]);
         CRUD::column([
             'name' => 'address_id',
             'label' => 'Address id',
-            'type' => 'number', 
+            'type' => 'relationship', 
             ]);
         CRUD::column([
             'name' => 'restaurant_id',
             'label' => 'Restaurant id',
-            'type' => 'number', 
+            'type' => 'relationship', 
             ]);
         CRUD::column([
             'name' => 'details',
@@ -83,7 +83,7 @@ class OrderCrudController extends CrudController
         CRUD::column([
             'name' => 'rider_id',
             'label' => 'Rider id',
-            'type' => 'text', 
+            'type' => 'number', 
             ]);
         CRUD::column([
             'name' => 'delivery_mode',
@@ -141,17 +141,21 @@ class OrderCrudController extends CrudController
         CRUD::field([
             'name' => 'shipping',
             'label' => 'Shipping',
-            'type' => 'text', 
+            'type' => 'number', 
+            'decimals' => 2,
             ]);
         CRUD::field([
             'name' => 'total',
             'label' => 'Total',
-            'type' => 'text', 
+            'type' => 'number', 
+            'decimals' => 2,
             ]);
         CRUD::field([
             'name' => 'status',
             'label' => 'Status',
-            'type' => 'text', 
+            'type' => 'select2_from_array', 
+            'options' => ['received' => 'Received', 'delivered' => 'Delivered'],
+
             ]);
         CRUD::field([
             'name' => 'rider_id',
@@ -161,7 +165,8 @@ class OrderCrudController extends CrudController
         CRUD::field([
             'name' => 'delivery_mode',
             'label' => 'Delivery mode',
-            'type' => 'text', 
+            'type' => 'select2_from_array', 
+            'options' => ['pick_up' => 'Pick-up', 'home_delivery' => 'Home delivery'],
             ]);
 
         /**

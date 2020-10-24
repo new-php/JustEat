@@ -26,7 +26,7 @@ class AddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'address_name' => 'required|email|max:255',
+            'address_name' => 'required|min:5|max:255',
             'address_line_1' => 'required|max:255',
             'address_line_2' => 'max:255',
             'observations' => 'max:255',

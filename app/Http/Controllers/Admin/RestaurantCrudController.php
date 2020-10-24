@@ -40,6 +40,11 @@ class RestaurantCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column([
+            'name' => 'user_id',
+            'label' => 'User id',
+            'type' => 'relationship', 
+            ]);
+        CRUD::column([
             'name' => 'name',
             'label' => 'Name',
             'type' => 'text', 
@@ -47,7 +52,7 @@ class RestaurantCrudController extends CrudController
         CRUD::column([
             'name' => 'email',
             'label' => 'Email',
-            'type' => 'text', 
+            'type' => 'email', 
             ]);
         CRUD::column([
             'name' => 'phone',
@@ -101,6 +106,11 @@ class RestaurantCrudController extends CrudController
     {
         CRUD::setValidation(RestaurantRequest::class);
 
+        CRUD::field([
+            'name' => 'user_id',
+            'label' => 'User id',
+            'type' => 'number', 
+            ]);
         CRUD::field([
             'name' => 'name',
             'label' => 'Name',

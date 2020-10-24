@@ -42,17 +42,18 @@ class RatingCrudController extends CrudController
         CRUD::column([
             'name' => 'user_id',
             'label' => 'User id',
-            'type' => 'number', 
+            'type' => 'relationship', 
             ]);
         CRUD::column([
             'name' => 'restaurant_id',
             'label' => 'Restaurant id',
-            'type' => 'number', 
+            'type' => 'relationship', 
             ]);
         CRUD::column([
             'name' => 'score',
             'label' => 'Score',
-            'type' => 'number', 
+            'type' => 'number',
+            'decimals' => 1, 
             ]);
         CRUD::column([
             'name' => 'comments',
@@ -85,6 +86,7 @@ class RatingCrudController extends CrudController
             'name' => 'score',
             'label' => 'Score',
             'type' => 'number', 
+            'decimals' => 1,
             ]);
         CRUD::field([
             'name' => 'comments',

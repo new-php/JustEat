@@ -42,7 +42,7 @@ class ProductCrudController extends CrudController
         CRUD::column([
             'name' => 'restaurant_id',
             'label' => 'Restaurant id',
-            'type' => 'text', 
+            'type' => 'relationship', 
             ]);
         CRUD::column([
             'name' => 'photo',
@@ -62,7 +62,8 @@ class ProductCrudController extends CrudController
         CRUD::column([
             'name' => 'price',
             'label' => 'Price',
-            'type' => 'text', 
+            'type' => 'number', 
+            'decimals' => 2,
             ]);
 
         /**
@@ -85,7 +86,7 @@ class ProductCrudController extends CrudController
         CRUD::field([
             'name' => 'restaurant_id',
             'label' => 'Restaurant id',
-            'type' => 'text', 
+            'type' => 'number', 
             ]);
         CRUD::field([
             'name' => 'photo',
@@ -105,7 +106,8 @@ class ProductCrudController extends CrudController
         CRUD::field([
             'name' => 'price',
             'label' => 'Price',
-            'type' => 'text', 
+            'type' => 'number', 
+            'decimals' => 2,
             ]);
 
         /**
