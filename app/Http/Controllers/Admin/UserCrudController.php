@@ -42,22 +42,22 @@ class UserCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->crud->addColumn([
+        CRUD::addColumn([
             'name' => 'name',
             'label' => 'Name',
             'type' => 'text', 
         ]);
-        $this->crud->addColumn([
+        CRUD::addColumn([
             'name' => 'email',
             'label' => 'Email',
             'type' => 'text', 
         ]);
-        $this->crud->addColumn([
+        CRUD::addColumn([
             'name' => 'phone',
             'label' => 'Phone',
             'type' => 'text', 
         ]);
-        $this->crud->addColumn([ // n-n relationship (with pivot table)
+        CRUD::addColumn([ // n-n relationship (with pivot table)
             'label'     => trans('backpack::permissionmanager.roles'), // Table column heading
             'type'      => 'select_multiple',
             'name'      => 'roles', // the method that defines the relationship in your Model
@@ -65,7 +65,7 @@ class UserCrudController extends CrudController
             'attribute' => 'name', // foreign key attribute that is shown to user
             'model'     => config('permission.models.role'), // foreign key model
         ]);
-        $this->crud->addColumn([ // n-n relationship (with pivot table)
+        CRUD::addColumn([ // n-n relationship (with pivot table)
             'label'     => trans('backpack::permissionmanager.extra_permissions'), // Table column heading
             'type'      => 'select_multiple',
             'name'      => 'permissions', // the method that defines the relationship in your Model
@@ -75,7 +75,7 @@ class UserCrudController extends CrudController
         ]);
 
         // Role Filter
-        $this->crud->addFilter(
+        CRUD::addFilter(
             [
                 'name'  => 'role',
                 'type'  => 'dropdown',
@@ -90,7 +90,7 @@ class UserCrudController extends CrudController
         );
 
         // Extra Permission Filter
-        $this->crud->addFilter(
+        CRUD::addFilter(
             [
                 'name'  => 'permissions',
                 'type'  => 'select2',
@@ -115,32 +115,32 @@ class UserCrudController extends CrudController
     {
         CRUD::setValidation(UserRequest::class);
 
-        $this->crud->addField([
+        CRUD::addField([
             'name'  => 'name',
             'label' => trans('backpack::permissionmanager.name'),
             'type'  => 'text',
         ]);
-        $this->crud->addField([
+        CRUD::addField([
             'name'  => 'email',
             'label' => trans('backpack::permissionmanager.email'),
             'type'  => 'email',
         ]);
-        $this->crud->addField([
+        CRUD::addField([
             'name' => 'phone',
             'label' => 'Phone',
             'type' => 'text', 
         ]);
-        $this->crud->addField([
+        CRUD::addField([
             'name'  => 'password',
             'label' => trans('backpack::permissionmanager.password'),
             'type'  => 'password',
         ]);
-        $this->crud->addField([
+        CRUD::addField([
             'name'  => 'password_confirmation',
             'label' => trans('backpack::permissionmanager.password_confirmation'),
             'type'  => 'password',
         ]);
-        $this->crud->addField([
+        CRUD::addField([
             // two interconnected entities
             'label'             => trans('backpack::permissionmanager.user_role_permission'),
             'field_unique_name' => 'user_role_permission',
