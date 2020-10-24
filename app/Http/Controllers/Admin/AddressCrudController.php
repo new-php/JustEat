@@ -39,7 +39,14 @@ class AddressCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-
+        CRUD::column([
+            'label' => 'User',
+            'type' => 'select',
+            'name' => 'user_id',
+            'entity' => 'user',
+            'attribute' => 'name',
+            'model' => 'App\Models\User',
+        ]);
         CRUD::column([
             'name' => 'address_name',
             'label' => 'Address name',
@@ -70,21 +77,6 @@ class AddressCrudController extends CrudController
             'label' => 'ZIP Code',
             'type' => 'text', 
             ]);
-        /*CRUD::column([
-           // n-n relationship (with pivot table)
-           'label'     => 'Roles', // Table column heading
-           'type'      => 'select_multiple',
-           'name'      => 'roles', // the method that defines the relationship in your Model
-           'entity'    => 'roles', // the method that defines the relationship in your Model
-           'attribute' => 'name', // foreign key attribute that is shown to user
-           'model'     => 'App\Models\Roles', // foreign key model
-        ]);*/
-
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
     }
 
     /**
@@ -98,6 +90,14 @@ class AddressCrudController extends CrudController
         CRUD::setValidation(AddressRequest::class);
 
         CRUD::field([
+            'label' => 'User',
+            'type' => 'select2',
+            'name' => 'user_id',
+            'entity' => 'user',
+            'attribute' => 'name',
+            'model' => 'App\Models\User',
+        ]);
+        CRUD::field([
             'name' => 'address_name',
             'label' => 'Address name',
             'type' => 'text', 
@@ -127,12 +127,6 @@ class AddressCrudController extends CrudController
             'label' => 'ZIP Code',
             'type' => 'text', 
             ]);
-
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
     }
 
     /**
