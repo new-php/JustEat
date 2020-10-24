@@ -40,57 +40,57 @@ class RestaurantCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'user_id',
             'label' => 'User id',
             'type' => 'relationship', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'name',
             'label' => 'Name',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'email',
             'label' => 'Email',
             'type' => 'email', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'phone',
             'label' => 'Phone',
             'type' => 'phone', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'photo',
             'label' => 'Photo',
             'type' => 'image', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'address',
             'label' => 'Address',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'postal_code',
             'label' => 'ZIP Code',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'city',
             'label' => 'City',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'state',
             'label' => 'State',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'country',
             'label' => 'Country',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'cif',
             'label' => 'Cif',
             'type' => 'number', 
@@ -107,67 +107,61 @@ class RestaurantCrudController extends CrudController
     {
         CRUD::setValidation(RestaurantRequest::class);
 
-        CRUD::field([
+        CRUD::addField([
             'name' => 'user_id',
             'label' => 'User id',
             'type' => 'number', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'name',
             'label' => 'Name',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'email',
             'label' => 'Email',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'phone',
             'label' => 'Phone',
             'type' => 'phone', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'photo',
             'label' => 'Photo',
             'type' => 'image', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'address',
             'label' => 'Address',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'postal_code',
             'label' => 'ZIP Code',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'city',
             'label' => 'City',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'state',
             'label' => 'State',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'country',
             'label' => 'Country',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'cif',
             'label' => 'Cif',
             'type' => 'number', 
             ]);
-
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
     }
 
     /**

@@ -39,7 +39,7 @@ class AddressCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column([
+        CRUD::addColumn([
             'label' => 'User',
             'type' => 'select',
             'name' => 'user_id',
@@ -47,32 +47,32 @@ class AddressCrudController extends CrudController
             'attribute' => 'name',
             'model' => 'App\Models\User',
         ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'address_name',
             'label' => 'Address name',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'address_line_1',
             'label' => 'Address line 1',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'address_line_2',
             'label' => 'Address line 2',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'observations',
             'label' => 'Observations',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'city',
             'label' => 'City',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'postal_code',
             'label' => 'ZIP Code',
             'type' => 'text', 
@@ -89,7 +89,7 @@ class AddressCrudController extends CrudController
     {
         CRUD::setValidation(AddressRequest::class);
 
-        CRUD::field([
+        CRUD::addField([
             'label' => 'User',
             'type' => 'select2',
             'name' => 'user_id',
@@ -97,32 +97,32 @@ class AddressCrudController extends CrudController
             'attribute' => 'name',
             'model' => 'App\Models\User',
         ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'address_name',
             'label' => 'Address name',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'address_line_1',
             'label' => 'Address line 1',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'address_line_2',
             'label' => 'Address line 2',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'observations',
             'label' => 'Observations',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'city',
             'label' => 'City',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'postal_code',
             'label' => 'ZIP Code',
             'type' => 'text', 

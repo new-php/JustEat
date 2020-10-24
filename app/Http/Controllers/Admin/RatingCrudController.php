@@ -40,23 +40,23 @@ class RatingCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'user_id',
             'label' => 'User id',
             'type' => 'relationship', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'restaurant_id',
             'label' => 'Restaurant id',
             'type' => 'relationship', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'score',
             'label' => 'Score',
             'type' => 'number',
             'decimals' => 1, 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'comments',
             'label' => 'Comments',
             'type' => 'text', 
@@ -73,23 +73,23 @@ class RatingCrudController extends CrudController
     {
         CRUD::setValidation(UserRequest::class);
 
-        CRUD::field([
+        CRUD::addField([
             'name' => 'user_id',
             'label' => 'User id',
             'type' => 'number', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'restaurant_id',
             'label' => 'Restaurant id',
             'type' => 'number', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'score',
             'label' => 'Score',
             'type' => 'number', 
             'decimals' => 1,
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'comments',
             'label' => 'Comments',
             'type' => 'text', 

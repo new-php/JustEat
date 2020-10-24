@@ -46,66 +46,51 @@ class OrderCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'user_id',
             'label' => 'User id',
             'type' => 'relationship', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'address_id',
             'label' => 'Address id',
             'type' => 'relationship', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'restaurant_id',
             'label' => 'Restaurant id',
             'type' => 'relationship', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'details',
             'label' => 'Details',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'shipping',
             'label' => 'Shipping',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'total',
             'label' => 'Total',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'status',
             'label' => 'Status',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'rider_id',
             'label' => 'Rider id',
             'type' => 'number', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'delivery_mode',
             'label' => 'Delivery mode',
             'type' => 'text', 
             ]);
-        /*CRUD::column([
-           // n-n relationship (with pivot table)
-           'label'     => 'Roles', // Table column heading
-           'type'      => 'select_multiple',
-           'name'      => 'roles', // the method that defines the relationship in your Model
-           'entity'    => 'roles', // the method that defines the relationship in your Model
-           'attribute' => 'name', // foreign key attribute that is shown to user
-           'model'     => 'App\Models\Roles', // foreign key model
-        ]);*/
-
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
     }
 
 
@@ -119,62 +104,56 @@ class OrderCrudController extends CrudController
     {
         CRUD::setValidation(OrderRequest::class);
 
-        CRUD::field([
+        CRUD::addField([
             'name' => 'user_id',
             'label' => 'User id',
             'type' => 'number', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'address_id',
             'label' => 'Address id',
             'type' => 'number', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'restaurant_id',
             'label' => 'Restaurant id',
             'type' => 'number', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'details',
             'label' => 'Details',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'shipping',
             'label' => 'Shipping',
             'type' => 'number', 
             'decimals' => 2,
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'total',
             'label' => 'Total',
             'type' => 'number', 
             'decimals' => 2,
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'status',
             'label' => 'Status',
             'type' => 'select2_from_array', 
             'options' => ['received' => 'Received', 'delivered' => 'Delivered'],
 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'rider_id',
             'label' => 'Rider id',
             'type' => 'number', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'delivery_mode',
             'label' => 'Delivery mode',
             'type' => 'select2_from_array', 
             'options' => ['pick_up' => 'Pick-up', 'home_delivery' => 'Home delivery'],
             ]);
-
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
     }
 
     /**

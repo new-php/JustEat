@@ -40,38 +40,32 @@ class ProductCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'restaurant_id',
             'label' => 'Restaurant id',
             'type' => 'relationship', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'photo',
             'label' => 'Photo',
             'type' => 'image', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'description',
             'label' => 'Description',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'name',
             'label' => 'Name',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'price',
             'label' => 'Price',
             'type' => 'number', 
             'decimals' => 2,
             ]);
-
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
     }
 
     /**
@@ -84,38 +78,32 @@ class ProductCrudController extends CrudController
     {
         CRUD::setValidation(ProductRequest::class);
 
-        CRUD::field([
+        CRUD::addField([
             'name' => 'restaurant_id',
             'label' => 'Restaurant id',
             'type' => 'number', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'photo',
             'label' => 'Photo',
             'type' => 'image', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'description',
             'label' => 'Description',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'name',
             'label' => 'Name',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'price',
             'label' => 'Price',
             'type' => 'number', 
             'decimals' => 2,
             ]);
-
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
     }
 
     /**

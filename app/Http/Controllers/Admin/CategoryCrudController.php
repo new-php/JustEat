@@ -40,12 +40,12 @@ class CategoryCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'name',
             'label' => 'Name',
             'type' => 'text', 
             ]);
-        CRUD::column([
+        CRUD::addColumn([
             'name' => 'image',
             'label' => 'Image',
             'type' => 'image',
@@ -63,12 +63,12 @@ class CategoryCrudController extends CrudController
     {
         CRUD::setValidation(CategoryRequest::class);
 
-        CRUD::field([
+        CRUD::addField([
             'name' => 'name',
             'label' => 'Name',
             'type' => 'text', 
             ]);
-        CRUD::field([
+        CRUD::addField([
             'name' => 'image',
             'label' => 'Image',
             'type' => 'image', 
