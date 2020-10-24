@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -60,7 +61,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Rating');
     }
 
-    public function ratings()
+    public function restaurants()
     {
         return $this->hasMany('App\Models\Restaurants');
     }

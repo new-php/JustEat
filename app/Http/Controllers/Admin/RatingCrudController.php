@@ -94,18 +94,6 @@ class RatingCrudController extends CrudController
             'label' => 'Comments',
             'type' => 'text', 
             ]);
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
-    }
-
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
     }
 
     /**

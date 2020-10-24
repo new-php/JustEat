@@ -18,7 +18,9 @@ use Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
  */
 class UserCrudController extends CrudController
 {
-    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation, ShowOperation;
+    use ListOperation, DeleteOperation, ShowOperation;
+    use CreateOperation { store as traitStore; }
+    use UpdateOperation { update as traitUpdate; }
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -40,36 +42,67 @@ class UserCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column([
+        $this->crud->addColumn([
             'name' => 'name',
             'label' => 'Name',
             'type' => 'text', 
-            ]);
-        CRUD::column([
+        ]);
+        $this->crud->addColumn([
             'name' => 'email',
             'label' => 'Email',
             'type' => 'text', 
-            ]);
-        CRUD::column([
+        ]);
+        $this->crud->addColumn([
             'name' => 'phone',
             'label' => 'Phone',
             'type' => 'text', 
-            ]);
-        CRUD::column([
-           // n-n relationship (with pivot table)
-           'label'     => 'Roles', // Table column heading
-           'type'      => 'select_multiple',
-           'name'      => 'roles', // the method that defines the relationship in your Model
-           'entity'    => 'roles', // the method that defines the relationship in your Model
-           'attribute' => 'name', // foreign key attribute that is shown to user
-           'model'     => 'App\Models\Roles', // foreign key model
+        ]);
+        $this->crud->addColumn([ // n-n relationship (with pivot table)
+            'label'     => trans('backpack::permissionmanager.roles'), // Table column heading
+            'type'      => 'select_multiple',
+            'name'      => 'roles', // the method that defines the relationship in your Model
+            'entity'    => 'roles', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model'     => config('permission.models.role'), // foreign key model
+        ]);
+        $this->crud->addColumn([ // n-n relationship (with pivot table)
+            'label'     => trans('backpack::permissionmanager.extra_permissions'), // Table column heading
+            'type'      => 'select_multiple',
+            'name'      => 'permissions', // the method that defines the relationship in your Model
+            'entity'    => 'permissions', // the method that defines the relationship in your Model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'model'     => config('permission.models.permission'), // foreign key model
         ]);
 
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
+        // Role Filter
+        $this->crud->addFilter(
+            [
+                'name'  => 'role',
+                'type'  => 'dropdown',
+                'label' => trans('backpack::permissionmanager.role'),
+            ],
+            config('permission.models.role')::all()->pluck('name', 'id')->toArray(),
+            function ($value) { // if the filter is active
+                $this->crud->addClause('whereHas', 'roles', function ($query) use ($value) {
+                    $query->where('role_id', '=', $value);
+                });
+            }
+        );
+
+        // Extra Permission Filter
+        $this->crud->addFilter(
+            [
+                'name'  => 'permissions',
+                'type'  => 'select2',
+                'label' => trans('backpack::permissionmanager.extra_permissions'),
+            ],
+            config('permission.models.permission')::all()->pluck('name', 'id')->toArray(),
+            function ($value) { // if the filter is active
+                $this->crud->addClause('whereHas', 'permissions', function ($query) use ($value) {
+                    $query->where('permission_id', '=', $value);
+                });
+            }
+        );
     }
 
     /**
@@ -82,41 +115,60 @@ class UserCrudController extends CrudController
     {
         CRUD::setValidation(UserRequest::class);
 
-        CRUD::field([
-            'name' => 'name',
-            'label' => 'Name',
-            'type' => 'text', 
-            ]);
-        CRUD::field([
-            'name' => 'email',
-            'label' => 'Email',
-            'type' => 'text', 
-            ]);
-        CRUD::field([
+        $this->crud->addField([
+            'name'  => 'name',
+            'label' => trans('backpack::permissionmanager.name'),
+            'type'  => 'text',
+        ]);
+        $this->crud->addField([
+            'name'  => 'email',
+            'label' => trans('backpack::permissionmanager.email'),
+            'type'  => 'email',
+        ]);
+        $this->crud->addField([
             'name' => 'phone',
             'label' => 'Phone',
             'type' => 'text', 
-            ]);
-        CRUD::field([
-            'name' => 'password',
-            'label' => 'Password',
-            'type' => 'password', 
-            ]);
-        CRUD::field([
-           // n-n relationship (with pivot table)
-           'label'     => 'Roles', // Table column heading
-           'type'      => 'select2_multiple',
-           'name'      => 'roles', // the method that defines the relationship in your Model
-           'entity'    => 'roles', // the method that defines the relationship in your Model
-           'attribute' => 'name', // foreign key attribute that is shown to user
-           'model'     => 'App\Models\Roles', // foreign key model
-           'pivot'     => true,
         ]);
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
+        $this->crud->addField([
+            'name'  => 'password',
+            'label' => trans('backpack::permissionmanager.password'),
+            'type'  => 'password',
+        ]);
+        $this->crud->addField([
+            'name'  => 'password_confirmation',
+            'label' => trans('backpack::permissionmanager.password_confirmation'),
+            'type'  => 'password',
+        ]);
+        $this->crud->addField([
+            // two interconnected entities
+            'label'             => trans('backpack::permissionmanager.user_role_permission'),
+            'field_unique_name' => 'user_role_permission',
+            'type'              => 'checklist_dependency',
+            'name'              => ['roles', 'permissions'],
+            'subfields'         => [
+                'primary' => [
+                    'label'            => trans('backpack::permissionmanager.roles'),
+                    'name'             => 'roles', // the method that defines the relationship in your Model
+                    'entity'           => 'roles', // the method that defines the relationship in your Model
+                    'entity_secondary' => 'permissions', // the method that defines the relationship in your Model
+                    'attribute'        => 'name', // foreign key attribute that is shown to user
+                    'model'            => config('permission.models.role'), // foreign key model
+                    'pivot'            => true, // on create&update, do you need to add/delete pivot table entries?]
+                    'number_columns'   => 3, //can be 1,2,3,4,6
+                ],
+                'secondary' => [
+                    'label'          => ucfirst(trans('backpack::permissionmanager.permission_singular')),
+                    'name'           => 'permissions', // the method that defines the relationship in your Model
+                    'entity'         => 'permissions', // the method that defines the relationship in your Model
+                    'entity_primary' => 'roles', // the method that defines the relationship in your Model
+                    'attribute'      => 'name', // foreign key attribute that is shown to user
+                    'model'          => config('permission.models.permission'), // foreign key model
+                    'pivot'          => true, // on create&update, do you need to add/delete pivot table entries?]
+                    'number_columns' => 3, //can be 1,2,3,4,6
+                ],
+            ],
+        ]);
     }
 
     /**
@@ -130,5 +182,51 @@ class UserCrudController extends CrudController
         $this->setupCreateOperation();
     }
 
-    ## TODO: Guardar el password hashed
+    /**
+     * Store a newly created resource in the database.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store()
+    {
+        $this->crud->setRequest($this->crud->validateRequest());
+        $this->crud->setRequest($this->handlePasswordInput($this->crud->getRequest()));
+        $this->crud->unsetValidation(); // validation has already been run
+
+        return $this->traitStore();
+    }
+
+    /**
+     * Update the specified resource in the database.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update()
+    {
+        $this->crud->setRequest($this->crud->validateRequest());
+        $this->crud->setRequest($this->handlePasswordInput($this->crud->getRequest()));
+        $this->crud->unsetValidation(); // validation has already been run
+
+        return $this->traitUpdate();
+    }
+
+    /**
+     * Handle password input fields.
+     */
+    protected function handlePasswordInput($request)
+    {
+        // Remove fields not present on the user.
+        $request->request->remove('password_confirmation');
+        $request->request->remove('roles_show');
+        $request->request->remove('permissions_show');
+
+        // Encrypt password if specified.
+        if ($request->input('password')) {
+            $request->request->set('password', Hash::make($request->input('password')));
+        } else {
+            $request->request->remove('password');
+        }
+
+        return $request;
+    }
 }
