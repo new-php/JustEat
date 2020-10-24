@@ -48,14 +48,9 @@ class CategoryCrudController extends CrudController
         CRUD::column([
             'name' => 'image',
             'label' => 'Image',
-            'type' => 'image', 
+            'type' => 'image',
+            'disk' => 'public',
             ]);
-
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
     }
 
     /**
@@ -77,13 +72,8 @@ class CategoryCrudController extends CrudController
             'name' => 'image',
             'label' => 'Image',
             'type' => 'image', 
+            'disk' => 'public',
             ]);
- 
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
     }
 
     /**
