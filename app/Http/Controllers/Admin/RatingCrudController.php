@@ -41,25 +41,31 @@ class RatingCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::addColumn([
+            'label' => 'User',
+            'type' => 'select',
             'name' => 'user_id',
-            'label' => 'User id',
-            'type' => 'relationship', 
-            ]);
+            'entity' => 'user',
+            'attribute' => 'email',
+            'model' => 'App\Models\User',
+        ]);
         CRUD::addColumn([
+            'label' => 'Restaurant',
+            'type' => 'select', 
             'name' => 'restaurant_id',
-            'label' => 'Restaurant id',
-            'type' => 'relationship', 
+            'entity' => 'restaurant',
+            'attribute' => 'name',
+            'model' => 'App\Models\Restaurant',
             ]);
         CRUD::addColumn([
-            'name' => 'score',
             'label' => 'Score',
             'type' => 'number',
+            'name' => 'score',
             'decimals' => 1, 
             ]);
         CRUD::addColumn([
-            'name' => 'comments',
             'label' => 'Comments',
             'type' => 'text', 
+            'name' => 'comments',
             ]);
     }
 
@@ -71,23 +77,29 @@ class RatingCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(UserRequest::class);
+        CRUD::setValidation(RatingRequest::class);
 
         CRUD::addField([
+            'label' => 'User',
+            'type' => 'select2',
             'name' => 'user_id',
-            'label' => 'User id',
-            'type' => 'number', 
-            ]);
+            'entity' => 'user',
+            'attribute' => 'email',
+            'model' => 'App\Models\User',
+        ]);
         CRUD::addField([
+            'label' => 'Restaurant',
+            'type' => 'select2', 
             'name' => 'restaurant_id',
-            'label' => 'Restaurant id',
-            'type' => 'number', 
+            'entity' => 'restaurant',
+            'attribute' => 'name',
+            'model' => 'App\Models\Restaurant',
             ]);
         CRUD::addField([
             'name' => 'score',
             'label' => 'Score',
             'type' => 'number', 
-            'decimals' => 1,
+            'attributes' => ["step" => "any"]
             ]);
         CRUD::addField([
             'name' => 'comments',

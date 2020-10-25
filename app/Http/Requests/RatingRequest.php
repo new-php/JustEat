@@ -26,10 +26,10 @@ class RatingRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required'
-            'restaurant_id' => 'required'
-            'score' => 'required|min:0|max:5'
-            'comments' => 'min:5|max:255'
+            'user_id' => 'required',
+            'restaurant_id' => 'required',
+            'score' => 'required|numeric',
+            'comments' => 'max:255',
 
         ];
     }
