@@ -75,7 +75,7 @@ class AddressCrudController extends CrudController
         CRUD::addColumn([
             'name' => 'postal_code',
             'label' => 'ZIP Code',
-            'type' => 'text', 
+            'type' => 'number', 
             ]);
     }
 
