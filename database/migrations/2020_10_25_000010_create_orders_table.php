@@ -19,8 +19,8 @@ class CreateOrdersTable extends Migration
             $table->foreignId('address_id');
             $table->foreignId('restaurant_id');
             $table->string('details')->nullable();
-            $table->decimal('shipping', 5, 2);
-            $table->decimal('total', 5, 2);
+            $table->decimal('shipping', 8, 2);
+            $table->decimal('total', 8, 2);
             $table->string('status');
             $table->foreignId('rider_id');
             $table->string('delivery_mode');
