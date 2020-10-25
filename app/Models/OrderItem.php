@@ -37,4 +37,9 @@ class OrderItem extends Model
     // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
+
+    public function order()
+    {
+        return $this->belongsTo('App\Models\Order');
+    }
 }
