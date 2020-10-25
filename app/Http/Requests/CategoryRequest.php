@@ -28,12 +28,12 @@ class CategoryRequest extends FormRequest
         if ($this->method() == "PUT") {
             return [
                 'name' => 'required|max:255',
-                'image' => 'image',
+                'image' => '',
             ];
         }
         return [
             'name' => 'required|max:255',
-            'image' => 'required|image',
+            'image' => 'required',
         ];
     }
 
