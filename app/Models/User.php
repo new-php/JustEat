@@ -65,4 +65,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Restaurants');
     }
+
+    public function paymentMethods()
+    {
+        return $this->hasMany('App\Models\PaymentMethod');
+    }
 }
