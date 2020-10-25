@@ -27,7 +27,7 @@ class ScheduleRequest extends FormRequest
     {
         return [
             'restaurant_id' => 'required',
-            'weekday' => 'required|min:5|max:255',
+            'weekday' => 'required|max:255',
             'open' => 'required',
             'close' => 'required',
         ];

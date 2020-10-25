@@ -41,24 +41,27 @@ class ScheduleCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::addColumn([
+            'label' => 'Restaurant',
+            'type' => 'select', 
             'name' => 'restaurant_id',
-            'label' => 'Restaurant id',
-            'type' => 'relationship', 
+            'entity' => 'restaurant',
+            'attribute' => 'name',
+            'model' => 'App\Models\Restaurant',
             ]);
         CRUD::addColumn([
-            'name' => 'weekday',
             'label' => 'Weekday',
             'type' => 'text', 
+            'name' => 'weekday',
             ]);
         CRUD::addColumn([
-            'name' => 'open',
             'label' => 'Open',
             'type' => 'time', 
+            'name' => 'open',
             ]);
         CRUD::addColumn([
-            'name' => 'close',
             'label' => 'Close',
             'type' => 'time', 
+            'name' => 'close',
             ]);
     }
 
@@ -73,24 +76,28 @@ class ScheduleCrudController extends CrudController
         CRUD::setValidation(ScheduleRequest::class);
 
         CRUD::addField([
+            'label' => 'Restaurant',
+            'type' => 'select', 
             'name' => 'restaurant_id',
-            'label' => 'Restaurant id',
-            'type' => 'number', 
+            'entity' => 'restaurant',
+            'attribute' => 'name',
+            'model' => 'App\Models\Restaurant',
             ]);
         CRUD::addField([
-            'name' => 'weekday',
             'label' => 'Weekday',
-            'type' => 'text', 
+            'type' => 'select2_from_array', 
+            'name' => 'weekday',
+            'options' => ['monday' => 'Monday', 'tuesday' => 'Tuesday', 'wednesday' => 'Wednesday', 'thursday' => 'Thursday', 'friday' => 'Friday', 'saturday' => 'Saturday', 'sunday' => 'Sunday'],
             ]);
         CRUD::addField([
-            'name' => 'open',
             'label' => 'Open',
             'type' => 'time', 
+            'name' => 'open',
             ]);
         CRUD::addField([
-            'name' => 'close',
             'label' => 'Close',
             'type' => 'time', 
+            'name' => 'close',
             ]);
     }
 
