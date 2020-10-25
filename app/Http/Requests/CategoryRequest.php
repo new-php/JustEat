@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,17 +27,13 @@ class UserRequest extends FormRequest
     {
         if ($this->method() == "PUT") {
             return [
-                'name' => 'max:255',
-                'email' => 'required|email|max:255|unique:App\Models\User,email,' . $this->request->get('id'),
-                'phone' => 'max:255',
-                'password' => 'nullable|confirmed',
+                'name' => 'required|max:255',
+                'image' => '',
             ];
         }
         return [
-            'name' => 'max:255',
-            'email' => 'required|email|max:255|unique:App\Models\User,email,' . $this->request->get('id'),
-            'phone' => 'max:255',
-            'password' => 'required|confirmed',
+            'name' => 'required|max:255',
+            'image' => 'required',
         ];
     }
 

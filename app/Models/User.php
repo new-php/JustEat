@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -48,5 +49,30 @@ class User extends Authenticatable
     public function addresses()
     {
         return $this->hasMany('App\Models\Address');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order');
+    }
+
+    public function riderOrders()
+    {
+        return $this->hasMany('App\Models\Order', 'rider_id');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany('App\Models\Rating');
+    }
+
+    public function restaurants()
+    {
+        return $this->hasMany('App\Models\Restaurants');
+    }
+
+    public function paymentMethods()
+    {
+        return $this->hasMany('App\Models\PaymentMethod');
     }
 }

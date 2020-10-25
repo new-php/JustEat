@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class ProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,19 +25,13 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->method() == "PUT") {
-            return [
-                'name' => 'max:255',
-                'email' => 'required|email|max:255|unique:App\Models\User,email,' . $this->request->get('id'),
-                'phone' => 'max:255',
-                'password' => 'nullable|confirmed',
-            ];
-        }
         return [
-            'name' => 'max:255',
-            'email' => 'required|email|max:255|unique:App\Models\User,email,' . $this->request->get('id'),
-            'phone' => 'max:255',
-            'password' => 'required|confirmed',
+            'restaurant_id' => 'required|max:255',
+            'photo' => '',
+            'description' => '',
+            'name' => 'required|max:255',
+            'price' => 'required|numeric',
+            'available' => 'required|boolean',
         ];
     }
 
