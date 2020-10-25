@@ -71,9 +71,9 @@ class OrderCrudController extends CrudController
             'model' => 'App\Models\Restaurant',
             ]);
         CRUD::addColumn([
-            'name' => 'details',
             'label' => 'Details',
             'type' => 'text', 
+            'name' => 'details',
             ]);
         CRUD::addColumn([
             'label' => 'Shipping',
@@ -88,9 +88,9 @@ class OrderCrudController extends CrudController
             'decimals' => 2, 
             ]);
         CRUD::addColumn([
-            'name' => 'status',
             'label' => 'Status',
             'type' => 'text', 
+            'name' => 'status',
             ]);
         CRUD::addColumn([
             'label' => 'Rider id',
@@ -101,9 +101,9 @@ class OrderCrudController extends CrudController
             'model' => 'App\Models\User',
             ]);
         CRUD::addColumn([
-            'name' => 'delivery_mode',
             'label' => 'Delivery mode',
             'type' => 'text', 
+            'name' => 'delivery_mode',
             ]);
     }
 
@@ -143,9 +143,9 @@ class OrderCrudController extends CrudController
             'model' => 'App\Models\Restaurant',
             ]);
         CRUD::addField([
-            'name' => 'details',
             'label' => 'Details',
             'type' => 'text', 
+            'name' => 'details',
             ]);
         CRUD::addField([
             'label' => 'Shipping',
@@ -160,9 +160,9 @@ class OrderCrudController extends CrudController
             'decimals' => 2, 
             ]);
         CRUD::addField([
-            'name' => 'status',
             'label' => 'Status',
             'type' => 'select2_from_array', 
+            'name' => 'status',
             'options' => ['error' => 'Error', 'cancelled' => 'Cancelled', 'received' => 'Received', 'preparing' => 'Preparing', 'prepared' => 'Prepared', 'picked' => 'Picked', 'delivered' => 'Delivered'],
 
             ]);
@@ -175,9 +175,9 @@ class OrderCrudController extends CrudController
             'model' => 'App\Models\User',
             ]);
         CRUD::addField([
-            'name' => 'delivery_mode',
             'label' => 'Delivery mode',
             'type' => 'select2_from_array', 
+            'name' => 'delivery_mode',
             'options' => ['pick_up' => 'Pick-up', 'home_delivery' => 'Home delivery'],
             ]);
     }
