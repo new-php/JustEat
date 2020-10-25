@@ -3,85 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/all.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Vista ejemplo</title>
 </head>
 <body>
-
-    <style>
-        
-        #logo{
-            font-weight: bold;
-            font-family: serif;
-            color: rgb(219, 121, 9); 
-        }
-
-        .contenedor{
-            border-width: 1px;
-            border-style: solid;
-            border-color: gray; 
-            margin-top: 70px;         
-        }
-
-        .nav{
-            margin-right: 200px;
-            margin-left: 200px;
-        }
-
-        .rowbutton{
-            justify-content: center;
-        }
-        
-        .facebook{
-            background-color: rgb(55, 20, 207);
-            width: 100%;
-        }
-
-        .google{
-            width: 100%;
-        }
-
-        .colo{
-            text-align: center;
-        }
-
-        .colo1{
-            text-align: center;
-            color: gainsboro;
-        }
-
-        .email{
-            width: 100%;
-        }
-
-        .password{
-            width: 100%;
-        }
-
-        .links{
-            font-weight: bold;
-        }
-
-        .btnlogin{
-            background-color: orange;
-            border-radius: 5px;
-            color: white;
-            border-width: 0px;
-            width: 100%;
-            height: 60px;
-            font-weight: bold;
-        }
-
-        .btnlogin:hover{
-            background-color: orangered;
-        }
-
-        #texto{
-            text-align: justify;
-        }
-
-    </style>
 
 
     <nav class="navbar">

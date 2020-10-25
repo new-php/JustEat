@@ -16,4 +16,10 @@ mix.js('resources/js/app.js', 'public/js')
         //
     ]);
 
+mix.styles([
+    'resources/css/login.css',
+    'resources/css/app.css',
+    'resources/css/register.css'
+], 'public/css/all.css');
+
 mix.version();
