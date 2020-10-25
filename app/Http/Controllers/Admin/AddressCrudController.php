@@ -48,34 +48,34 @@ class AddressCrudController extends CrudController
             'model' => 'App\Models\User',
         ]);
         CRUD::addColumn([
-            'name' => 'address_name',
             'label' => 'Address name',
             'type' => 'text', 
+            'name' => 'address_name',
             ]);
         CRUD::addColumn([
-            'name' => 'address_line_1',
             'label' => 'Address line 1',
-            'type' => 'text', 
+            'type' => 'text',
+            'name' => 'address_line_1',
             ]);
         CRUD::addColumn([
-            'name' => 'address_line_2',
             'label' => 'Address line 2',
-            'type' => 'text', 
+            'type' => 'text',
+            'name' => 'address_line_2',
             ]);
         CRUD::addColumn([
-            'name' => 'observations',
             'label' => 'Observations',
             'type' => 'text', 
+            'name' => 'observations',
             ]);
         CRUD::addColumn([
-            'name' => 'city',
             'label' => 'City',
             'type' => 'text', 
+            'name' => 'city',
             ]);
         CRUD::addColumn([
-            'name' => 'postal_code',
             'label' => 'ZIP Code',
             'type' => 'number', 
+            'name' => 'postal_code',
             ]);
     }
 
@@ -98,34 +98,34 @@ class AddressCrudController extends CrudController
             'model' => 'App\Models\User',
         ]);
         CRUD::addField([
-            'name' => 'address_name',
             'label' => 'Address name',
             'type' => 'text', 
+            'name' => 'address_name',
             ]);
         CRUD::addField([
-            'name' => 'address_line_1',
             'label' => 'Address line 1',
             'type' => 'text', 
+            'name' => 'address_line_1',
             ]);
         CRUD::addField([
-            'name' => 'address_line_2',
             'label' => 'Address line 2',
             'type' => 'text', 
+            'name' => 'address_line_2',
             ]);
         CRUD::addField([
-            'name' => 'observations',
             'label' => 'Observations',
             'type' => 'text', 
+            'name' => 'observations',
             ]);
         CRUD::addField([
-            'name' => 'city',
             'label' => 'City',
             'type' => 'text', 
+            'name' => 'city',
             ]);
         CRUD::addField([
-            'name' => 'postal_code',
             'label' => 'ZIP Code',
             'type' => 'number', 
+            'name' => 'postal_code',
             ]);
     }
 

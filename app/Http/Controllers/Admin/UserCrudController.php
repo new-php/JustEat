@@ -44,19 +44,19 @@ class UserCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::addColumn([
-            'name' => 'name',
             'label' => 'Name',
             'type' => 'text', 
+            'name' => 'name',
         ]);
         CRUD::addColumn([
-            'name' => 'email',
             'label' => 'Email',
             'type' => 'text', 
+            'name' => 'email',
         ]);
         CRUD::addColumn([
-            'name' => 'phone',
             'label' => 'Phone',
             'type' => 'text', 
+            'name' => 'phone',
         ]);
         CRUD::addColumn([ // n-n relationship (with pivot table)
             'label'     => trans('backpack::permissionmanager.roles'), // Table column heading
@@ -78,9 +78,9 @@ class UserCrudController extends CrudController
         // Role Filter
         CRUD::addFilter(
             [
-                'name'  => 'role',
-                'type'  => 'dropdown',
                 'label' => trans('backpack::permissionmanager.role'),
+                'type'  => 'dropdown',
+                'name'  => 'role',
             ],
             config('permission.models.role')::all()->pluck('name', 'id')->toArray(),
             function ($value) { // if the filter is active
@@ -93,9 +93,9 @@ class UserCrudController extends CrudController
         // Extra Permission Filter
         CRUD::addFilter(
             [
+                'label' => trans('backpack::permissionmanager.extra_permissions'),
                 'name'  => 'permissions',
                 'type'  => 'select2',
-                'label' => trans('backpack::permissionmanager.extra_permissions'),
             ],
             config('permission.models.permission')::all()->pluck('name', 'id')->toArray(),
             function ($value) { // if the filter is active
@@ -117,29 +117,29 @@ class UserCrudController extends CrudController
         CRUD::setValidation(UserRequest::class);
 
         CRUD::addField([
-            'name'  => 'name',
             'label' => trans('backpack::permissionmanager.name'),
             'type'  => 'text',
+            'name'  => 'name',
         ]);
         CRUD::addField([
-            'name'  => 'email',
             'label' => trans('backpack::permissionmanager.email'),
             'type'  => 'email',
+            'name'  => 'email',
         ]);
         CRUD::addField([
-            'name' => 'phone',
             'label' => 'Phone',
             'type' => 'text', 
+            'name' => 'phone',
         ]);
         CRUD::addField([
-            'name'  => 'password',
             'label' => trans('backpack::permissionmanager.password'),
             'type'  => 'password',
+            'name'  => 'password',
         ]);
         CRUD::addField([
-            'name'  => 'password_confirmation',
             'label' => trans('backpack::permissionmanager.password_confirmation'),
             'type'  => 'password',
+            'name'  => 'password_confirmation',
         ]);
         CRUD::addField([
             // two interconnected entities
