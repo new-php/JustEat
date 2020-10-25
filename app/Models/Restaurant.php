@@ -46,7 +46,7 @@ class Restaurant extends Model
         'email_verified_at' => 'datetime',
     ];*/
 
-    protected $table = 'addresses';
+    protected $table = 'restaurants';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
@@ -57,5 +57,10 @@ class Restaurant extends Model
     public function categories()
     {
         return $this->belongsToMany('App\Models\Category');
+    }
+
+    public function products()
+    {
+        return $this->hasMany('App\Models\Product');
     }
 }

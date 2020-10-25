@@ -30,7 +30,7 @@ class OrderItem extends Model
         'email_verified_at' => 'datetime',
     ];*/
 
-    protected $table = 'addresses';
+    protected $table = 'order_items';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
