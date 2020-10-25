@@ -26,11 +26,12 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'restaurant_id' => 'required|min:5|max:255',
-            'photo' => 'required',
-            'description' => 'required|min:5',
-            'name' => 'required|min:5|max:255',
-            'price' => 'required|min:5|max:255',
+            'restaurant_id' => 'required|max:255',
+            'photo' => 'nullable|image',
+            'description' => '',
+            'name' => 'required|max:255',
+            'price' => 'required|numeric',
+            'available' => 'required|boolean',
         ];
     }
 

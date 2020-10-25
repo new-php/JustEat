@@ -41,30 +41,47 @@ class ProductCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::addColumn([
+            'label' => 'Restaurant',
+            'type' => 'select',
             'name' => 'restaurant_id',
-            'label' => 'Restaurant id',
-            'type' => 'relationship', 
+            'entity' => 'restaurant',
+            'attribute' => 'name',
+            'model' => 'App\Models\Restaurant',
             ]);
         CRUD::addColumn([
-            'name' => 'photo',
-            'label' => 'Photo',
-            'type' => 'image', 
-            ]);
-        CRUD::addColumn([
-            'name' => 'description',
-            'label' => 'Description',
-            'type' => 'text', 
-            ]);
-        CRUD::addColumn([
-            'name' => 'name',
             'label' => 'Name',
             'type' => 'text', 
+            'name' => 'name',
             ]);
         CRUD::addColumn([
-            'name' => 'price',
             'label' => 'Price',
             'type' => 'number', 
+            'name' => 'price',
             'decimals' => 2,
+            ]);
+        CRUD::addColumn([
+            'label' => 'Available',
+            'type' => 'boolean', 
+            'name' => 'available',
+            ]);
+        CRUD::addColumn([
+            'label' => 'Photo',
+            'type' => 'image', 
+            'name' => 'photo',
+            'disk' => 'public',
+            ]);
+        CRUD::addColumn([
+            'label' => 'Description',
+            'type' => 'text', 
+            'name' => 'description',
+            ]);
+        CRUD::addColumn([
+            'label' => 'Restaurant',
+            'type' => 'select_multiple',
+            'name' => 'productCategories',
+            'entity' => 'productCategories',
+            'attribute' => 'name',
+            'model' => 'App\Models\ProductCategory',
             ]);
     }
 
@@ -79,30 +96,49 @@ class ProductCrudController extends CrudController
         CRUD::setValidation(ProductRequest::class);
 
         CRUD::addField([
+            'label' => 'Restaurant',
+            'type' => 'select',
             'name' => 'restaurant_id',
-            'label' => 'Restaurant id',
-            'type' => 'number', 
+            'entity' => 'restaurant',
+            'attribute' => 'name',
+            'model' => 'App\Models\Restaurant',
             ]);
         CRUD::addField([
-            'name' => 'photo',
-            'label' => 'Photo',
-            'type' => 'image', 
-            ]);
-        CRUD::addField([
-            'name' => 'description',
-            'label' => 'Description',
-            'type' => 'text', 
-            ]);
-        CRUD::addField([
-            'name' => 'name',
             'label' => 'Name',
             'type' => 'text', 
+            'name' => 'name',
             ]);
         CRUD::addField([
-            'name' => 'price',
             'label' => 'Price',
             'type' => 'number', 
+            'name' => 'price',
             'decimals' => 2,
+            ]);
+        CRUD::addField([
+            'label' => 'Available',
+            'type' => 'checkbox', 
+            'name' => 'available',
+            'default' => true,
+            ]);
+        CRUD::addField([
+            'label' => 'Photo',
+            'type' => 'image', 
+            'name' => 'photo',
+            'disk' => 'public',
+            ]);
+        CRUD::addField([
+            'label' => 'Description',
+            'type' => 'text', 
+            'name' => 'description',
+            ]);
+        CRUD::addColumn([
+            'label' => 'Restaurant',
+            'type' => 'select_multiple',
+            'name' => 'productCategories',
+            'entity' => 'productCategories',
+            'attribute' => 'name',
+            'model' => 'App\Models\ProductCategory',
+            'pivot' => true,
             ]);
     }
 
