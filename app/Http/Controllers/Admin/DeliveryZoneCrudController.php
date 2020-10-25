@@ -41,29 +41,32 @@ class DeliveryZoneCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::addColumn([
+            'label' => 'Restaurant',
+            'type' => 'select', 
             'name' => 'restaurant_id',
-            'label' => 'Restaurant id',
-            'type' => 'relationship', 
+            'entity' => 'restaurant',
+            'attribute' => 'name',
+            'model' => 'App\Models\Restaurant',
             ]);
         CRUD::addColumn([
-            'name' => 'postal_code',
             'label' => 'ZIP Code',
-            'type' => 'text', 
+            'type' => 'number', 
+            'name' => 'postal_code',
             ]);
         CRUD::addColumn([
-            'name' => 'min_order_price',
             'label' => 'Min order price',
             'type' => 'number', 
+            'name' => 'min_order_price',
             ]);
         CRUD::addColumn([
-            'name' => 'delivery_price',
             'label' => 'Delivery price',
             'type' => 'number', 
+            'name' => 'delivery_price',
             ]);
         CRUD::addColumn([
-            'name' => 'delivery_time',
             'label' => 'Delivery time',
             'type' => 'number', 
+            'name' => 'delivery_time',
             ]);
     }
 
@@ -78,32 +81,32 @@ class DeliveryZoneCrudController extends CrudController
         CRUD::setValidation(DeliveryZoneRequest::class);
 
         CRUD::addField([
+            'label' => 'Restaurant',
+            'type' => 'select2', 
             'name' => 'restaurant_id',
-            'label' => 'Restaurant id',
-            'type' => 'number', 
+            'entity' => 'restaurant',
+            'attribute' => 'name',
+            'model' => 'App\Models\Restaurant',
             ]);
         CRUD::addField([
             'name' => 'postal_code',
             'label' => 'ZIP Code',
-            'type' => 'text', 
+            'type' => 'number', 
             ]);
         CRUD::addField([
             'name' => 'min_order_price',
             'label' => 'Min order price',
             'type' => 'number', 
-            'decimals' => 0,
             ]);
         CRUD::addField([
             'name' => 'delivery_price',
             'label' => 'Delivery price',
             'type' => 'number', 
-            'decimals' => 0,
             ]);
         CRUD::addField([
             'name' => 'delivery_time',
             'label' => 'Delivery time',
             'type' => 'number', 
-            'decimals' => 0,
             ]);
     }
 

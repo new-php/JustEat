@@ -27,10 +27,10 @@ class DeliveryZoneRequest extends FormRequest
     {
         return [
             'restaurant_id' => 'required',
-            'postal_code' => 'required|min:5|max:255',
-            'min_order_price' => 'required',
-            'delivery_price' => 'required',
-            'delivery_time' => 'required',
+            'postal_code' => 'required|numeric',
+            'min_order_price' => 'required|numeric',
+            'delivery_price' => 'required|numeric',
+            'delivery_time' => 'required|numeric',
         ];
     }
 
