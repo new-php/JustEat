@@ -29,12 +29,12 @@ class OrderRequest extends FormRequest
             'user_id' => 'required',
             'address_id' => 'required',
             'restaurant_id' => 'required',
-            'details' => 'required|min:5|max:255',
-            'shipping' => 'required',
-            'total' => 'required',
+            'details' => 'max:255',
+            'shipping' => 'required|numeric',
+            'total' => 'required|numeric',
             'status' => 'required',
             'rider_id' => 'required',
-            'delivery_mode' => 'required|min:5|max:255',
+            'delivery_mode' => 'required|max:255',
         ];
     }
 
