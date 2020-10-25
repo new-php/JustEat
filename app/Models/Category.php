@@ -11,7 +11,7 @@ class Category extends Model
 {
     use CrudTrait;
 
-        /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -20,21 +20,10 @@ class Category extends Model
         'name',
         'image',
     ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-/*    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];*/
-
     protected $table = 'categories';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
-    // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
 

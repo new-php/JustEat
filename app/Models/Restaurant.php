@@ -27,30 +27,10 @@ class Restaurant extends Model
         'country',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'cif',
-    ];
-
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-/*    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];*/
-
     protected $table = 'restaurants';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
-    // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
 

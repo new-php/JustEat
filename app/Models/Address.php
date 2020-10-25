@@ -24,15 +24,6 @@ class Address extends Model
         'postal_code',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-/*    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];*/
-
     protected $table = 'addresses';
     // protected $primaryKey = 'id';
     // public $timestamps = false;

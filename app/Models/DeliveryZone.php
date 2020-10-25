@@ -22,22 +22,10 @@ class DeliveryZone extends Model
         'delivery_time',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-/*    protected $hidden = [
-        'password',
-        'remember_token',
-    ];*/
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    /*protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];*/
+    protected $table = 'delivery_zones';
+    // protected $primaryKey = 'id';
+    // public $timestamps = false;
+    protected $guarded = ['id'];
+    // protected $hidden = [];
+    // protected $dates = [];
 }

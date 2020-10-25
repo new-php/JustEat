@@ -9,7 +9,7 @@ class Order extends Model
 {
     use CrudTrait;
 
-        /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -25,21 +25,11 @@ class Order extends Model
         'rider_id',
         'delivery_mode',
     ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-/*    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];*/
-
+    
     protected $table = 'orders';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
-    // protected $fillable = [];
     // protected $hidden = [];
     // protected $dates = [];
 
