@@ -41,59 +41,71 @@ class RestaurantCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::addColumn([
+            'label' => 'User',
+            'type' => 'select', 
             'name' => 'user_id',
-            'label' => 'User id',
-            'type' => 'relationship', 
+            'entity' => 'user',
+            'attribute' => 'email',
+            'model' => 'App\Models\User',
             ]);
         CRUD::addColumn([
-            'name' => 'name',
             'label' => 'Name',
             'type' => 'text', 
+            'name' => 'name',
             ]);
         CRUD::addColumn([
-            'name' => 'email',
             'label' => 'Email',
             'type' => 'email', 
+            'name' => 'email',
             ]);
         CRUD::addColumn([
-            'name' => 'phone',
             'label' => 'Phone',
             'type' => 'phone', 
+            'name' => 'phone',
             ]);
         CRUD::addColumn([
-            'name' => 'photo',
             'label' => 'Photo',
             'type' => 'image', 
+            'name' => 'photo',
+            'disk' => 'public',
             ]);
         CRUD::addColumn([
-            'name' => 'address',
             'label' => 'Address',
             'type' => 'text', 
+            'name' => 'address',
             ]);
         CRUD::addColumn([
-            'name' => 'postal_code',
             'label' => 'ZIP Code',
-            'type' => 'text', 
+            'type' => 'number', 
+            'name' => 'postal_code',
             ]);
         CRUD::addColumn([
-            'name' => 'city',
             'label' => 'City',
             'type' => 'text', 
+            'name' => 'city',
             ]);
         CRUD::addColumn([
-            'name' => 'state',
             'label' => 'State',
             'type' => 'text', 
+            'name' => 'state',
             ]);
         CRUD::addColumn([
-            'name' => 'country',
             'label' => 'Country',
             'type' => 'text', 
+            'name' => 'country',
             ]);
         CRUD::addColumn([
-            'name' => 'cif',
             'label' => 'Cif',
-            'type' => 'number', 
+            'type' => 'text', 
+            'name' => 'cif',
+            ]);
+        CRUD::addColumn([
+            'label' => 'Categories',
+            'type' => 'select_multiple',
+            'name' => 'categories',
+            'entity' => 'categories',
+            'attribute' => 'name',
+            'model' => 'App\Models\Category',
             ]);
     }
 
@@ -108,59 +120,71 @@ class RestaurantCrudController extends CrudController
         CRUD::setValidation(RestaurantRequest::class);
 
         CRUD::addField([
+            'label' => 'User',
+            'type' => 'select2', 
             'name' => 'user_id',
-            'label' => 'User id',
-            'type' => 'number', 
+            'entity' => 'user',
+            'attribute' => 'email',
+            'model' => 'App\Models\User',
             ]);
         CRUD::addField([
-            'name' => 'name',
             'label' => 'Name',
             'type' => 'text', 
+            'name' => 'name',
             ]);
         CRUD::addField([
-            'name' => 'email',
             'label' => 'Email',
-            'type' => 'text', 
+            'type' => 'email', 
+            'name' => 'email',
             ]);
         CRUD::addField([
-            'name' => 'phone',
             'label' => 'Phone',
-            'type' => 'phone', 
+            'type' => 'text', 
+            'name' => 'phone',
             ]);
         CRUD::addField([
-            'name' => 'photo',
             'label' => 'Photo',
             'type' => 'image', 
+            'name' => 'photo',
+            'disk' => 'public',
             ]);
         CRUD::addField([
-            'name' => 'address',
             'label' => 'Address',
             'type' => 'text', 
+            'name' => 'address',
             ]);
         CRUD::addField([
-            'name' => 'postal_code',
             'label' => 'ZIP Code',
-            'type' => 'text', 
+            'type' => 'number', 
+            'name' => 'postal_code',
             ]);
         CRUD::addField([
-            'name' => 'city',
             'label' => 'City',
             'type' => 'text', 
+            'name' => 'city',
             ]);
         CRUD::addField([
-            'name' => 'state',
             'label' => 'State',
             'type' => 'text', 
+            'name' => 'state',
             ]);
         CRUD::addField([
-            'name' => 'country',
             'label' => 'Country',
             'type' => 'text', 
+            'name' => 'country',
             ]);
         CRUD::addField([
-            'name' => 'cif',
             'label' => 'Cif',
-            'type' => 'number', 
+            'type' => 'text', 
+            'name' => 'cif',
+            ]);
+        CRUD::addField([
+            'label' => 'Categories',
+            'type' => 'select2_multiple',
+            'name' => 'categories',
+            'entity' => 'categories',
+            'attribute' => 'name',
+            'model' => 'App\Models\Category',
             ]);
     }
 

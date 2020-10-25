@@ -27,16 +27,16 @@ class RestaurantRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-            'name' => 'required|min:5|max:255',
-            'email' => 'required|email|max:255',
-            'photo' => 'required',
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:App\Models\User,email,' . $this->request->get('id'),
+            'photo' => '',
             'phone' => 'required',
-            'address' => 'required|min:5|max:255',
-            'postal_code' => 'required|min:5|max:255',
-            'city' => 'required|min:5|max:255',
-            'state' => 'required|min:5|max:255',
-            'country' => 'required|min:5|max:255',
-            'cif' => 'required',
+            'address' => 'required|max:255',
+            'postal_code' => 'required|numeric',
+            'city' => 'required|max:255',
+            'state' => 'required|max:255',
+            'country' => 'required|max:255',
+            'cif' => 'required|max:255',
         ];
     }
 

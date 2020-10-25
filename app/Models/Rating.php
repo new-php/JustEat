@@ -27,4 +27,14 @@ class Rating extends Model
     protected $guarded = ['id'];
     // protected $hidden = [];
     // protected $dates = [];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function restaurant()
+    {
+        return $this->belongsTo('App\Models\Restaurant');
+    }
 }
