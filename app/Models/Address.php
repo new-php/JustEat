@@ -9,7 +9,7 @@ class Address extends Model
 {
     use CrudTrait;
 
-        /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
