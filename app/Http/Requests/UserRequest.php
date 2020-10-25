@@ -25,10 +25,18 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->method() == "PUT") {
+            return [
+                'name' => 'max:255',
+                'email' => 'required|email|max:255|unique:App\Models\User,email,' . $this->request->get('id'),
+                'phone' => 'max:255',
+                'password' => 'nullable|confirmed',
+            ];
+        }
         return [
-            'name' => 'required|min:5|max:255',
-            'email' => 'required|email|max:255|unique:App\Models\User,email',
-            'phone' => 'required|max:255',
+            'name' => 'max:255',
+            'email' => 'required|email|max:255|unique:App\Models\User,email,' . $this->request->get('id'),
+            'phone' => 'max:255',
             'password' => 'required|confirmed',
         ];
     }
