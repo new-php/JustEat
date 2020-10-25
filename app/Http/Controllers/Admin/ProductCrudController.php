@@ -76,7 +76,7 @@ class ProductCrudController extends CrudController
             'name' => 'description',
             ]);
         CRUD::addColumn([
-            'label' => 'Restaurant',
+            'label' => 'Product Categories',
             'type' => 'select_multiple',
             'name' => 'productCategories',
             'entity' => 'productCategories',
@@ -131,9 +131,9 @@ class ProductCrudController extends CrudController
             'type' => 'text', 
             'name' => 'description',
             ]);
-        CRUD::addColumn([
-            'label' => 'Restaurant',
-            'type' => 'select_multiple',
+        CRUD::addField([
+            'label' => 'Product Categories',
+            'type' => 'select2_multiple',
             'name' => 'productCategories',
             'entity' => 'productCategories',
             'attribute' => 'name',
