@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\OrderItemRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
 /**
  * Class OrderItemCrudController
@@ -13,11 +18,7 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
  */
 class OrderItemCrudController extends CrudController
 {
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use ListOperation, CreateOperation, UpdateOperation, DeleteOperation, ShowOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -39,27 +40,32 @@ class OrderItemCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // columns
-
         CRUD::addColumn([
+            'label' => 'Order',
+            'type' => 'select', 
             'name' => 'order_id',
-            'label' => 'Order id',
-            'type' => 'relationship', 
+            'entity' => 'order',
+            'attribute' => 'id',
+            'model' => 'App\Models\Order',
             ]);
         CRUD::addColumn([
+            'label' => 'Product',
+            'type' => 'select',
             'name' => 'product_id',
-            'label' => 'Product id',
-            'type' => 'relationship', 
+            'entity' => 'product',
+            'attribute' => 'name',
+            'model' => 'App\Models\Product',
             ]);
         CRUD::addColumn([
-            'name' => 'quantity',
             'label' => 'Quantity',
             'type' => 'number', 
+            'name' => 'quantity',
             ]);
         CRUD::addColumn([
-            'name' => 'price',
             'label' => 'Price',
             'type' => 'number', 
+            'name' => 'price',
+            'decimals' => 2,
             ]);
     }
 
@@ -73,22 +79,26 @@ class OrderItemCrudController extends CrudController
     {
         CRUD::setValidation(OrderItemRequest::class);
 
-        
         CRUD::addField([
+            'label' => 'Order',
+            'type' => 'select', 
             'name' => 'order_id',
-            'label' => 'Order id',
-            'type' => 'relationship', 
+            'entity' => 'order',
+            'attribute' => 'id',
+            'model' => 'App\Models\Order',
             ]);
         CRUD::addField([
+            'label' => 'Product',
+            'type' => 'select',
             'name' => 'product_id',
-            'label' => 'Product id',
-            'type' => 'relationship', 
+            'entity' => 'product',
+            'attribute' => 'name',
+            'model' => 'App\Models\Product',
             ]);
         CRUD::addField([
             'name' => 'quantity',
             'label' => 'Quantity',
             'type' => 'number', 
-            'decimals' => 0,
             ]);
         CRUD::addField([
             'name' => 'price',
@@ -96,12 +106,6 @@ class OrderItemCrudController extends CrudController
             'type' => 'number', 
             'decimals' => 2,
             ]);
-
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
     }
 
     /**

@@ -28,8 +28,8 @@ class OrderItemRequest extends FormRequest
         return [
             'order_id' => 'required',
             'restaurant_id' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
+            'quantity' => 'required|numeric',
+            'price' => 'required|numeric',
 
         ];
     }
