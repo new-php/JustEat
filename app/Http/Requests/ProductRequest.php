@@ -27,7 +27,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'restaurant_id' => 'required|max:255',
-            'photo' => 'nullable|image',
+            'photo' => '',
             'description' => '',
             'name' => 'required|max:255',
             'price' => 'required|numeric',
