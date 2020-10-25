@@ -104,7 +104,7 @@ class OrderItemCrudController extends CrudController
             'name' => 'price',
             'label' => 'Price',
             'type' => 'number', 
-            'decimals' => 2,
+            'attributes' => ["step" => "any"]
             ]);
     }
 

@@ -38,12 +38,6 @@ class OrderCrudController extends CrudController
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
-/**
-     * Define what happens when the List operation is loaded.
-     * 
-     * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
-     * @return void
-     */
     protected function setupListOperation()
     {
         CRUD::addColumn([
@@ -151,13 +145,13 @@ class OrderCrudController extends CrudController
             'label' => 'Shipping',
             'type' => 'number',
             'name' => 'shipping',
-            'decimals' => 2,
+            'attributes' => ["step" => "any"]
             ]);
         CRUD::addField([
             'label' => 'Total',
             'type' => 'number',
             'name' => 'total',
-            'decimals' => 2, 
+            'attributes' => ["step" => "any"] 
             ]);
         CRUD::addField([
             'label' => 'Status',

@@ -112,7 +112,7 @@ class ProductCrudController extends CrudController
             'label' => 'Price',
             'type' => 'number', 
             'name' => 'price',
-            'decimals' => 2,
+            'attributes' => ["step" => "any"]
             ]);
         CRUD::addField([
             'label' => 'Available',
