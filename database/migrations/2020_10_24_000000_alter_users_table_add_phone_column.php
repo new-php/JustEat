@@ -15,7 +15,7 @@ class AlterUsersTableAddPhoneColumn extends Migration
     {
         Schema::table('users', function($table)
         {
-            $table->string('phone');
+            $table->string('phone')->after('email')->nullable();
         });
     }
 
@@ -26,12 +26,9 @@ class AlterUsersTableAddPhoneColumn extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumn('users', 'phone'))
+        Schema::table('users', function($table)
         {
-            Schema::table('users', function($table)
-            {
-                $table->dropColumn('phone');
-            });
-        }
+            $table->dropColumn('phone');
+        });
     }
 }
