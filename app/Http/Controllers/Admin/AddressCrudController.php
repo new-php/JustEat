@@ -44,7 +44,7 @@ class AddressCrudController extends CrudController
             'type' => 'select',
             'name' => 'user_id',
             'entity' => 'user',
-            'attribute' => 'name',
+            'attribute' => 'email',
             'model' => 'App\Models\User',
         ]);
         CRUD::addColumn([
@@ -94,7 +94,7 @@ class AddressCrudController extends CrudController
             'type' => 'select2',
             'name' => 'user_id',
             'entity' => 'user',
-            'attribute' => 'name',
+            'attribute' => 'email',
             'model' => 'App\Models\User',
         ]);
         CRUD::addField([
@@ -125,7 +125,7 @@ class AddressCrudController extends CrudController
         CRUD::addField([
             'name' => 'postal_code',
             'label' => 'ZIP Code',
-            'type' => 'text', 
+            'type' => 'number', 
             ]);
     }
 

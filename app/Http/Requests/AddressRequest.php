@@ -32,7 +32,7 @@ class AddressRequest extends FormRequest
             'address_line_2' => 'max:255',
             'observations' => 'max:255',
             'city' => 'required|max:255',
-            'postal_code' => 'required|max:255',
+            'postal_code' => 'required|numeric',
         ];
     }
 
