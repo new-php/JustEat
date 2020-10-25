@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->string('status');
             $table->foreignId('rider_id');
             $table->string('delivery_mode');
+            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('address_id')->references('id')->on('addresses');

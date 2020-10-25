@@ -19,6 +19,7 @@ class CreateRatingsTable extends Migration
             $table->foreignId('restaurant_id');
             $table->decimal('score', 3, 2);
             $table->string('comments')->nullable();
+            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');

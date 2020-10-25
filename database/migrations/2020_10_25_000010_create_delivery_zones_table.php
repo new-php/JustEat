@@ -20,6 +20,7 @@ class CreateDeliveryZonesTable extends Migration
             $table->integer('min_order_price');
             $table->integer('delivery_price');
             $table->integer('delivery_time');
+            $table->timestamps();
 
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
         });

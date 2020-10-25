@@ -19,6 +19,7 @@ class CreateSchedulesTable extends Migration
             $table->string('weekday');
             $table->time('open');
             $table->time('close');
+            $table->timestamps();
 
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
         });

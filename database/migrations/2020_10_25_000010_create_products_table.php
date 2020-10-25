@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->decimal('price', 5, 2);
             $table->boolean('available');
+            $table->timestamps();
             
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
         });

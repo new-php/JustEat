@@ -22,6 +22,7 @@ class CreateAddressesTable extends Migration
             $table->string('observations')->nullable();
             $table->string('city');
             $table->integer('postal_code');
+            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

@@ -17,6 +17,7 @@ class CreateProductProductCategoryTable extends Migration
             $table->id();
             $table->foreignId('product_category_id');
             $table->foreignId('product_id');
+            $table->timestamps();
 
             $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
