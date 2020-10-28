@@ -1,0 +1,28 @@
+language: php
+
+php:
+- 7.4
+
+services:
+- mysql
+
+before_script:
+- cp .env.testing .env
+- mysql -e 'create database justeat;'
+- composer self-update
+- composer install --no-interaction
+- php artisan key:generate
+- php artisan migrate --seed
+
+script:
+    - vendor/bin/phpunit
+
+branches:
+  only:
+    - main
+
+notifications:
+    recipients:
+        - xavidejuan@gmail.com
+    on_success: always
+    on_failure: always
