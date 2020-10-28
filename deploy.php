@@ -21,7 +21,7 @@ set('cloudflare', [
 	'domain' => 'xavidejuan.com'
 ]);
 
-// Shared files/dirs between deploys 
+// Shared files/dirs between deploys
 add('shared_files', [
 	'.env',
 ]);
@@ -30,7 +30,7 @@ add('shared_dirs', [
 	'storage',
 ]);
 
-// Writable dirs by web server 
+// Writable dirs by web server
 add('writable_dirs', []);
 set('allow_anonymous_stats', false);
 
@@ -57,5 +57,12 @@ after('deploy:update_code', 'npm:install');
 // Run npm run prod after npm install
 after('npm:install', 'npm:run');
 
+// Run php artisan storage:link before symlink
+before('deploy:symlink', 'artisan:storage:link')
+
 // Clears Cloudflare cache after changing the symlink
 after('deploy:symlink', 'deploy:cloudflare');
+
+
+
+//TODO: afegir php artisan storage:link al procés de deploy
