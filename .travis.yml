@@ -23,7 +23,7 @@ script:
 
 branches:
   only:
-    - develop
+    - main
 
 notifications:
     recipients:
