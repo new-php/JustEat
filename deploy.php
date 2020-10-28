@@ -62,7 +62,3 @@ before('deploy:symlink', 'artisan:storage:link');
 
 // Clears Cloudflare cache after changing the symlink
 after('deploy:symlink', 'deploy:cloudflare');
-
-
-
-//TODO: afegir php artisan storage:link al procés de deploy
