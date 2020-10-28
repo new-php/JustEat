@@ -12,7 +12,7 @@ set('application', 'JustEat');
 set('repository', 'git@github.com:UB-ES-2020/JustEat.git');
 
 // [Optional] Allocate tty for git clone. Default value is false.
-set('git_tty', true);
+set('git_tty', false);
 
 // Cloudflare data
 set('cloudflare', [
