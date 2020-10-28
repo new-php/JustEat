@@ -30,7 +30,7 @@ jobs:
       - run: chmod 600 ~/.ssh/deploy_justeat
       - run: chmod 600 ~/.ssh/config
       - name: Deploy to PRODUCTION Server
-        run: dep deploy production -vvv
+        run: php dep deploy production -vvv
   deploy-staging:
     name: Deploy Project to STAGING Server
     runs-on: ubuntu-latest
@@ -51,4 +51,4 @@ jobs:
       - run: chmod 600 ~/.ssh/deploy_justeat
       - run: chmod 600 ~/.ssh/config
       - name: Deploy to PRODUCTION Server
-        run: dep deploy production -vvv
+        run: php dep deploy production -vvv
