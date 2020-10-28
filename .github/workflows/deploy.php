@@ -51,4 +51,4 @@ jobs:
       - run: chmod 600 ~/.ssh/deploy_justeat
       - run: chmod 600 ~/.ssh/config
       - name: Deploy to PRODUCTION Server
-        run: vendor/bin/deploy production -vvv
+        run: vendor/bin/deploy staging -vvv
