@@ -24,7 +24,7 @@ jobs:
       - name: Composer install
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
       - run: mkdir -p ~/.ssh
-      - run: echo ${{ secrets.SSH_PRIVATE_KEY }} >> ~/.ssh/deploy_justeat
+      - run: echo "${{ secrets.SSH_PRIVATE_KEY }}" >> ~/.ssh/deploy_justeat
       - run: echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
       - run: echo -e "Host deploy.justeat.xavidejuan.com \n\tHostName ${{ secrets.PRODUCTION_IP }}" >> ~/.ssh/config
       - run: chmod 600 ~/.ssh/deploy_justeat
@@ -45,7 +45,7 @@ jobs:
       - name: Composer install
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
       - run: mkdir -p ~/.ssh
-      - run: echo ${{ secrets.SSH_PRIVATE_KEY }} >> ~/.ssh/deploy_justeat
+      - run: echo "${{ secrets.SSH_PRIVATE_KEY }}" >> ~/.ssh/deploy_justeat
       - run: echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
       - run: echo -e "Host deploy.staging.justeat.xavidejuan.com \n\tHostName ${{ secrets.STAGING_IP }}" >> ~/.ssh/config
       - run: chmod 600 ~/.ssh/deploy_justeat
