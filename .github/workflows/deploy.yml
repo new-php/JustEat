@@ -16,11 +16,6 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v1
-      - name: Fetch built assets from Artifacts
-        uses: actions/download-artifact@v1
-        with:
-          name: assets
-          path: public
       - name: Setup PHP
         uses: shivammathur/setup-php@master
         with:
@@ -42,11 +37,6 @@ jobs:
     if: github.ref == 'refs/heads/develop'
     steps:
       - uses: actions/checkout@v1
-      - name: Fetch built assets from Artifacts
-        uses: actions/download-artifact@v1
-        with:
-          name: assets
-          path: public
       - name: Setup PHP
         uses: shivammathur/setup-php@master
         with:
