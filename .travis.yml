@@ -27,6 +27,7 @@ branches:
     - develop
 
 notifications:
+    slack: ub-es-2020-justeat:tStsxAy5WWl74qZJWBxGJYAi
     recipients:
         - xavidejuan@gmail.com
     on_success: always
