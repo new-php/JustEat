@@ -29,7 +29,7 @@
                             <a href="{{ route ('welcome') }}"><strong>Iniciar sesión</strong></a>
                         </li>
                         <li>
-                            <a href="{{ route ('welcome') }}"><strong>Cerrar sesión</strong></a>
+                            <a href="{{ route ('welcome') }}" onclick="logOut()"><strong>Cerrar sesión</strong></a>
                         </li>
                         <li>
                             <a class="visually-hidden" href=""><strong>Nombre Usuario</strong></a>
@@ -598,5 +598,13 @@
             </div>
         </div>
     </footer>
+
+
+    <!-- This script deletes the auth token-->
+    <script>
+        function logOut(){
+            window.localStorage.removeItem('auth_token');
+        }
+    </script>
 </body>
 </html>
