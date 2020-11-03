@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Role;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,7 +17,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        $user = User::create([
         	'name' => 'admin',
         	'email' => 'admin@justeat.com',
         	'email_verified_at' => Carbon::now(),
@@ -24,5 +25,7 @@ class UserSeeder extends Seeder
         	'created_at' => Carbon::now(),
         	'updated_at' => Carbon::now(),
         ]);
+
+        $user->assignRole('admin');
     }
 }

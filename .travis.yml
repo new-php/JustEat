@@ -1,0 +1,34 @@
+language: php
+
+os: linux
+
+dist: focal
+
+php:
+- 7.4
+
+services:
+- mysql
+
+before_script:
+- cp .env.testing .env
+- mysql -e 'create database justeat;'
+- composer self-update
+- composer install --no-interaction
+- php artisan key:generate
+- php artisan migrate --seed
+
+script:
+    - vendor/bin/phpunit
+
+branches:
+  only:
+    - main
+    - develop
+
+notifications:
+    slack: ub-es-2020-justeat:tStsxAy5WWl74qZJWBxGJYAi
+    recipients:
+        - xavidejuan@gmail.com
+    on_success: always
+    on_failure: always

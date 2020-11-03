@@ -17,20 +17,20 @@ set('git_tty', false);
 // Cloudflare data
 set('cloudflare', [
     'api_key' => '0da6e3465f481c6fe36b21917b492868fda20',
-	'email' => 'xavidejuan@gmail.com',
-	'domain' => 'xavidejuan.com'
+    'email' => 'xavidejuan@gmail.com',
+    'domain' => 'xavidejuan.com'
 ]);
 
-// Shared files/dirs between deploys 
+// Shared files/dirs between deploys
 add('shared_files', [
-	'.env',
+    '.env',
 ]);
 add('shared_dirs', [
-	'bootstrap/cache',
-	'storage',
+    'bootstrap/cache',
+    'storage',
 ]);
 
-// Writable dirs by web server 
+// Writable dirs by web server
 add('writable_dirs', []);
 set('allow_anonymous_stats', false);
 
@@ -56,6 +56,9 @@ after('deploy:update_code', 'npm:install');
 
 // Run npm run prod after npm install
 after('npm:install', 'npm:run');
+
+// Run php artisan storage:link before symlink
+before('deploy:symlink', 'artisan:storage:link');
 
 // Clears Cloudflare cache after changing the symlink
 after('deploy:symlink', 'deploy:cloudflare');
