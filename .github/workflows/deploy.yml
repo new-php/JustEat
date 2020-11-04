@@ -50,5 +50,5 @@ jobs:
       - run: echo -e "Host deploy.staging.justeat.xavidejuan.com \n\tHostName ${{ secrets.STAGING_IP }}" >> ~/.ssh/config
       - run: chmod 600 ~/.ssh/deploy_justeat
       - run: chmod 600 ~/.ssh/config
-      - name: Deploy to PRODUCTION Server
+      - name: Deploy to STAGING Server
         run: vendor/bin/dep deploy staging -vvv
