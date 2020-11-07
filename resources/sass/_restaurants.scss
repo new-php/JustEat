@@ -171,28 +171,127 @@
         }
 
         .restaurants-container {
-            background: #F1F2F4;
             border-radius: 4px;
             padding: 0.1% 1.5%;
 
             .restaurant-card {
+                box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
                 background: #FFF;
-                padding: 0.5%;
                 margin: 2% 0;
+                display: flex;
+                padding: 0.5%;
+                cursor: pointer;
 
-                .restaurant-image {
-                    width: 10%;
+                .restaurant-image-container {
+                    height: 87px;
+                    width: 18%;
+                    display: inline-block;
+                    overflow: hidden;
                     border-radius: 4px;
+
+                    .restaurant-image {
+                        height: 100%;
+                        widows: auto;
+                        max-width: none !important;
+                        transform: translate(-15%,0)
+                    }
                 }
 
-                .restaurant-logo {
+                .restaurant-logo-container {
+
+                    .restaurant-logo {
+                        position: relative;
+                        top: 15%;
+                        left: -35%;
+                        width: 62%;
+                        border-radius: 4px;
+                    }
+                }
+
+                .restaurant-text {
                     position: relative;
-                    left: -3%;
-                    width: 6%;
-                    border-radius: 4px;
+                    left: -6%;
+                    width: 30%;
+                    padding-left: 0.5%;
+                    padding-top: 1%;
+                    display: inline-block;
+
+                    .restaurant-name {
+                        font-size: 1.1rem;
+                    }
+
+                    .restaurant-categories {
+                        display: flex;
+
+                        .restaurant-category-name {
+                            margin-right: 5%;
+                        }
+                    }
+
+                    .restaurant-rating {
+                        border: none;
+
+                        .restaurant-star-rating {
+                            padding: 0;
+                            height: auto;
+
+                            .b-rating-star {
+                                padding: 1px;
+                            }
+                        }
+
+                        .form-control:focus {
+                            border-color: inherit !important;
+                            box-shadow: inherit !important;
+                        }
+
+                        .restaurant-num-ratings {
+                            font-size: 0.8rem;
+                        }
+                    }
+                }
+
+                .restaurant-info {
+                    width: 45%;
+                    padding: 0.5%;
+                    font-size: 0.9rem;
+                    display: inline-block;
+
+                    .restaurant-prices {
+                        display: flex;
+                        padding-top: 8%;
+                        color: #2A3846;
+
+                        .restaurant-price-delivery {
+                            width: 30%;
+
+                            .restaurant-price-delivery-icon {
+                                width: 17%;
+                            }
+
+                            .restaurant-price-delivery-label {
+                                padding-left: 5%;
+                            }
+                        }
+
+                        .restaurant-min-order-price {
+
+                        }
+                    }
+
+                    .restaurant-delivery-time {
+                        color: #006631;
+
+                        .restaurant-delivery-time-icon {
+                            width: 5.2%;
+                        }
+
+                        .restaurant-delivery-time-label {
+                            padding-left: 1.4%;
+                        }
+                    }
                 }
             }
         }
-
     }
 }

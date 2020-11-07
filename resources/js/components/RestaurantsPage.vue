@@ -77,10 +77,48 @@
                         <span class="restaurants-open-ordering">Ordenar por relevantes</span>
                     </div>
                     <div class="restaurants-container">
-                        <section class="restaurant-card" v-for="(restaurant) in restaurants_showing" :key=restaurant.id>
-                            <img class="restaurant-image" :src="restaurant.photo">
-                            <img class="restaurant-logo" :src="restaurant.logo">
-                            {{restaurant.name}}
+                        <section class="restaurant-card" v-for="(restaurant) in restaurants_showing" :key=restaurant.id v-on:click="goToRestaurant(restaurant)">
+                            <div class="restaurant-image-container">
+                                <img draggable="false" class="restaurant-image" :src="restaurant.photo">
+                            </div>
+                            <div class="restaurant-logo-container">
+                                <img draggable="false" class="restaurant-logo" :src="restaurant.logo">
+                            </div>
+                            <div class="restaurant-text">
+                                <div class="restaurant-name">
+                                    <strong>{{restaurant.name}}</strong>
+                                </div>
+                                <div class="restaurant-categories">
+                                    <div class="restaurant-category-name" v-for="(category) in restaurant.categories.slice(0,2)">
+                                    {{ category.name }}
+                                    </div>
+                                </div>
+                                <div class="restaurant-rating">
+                                    <b-form-rating class="restaurant-star-rating" v-model="restaurant.average_rating" stars="6" size="sm" color="#FF8000" inline no-border readonly></b-form-rating>
+                                    <span class="restaurant-num-ratings"><strong>{{ restaurant.number_of_ratings }}</strong></span>
+                                </div>
+                            </div>
+                            <div class="restaurant-info">
+                                <div class="restaurant-prices">
+                                    <div class="restaurant-price-delivery">
+                                        <svg class="restaurant-price-delivery-icon" fill="#5E6B77;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path d="M11.25 16.667a2.083 2.083 0 1 1 0-4.167 2.083 2.083 0 0 1 0 4.167zm0-.834a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5zm-6.258-4.166V17.5H17.5v-5.833H4.992zm-.417-.834h13.342c.23 0 .416.187.416.417v6.667c0 .23-.186.416-.416.416H4.575a.417.417 0 0 1-.417-.416V11.25c0-.23.187-.417.417-.417zm-1.872-1.45l.824 1.41a.417.417 0 0 1-.72.42l-1.033-1.77a.417.417 0 0 1 .15-.57l11.524-6.725a.417.417 0 0 1 .57.15l3.367 5.758a.417.417 0 0 1-.15.57l-2.258 1.317a.417.417 0 1 1-.42-.72l1.898-1.106-2.946-5.039L2.703 9.383zm8.682.41a.417.417 0 0 1-.72-.419 1.25 1.25 0 1 0-2.163 0 .417.417 0 0 1-.72.418 2.083 2.083 0 1 1 3.603 0z">
+                                            </path>
+                                        </svg>
+                                        <span class="restaurant-price-delivery-label">Entrega {{ restaurant.price_delivery }}€</span>
+                                    </div>
+                                    <div class="restaurant-min-order-price">
+                                        <span>Pedido Mínimo {{ restaurant.min_order_price }}€</span>
+                                    </div>
+                                </div>
+                                <div class="restaurant-delivery-time">
+                                    <svg class="restaurant-delivery-time-icon" fill="#006631" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path d="M10.711 11.545l-.589-.59 2.5-2.5.59.59-2.5 2.5zm5.244-6.423l.59.59-1.634 1.633-.589-.59 1.633-1.633zm-5.538 13.211a6.667 6.667 0 1 1 0-13.333 6.667 6.667 0 0 1 0 13.333zm0-.833a5.833 5.833 0 1 0 0-11.667 5.833 5.833 0 0 0 0 11.667zm0-11.667a2.083 2.083 0 1 1 0-4.166 2.083 2.083 0 0 1 0 4.166zm0-.833a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5z">
+                                        </path>
+                                    </svg>
+                                    <span class="restaurant-delivery-time-label"><strong>{{ restaurant.min_delivery_time }} - {{ restaurant.max_delivery_time }} min.</strong></span>
+                                </div>
+                            </div>
                         </section>
                     </div>
                 </div>
@@ -136,33 +174,105 @@
         this.restaurants = [
             {
                 id: 1,
-                name: "Restaurant1",
-                photo: "storage/images/restaurants/4cdfb34bc25f6f89b7099ca73a0c6544.jpg",
-                logo: "storage/images/restaurants/4cdfb34bc25f6f89b7099ca73a0c6544.jpg",
+                name: "McDonald's 1",
+                photo: "storage/images/restaurants/060a38a121bb843bd30b806d677b6044.jpg",
+                logo: "storage/images/restaurants/d395b692430196de511d4603c43ea5da.jpg",
+                categories: [
+                    {
+                        id: 1,
+                        name: "Americana"
+                    },
+                    {
+                        id: 2,
+                        name: "Argentina"
+                    },
+                ],
+                average_rating: 4.7,
+                number_of_ratings: 123,
+                price_delivery: 2,
+                min_order_price: 12,
+                min_delivery_time: 30,
+                max_delivery_time: 45,
             },
             {
                 id: 2,
-                name: "Restaurant2",
-                photo: "storage/images/restaurants/4cdfb34bc25f6f89b7099ca73a0c6544.jpg",
-                logo: "storage/images/restaurants/4cdfb34bc25f6f89b7099ca73a0c6544.jpg",
+                name: "McDonald's 2",
+                photo: "storage/images/restaurants/060a38a121bb843bd30b806d677b6044.jpg",
+                logo: "storage/images/restaurants/d395b692430196de511d4603c43ea5da.jpg",
+                categories: [
+                    {
+                        id: 1,
+                        name: "Americana"
+                    },
+                ],
+                average_rating: 3.7,
+                number_of_ratings: 123,
+                price_delivery: 2,
+                min_order_price: 12,
+                min_delivery_time: 30,
+                max_delivery_time: 45,
             },
             {
                 id: 3,
-                name: "Restaurant3",
-                photo: "storage/images/restaurants/4cdfb34bc25f6f89b7099ca73a0c6544.jpg",
-                logo: "storage/images/restaurants/4cdfb34bc25f6f89b7099ca73a0c6544.jpg",
+                name: "McDonald's 3",
+                photo: "storage/images/restaurants/060a38a121bb843bd30b806d677b6044.jpg",
+                logo: "storage/images/restaurants/d395b692430196de511d4603c43ea5da.jpg",
+                categories: [
+                    {
+                        id: 1,
+                        name: "Americana"
+                    },
+                    {
+                        id: 2,
+                        name: "Argentina"
+                    },
+                    {
+                        id: 3,
+                        name: "Bao",
+                    }
+                ],
+                average_rating: 3.2,
+                number_of_ratings: 123,
+                price_delivery: 2,
+                min_order_price: 12,
+                min_delivery_time: 30,
+                max_delivery_time: 45,
             },
             {
                 id: 4,
-                name: "Restaurant4",
-                photo: "storage/images/restaurants/4cdfb34bc25f6f89b7099ca73a0c6544.jpg",
-                logo: "storage/images/restaurants/4cdfb34bc25f6f89b7099ca73a0c6544.jpg",
+                name: "McDonald's 4",
+                photo: "storage/images/restaurants/060a38a121bb843bd30b806d677b6044.jpg",
+                logo: "storage/images/restaurants/d395b692430196de511d4603c43ea5da.jpg",
+                categories: [
+                    {
+                        id: 1,
+                        name: "Americana"
+                    },
+                ],
+                average_rating: 1.5,
+                number_of_ratings: 123,
+                price_delivery: 2,
+                min_order_price: 12,
+                min_delivery_time: 30,
+                max_delivery_time: 45,
             },
             {
                 id: 5,
-                name: "Restaurant5",
-                photo: "storage/images/restaurants/4cdfb34bc25f6f89b7099ca73a0c6544.jpg",
-                logo: "storage/images/restaurants/4cdfb34bc25f6f89b7099ca73a0c6544.jpg",
+                name: "McDonald's 5",
+                photo: "storage/images/restaurants/060a38a121bb843bd30b806d677b6044.jpg",
+                logo: "storage/images/restaurants/d395b692430196de511d4603c43ea5da.jpg",
+                categories: [
+                    {
+                        id: 1,
+                        name: "Americana"
+                    },
+                ],
+                average_rating: 2,
+                number_of_ratings: 123,
+                price_delivery: 2,
+                min_order_price: 12,
+                min_delivery_time: 30,
+                max_delivery_time: 45,
             },
         ];
 
@@ -227,6 +337,9 @@
                 $("#" + filter).removeClass("filter-active");
             }
         },
+        goToRestaurant(restaurant) {
+            window.location.href = "restaurant/" + restaurant.id;
+        }
     },
   };
 </script>
