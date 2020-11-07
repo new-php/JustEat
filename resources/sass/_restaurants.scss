@@ -1,0 +1,198 @@
+.base-container {
+    width: 100%;
+    max-width: 1272px;
+    position: relative;
+    margin: 0 auto;
+
+    .filters {
+        font-size: 1rem;
+        width: 25%;
+        padding: 0 1.5%;
+        line-height: 1.43;
+
+        .address-filter {
+            padding: 5% 7%;
+            background-color: #f1f2f4;
+            border-radius: 8px;
+            margin: 0 0 24px;
+
+            .address-box {
+                display: flex;
+
+                .address-icon {
+                    margin-right: 3%;
+                }
+            }
+
+            .change-address {
+                margin-left: 6.5%;
+            }
+        }
+
+        .categories-filter {
+            margin-bottom: 5%;
+
+            .categories-reset {
+                float:right;
+            }
+        }
+
+        .categories-available {
+            font-size: 0.85rem;
+
+            .category {
+                background: #FFF;
+                padding: 3%;
+                border-radius: 8px;
+                border: 1px solid #e2e6e9;
+                margin: 3% 0;
+                cursor: pointer;
+
+                .category-check {
+                    display: none;
+                    color: $green;
+                }
+
+                .category-restaurants-number {
+                    float: right;
+                }
+            }
+
+            .category:hover {
+                font-weight: bold;
+
+                .category-check {
+                    display: contents;
+                }
+            }
+
+            .category-active {
+                font-weight: bold;
+                color: $green;
+
+                .category-check {
+                    display: contents;
+                }
+            }
+        }
+
+        .other-filter {
+            margin-top: 15%;
+            margin-bottom: 5%;
+
+            .filter-reset {
+                float:right;
+            }
+        }
+
+        .filters-available {
+            font-size: 0.85rem;
+
+            .filter {
+                background: #FFF;
+                padding: 3%;
+                border-radius: 8px;
+                border: 1px solid #e2e6e9;
+                margin: 3% 0;
+                cursor: pointer;
+
+                .filter-check {
+                    display: none;
+                    color: $green;
+                }
+            }
+
+            .filter:hover {
+                font-weight: bold;
+                color: $green;
+
+                .filter-check {
+                    display: contents;
+                }
+            }
+
+            .filter-active {
+                font-weight: bold;
+                color: $green;
+
+                .filter-check {
+                    display: contents;
+                }
+            }
+        }
+    }
+
+    .restaurants-section {
+        width: 75%;
+
+        .search-bar {
+            box-shadow: 0 2px 5px 1px rgba(0,0,0,.1);
+            margin-bottom: 2.5%;
+
+            .search-icon {
+                position: absolute;
+                color: #125FCA;
+                font-size: 2rem;
+                padding: 1.5%;
+            }
+
+            .search-input {
+                width: 100%;
+                padding: 2% 6%;
+                background: #fff;
+                border-radius: 4px;
+                border: 0;
+                outline: 0;
+                font-size: 1.4rem;
+                color: #2A3846;
+            }
+
+            .search-input:focus {
+                outline: 2px solid #125FCA;
+            }
+        }
+
+        .restaurants-open {
+            margin-bottom: 2%;
+
+            .restaurants-open-icon {
+                width: 1.3rem;
+                padding-bottom: 1%;
+            }
+
+            .restaurants-open-label {
+                font-size: 1.3rem;
+            }
+
+            .restaurants-open-ordering {
+                font-size: 1rem;
+                float: right;
+            }
+        }
+
+        .restaurants-container {
+            background: #F1F2F4;
+            border-radius: 4px;
+            padding: 0.1% 1.5%;
+
+            .restaurant-card {
+                background: #FFF;
+                padding: 0.5%;
+                margin: 2% 0;
+
+                .restaurant-image {
+                    width: 10%;
+                    border-radius: 4px;
+                }
+
+                .restaurant-logo {
+                    position: relative;
+                    left: -3%;
+                    width: 6%;
+                    border-radius: 4px;
+                }
+            }
+        }
+
+    }
+}
