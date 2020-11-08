@@ -6,3 +6,16 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
+// Font Awesome
+@import "node_modules/font-awesome/scss/font-awesome.scss";
+
+// Styles
+@import 'restaurants';
+@import 'restaurants-categories';
+
+body {
+    user-select: none;
+}

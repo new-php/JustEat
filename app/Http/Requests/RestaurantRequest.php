@@ -30,6 +30,7 @@ class RestaurantRequest extends FormRequest
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:App\Models\User,email,' . $this->request->get('id'),
             'photo' => '',
+            'logo' => '',
             'phone' => 'required',
             'address' => 'required|max:255',
             'postal_code' => 'required|numeric',
