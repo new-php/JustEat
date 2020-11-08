@@ -3,11 +3,12 @@
     max-width: 1272px;
     position: relative;
     margin: 0 auto;
+    padding-left: 2%;
 
     .filters {
         font-size: 1rem;
         width: 25%;
-        padding: 0 1.5%;
+        padding-right: 1.5%;
         line-height: 1.43;
 
         .address-filter {
@@ -123,7 +124,7 @@
     }
 
     .restaurants-section {
-        width: 75%;
+        width: 73.8%;
 
         .search-bar {
             box-shadow: 0 2px 5px 1px rgba(0,0,0,.1);
@@ -172,7 +173,7 @@
 
         .restaurants-container {
             border-radius: 4px;
-            padding: 0.1% 1.5%;
+            padding: 0.1% 0 0.1% 1.5%;
 
             .restaurant-card {
                 box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
