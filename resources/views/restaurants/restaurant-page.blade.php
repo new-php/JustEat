@@ -9,3 +9,7 @@
     restaurant="{{ $restaurant }}">
 </restaurant-page>
 @endsection
+
+@section('footer')
+    @include('footer')
+@endsection

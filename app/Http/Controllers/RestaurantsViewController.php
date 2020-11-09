@@ -14,10 +14,7 @@ class RestaurantsViewController extends Controller
 
     public function restaurantPage(Restaurant $restaurant)
     {
-        if (!$restaurant) {
-            return redirect('/restaurants');
-        }
-        return view('restaurants.restaurant-page', ['restaurant' => $restaurant]);
+        return view('restaurants.restaurant-page', ['user' => auth('api')->user(), 'restaurant' => $restaurant]);
     }
 }
 
