@@ -1,7 +1,13 @@
 @extends('layouts.app')
 
+@section('header')
+    @include('header')
+@endsection
+
 @section('content')
-<div class="container">
+<login>
+</login>
+<!--<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -39,7 +45,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row"> 
+                        <div class="form-group row">
                             <div class= "col-md-5 offset-md-4">
                                 @if (Route::has('password.request'))
                                     <a class="link" href="{{ route('password.request') }}">
@@ -92,5 +98,5 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 @endsection

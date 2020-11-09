@@ -12,6 +12,9 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <!-- Facebook -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v8.0&appId=1605520302893810&autoLogAppEvents=1" nonce="clLnDENQ"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -23,7 +26,7 @@
     <div id="app">
         @yield('header')
         @yield('content')
-        @include('footer')
+        @yield('footer')
     </div>
 </body>
 </html>
