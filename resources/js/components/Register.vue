@@ -1,9 +1,9 @@
 <template>
     <div class="login-background">
-        <form class="login-container" align="middle" @submit.prevent="login">
-            <span class="login-label">Inicia sesión</span>
+        <form class="login-container" align="middle" @submit.prevent="register">
+            <span class="login-label">Regístrate en Just Eat</span>
             <div class="form-errors" id="form-errors">
-                <span>Lo sentimos, no hemos podido iniciar sesión. Introduce tus detalles de nuevo, o <a href="password/reset"><strong>resetea tu contraseña</strong></a></span>
+                <span>Ya existe una cuenta para este email. <a href="login"><strong>Inicia sesión</strong></a> o <a href="password/reset"><strong>resetea tu contraseña</strong></a></span>
             </div>
             <a class="btn login-facebook">
                 <div class="login-facebook-icon-container">
@@ -26,7 +26,7 @@
             </div>
             <input class="email-input" v-model="email" placeholder="Introduce tu email" type="email" required>
             <input class="password-input" v-model="password" placeholder="Introduce contraseña" type="password" required>
-            <a class="forgot-password-link" href="password/reset"><strong>¿Has olvidado tu contraseña?</strong></a>
+            <input class="password-input-confirm" v-model="password_confirmation" placeholder="Confirmar contraseña" type="password" required>
             <div class="remember-me-container">
                 <input type="checkbox" v-model="rememberme">
                 <label class="remember-me-label" for="checkbox">Guardar sesión</label>
@@ -35,21 +35,22 @@
             <button type="submit" class="btn submit-button">
                 <span class="submit-button-text"><strong>Inicia sesión</strong></span>
             </button>
-            <span class="register">¿Nuevo en Just Eat? <a class="register-link" href="register"><strong>Crear cuenta</strong></a></span>
             <div class="privacy-tos">
                 <span>Al crear la cuenta, aceptas nuestros <a class="privacy-tos-link" href="#"><strong>términos y condiciones</strong></a>. Por favor, lee nuestra <a class="privacy-tos-link" href="#"><strong>política de privacidad</strong></a> y nuestra <a class="privacy-tos-link" href="#"><strong>política de cookies</strong></a>.</span>
             </div>
+            <span class="register">¿Ya formas parte de Just Eat? <a class="register-link" href="register"><strong>Inicia sesión</strong></a></span>
         </form>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Login",
+        name: "Register",
         data() {
             return {
                 email: "",
                 password: "",
+                password_confirmation: "",
                 rememberme: false,
             }
         },
@@ -62,14 +63,12 @@
             }
         },
         methods: {
-            login() {
-                window.axios.post('oauth/token',
+            register() {
+                window.axios.post('register',
                     {
-                        username: this.email,
+                        email: this.email,
                         password: this.password,
-                        grant_type: process.env.MIX_PASSPORT_GRANT,
-                        client_id: process.env.MIX_PASSPORT_CLIENT_ID,
-                        client_secret: process.env.MIX_PASSPORT_CLIENT_SECRET,
+                        password_confirmation: this.password_confirmation,
                     },
                     {
                         'Accept': 'application/json',
@@ -77,12 +76,7 @@
                 )
                 .then(response => {
                     window.localStorage.setItem('auth_token', response.data.access_token);
-                    window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + window.localStorage.getItem('auth_token');
-                    window.axios.get('user')
-                    .then(response => {
-                        window.localStorage.setItem('username', response.data.data.name)
-                        window.location.href = '/restaurants';
-                    });
+                    window.location.href = '/';
                 })
                 .catch((error) => {
                     window.localStorage.removeItem('auth_token')
