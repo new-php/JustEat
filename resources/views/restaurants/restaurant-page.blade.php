@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('header')
-    @include('header')
+<vue-header
+login_form=false>
+</vue-header>
 @endsection
 
 @section('content')
