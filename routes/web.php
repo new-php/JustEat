@@ -20,6 +20,6 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::get('/restaurants', 'RestaurantsViewController@restaurantsPage')->name('restaurants');
-Route::get('/restaurant/{restaurant}', 'RestaurantsViewController@restaurantPage')->name('restaurant');
+Route::get('/restaurants/{restaurant}', 'RestaurantsViewController@restaurantPage')->name('restaurant');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

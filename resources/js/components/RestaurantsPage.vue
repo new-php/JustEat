@@ -130,7 +130,7 @@
 <script>
   export default {
     name: "Restaurants",
-    props: ['address'],
+    props: ['address', 'restaurants'],
     created() {
         this.categories = [
             {
