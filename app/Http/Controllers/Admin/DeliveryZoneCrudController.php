@@ -102,7 +102,6 @@ class DeliveryZoneCrudController extends CrudController
             'name' => 'delivery_price',
             'label' => 'Delivery price',
             'type' => 'number',
-            'attributes' => ["step" => "any"],
             ]);
         CRUD::addField([
             'name' => 'delivery_time',
