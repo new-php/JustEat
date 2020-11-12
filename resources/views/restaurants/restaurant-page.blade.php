@@ -13,5 +13,6 @@ login_form=false>
 @endsection
 
 @section('footer')
-    @include('footer')
+<vue-footer>
+</vue-footer>
 @endsection
