@@ -3,7 +3,6 @@
 <restaurants-page
     address="{{ $address }}"
     restaurants="{{ $restaurants }}"
-    categories="{{ $categories }}"
     >
 </restaurants-page>
 @endsection
