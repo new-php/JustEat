@@ -1,8 +1,8 @@
 <template>
     <div>
         <restaurants-categories></restaurants-categories>
-        <div class="py-4 base-container">
-            <div class="row">
+        <div class="base-container">
+            <div class="app-row">
                 <div class="filters">
                     <div class="address-filter">
                         <div class="address-box">
@@ -289,7 +289,7 @@
         }
     },
     mounted() {
-      console.log("Example component mounted");
+
     },
     watch: {
         search_input: function(val, oldVal) {
