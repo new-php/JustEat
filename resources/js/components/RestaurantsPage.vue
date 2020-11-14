@@ -1,6 +1,23 @@
 <template>
     <div>
-        <restaurants-categories></restaurants-categories>
+        <div class="bg-white">
+        <div class="base-container">
+            <div class="categories">
+            <div>
+                <p>Cocinas Populares</p>
+            </div>
+            <div class="header-filters">
+                <span class="categories-container" v-for="(category) in categories.slice(0,8)" v-on:click="selectMainCategory(category)"  :key=category.id :id="'mainCategory-' + category.id">
+                    <div class="categories-image-container">
+                        <img :src=category.img>
+                    </div>
+                    <i class="fa fa-check categories-check" aria-hidden="true"></i>
+                    <span>{{category.name}}</span>
+                </span>
+            </div>
+        </div>
+        </div>
+    </div>
         <div class="py-4 base-container">
             <div class="row">
                 <div class="filters">
@@ -136,6 +153,7 @@
             {
                 id: 1,
                 name: 'Americana',
+                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/americana",
                 restaurants: [
                     {
                         id: 1,
@@ -148,6 +166,7 @@
             {
                 id: 2,
                 name: 'Argentina',
+                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/argentina",
                 restaurants: [
                     {
                         id: 1,
@@ -163,9 +182,87 @@
             {
                 id: 3,
                 name: 'Bao',
+                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/bao",
                 restaurants: [
                     {
                         id: 1,
+                    }
+                ]
+            },
+            {
+                id: 4,
+                name: 'BBQ',
+                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/bbq",
+                restaurants: [
+                    {
+                        id: 1,
+                    },
+                    {
+                        id: 2,
+                    }
+                ]
+            },
+            {
+                id: 5,
+                name: 'Bocadillos',
+                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/bocadillos",
+                restaurants: [
+                    {
+                        id: 1,
+                    },
+                    {
+                        id: 2,
+                    }
+                ]
+            },
+            {
+                id: 6,
+                name: 'Bocadillos/wraps',
+                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/bocadillos-wraps",
+                restaurants: [
+                    {
+                        id: 1,
+                    },
+                    {
+                        id: 2,
+                    }
+                ]
+            },
+            {
+                id: 7,
+                name: 'Braseria',
+                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/braseria",
+                restaurants: [
+                    {
+                        id: 1,
+                    },
+                    {
+                        id: 2,
+                    }
+                ]
+            },
+            {
+                id: 8,
+                name: 'Caribeña',
+                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/caribeña",
+                restaurants: [
+                    {
+                        id: 1,
+                    },
+                    {
+                        id: 2,
+                    }
+                ]
+            },{
+                id: 9,
+                name: 'Casera',
+                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/casera",
+                restaurants: [
+                    {
+                        id: 1,
+                    },
+                    {
+                        id: 2,
                     }
                 ]
             }
@@ -322,6 +419,19 @@
                     }
                 }
                 $("#category-" + category.id).removeClass("category-active");
+            }
+        },
+        selectMainCategory(category) {
+            if (!this.categories_selected.includes(category)) {
+                this.categories_selected.push(category);
+                $("#mainCategory-" + category.id).addClass("categories-active");
+            } else {
+                for (let i = this.categories_selected.length-1; i >= 0; i-- ) {
+                    if (this.categories_selected[i].id == category.id) {
+                        this.categories_selected.splice(i,1);
+                    }
+                }
+                $("#mainCategory-" + category.id).removeClass("categories-active");
             }
         },
         selectFilter(filter) {

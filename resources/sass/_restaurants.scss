@@ -4,6 +4,56 @@
     position: relative;
     margin: 0 auto;
 
+    .categories {
+        height: 200px;
+        position: relative;
+        margin-top: -4px;
+        position: relative;
+        padding-bottom: 16px;
+        padding: 0;
+        overflow: hidden;
+
+        h4{
+          color: gray;
+        }
+
+        .header-filters{
+          display: flex;
+          justify-content: center;
+
+          .categories-container{
+            border: 1px solid lightgray;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 12.5%;
+            margin: 0 5px;
+
+            .categories-image-container{
+              height: 64px;
+                width: 100%;
+                overflow: hidden;
+
+                img{
+                    transform: translate(-25%,-25%);
+                }
+            }
+
+            .categories-check {
+                display: none;
+                color: $green;
+            }
+          }
+          .categories-active {
+              font-weight: bold;
+              color: $green;
+
+              .categories-check {
+                  display: contents;
+              }
+          }
+        }
+    }
+
     .filters {
         font-size: 1rem;
         width: 25%;
