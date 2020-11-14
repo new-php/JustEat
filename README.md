@@ -1,5 +1,5 @@
 # JustEat
-[![CodeFactor](https://www.codefactor.io/repository/github/ub-es-2020/justeat/badge)](https://www.codefactor.io/repository/github/ub-es-2020/justeat)
+[![CodeFactor](https://www.codefactor.io/repository/github/ub-es-2020/justeat/badge/develop)](https://www.codefactor.io/repository/github/ub-es-2020/justeat/overview/develop)
 [![Build Status](https://travis-ci.com/UB-ES-2020/JustEat.svg?branch=develop)](https://travis-ci.com/UB-ES-2020/JustEat)
 ## Requirements
 
