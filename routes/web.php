@@ -22,4 +22,6 @@ Route::get('/', function () {
 Route::get('/restaurants', 'RestaurantsViewController@restaurantsPage')->name('restaurants');
 Route::get('/restaurant/{restaurant}', 'RestaurantsViewController@restaurantPage')->name('restaurant');
 
+Route::get('/mainPage', 'mainPageViewController@mainPage')->name('mainPage');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
