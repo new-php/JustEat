@@ -7,7 +7,9 @@
 
 @section('content')
 <restaurants-page
-    address="{{ $address }}">
+    address="{{ $address }}"
+    restaurants="{{ $restaurants }}"
+    >
 </restaurants-page>
 @endsection
 

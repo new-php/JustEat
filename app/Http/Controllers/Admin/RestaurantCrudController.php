@@ -82,7 +82,7 @@ class RestaurantCrudController extends CrudController
             ]);
         CRUD::addColumn([
             'label' => 'ZIP Code',
-            'type' => 'number',
+            'type' => 'text',
             'name' => 'postal_code',
             ]);
         CRUD::addColumn([
@@ -167,7 +167,7 @@ class RestaurantCrudController extends CrudController
             ]);
         CRUD::addField([
             'label' => 'ZIP Code',
-            'type' => 'number',
+            'type' => 'text',
             'name' => 'postal_code',
             ]);
         CRUD::addField([

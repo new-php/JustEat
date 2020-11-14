@@ -33,4 +33,4 @@ Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->na
 
 
 Route::get('/restaurants', 'RestaurantsViewController@restaurantsPage')->name('restaurants');
-Route::get('/restaurant/{restaurant}', 'RestaurantsViewController@restaurantPage')->name('restaurant');
+Route::get('/restaurants/{restaurant}', 'RestaurantsViewController@restaurantPage')->name('restaurant');
