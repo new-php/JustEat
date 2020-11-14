@@ -70,35 +70,28 @@
                 margin-top: 10px;
                 width: 30%;
                 color: #FFF;
-                font-size: 1.2rem
+                font-size: 1.2rem;
             }
         }
     }
 }
 
-.contInfo {
-    position: absolute;
-    width: 80%;
-    top: 80%;
-    left: 10%;
-    margin-bottom: 80px;
-    background-color: rgb(241, 233, 233);
-    border-radius: 10px;
+.app-section {
+    max-width: 1272px;
+    width: 100%;
+    margin: 50px auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
 
-    .titleInfo1 {
-        font-weight: bold;
-        font-size: 40px;
-        margin-top: 0px;
-    }
+    .contInfo {
+        background: #FFF;
+        padding: 40px;
 
-    .cl {
-        text-align:center;
-        margin-top: 40px;
-    }
+        .titleInfo1 {
+            font-size: 2.2rem;
+            color: #333;
+        }
 
-    .cl2 {
-        text-align:center;
-        margin-top: 10px;
         .st0 {
             fill:#a6a6a6;
         }
