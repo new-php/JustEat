@@ -11,7 +11,10 @@ class RestaurantsViewController extends Controller
 {
     public function restaurantsPage()
     {
-        $restaurants = Restaurant::select('id','name','photo','logo')->with('categories', 'ratings', 'deliveryZones')->get();
+        $zip = $request->input("zip");
+        $restaurants = Restaurant::select('id','name','photo','logo')->whereHas('deliveryZones', function($query) use ($zip) {
+            $query->where('delivery_zones.postal_code', $zip);
+        })->with('categories', 'ratings', 'deliveryZones')->get();
 
         foreach($restaurants as $restaurant) {
             $restaurant->average_rating = $restaurant->ratings->avg('score');
