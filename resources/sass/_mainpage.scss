@@ -1,0 +1,73 @@
+.cont_mp{
+    min-width: 100%;
+    padding: 0;
+    margin: 0;
+
+    .mainFoto{
+        position: absolute;
+        z-index: 0;
+    }
+
+    .contdir{
+        position: absolute;
+        z-index: 1;
+        width: 40%;
+        height: 25%;
+        border-radius: 5px;
+        background-color: white;
+        text-align: center;
+        padding-top: 10px;
+        left: 30%;
+        top: 47%;
+        box-shadow: 0px 0px 4px 1px gray;
+
+        .title1{
+            color: rgb(236, 137, 8);
+            font-weight: bold;
+            font-size: 50px;
+            margin-top: 0px;
+        }
+        
+        .fdir{
+            border-bottom-right-radius: 0px;
+            border-top-right-radius: 0px;
+            width: 40%;
+            margin-top: 10px;
+        }
+        
+        .btndir{
+            background-color: rgb(236, 137, 8);
+            border-bottom-left-radius: 0px;
+            border-top-left-radius: 0px;
+            margin-top: 10px;
+        }
+    }
+
+    .contInfo{
+        position: absolute;
+        width: 80%;
+        top: 80%;
+        left: 10%;
+        margin-bottom: 80px;
+        background-color: rgb(241, 233, 233);
+        border-radius: 10px;
+
+        .titleInfo1{
+            font-weight: bold;
+            font-size: 40px;
+            margin-top: 0px;
+        }
+    
+        .cl{
+            text-align:center;
+            margin-top: 40px;
+        }
+    
+        .cl2{
+            text-align:center;
+            margin-top: 10px;
+        }
+        
+    }
+
+} 
