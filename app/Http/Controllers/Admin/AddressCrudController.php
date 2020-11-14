@@ -21,7 +21,7 @@ class AddressCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -33,7 +33,7 @@ class AddressCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -49,7 +49,7 @@ class AddressCrudController extends CrudController
         ]);
         CRUD::addColumn([
             'label' => 'Address name',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'address_name',
             ]);
         CRUD::addColumn([
@@ -64,24 +64,24 @@ class AddressCrudController extends CrudController
             ]);
         CRUD::addColumn([
             'label' => 'Observations',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'observations',
             ]);
         CRUD::addColumn([
             'label' => 'City',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'city',
             ]);
         CRUD::addColumn([
             'label' => 'ZIP Code',
-            'type' => 'number', 
-            'name' => 'postal_code',
+            'type' => 'number',
+            'name' => 'text',
             ]);
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -99,39 +99,39 @@ class AddressCrudController extends CrudController
         ]);
         CRUD::addField([
             'label' => 'Address name',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'address_name',
             ]);
         CRUD::addField([
             'label' => 'Address line 1',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'address_line_1',
             ]);
         CRUD::addField([
             'label' => 'Address line 2',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'address_line_2',
             ]);
         CRUD::addField([
             'label' => 'Observations',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'observations',
             ]);
         CRUD::addField([
             'label' => 'City',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'city',
             ]);
         CRUD::addField([
             'label' => 'ZIP Code',
-            'type' => 'number', 
-            'name' => 'postal_code',
+            'type' => 'number',
+            'name' => 'text',
             ]);
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
