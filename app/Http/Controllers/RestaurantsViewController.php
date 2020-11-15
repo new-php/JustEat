@@ -9,9 +9,19 @@ use App\Models\ProductCategory;
 
 class RestaurantsViewController extends Controller
 {
-    public function restaurantsPage()
+    public function restaurantsPage(Request $request)
     {
-        $restaurants = Restaurant::select('id','name','photo','logo')->with('categories', 'ratings', 'deliveryZones')->get();
+        $restaurants = Restaurant::select('id','name','photo','logo')->with('categories', 'ratings', 'deliveryZones');
+
+        if ($request->input('zip')) {
+            $zip = $request->input('zip');
+
+            $restaurants->whereHas('deliveryZones', function($query) use ($zip) {
+                $query->where('delivery_zones.postal_code', $zip);
+            });
+        }
+
+        $restaurants = $restaurants->get();
 
         foreach($restaurants as $restaurant) {
             $restaurant->average_rating = $restaurant->ratings->avg('score');
