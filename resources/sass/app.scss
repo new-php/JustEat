@@ -13,8 +13,12 @@
 @import "node_modules/font-awesome/scss/font-awesome.scss";
 
 // Styles
+@import 'header';
+@import 'footer';
+@import 'login';
 @import 'restaurants';
 @import 'restaurants-categories';
+@import 'mainpage';
 
 body {
     user-select: none;

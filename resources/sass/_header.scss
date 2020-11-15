@@ -1,0 +1,53 @@
+.header {
+    background: #FFF;
+    width: 100%;
+
+    .app-container {
+        width: 100%;
+        max-width: 1272px;
+        position: relative;
+        margin: 0 auto;
+        padding: 22px 2% 10px;
+
+        .app-row {
+            display: flex;
+            width: 100%;
+
+            .logo-container {
+                width: fit-content;
+
+                .app-logo {
+                    width: 140px;
+                }
+            }
+
+            .header-links {
+                width: inherit;
+                padding-top: 10px;
+
+                .login-link {
+                    padding-right: 3%;
+                    float: right;
+                    color: #125FCA;
+                }
+
+                .register-link {
+                    padding-right: 3%;
+                    float: right;
+                    color: #125FCA;
+                }
+
+                .my-account-link {
+                    padding-right: 3%;
+                    float: right;
+                    color: #125FCA;
+                }
+
+                .help-link {
+                    float: right;
+                    color: #125FCA;
+                }
+            }
+        }
+    }
+}

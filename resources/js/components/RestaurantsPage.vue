@@ -20,6 +20,7 @@
     </div>
         <div class="py-4 base-container">
             <div class="row">
+
                 <div class="filters">
                     <div class="address-filter">
                         <div class="address-box">
@@ -147,7 +148,7 @@
 <script>
   export default {
     name: "Restaurants",
-    props: ['address'],
+    props: ['address', 'restaurants'],
     created() {
         this.categories = [
             {
@@ -386,7 +387,7 @@
         }
     },
     mounted() {
-      console.log("Example component mounted");
+
     },
     watch: {
         search_input: function(val, oldVal) {
