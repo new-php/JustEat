@@ -25,7 +25,7 @@
                 <hr>
             </div>
             <input class="email-input" v-model="email" placeholder="Introduce tu email" type="email" required>
-            <input class="password-input" v-model="password" placeholder="Introduce contraseña" type="password" required>
+            <input class="email-input password-input" v-model="password" placeholder="Introduce contraseña" type="password" required>
             <a class="forgot-password-link" href="password/reset"><strong>¿Has olvidado tu contraseña?</strong></a>
             <div class="remember-me-container">
                 <input type="checkbox" v-model="rememberme">

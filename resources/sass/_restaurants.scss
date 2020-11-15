@@ -9,14 +9,12 @@
         height: 200px;
         position: relative;
         margin-top: -4px;
-        position: relative;
-        padding-bottom: 16px;
         padding: 0;
         overflow: hidden;
 
         .categories-label {
             display: flex;
-            padding: 15px 0px;
+            padding: 15px 0;
             color: #2A3846;
 
             .categories-label-icon {
@@ -39,6 +37,7 @@
                 overflow: hidden;
                 width: 12.5%;
                 margin: 0 5px;
+                cursor: pointer;
 
                 .categories-image-container {
                     height: 64px;
