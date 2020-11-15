@@ -23,7 +23,6 @@ class RestaurantsViewController extends Controller
 
         $restaurants = $restaurants->get();
 
-        return $restaurants;
         foreach($restaurants as $restaurant) {
             $restaurant->average_rating = $restaurant->ratings->avg('score');
             $restaurant->number_of_ratings = $restaurant->ratings->count();
