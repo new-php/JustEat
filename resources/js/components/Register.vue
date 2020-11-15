@@ -26,7 +26,7 @@
             </div>
             <input class="email-input" v-model="email" placeholder="Introduce tu email" type="email" required>
             <input class="password-input" v-model="password" placeholder="Introduce contraseña" type="password" required>
-            <input class="password-input-confirm" v-model="password_confirmation" placeholder="Confirmar contraseña" type="password" required>
+            <input class="password-input" style="margin-top: 4px;" v-model="password_confirmation" placeholder="Confirmar contraseña" type="password" required>
             <div class="remember-me-container">
                 <input type="checkbox" v-model="rememberme">
                 <label class="remember-me-label" for="checkbox">Guardar sesión</label>

@@ -16,11 +16,14 @@
 @import 'header';
 @import 'footer';
 @import 'login';
+@import 'mainpage';
 @import 'restaurants';
 @import 'restaurants-categories';
 @import 'mainpage';
 @import 'menu-restaurants';
 
+
 body {
     user-select: none;
+    background-color: #F5F5F5;
 }
