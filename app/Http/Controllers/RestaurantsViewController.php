@@ -32,7 +32,9 @@ class RestaurantsViewController extends Controller
             $restaurant->max_delivery_time = $restaurant->deliveryZones->max('delivery_time');
         }
 
-        return view('restaurants.restaurants-page', ['address' => 'Carrer Congrés, 08031 Barcelona', 'restaurants' => $restaurants, 'categories' => Category::all()]);
+        $address = $request->input('address') ? $request->input('address') : "Address not found";
+
+        return view('restaurants.restaurants-page', ['address' => $address, 'restaurants' => $restaurants, 'categories' => Category::all()]);
     }
 
     public function restaurantPage(Restaurant $restaurant)
