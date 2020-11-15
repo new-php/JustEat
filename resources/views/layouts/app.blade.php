@@ -12,7 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJBFzJSsS8EpdFLszJe0zoi3SF_66tQ20&libraries=places"></script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3g02KZRSXamK3M8NR2XA3RIkrNwypJWc&libraries=places"></script>
     <script>
         var autocomplete;
         function initialize() {
