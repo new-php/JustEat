@@ -9,7 +9,7 @@ use App\Models\ProductCategory;
 
 class RestaurantsViewController extends Controller
 {
-    public function restaurantsPage()
+    public function restaurantsPage(Request $request)
     {
         $restaurants = Restaurant::select('id','name','photo','logo')->with('categories', 'ratings', 'deliveryZones')->get();
 
@@ -22,7 +22,11 @@ class RestaurantsViewController extends Controller
             $restaurant->max_delivery_time = $restaurant->deliveryZones->max('delivery_time');
         }
 
-        return view('restaurants.restaurants-page', ['address' => 'Carrer Congrés, 08031 Barcelona', 'restaurants' => $restaurants]);
+        if (!$address = $request->input('address')) {
+            $address = "Address not found";
+        }
+
+        return view('restaurants.restaurants-page', ['address' => $address, 'restaurants' => $restaurants]);
     }
 
     public function restaurantPage(Restaurant $restaurant)

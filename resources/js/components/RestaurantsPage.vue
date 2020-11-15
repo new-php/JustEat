@@ -280,7 +280,6 @@
     },
     data() {
         return {
-            restaurants: [],
             restaurants_showing: [],
             categories: [],
             categories_selected: [],
