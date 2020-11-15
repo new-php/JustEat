@@ -1,23 +1,24 @@
 <template>
-    <div>
+    <div style="background-color: #f9fafb;">
         <div class="bg-white">
-        <div class="base-container">
-            <div class="categories">
-            <div>
-                <p>Cocinas Populares</p>
-            </div>
-            <div class="header-filters">
-                <span class="categories-container" v-for="(category) in categories.slice(0,8)" v-on:click="selectMainCategory(category)"  :key=category.id :id="'mainCategory-' + category.id">
-                    <div class="categories-image-container">
-                        <img :src=category.img>
+            <div class="base-container-categories">
+                <div class="categories">
+                    <div class="categories-label">
+                        <svg class="categories-label-icon" alt="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 15"><path d="M5.1 4h3.6a.4.4 0 0 1 0 .8h-.4l-1.2 9.3a.4.4 0 0 1-.4.3h-4a.4.4 0 0 1-.4-.3L1.3 4.8H.7a.4.4 0 1 1 0-.8h3.6V2.2L2.8.7a.4.4 0 1 1 .6-.6L5 1.7a.4.4 0 0 1 .1.3v2zm2.4.8H2L3 13.6h3.3l1-8.8zm7.2 4v-.4c0-.7-.5-1.2-1.2-1.2h-2.4c-.6 0-1.2.5-1.2 1.2v.4h4.8zm.8 3.2v.4a2 2 0 0 1-2 2h-2.4a2 2 0 0 1-2-2V12a1.7 1.7 0 0 1-.4 0 .4.4 0 1 1 0-.8c.3 0 .4 0 .7-.3.4-.4.6-.5 1.1-.5.5 0 .8.1 1.2.5l.6.3c.3 0 .4 0 .7-.3.4-.4.6-.5 1.1-.5.5 0 .8.1 1.2.5l.6.3a.4.4 0 1 1 0 .8 1.7 1.7 0 0 1-.4 0zm-5.6-.5v.9c0 .7.6 1.2 1.2 1.2h2.4c.7 0 1.2-.5 1.2-1.2v-1l-.6-.2c-.3 0-.3 0-.6.3-.4.4-.7.5-1.2.5s-.7-.1-1.1-.5c-.3-.2-.4-.3-.7-.3-.2 0-.3 0-.6.3zm-.8-3.1c0-1.1 1-2 2-2h2.4a2 2 0 0 1 2 2v.8a.4.4 0 0 1-.4.4H9.5a.4.4 0 0 1-.4-.4v-.8z"></path></svg>
+                        <span class="categories-label-text">Cocinas Populares</span>
                     </div>
-                    <i class="fa fa-check categories-check" aria-hidden="true"></i>
-                    <span>{{category.name}}</span>
-                </span>
+                    <div class="header-filters">
+                        <span class="categories-container" v-for="(category) in categories.slice(0,8)" v-on:click="selectMainCategory(category)"  :key=category.id :id="'mainCategory-' + category.id">
+                            <div class="categories-image-container">
+                                <img class="category-image" :src=category.img>
+                            </div>
+                            <i class="fa fa-check categories-check" aria-hidden="true"></i>
+                            <span>{{category.name}}</span>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
-    </div>
         <div class="py-4 base-container">
             <div class="row">
 

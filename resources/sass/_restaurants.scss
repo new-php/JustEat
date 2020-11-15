@@ -1,9 +1,9 @@
-.base-container {
+.base-container-categories {
     width: 100%;
     max-width: 1272px;
     position: relative;
     margin: 0 auto;
-    padding: 2%;
+    padding: 2% 1%;
 
     .categories {
         height: 200px;
@@ -14,46 +14,66 @@
         padding: 0;
         overflow: hidden;
 
-        h4{
-          color: gray;
+        .categories-label {
+            display: flex;
+            padding: 15px 0px;
+            color: #2A3846;
+
+            .categories-label-icon {
+                width: 2%;
+                margin-right: 10px;
+            }
+
+            .categories-label-text {
+                font-size: 1rem;
+            }
         }
 
-        .header-filters{
+        .header-filters {
           display: flex;
           justify-content: center;
 
-          .categories-container{
-            border: 1px solid lightgray;
-            border-radius: 10px;
-            overflow: hidden;
-            width: 12.5%;
-            margin: 0 5px;
-
-            .categories-image-container{
-              height: 64px;
-                width: 100%;
+            .categories-container {
+                border: 1px solid lightgray;
+                border-radius: 10px;
                 overflow: hidden;
+                width: 12.5%;
+                margin: 0 5px;
 
-                img{
-                    transform: translate(-25%,-25%);
+                .categories-image-container {
+                    height: 64px;
+                    width: 100%;
+                    overflow: hidden;
+
+                    .category-image {
+                        width: 120%;
+                        transform: translate(-10%, -10%);
+                    }
+                }
+
+                .categories-check {
+                    display: none;
+                    color: $green;
                 }
             }
-
-            .categories-check {
-                display: none;
+            .categories-active {
+                font-weight: bold;
                 color: $green;
-            }
-          }
-          .categories-active {
-              font-weight: bold;
-              color: $green;
 
-              .categories-check {
-                  display: contents;
-              }
-          }
+                .categories-check {
+                    display: contents;
+                }
+            }
         }
     }
+}
+.base-container {
+    width: 100%;
+    max-width: 1272px;
+    position: relative;
+    margin: 0 auto;
+    padding: 2%;
+
     .filters {
         font-size: 1rem;
         width: 25%;
