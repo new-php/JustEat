@@ -34,7 +34,7 @@ class RestaurantsViewController extends Controller
 
         $address = $request->input('address') ? $request->input('address') : "Address not found";
 
-        return view('restaurants.restaurants-page', ['address' => $address, 'restaurants' => $restaurants, 'categories' => Category::all()]);
+        return view('restaurants.restaurants-page', ['address' => $address, 'restaurants' => $restaurants, 'categories' => Category::with('restaurants')->get()]);
     }
 
     public function restaurantPage(Restaurant $restaurant)

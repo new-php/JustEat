@@ -10,7 +10,7 @@
                     <div class="header-filters">
                         <span class="categories-container" v-for="(category) in categories.slice(0,8)" v-on:click="selectMainCategory(category)"  :key=category.id :id="'mainCategory-' + category.id">
                             <div class="categories-image-container">
-                                <img class="category-image" :src=category.img>
+                                <img class="category-image" :src="'storage/' + category.image">
                             </div>
                             <i class="fa fa-check categories-check" aria-hidden="true"></i>
                             <span>{{category.name}}</span>
@@ -98,10 +98,10 @@
                     <div class="restaurants-container">
                         <section class="restaurant-card" v-for="(restaurant) in restaurants_showing" :key=restaurant.id v-on:click="goToRestaurant(restaurant)">
                             <div class="restaurant-image-container">
-                                <img draggable="false" class="restaurant-image" :src="restaurant.photo">
+                                <img draggable="false" class="restaurant-image" :src="'storage/' + restaurant.photo">
                             </div>
                             <div class="restaurant-logo-container">
-                                <img draggable="false" class="restaurant-logo" :src="restaurant.logo">
+                                <img draggable="false" class="restaurant-logo" :src="'storage/' + restaurant.logo">
                             </div>
                             <div class="restaurant-text">
                                 <div class="restaurant-name">
@@ -149,238 +149,17 @@
 <script>
   export default {
     name: "Restaurants",
-    props: ['address', 'restaurants'],
+    props: [
+        'address',
+        'restaurants',
+        'categories'
+    ],
     created() {
-        this.categories = [
-            {
-                id: 1,
-                name: 'Americana',
-                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/americana",
-                restaurants: [
-                    {
-                        id: 1,
-                    },
-                    {
-                        id: 2,
-                    }
-                ]
-            },
-            {
-                id: 2,
-                name: 'Argentina',
-                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/argentina",
-                restaurants: [
-                    {
-                        id: 1,
-                    },
-                    {
-                        id: 2,
-                    },
-                    {
-                        id: 3,
-                    }
-                ]
-            },
-            {
-                id: 3,
-                name: 'Bao',
-                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/bao",
-                restaurants: [
-                    {
-                        id: 1,
-                    }
-                ]
-            },
-            {
-                id: 4,
-                name: 'BBQ',
-                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/bbq",
-                restaurants: [
-                    {
-                        id: 1,
-                    },
-                    {
-                        id: 2,
-                    }
-                ]
-            },
-            {
-                id: 5,
-                name: 'Bocadillos',
-                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/bocadillos",
-                restaurants: [
-                    {
-                        id: 1,
-                    },
-                    {
-                        id: 2,
-                    }
-                ]
-            },
-            {
-                id: 6,
-                name: 'Bocadillos/wraps',
-                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/bocadillos-wraps",
-                restaurants: [
-                    {
-                        id: 1,
-                    },
-                    {
-                        id: 2,
-                    }
-                ]
-            },
-            {
-                id: 7,
-                name: 'Braseria',
-                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/braseria",
-                restaurants: [
-                    {
-                        id: 1,
-                    },
-                    {
-                        id: 2,
-                    }
-                ]
-            },
-            {
-                id: 8,
-                name: 'Caribeña',
-                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/caribeña",
-                restaurants: [
-                    {
-                        id: 1,
-                    },
-                    {
-                        id: 2,
-                    }
-                ]
-            },{
-                id: 9,
-                name: 'Casera',
-                img: "https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_180,q_auto,w_290/v1/es/cuisine-icons/casera",
-                restaurants: [
-                    {
-                        id: 1,
-                    },
-                    {
-                        id: 2,
-                    }
-                ]
-            }
-        ];
-
-        this.restaurants = [
-            {
-                id: 1,
-                name: "McDonald's 1",
-                photo: "storage/images/restaurants/060a38a121bb843bd30b806d677b6044.jpg",
-                logo: "storage/images/restaurants/d395b692430196de511d4603c43ea5da.jpg",
-                categories: [
-                    {
-                        id: 1,
-                        name: "Americana"
-                    },
-                    {
-                        id: 2,
-                        name: "Argentina"
-                    },
-                ],
-                average_rating: 4.7,
-                number_of_ratings: 123,
-                price_delivery: 2,
-                min_order_price: 12,
-                min_delivery_time: 30,
-                max_delivery_time: 45,
-            },
-            {
-                id: 2,
-                name: "McDonald's 2",
-                photo: "storage/images/restaurants/060a38a121bb843bd30b806d677b6044.jpg",
-                logo: "storage/images/restaurants/d395b692430196de511d4603c43ea5da.jpg",
-                categories: [
-                    {
-                        id: 1,
-                        name: "Americana"
-                    },
-                ],
-                average_rating: 3.7,
-                number_of_ratings: 123,
-                price_delivery: 2,
-                min_order_price: 12,
-                min_delivery_time: 30,
-                max_delivery_time: 45,
-            },
-            {
-                id: 3,
-                name: "McDonald's 3",
-                photo: "storage/images/restaurants/060a38a121bb843bd30b806d677b6044.jpg",
-                logo: "storage/images/restaurants/d395b692430196de511d4603c43ea5da.jpg",
-                categories: [
-                    {
-                        id: 1,
-                        name: "Americana"
-                    },
-                    {
-                        id: 2,
-                        name: "Argentina"
-                    },
-                    {
-                        id: 3,
-                        name: "Bao",
-                    }
-                ],
-                average_rating: 3.2,
-                number_of_ratings: 123,
-                price_delivery: 2,
-                min_order_price: 12,
-                min_delivery_time: 30,
-                max_delivery_time: 45,
-            },
-            {
-                id: 4,
-                name: "McDonald's 4",
-                photo: "storage/images/restaurants/060a38a121bb843bd30b806d677b6044.jpg",
-                logo: "storage/images/restaurants/d395b692430196de511d4603c43ea5da.jpg",
-                categories: [
-                    {
-                        id: 1,
-                        name: "Americana"
-                    },
-                ],
-                average_rating: 1.5,
-                number_of_ratings: 123,
-                price_delivery: 2,
-                min_order_price: 12,
-                min_delivery_time: 30,
-                max_delivery_time: 45,
-            },
-            {
-                id: 5,
-                name: "McDonald's 5",
-                photo: "storage/images/restaurants/060a38a121bb843bd30b806d677b6044.jpg",
-                logo: "storage/images/restaurants/d395b692430196de511d4603c43ea5da.jpg",
-                categories: [
-                    {
-                        id: 1,
-                        name: "Americana"
-                    },
-                ],
-                average_rating: 2,
-                number_of_ratings: 123,
-                price_delivery: 2,
-                min_order_price: 12,
-                min_delivery_time: 30,
-                max_delivery_time: 45,
-            },
-        ];
-
         this.restaurants_showing = this.restaurants;
     },
     data() {
         return {
             restaurants_showing: [],
-            categories: [],
             categories_selected: [],
             filters_selected: [],
             search_input: "",
