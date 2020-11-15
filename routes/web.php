@@ -36,3 +36,4 @@ Route::get('/restaurants', 'RestaurantsViewController@restaurantsPage')->name('r
 Route::get('/restaurants/{restaurant}', 'RestaurantsViewController@restaurantPage')->name('restaurant');
 
 Route::get('/mainPage', 'mainPageViewController@mainPage')->name('mainPage');
+Route::get('/menuRestaurants', 'MenuRestaurantsViewController@menuRestaurantsPage')->name('menuRestaurants');
