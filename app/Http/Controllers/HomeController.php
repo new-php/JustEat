@@ -11,14 +11,4 @@ class HomeController extends Controller
     {
         return view('main-page', ['categories' => Category::all()]);
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('home');
-    }
 }

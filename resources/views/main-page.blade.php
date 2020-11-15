@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<main-page
-categories="{{ $categories }}">
+<main-page>
 </main-page>
 @endsection
 
