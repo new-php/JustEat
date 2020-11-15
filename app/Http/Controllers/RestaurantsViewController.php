@@ -22,9 +22,7 @@ class RestaurantsViewController extends Controller
             $restaurant->max_delivery_time = $restaurant->deliveryZones->max('delivery_time');
         }
 
-        if (!$address = $request->input('address')) {
-            $address = "Address not found";
-        }
+        $address = $request->input('address') ? $request->input('address') : "Address not found";
 
         return view('restaurants.restaurants-page', ['address' => $address, 'restaurants' => $restaurants]);
     }
