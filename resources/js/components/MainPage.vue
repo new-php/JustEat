@@ -52,17 +52,12 @@
                     <h5 class="title2">Comida a domicilio online cerca de ti</h5>
 
                     <div class="row justify-content-center my-4">
-                        <input type="text" class="form-control fdir" v-model="search_input" placeholder="Ej: 1234 Main St">
-                        <button class="btn btn-default btndir" type="button"><strong>Buscar restaurantes</strong></button>
+                        <input id="autocomplete" class="form-control fdir" placeholder="Enter your address" type="text"></input>
+                        <button class="btn btn-default btndir" type="button" v-on:click="search()"><strong>Buscar restaurantes</strong></button>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="">
-            Categories
-        </div>
-
         <div class="app-section">
             <div class="row justify-content-center contInfo">
 
@@ -131,22 +126,27 @@
 <script>
   export default {
     name: "MainPage",
-    props: ["categories"],
     data() {
         return {
-            search_input: "",
         }
     },
     mounted() {
-      console.log("Example component mounted");
     },
     methods: {
-        search(evt) {
-            evt.preventDefault();
-            if (this.search_input != "") {
-                window.location.href = "/restaurants?" + this.search_input;
+        search() {
+            if (this.autocomplete.getPlace() !== undefined) {
+                var address = autocomplete.getPlace();
+                var zip = "";
+                for (let i = 0; i < address.address_components.length; i++) {
+                    if (address.address_components[i].types[0] == "postal_code") {
+                        zip = address.address_components[i].short_name;
+                        break;
+                    }
+                }
+                var formatted_address = encodeURI(address.formatted_address);
+                window.location.href = "/restaurants?address=" + formatted_address + "&zip=" + zip;
             }
-        }
+        },
     },
     computed: {
         username: function() {
@@ -158,6 +158,9 @@
                     return "Mi Cuenta";
                 }
             }
+        },
+        autocomplete: function() {
+            return window.autocomplete;
         }
     }
   };
