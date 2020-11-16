@@ -35,6 +35,11 @@ Route::get('/', 'HomeController@mainPage')->name('mainpage');
 Route::get('/restaurants', 'RestaurantsViewController@restaurantsPage')->name('restaurants');
 Route::get('/restaurants/{restaurant}', 'RestaurantsViewController@restaurantPage')->name('restaurant');
 
-Route::get('/delivery-address', 'OrderViewController@deliveryAddressPage');
-Route::get('/ordertimeconfirm', function () {return view('orderTimeConfirm');});
-Route::get('/paymentmethod', function () {return view('paymentMethod');});
+/*
+|
+| Order Routes Views
+|
+*/
+Route::get('/order/delivery-address', 'OrderViewController@deliveryAddressPage');
+Route::get('/order/delivery-time', 'OrderViewController@deliveryTimePage');
+Route::get('/order/paymentmethod', function () {return view('paymentMethod');});
