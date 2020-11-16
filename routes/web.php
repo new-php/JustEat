@@ -21,5 +21,7 @@ Route::get('/', function () {
 
 Route::get('/restaurants', 'RestaurantsViewController@restaurantsPage')->name('restaurants');
 Route::get('/restaurant/{restaurant}', 'RestaurantsViewController@restaurantPage')->name('restaurant');
-
+Route::get('/orderdetails', function () {return view('orderDetails');});
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/ordertimeconfirm', function () {return view('orderTimeConfirm');});
+Route::get('/paymentmethod', function () {return view('paymentMethod');});

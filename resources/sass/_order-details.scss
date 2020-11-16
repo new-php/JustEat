@@ -1,0 +1,79 @@
+.buffer-title{
+	margin-top: 60px;
+}
+
+.no-background{
+	background-color: white;
+}
+
+.buffer-text{
+	margin-left: 10px;
+}
+
+
+a{
+	text-decoration: underline;
+	background-color: white;
+	color: #125FCA;
+	font-weight: bold;
+}
+
+.special-a{
+	text-decoration: none;
+}
+
+.button{
+	background-color: darkorange;
+	font-weight: bold;
+	margin-top: 15px;
+	height: 150%;
+}
+
+.form-square{
+	margin-bottom: 5px;
+	width: 100%;
+	height: 100%;
+
+	.form-square-text{
+		width: 95%;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+
+	.form-square-pin{
+		width: 15%;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+
+	.form-square-card{
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+}
+
+
+
+.form-text{
+	margin-top: 10px;
+}
+
+.text-centered{
+	text-align: center;
+}
+
+.dropdown-stuff{
+	background-color: white;
+
+}
+
+.enquadrat{
+	border-top: thin solid gray;
+	border-bottom: thin solid gray;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.buffer-title{
+	margin-top: 20px;
+}
