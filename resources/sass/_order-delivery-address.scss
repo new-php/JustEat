@@ -1,25 +1,33 @@
-.buffer-title{
-	margin-top: 60px;
-}
+.delivery-address-container {
+    max-width: 340px;
+    width: 100%;
+    border-radius: 3px;
+    box-shadow: 0 0 0 1px #e2e6e9;
+    margin: 0 auto;
+    padding: 32px 32px 48px;
+    text-align: left;
+    color: #333;
 
-.no-background{
-	background-color: white;
-}
+    .delivery-address-title {
+        font-size: 1.5rem;
+        line-height: 1.7rem;
+    }
 
-.buffer-text{
-	margin-left: 10px;
-}
+    .delivery-address-name {
+        margin-top: 15px;
 
+        .change-user-link {
+            text-decoration: underline;
+            color: #125FCA;
+        }
+    }
 
-a{
-	text-decoration: underline;
-	background-color: white;
-	color: #125FCA;
-	font-weight: bold;
-}
+    .delivery-address-label-container {
 
-.special-a{
-	text-decoration: none;
+        .delivery-address-label {
+
+        }
+    }
 }
 
 .button{
