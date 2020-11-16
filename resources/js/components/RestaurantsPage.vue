@@ -228,7 +228,7 @@
             }
         },
         goToRestaurant(restaurant) {
-            window.location.href = "restaurant/" + restaurant.id;
+            window.location.href = "restaurants/" + restaurant.id;
         }
     },
   };
