@@ -83,6 +83,23 @@
     padding-left: 2rem;
     padding-right: 2rem;
 
+    .best-restaurants {
+        font-size: 2rem;
+    }
+
+    .choose-food {
+        font-size: 1rem;
+    }
+
+    .best-restaurants-image {
+        margin-top: 23px;
+    }
+
+    .find-restaurant {
+        margin-top: 40px;
+        font-size: 1rem;
+    }
+
     .contInfo {
         background: #FFF;
         padding: 40px;
@@ -130,4 +147,12 @@
             stroke-miterlimit:10;
         }
     }
+}
+
+.section-button{
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 100px;
+    padding-right: 100px;
 }

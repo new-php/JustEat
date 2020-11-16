@@ -58,6 +58,28 @@
                 </div>
             </div>
         </div>
+        <div class="app-section pt-4">
+            <div class="row">
+                <div>
+                    <span class="best-restaurants"><strong>Los mejores restaurantes</strong></span>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <span class="choose-food">Pide comida a domicilio, o para recoger, en la mejor selección de restaurantes de España.</span>
+                </div>
+            </div>
+            <div class="row best-restaurants-image">
+                <div class="w-100">
+                    <img class="w-100" src="storage/images/main-page-screen.png">
+                </div>
+            </div>
+            <div class="row text-center find-restaurant">
+                <div class="col-md-12">
+                    <a href="#" class="section-button"><b>Encontrar un restaurante</b></a>
+                </div>
+            </div>
+        </div>
         <div class="app-section">
             <div class="row justify-content-center contInfo">
 
