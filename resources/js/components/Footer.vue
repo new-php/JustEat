@@ -48,7 +48,7 @@
                 </ul>
             </div>
         </div>
-        <div class="app-section">
+        <div class="app-footer-section">
             <div class="app-section-container">
                 <div class="download-app">
                     <span class="download-app-label"><strong>Descárgate la app</strong></span>

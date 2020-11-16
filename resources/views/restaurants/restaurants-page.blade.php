@@ -8,7 +8,8 @@
 @section('content')
 <restaurants-page
     address="{{ $address }}"
-    restaurants="{{ $restaurants }}"
+    :restaurants="{{ json_encode($restaurants) }}"
+    :categories="{{ json_encode($categories) }}"
     >
 </restaurants-page>
 @endsection

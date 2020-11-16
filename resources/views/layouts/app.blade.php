@@ -12,6 +12,22 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3g02KZRSXamK3M8NR2XA3RIkrNwypJWc&libraries=places"></script>
+    <script>
+        var autocomplete;
+        function initialize() {
+            if (document.getElementById('autocomplete')) {
+                window.autocomplete = new google.maps.places.Autocomplete(
+                    (document.getElementById('autocomplete')),
+                    { types: ['geocode'] }
+                );
+            }
+        }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -19,7 +35,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body onload="initialize()">
     <div id="app">
         @yield('header')
         @yield('content')

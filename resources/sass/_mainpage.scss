@@ -1,73 +1,158 @@
-.cont_mp{
-    min-width: 100%;
-    padding: 0;
-    margin: 0;
+.mainpage-header {
+    position: absolute;
+    z-index: 1;
+    background: transparent;
+}
 
-    .mainFoto{
-        position: absolute;
+.banner-section {
+    position: relative;
+    margin-bottom: -36px;
+
+    .mainFoto {
+        position: relative;
+        height: 420px;
         z-index: 0;
+
+        .image-background {
+            width: 100%;
+            height: 100%;
+            background:linear-gradient(to top, rgba(0,0,0,0) 20%, rgba(0,0,0,0.4)), url('/storage/images/main-page-background.jpg');
+
+            background-size: cover;
+            background-position-x: 50%;
+            overflow: hidden;
+        }
     }
 
-    .contdir{
-        position: absolute;
+    .address-section {
+        position: relative;
+        max-width: 1272px;
+        width: 100%;
+        margin-top: -155px;
+        margin-right: auto;
+        margin-left: auto;
+        padding-left: 2rem;
+        padding-right: 2rem;
         z-index: 1;
-        width: 40%;
-        height: 25%;
         border-radius: 5px;
-        background-color: white;
-        text-align: center;
-        padding-top: 10px;
-        left: 30%;
-        top: 47%;
-        box-shadow: 0px 0px 4px 1px gray;
 
-        .title1{
-            color: rgb(236, 137, 8);
-            font-weight: bold;
-            font-size: 50px;
-            margin-top: 0px;
-        }
-        
-        .fdir{
-            border-bottom-right-radius: 0px;
-            border-top-right-radius: 0px;
-            width: 40%;
-            margin-top: 10px;
-        }
-        
-        .btndir{
-            background-color: rgb(236, 137, 8);
-            border-bottom-left-radius: 0px;
-            border-top-left-radius: 0px;
-            margin-top: 10px;
+        .address-container {
+            width: 800px;
+            max-width: 100%;
+            min-height: 200px;
+            padding: 16px;
+            margin: 0 auto 10px;
+            border-radius: 4px;
+            background-color: #FFF;
+            box-shadow: 0 2px 4px 0 rgba(0,0,0,.16);
+            text-align: center;
+
+            .title1 {
+                    color: #FF5200;
+                    font-weight: bold;
+                    font-size: 50px;
+                    margin-top: 0;
+                }
+
+                .fdir {
+                    border-bottom-right-radius: 0;
+                    border-top-right-radius: 0;
+                    width: 50%;
+                    height: 60px;
+                    margin-top: 10px;
+                    font-size: 1.2rem;
+                }
+
+            .btndir {
+                background-color: rgb(236, 137, 8);
+                border-bottom-left-radius: 0;
+                border-top-left-radius: 0;
+                margin-top: 10px;
+                width: 30%;
+                color: #FFF;
+                font-size: 1.2rem;
+            }
         }
     }
+}
 
-    .contInfo{
-        position: absolute;
-        width: 80%;
-        top: 80%;
-        left: 10%;
-        margin-bottom: 80px;
-        background-color: rgb(241, 233, 233);
-        border-radius: 10px;
+.app-section {
+    max-width: 1272px;
+    width: 100%;
+    margin: 50px auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
 
-        .titleInfo1{
-            font-weight: bold;
-            font-size: 40px;
-            margin-top: 0px;
-        }
-    
-        .cl{
-            text-align:center;
-            margin-top: 40px;
-        }
-    
-        .cl2{
-            text-align:center;
-            margin-top: 10px;
-        }
-        
+    .best-restaurants {
+        font-size: 2rem;
     }
 
-} 
+    .choose-food {
+        font-size: 1rem;
+    }
+
+    .best-restaurants-image {
+        margin-top: 23px;
+    }
+
+    .find-restaurant {
+        margin-top: 40px;
+        font-size: 1rem;
+    }
+
+    .contInfo {
+        background: #FFF;
+        padding: 40px;
+
+        .titleInfo1 {
+            font-size: 2.2rem;
+            color: #333;
+        }
+
+        .st0 {
+            fill:#a6a6a6;
+        }
+        .st1 {
+            fill:#fff;
+        }
+        .st2 {
+            fill:url(#SVGID_1_);
+        }
+        .st3 {
+            fill:url(#SVGID_2_);
+        }
+        .st4 {
+            fill:url(#SVGID_3_);
+        }
+        .st5 {
+            fill:url(#SVGID_4_);
+        }
+        .st6 {
+            opacity:.2;
+            enable-background:new;
+        }
+        .st7 {
+            opacity:.12;
+            enable-background:new;
+        }
+        .st8 {
+            enable-background:new;
+            opacity:.25;
+            fill:#fff;
+        }
+        .st9 {
+            fill:#fff;
+            stroke:#fff;
+            stroke-width:.2;
+            stroke-miterlimit:10;
+        }
+    }
+}
+
+.section-button{
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 100px;
+    padding-right: 100px;
+}

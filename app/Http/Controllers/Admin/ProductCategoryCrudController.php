@@ -22,7 +22,7 @@ class ProductCategoryCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -34,22 +34,30 @@ class ProductCategoryCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
     protected function setupListOperation()
     {
         CRUD::addColumn([
+            'label' => 'Restaurant',
+            'type' => 'select',
+            'name' => 'restaurant_id',
+            'entity' => 'restaurant',
+            'attribute' => 'name',
+            'model' => 'App\Models\Restaurant',
+            ]);
+        CRUD::addColumn([
             'label' => 'Name',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'name',
             ]);
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -58,15 +66,23 @@ class ProductCategoryCrudController extends CrudController
         CRUD::setValidation(ProductCategoryRequest::class);
 
         CRUD::addField([
+            'label' => 'Restaurant',
+            'type' => 'select',
+            'name' => 'restaurant_id',
+            'entity' => 'restaurant',
+            'attribute' => 'name',
+            'model' => 'App\Models\Restaurant',
+            ]);
+        CRUD::addField([
             'label' => 'Name',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'name',
             ]);
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
