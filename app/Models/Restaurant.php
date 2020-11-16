@@ -73,6 +73,11 @@ class Restaurant extends Model
         return $this->hasMany('App\Models\Rating');
     }
 
+    public function productCategories()
+    {
+        return $this->hasMany('App\Models\ProductCategory');
+    }
+
     public function setPhotoAttribute($value)
     {
         $attribute_name = "photo";

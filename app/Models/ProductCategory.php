@@ -16,6 +16,7 @@ class ProductCategory extends Model
      */
     protected $fillable = [
         'name',
+        'restaurant_id',
     ];
 
     protected $table = 'product_categories';
@@ -28,5 +29,10 @@ class ProductCategory extends Model
     public function products()
     {
         return $this->belongsToMany('App\Models\Product');
+    }
+
+    public function restaurant()
+    {
+        return $this->belongsTo('App\Models\Restaurant');
     }
 }

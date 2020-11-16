@@ -7,14 +7,14 @@
 <script>
   export default {
     name: "Restaurants",
-    props: ['restaurant'],
+    props: ['restaurant', 'product_categories'],
     data() {
         return {
 
         }
     },
     mounted() {
-      console.log("Example component mounted");
+
     },
     methods: {
 
