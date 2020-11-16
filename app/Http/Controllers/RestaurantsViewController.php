@@ -46,7 +46,7 @@ class RestaurantsViewController extends Controller
 
         $restaurant->load('categories', 'products', 'products.productCategories', 'deliveryZones', 'schedules');
 
-        return view('restaurants.restaurant-page', ['restaurant' => $restaurant, 'product_categories' => $restaurant->productCategories]);
+        return view('restaurants.restaurant-page', ['restaurant' => $restaurant, 'product_categories' => $restaurant->productCategories->load('products')]);
     }
 }
 
