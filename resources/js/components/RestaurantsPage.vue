@@ -166,7 +166,6 @@
         }
     },
     mounted() {
-
     },
     watch: {
         search_input: function(val, oldVal) {
@@ -205,6 +204,7 @@
             if (!this.categories_selected.includes(category)) {
                 this.categories_selected.push(category);
                 $("#mainCategory-" + category.id).addClass("categories-active");
+                this.showForCategoryRestaurants(category);
             } else {
                 for (let i = this.categories_selected.length-1; i >= 0; i-- ) {
                     if (this.categories_selected[i].id == category.id) {
@@ -212,6 +212,7 @@
                     }
                 }
                 $("#mainCategory-" + category.id).removeClass("categories-active");
+                this.hideForCategoryRestaurants(category);
             }
         },
         selectFilter(filter) {
@@ -225,6 +226,46 @@
                     }
                 }
                 $("#" + filter).removeClass("filter-active");
+            }
+        },
+        showForCategoryRestaurants(category){
+            if(this.categories_selected.length <= 1){
+                this.restaurants_showing = [];
+            }
+
+            if(this.categories_selected.includes(category)){
+                for(let i = this.restaurants.length-1; i >= 0; i--){
+                    if(this.restaurants[i].categories.includes(category)){
+                        if(!this.restaurants_showing.includes(this.restaurants[i])){
+                            this.restaurants_showing.push(this.restaurants[i]);
+                        }
+                    }
+                }
+            }
+        },
+        hideForCategoryRestaurants(category){
+            if(this.categories_selected.length == 0){
+                this.restaurants_showing = this.restaurants;
+            }
+            else{ 
+                for(let i = this.restaurants_showing.length-1; i >= 0; i--){
+                    if(this.restaurants_showing[i].categories.includes(category)){
+                        var otherCategory = false;
+                        for(let j = this.restaurants_showing[i].categories.length-1; j >= 0; j--){
+                            if(this.categories_selected.includes(this.restaurants_showing[i].categories[j])){
+                                otherCategory = true;
+                            }
+                        }
+
+                        if(!otherCategory){
+                            for (let j = this.restaurants_showing.length-1; j >= 0; j-- ) {
+                                if (this.restaurants_showing[j] == this.restaurants_showing[i]) {
+                                    this.restaurants_showing.splice(j,1);
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         goToRestaurant(restaurant) {
