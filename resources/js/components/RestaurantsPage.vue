@@ -8,7 +8,7 @@
                         <span class="categories-label-text">Cocinas Populares</span>
                     </div>
                     <div class="header-filters">
-                        <span class="categories-container" v-for="(category) in categories.slice(0,8)" v-on:click="selectMainCategory(category)"  :key=category.id :id="'mainCategory-' + category.id">
+                        <span class="categories-container" v-for="(category) in categories.slice(0,8)" v-on:click="selectCategory(category)"  :key=category.id :id="'mainCategory-' + category.id">
                             <div class="categories-image-container">
                                 <img class="category-image" :src="'storage/' + category.image">
                             </div>
@@ -191,6 +191,8 @@
             if (!this.categories_selected.includes(category)) {
                 this.categories_selected.push(category);
                 $("#category-" + category.id).addClass("category-active");
+                $("#mainCategory-" + category.id).addClass("categories-active");
+                this.showForCategoryRestaurants();
             } else {
                 for (let i = this.categories_selected.length-1; i >= 0; i-- ) {
                     if (this.categories_selected[i].id == category.id) {
@@ -198,13 +200,16 @@
                     }
                 }
                 $("#category-" + category.id).removeClass("category-active");
+                $("#mainCategory-" + category.id).removeClass("categories-active");
+                this.restaurants_showing = this.restaurants;
+                this.showForCategoryRestaurants(category);
             }
         },
-        selectMainCategory(category) {
+        /*selectCategory(category) {
             if (!this.categories_selected.includes(category)) {
                 this.categories_selected.push(category);
                 $("#mainCategory-" + category.id).addClass("categories-active");
-                this.showForCategoryRestaurants(category);
+                this.showForCategoryRestaurants();
             } else {
                 for (let i = this.categories_selected.length-1; i >= 0; i-- ) {
                     if (this.categories_selected[i].id == category.id) {
@@ -212,9 +217,10 @@
                     }
                 }
                 $("#mainCategory-" + category.id).removeClass("categories-active");
-                this.hideForCategoryRestaurants(category);
+                this.restaurants_showing = this.restaurants;
+                this.showForCategoryRestaurants(category);
             }
-        },
+        },*/
         selectFilter(filter) {
             if (!this.filters_selected.includes(filter)) {
                 this.filters_selected.push(filter);
@@ -228,26 +234,44 @@
                 $("#" + filter).removeClass("filter-active");
             }
         },
-        showForCategoryRestaurants(category){
-            if(this.categories_selected.length <= 1){
+        showForCategoryRestaurants(){
+
+            var has_category = false;
+            for (let i = 0; i < this.categories_selected.length-1; i++) {
+                has_category = false;
+                for (let j = this.restaurants_showing.length-1; j >= 0; j--) {
+                    for (let k = 0; k < this.restaurants_showing[j].categories.length; k++) {
+                        if (this.restaurants_showing[j].categories[k] == this.categories_selected[i]) {
+                            has_category = true;
+                        }
+                    }
+                    if (!has_category) {
+                        this.restaurants_showing.splice(j,1);
+                    }
+                }
+            }
+
+            /*if(this.categories_selected.length <= 1){
                 this.restaurants_showing = [];
             }
 
             if(this.categories_selected.includes(category)){
                 for(let i = this.restaurants.length-1; i >= 0; i--){
-                    if(this.restaurants[i].categories.includes(category)){
-                        if(!this.restaurants_showing.includes(this.restaurants[i])){
-                            this.restaurants_showing.push(this.restaurants[i]);
+                    for (let j = this.restaurants[i].categories.length; j >= 0 ; j--) {
+                        if(this.restaurants[i].categories[j].id == category.id){
+                            if(!this.restaurants_showing.includes(this.restaurants[i])){
+                                this.restaurants_showing.push(this.restaurants[i]);
+                            }
                         }
                     }
                 }
-            }
+            }*/
         },
-        hideForCategoryRestaurants(category){
+        /*hideForCategoryRestaurants(category){
             if(this.categories_selected.length == 0){
                 this.restaurants_showing = this.restaurants;
             }
-            else{ 
+            else{
                 for(let i = this.restaurants_showing.length-1; i >= 0; i--){
                     if(this.restaurants_showing[i].categories.includes(category)){
                         var otherCategory = false;
@@ -267,7 +291,7 @@
                     }
                 }
             }
-        },
+        },*/
         goToRestaurant(restaurant) {
             window.location.href = "restaurants/" + restaurant.id;
         }
