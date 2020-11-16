@@ -1,23 +1,23 @@
 <template>
   <div>
-    <img src="images/menuRestaurant/foto-heather-menuRest2.jpeg" class="image" alt="FotoHeather">
+    <img :src="'/storage/' + restaurant.photo" class="image" alt="FotoHeather">
 
     <div class="base-container">
 
       <div class="heather-container">
           <div class="row">
 
-              <div class="col-sm-2 h-icon"><img src="images/menuRestaurant/pans-and-company.gif" alt="p-and-c" width="70%" height="80%"></div>
-              
+              <div class="col-sm-2 h-icon"><img :src="'/storage/' + restaurant.logo" alt="p-and-c" width="70%" height="80%"></div>
+
               <div class="col-md-5 h-rest">
                   <div class="row">
                       <h6>
                           <a href="mainPage" class="link mx-3">Inicio</a>
                           <span>></span>
-                          <span><a href="restaurants" class="link mx-2">{{ restaurant.address }}</a></span>
+                          <span><a href="restaurants" class="link mx-2">{{ restaurant.postal_code }} {{ restaurant.city }}</a></span>
                           <span>></span>
-                          <span><a href="#" class="link mx-2">{{ restaurant.name }}</a></span>   
-                      </h6>                       
+                          <span><a href="#" class="link mx-2">{{ restaurant.name }}</a></span>
+                      </h6>
                   </div>
 
                   <div class="row">
@@ -95,9 +95,9 @@
                                   <span><i class="fa fa-sort-asc product-cat-icon" aria-hidden="true"></i></span>
                               </h2>
                           </div>
-                      </div>   
+                      </div>
 
-                      <section class="product-card-cat" v-for="(product) in restaurant.products" :key=product.id>
+                      <section class="product-card-cat" v-for="(product) in category.products" :key=product.id>
                           <div class="product-text" >
                               <div class="product-name">
                                   {{product.name}}
@@ -127,130 +127,10 @@
     props: ['restaurant', 'product_categories'],
 
     created() {
-      this.restaurant = {
-          id: 1,
-          user_id: 1,
-          name: "Pans & Comapny",
-          email: "a@a.com",
-          photo: "images/menuRestaurant/foto-heather-menuRest2.jpeg",
-          logo: "images/menuRestaurant/pans-and-company.gif",
-          phone: 123456789,
-          address: "Carrer Congrés, 8031 Barcelona",
-          postal_code: 452,
-          city: "Barcelona",
-          state: "Barcelona",
-          cif: 1,
-          average_rating: 4.7,
-          number_of_ratings: 123,
-          price_delivery: 2,
-          min_order_price: 12,
-          rating: [],
-          delivery_zones: [],
-          categories: [],
-          products: [
-            {
-              id: 1,
-              restaurant_name: "Pans & Company",
-              name: "Menú British Bacon",
-              price: 7.70,
-              photo: [],
-              description: "Pan provenzal, bacon y queso Edam fundido",
-              product_categories: [
-                  {
-                      name: "Menús Pans"
-                  },
-              ],
-            },
-            {
-              id: 2,
-              restaurant_name: "Pans & Company",
-              name: "Menú Crujiente de Bacon.",
-              price: 9.20,
-              photo: [],
-              description: "Bocadillo crujiente de bacon+ complemento (a escoger)+ bebida (a escoger)",
-              product_categories: [
-                  {
-                      name: "Top ventas"
-                  },
-                  {
-                      name: "Menús Pans"
-                  },
-              ],
-            },
-            {
-              id: 3,
-              restaurant_name: "Pans & Company",
-              name: "Menú Pan Experience.",
-              price: 9.30,
-              photo: [],
-              description: "Dos mitades de Bocadillos (a escoger) + Complemento Menú (a escoger) + Bebida (a escoger)",
-              product_categories: [
-                  {
-                      name: "Top ventas"
-                  },
-                  {
-                      name: "Menús Pans"
-                  },
-              ],
-            },
-            {
-              id: 4,
-              restaurant_name: "Pans & Company",
-              name: "Menú Bocadillo Heura Pimientos (Vegan)",
-              price: 8.95,
-              photo: [],
-              description: "Pan baguette, heura, pimientos asados, guacamole, lechuga batavia, rodajas de tomate y cebolla crujiente",
-              product_categories: [
-                  {
-                      name: "Menús Pans"
-                  },
-                  {
-                      name: "Menús Veggies& Vegans" 
-                  },
-              ],
-            },
-            {
-              id: 5,
-              restaurant_name: "Pans & Company",
-              name: "Nuggets de Pollo, 4 Uds",
-              price: 1.95,
-              photo: [],
-              description: '',
-              product_categories: [
-                  {
-                      name: "Complementos"
-                  },
-              ],
-            },
-  
-          ]
-      };
-
-      this.product_categories = [
-        {
-          id: 1,
-          name: "Menús Pans"
-        },
-        {
-          id: 2,
-          name: "Top ventas"
-        },
-        {
-          id: 3,
-          name: "Menús Veggies& Vegans"
-        },
-        {
-          id: 4,
-          name: "Complementos"
-        },
-      ];
-
     },
 
     data() {
         return {
-            restaurant: [],
-            product_categories: [],
             search_input: "",
         }
     },
@@ -266,5 +146,5 @@
 </script>
 
 <style type="text/css">
-    
+
 </style>

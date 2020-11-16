@@ -8,8 +8,8 @@ login_form=false>
 
 @section('content')
 <restaurant-page
-    restaurant="{{ $restaurant }}"
-    product_categories="{{ $product_categories }}"
+    :restaurant="{{ json_encode($restaurant) }}"
+    :product_categories="{{ json_encode($product_categories) }}"
     >
 </restaurant-page>
 @endsection

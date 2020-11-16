@@ -7,7 +7,7 @@
 
 @section('content')
 <restaurants-page
-    address="{{ $address }}"
+    :address="{{ json_encode($address) }}"
     :restaurants="{{ json_encode($restaurants) }}"
     :categories="{{ json_encode($categories) }}"
     >
