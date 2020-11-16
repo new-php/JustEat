@@ -1,0 +1,207 @@
+.image{
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+}
+
+.base-container {
+    width: 100%;
+    max-width: 1272px;
+    position: relative;
+    margin: 0 auto;
+    padding: 2%;
+
+    .heather-container{
+        margin-bottom: 2.5%;
+
+        .h-rest{
+
+            .link{
+                color: black;
+                margin-right: 5%;
+            }
+
+            .nameRest{
+                opacity: 50%;
+            }
+
+            .restaurant-rating {
+                border: none;
+
+                .restaurant-star-rating {
+                    padding: 0;
+                    height: auto;
+                }
+
+                .restaurant-num-ratings {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+
+        .h-info{
+
+            .icons{
+                font-size: 3rem;
+                padding: 8% 1.5%;
+            }
+        }
+
+
+    }
+
+    .app-row {
+        display: flex;
+        flex-wrap: wrap;
+
+        .filters {
+            font-size: 1rem;
+            width: 25%;
+            padding-right: 1.5%;
+            line-height: 1.43;
+
+            .categories-filter {
+                margin-right: 5%;
+
+            }
+
+            .categories-available {
+                font-size: 0.85rem;
+
+                .category {
+                    background: #FFF;
+                    padding: 3%;
+                    border-radius: 0px;
+                    border: 0px solid #e2e6e9;
+                    margin: 0% 0;
+                    cursor: pointer;
+
+                    .link{
+                        color: black;
+                    }
+
+                }
+
+                .category:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .products-section {
+            width: 73.8%;
+
+            .categories-filter {
+                margin-bottom: 3%;
+
+                .link{
+                    color: black;
+                    margin-right: 5%;
+                }
+
+            }
+
+            .search-bar {
+                box-shadow: 0 2px 5px 1px rgba(0,0,0,.1);
+                margin-bottom: 2.5%;
+
+                .search-icon {
+                    position: absolute;
+                    color: #125FCA;
+                    font-size: 1rem;
+                    padding: 0.5% 1.5%;
+                    right: 50px;
+                }
+
+                .search-input {
+                    width: 100%;
+                    padding: 0.5% 2%;
+                    background: #fff;
+                    border-radius: 4px;
+                    border: 0;
+                    outline: 0;
+                    font-size: 1rem;
+                    color: #2A3846;
+                }
+
+                .search-input:focus {
+                    outline: 2px solid #125FCA;
+                }
+            }
+
+            .products-container {
+                border-radius: 4px;
+                padding: 2.5%;
+                background: #FFF;
+
+                .product-card {
+                    box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
+                    border-top: 0.5px solid;
+                    border-bottom: 0.5px solid;
+                    border-top-color: rgba(145, 142, 142, .6);
+                    border-bottom-color: rgba(145, 142, 142, .6);
+                    background: #FFF;
+                    margin-top: 0.5%;
+                    position: relative;
+                    display: block;
+                    padding: 0.5%;
+                    cursor: pointer;
+
+                    .product-text {
+                        position: relative;
+                        left: 1%;
+                        width: 100%;
+                        padding-left: 0.5%;
+                        padding-top: 1%;
+                        display: inline-block;
+
+                        .product-name {
+                            font-size: 1.1rem;
+                        }
+
+                    }
+
+                    .product-icon {
+                        margin-top: 8%;
+                        margin-left: 5%;
+                    }
+
+                    .product-cat-icon {
+                        position: absolute;
+                        right: 30px;
+                    }
+                }
+
+                .product-card-cat {
+                    border-bottom: 0.5px;
+                    border-bottom-style: dotted;
+                    border-color: rgb(211, 205, 205);
+                    background: #FFF;
+                    margin: 0.5% 0;
+                    display: flex;
+                    padding: 0.5%;
+                    cursor: pointer;
+
+                    .description{
+                        font-size: small;
+                        opacity: 50%;
+                    }
+                }
+
+                .product-info {
+                    width: 10%;
+                    padding: 0.5%;
+                    margin-right: 1%; 
+                    margin-left: 1%; 
+                    font-size: 0.9rem;
+                    position: absolute;
+                    right: 10px;
+                }
+
+                .product:hover {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
