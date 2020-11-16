@@ -59,6 +59,28 @@
             </div>
         </div>
         <div class="app-section">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3><b>Los mejores restaurantes</b></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Pide comida a domicilio, o para recoger, en la mejor selección de restaurantes de España.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <img src="/JustEat/resources/views/img/mainPagescreen.png">
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <a href="#" class="section-button"><b>Encontrar un restaurante</b></a>
+                </div>
+            </div>
+        </div>
+        <div class="app-section">
             <div class="row justify-content-center contInfo">
 
                 <div class="w-50 text-center m-auto">
