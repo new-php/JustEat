@@ -10,4 +10,14 @@ class OrderViewController extends Controller
     {
         return view('order.delivery-address');
     }
+
+    public function deliveryTimePage()
+    {
+        return view('order.delivery-time');
+    }
+
+    public function paymentPage()
+    {
+        return view('order.payment');
+    }
 }

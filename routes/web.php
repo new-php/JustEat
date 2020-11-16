@@ -42,4 +42,4 @@ Route::get('/restaurants/{restaurant}', 'RestaurantsViewController@restaurantPag
 */
 Route::get('/order/delivery-address', 'OrderViewController@deliveryAddressPage');
 Route::get('/order/delivery-time', 'OrderViewController@deliveryTimePage');
-Route::get('/order/paymentmethod', function () {return view('paymentMethod');});
+Route::get('/order/payment', 'OrderViewController@paymentPage');

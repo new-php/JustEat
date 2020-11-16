@@ -1,6 +1,11 @@
+.full-height-2 {
+    height: 93vh !important;
+}
+
 .full-height {
     height: 91.5vh;
-    .delivery-address-container {
+
+    .delivery-container {
         max-width: 340px;
         width: 100%;
         border-radius: 3px;
@@ -10,12 +15,12 @@
         text-align: left;
         color: #333;
 
-        .delivery-address-title {
+        .delivery-title {
             font-size: 1.5rem;
             line-height: 1.7rem;
         }
 
-        .delivery-address-name {
+        .delivery-name {
             margin-top: 15px;
 
             .change-user-link {
@@ -24,10 +29,10 @@
             }
         }
 
-        .delivery-addres-input-container {
+        .delivery-input-container {
             margin-bottom: 15px;
 
-            .delivery-addres-input {
+            .delivery-input {
                 display: block;
                 width: 100%;
                 height: 2.4rem;
@@ -41,19 +46,31 @@
                 transition: border .2s ease-in-out;
             }
 
-            .delivery-addres-input:active {
+            .delivery-input:active {
                 outline: none;
                 border: 1px solid #FF8000;
             }
 
-            .delivery-addres-input:focus {
+            .delivery-input:focus {
                 outline: none;
                 border: 1px solid #FF8000;
+            }
+
+            .delivery-textarea {
+                height: 5rem;
+            }
+        }
+
+        .delivery-allergies-container {
+            text-align: center;
+            .delivery-allergies-link {
+                text-decoration: underline;
+                color: #125FCA;
             }
 
         }
 
-        .delivery-address-button {
+        .delivery-button {
             width: 100%;
             background-color: #ff8000;
             color: #FFF;
