@@ -195,7 +195,7 @@
                 this.categories_selected.push(category);
                 $("#category-" + category.id).addClass("category-active");
                 $("#mainCategory-" + category.id).addClass("categories-active");
-                this.showForCategoryRestaurants();
+                this.showForCategoryRestaurants(category);
             } else {
                 for (let i = this.categories_selected.length-1; i >= 0; i-- ) {
                     if (this.categories_selected[i].id == category.id) {
