@@ -22,7 +22,7 @@ class RestaurantCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -34,7 +34,7 @@ class RestaurantCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -42,7 +42,7 @@ class RestaurantCrudController extends CrudController
     {
         CRUD::addColumn([
             'label' => 'User',
-            'type' => 'select', 
+            'type' => 'select',
             'name' => 'user_id',
             'entity' => 'user',
             'attribute' => 'email',
@@ -50,53 +50,59 @@ class RestaurantCrudController extends CrudController
             ]);
         CRUD::addColumn([
             'label' => 'Name',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'name',
             ]);
         CRUD::addColumn([
             'label' => 'Email',
-            'type' => 'email', 
+            'type' => 'email',
             'name' => 'email',
             ]);
         CRUD::addColumn([
             'label' => 'Phone',
-            'type' => 'phone', 
+            'type' => 'phone',
             'name' => 'phone',
             ]);
         CRUD::addColumn([
+            'label' => 'Logo',
+            'type' => 'image',
+            'name' => 'logo',
+            'disk' => 'public',
+            ]);
+        CRUD::addColumn([
             'label' => 'Photo',
-            'type' => 'image', 
+            'type' => 'image',
             'name' => 'photo',
             'disk' => 'public',
             ]);
         CRUD::addColumn([
             'label' => 'Address',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'address',
             ]);
         CRUD::addColumn([
             'label' => 'ZIP Code',
-            'type' => 'number', 
+            'type' => 'text',
             'name' => 'postal_code',
             ]);
         CRUD::addColumn([
             'label' => 'City',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'city',
             ]);
         CRUD::addColumn([
             'label' => 'State',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'state',
             ]);
         CRUD::addColumn([
             'label' => 'Country',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'country',
             ]);
         CRUD::addColumn([
             'label' => 'Cif',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'cif',
             ]);
         CRUD::addColumn([
@@ -111,7 +117,7 @@ class RestaurantCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -121,7 +127,7 @@ class RestaurantCrudController extends CrudController
 
         CRUD::addField([
             'label' => 'User',
-            'type' => 'select2', 
+            'type' => 'select2',
             'name' => 'user_id',
             'entity' => 'user',
             'attribute' => 'email',
@@ -129,53 +135,59 @@ class RestaurantCrudController extends CrudController
             ]);
         CRUD::addField([
             'label' => 'Name',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'name',
             ]);
         CRUD::addField([
             'label' => 'Email',
-            'type' => 'email', 
+            'type' => 'email',
             'name' => 'email',
             ]);
         CRUD::addField([
             'label' => 'Phone',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'phone',
             ]);
         CRUD::addField([
+            'label' => 'Logo',
+            'type' => 'image',
+            'name' => 'logo',
+            'disk' => 'public',
+            ]);
+        CRUD::addField([
             'label' => 'Photo',
-            'type' => 'image', 
+            'type' => 'image',
             'name' => 'photo',
             'disk' => 'public',
             ]);
         CRUD::addField([
             'label' => 'Address',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'address',
             ]);
         CRUD::addField([
             'label' => 'ZIP Code',
-            'type' => 'number', 
+            'type' => 'text',
             'name' => 'postal_code',
             ]);
         CRUD::addField([
             'label' => 'City',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'city',
             ]);
         CRUD::addField([
             'label' => 'State',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'state',
             ]);
         CRUD::addField([
             'label' => 'Country',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'country',
             ]);
         CRUD::addField([
             'label' => 'Cif',
-            'type' => 'text', 
+            'type' => 'text',
             'name' => 'cif',
             ]);
         CRUD::addField([
@@ -190,7 +202,7 @@ class RestaurantCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

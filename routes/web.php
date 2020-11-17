@@ -13,12 +13,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+/*
+|
+| Auth Page Routes Views
+|
+*/
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+/*
+|
+| Other Page Routes Views
+|
+*/
+Route::get('/', 'HomeController@mainPage')->name('mainpage');
 
-Route::get('/mainPage', 'mainPageController@getMainPage')->name('mainPage');
+Route::get('/restaurants', 'RestaurantsViewController@restaurantsPage')->name('restaurants');
+Route::get('/restaurants/{restaurant}', 'RestaurantsViewController@restaurantPage')->name('restaurant');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/*
+|
+| Order Routes Views
+|
+*/
+Route::get('/order/delivery-address', 'OrderViewController@deliveryAddressPage');
+Route::get('/order/delivery-time', 'OrderViewController@deliveryTimePage');
+Route::get('/order/payment', 'OrderViewController@paymentPage');

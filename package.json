@@ -21,5 +21,10 @@
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0",
         "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "bootstrap-vue": "^2.18.1",
+        "font-awesome": "^4.7.0",
+        "vue": "^2.6.12"
     }
 }
