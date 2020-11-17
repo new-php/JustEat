@@ -227,6 +227,7 @@
             var has_category = false;
 
             for (let i = this.restaurants_showing.length-1; i >= 0; i--) {
+                has_category = false;
                 for (let j = 0; j < this.restaurants_showing[i].categories.length; j++) {
                     if (this.restaurants_showing[i].categories[j].id == category.id) {
                         has_category = true;
