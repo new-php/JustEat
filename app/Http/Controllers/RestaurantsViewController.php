@@ -24,10 +24,10 @@ class RestaurantsViewController extends Controller
         $restaurants = $restaurants->get();
 
         foreach($restaurants as $restaurant) {
-            $restaurant->average_rating = $restaurant->ratings->avg('score');
+            $restaurant->average_rating = round($restaurant->ratings->avg('score'), 2);
             $restaurant->number_of_ratings = $restaurant->ratings->count();
-            $restaurant->price_delivery = $restaurant->deliveryZones->avg('delivery_price');
-            $restaurant->min_order_price = $restaurant->deliveryZones->avg('min_order_price');
+            $restaurant->price_delivery = round($restaurant->deliveryZones->avg('delivery_price'), 2);
+            $restaurant->min_order_price = round($restaurant->deliveryZones->avg('min_order_price'), 2);
             $restaurant->min_delivery_time = $restaurant->deliveryZones->min('delivery_time');
             $restaurant->max_delivery_time = $restaurant->deliveryZones->max('delivery_time');
         }
@@ -39,10 +39,10 @@ class RestaurantsViewController extends Controller
 
     public function restaurantPage(Restaurant $restaurant)
     {
-        $restaurant->average_rating = $restaurant->ratings->avg('score');
+        $restaurant->average_rating = round($restaurant->ratings->avg('score'), 2);
         $restaurant->number_of_ratings = $restaurant->ratings->count();
-        $restaurant->price_delivery = $restaurant->deliveryZones->avg('delivery_price');
-        $restaurant->min_order_price = $restaurant->deliveryZones->avg('min_order_price');
+        $restaurant->price_delivery = round($restaurant->deliveryZones->avg('delivery_price'), 2);
+        $restaurant->min_order_price = round($restaurant->deliveryZones->avg('min_order_price'), 2);
 
         $restaurant->load('categories', 'products', 'products.productCategories', 'deliveryZones', 'schedules');
 
