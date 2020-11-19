@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        if (config('app.env') == 'testing') {
+            $this->call(OauthClientsSeeder::class);
+        }
     	$this->call(RoleSeeder::class);
     	$this->call(UserSeeder::class);
     }
