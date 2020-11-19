@@ -76,7 +76,6 @@
                 )
                 .then(response => {
                     window.localStorage.setItem('auth_token', response.data.access_token);
-                    window.localStorage.setItem('username', response.data.data.name);
                     window.location.href = '/';
                 })
                 .catch((error) => {
