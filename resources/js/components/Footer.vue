@@ -4,21 +4,21 @@
             <div class="footer-links-container">
                 <span class="footer-links-title"><strong>Servicio al cliente</strong></span>
                 <ul class="footer-links-list">
-                    <li><a href="login">Inicia Sesión</a></li>
-                    <li><a href="register">Regístrate</a></li>
+                    <li><a href="/login">Inicia Sesión</a></li>
+                    <li><a href="/register">Regístrate</a></li>
                     <li><a href="#">Nuestro Blog</a></li>
-                    <li><a href="account/info">Información De La Cuenta</a></li>
+                    <li><a href="/account/info">Información De La Cuenta</a></li>
                 </ul>
             </div>
             <div class="footer-links-container">
                 <span class="footer-links-title"><strong>Tipos de cocina</strong></span>
                 <ul class="footer-links-list">
-                    <li><a href="restaurants?category=pizza">Pizza a domicilio</a></li>
-                    <li><a href="restaurants?category=kebab">Kebab a domicilio</a></li>
-                    <li><a href="restaurants?category=china">Comida china a domicilio</a></li>
-                    <li><a href="restaurants?category=sushi">Sushi a domicilio</a></li>
-                    <li><a href="restaurants?category=burger">Hamburguesas a domicilio</a></li>
-                    <li><a href="restaurants">Mas tipos de cocina</a></li>
+                    <li><a href="/restaurants?category=pizza">Pizza a domicilio</a></li>
+                    <li><a href="/restaurants?category=kebab">Kebab a domicilio</a></li>
+                    <li><a href="/restaurants?category=china">Comida china a domicilio</a></li>
+                    <li><a href="/restaurants?category=sushi">Sushi a domicilio</a></li>
+                    <li><a href="/restaurants?category=burger">Hamburguesas a domicilio</a></li>
+                    <li><a href="/restaurants">Mas tipos de cocina</a></li>
                 </ul>
             </div>
             <div class="footer-links-container">
@@ -35,7 +35,7 @@
             <div class="footer-links-container">
                 <span class="footer-links-title"><strong>Sobre nosotros</strong></span>
                 <ul class="footer-links-list">
-                    <li><a href="admin/register">Registrarse en el restaurante</a></li>
+                    <li><a href="/admin/register">Registrarse en el restaurante</a></li>
                     <li><a href="#">Quienes somos</a></li>
                     <li><a href="#">Ayuda</a></li>
                     <li><a href="#">Garantía de precio</a></li>
@@ -44,7 +44,7 @@
                     <li><a href="#">Política de Cookies</a></li>
                     <li><a href="#">5% de descuento</a></li>
                     <li><a href="#">Programa de Afiliación</a></li>
-                    <li><a href="admin/dashboard">Gestiona tu restaurante</a></li>
+                    <li><a href="/admin/dashboard">Gestiona tu restaurante</a></li>
                 </ul>
             </div>
         </div>

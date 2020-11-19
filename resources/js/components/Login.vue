@@ -3,7 +3,7 @@
         <form class="login-container" align="middle" @submit.prevent="login">
             <span class="login-label">Inicia sesión</span>
             <div class="form-errors" id="form-errors">
-                <span>Lo sentimos, no hemos podido iniciar sesión. Introduce tus detalles de nuevo, o <a href="password/reset"><strong>resetea tu contraseña</strong></a></span>
+                <span>Lo sentimos, no hemos podido iniciar sesión. Introduce tus detalles de nuevo, o <a href="/password/reset"><strong>resetea tu contraseña</strong></a></span>
             </div>
             <a class="btn login-facebook">
                 <div class="login-facebook-icon-container">
@@ -26,7 +26,7 @@
             </div>
             <input class="email-input" v-model="email" placeholder="Introduce tu email" type="email" required>
             <input class="email-input password-input" v-model="password" placeholder="Introduce contraseña" type="password" required>
-            <a class="forgot-password-link" href="password/reset"><strong>¿Has olvidado tu contraseña?</strong></a>
+            <a class="forgot-password-link" href="/password/reset"><strong>¿Has olvidado tu contraseña?</strong></a>
             <div class="remember-me-container">
                 <input type="checkbox" v-model="rememberme">
                 <label class="remember-me-label" for="checkbox">Guardar sesión</label>
@@ -35,7 +35,7 @@
             <button type="submit" class="btn submit-button">
                 <span class="submit-button-text"><strong>Inicia sesión</strong></span>
             </button>
-            <span class="register">¿Nuevo en Just Eat? <a class="register-link" href="register"><strong>Crear cuenta</strong></a></span>
+            <span class="register">¿Nuevo en Just Eat? <a class="register-link" href="/register"><strong>Crear cuenta</strong></a></span>
             <div class="privacy-tos">
                 <span>Al crear la cuenta, aceptas nuestros <a class="privacy-tos-link" href="#"><strong>términos y condiciones</strong></a>. Por favor, lee nuestra <a class="privacy-tos-link" href="#"><strong>política de privacidad</strong></a> y nuestra <a class="privacy-tos-link" href="#"><strong>política de cookies</strong></a>.</span>
             </div>

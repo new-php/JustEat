@@ -3,7 +3,7 @@
         <form class="login-container" align="middle" @submit.prevent="register">
             <span class="login-label">Regístrate en Just Eat</span>
             <div class="form-errors" id="form-errors">
-                <span>Ya existe una cuenta para este email. <a href="login"><strong>Inicia sesión</strong></a> o <a href="password/reset"><strong>resetea tu contraseña</strong></a></span>
+                <span>Ya existe una cuenta para este email. <a href="/login"><strong>Inicia sesión</strong></a> o <a href="/password/reset"><strong>resetea tu contraseña</strong></a></span>
             </div>
             <a class="btn login-facebook">
                 <div class="login-facebook-icon-container">
@@ -38,7 +38,7 @@
             <div class="privacy-tos">
                 <span>Al crear la cuenta, aceptas nuestros <a class="privacy-tos-link" href="#"><strong>términos y condiciones</strong></a>. Por favor, lee nuestra <a class="privacy-tos-link" href="#"><strong>política de privacidad</strong></a> y nuestra <a class="privacy-tos-link" href="#"><strong>política de cookies</strong></a>.</span>
             </div>
-            <span class="register">¿Ya formas parte de Just Eat? <a class="register-link" href="register"><strong>Inicia sesión</strong></a></span>
+            <span class="register">¿Ya formas parte de Just Eat? <a class="register-link" href="/login"><strong>Inicia sesión</strong></a></span>
         </form>
     </div>
 </template>
@@ -76,6 +76,7 @@
                 )
                 .then(response => {
                     window.localStorage.setItem('auth_token', response.data.access_token);
+                    window.localStorage.setItem('username', response.data.data.name);
                     window.location.href = '/';
                 })
                 .catch((error) => {
