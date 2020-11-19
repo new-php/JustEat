@@ -10,16 +10,6 @@ use App\Models\User;
 
 class LoginTest extends DuskTestCase
 {
-    //use DatabaseMigrations;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        // seed the database
-        //$this->artisan('db:seed --class=OauthClientsSeeder');
-    }
-
     /**
      * Login fail
      *
