@@ -20,6 +20,7 @@ install:
 - php artisan key:generate
 - php artisan migrate:fresh
 - php artisan dusk:chrome-driver
+- npm run prod
 
 before_script:
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
