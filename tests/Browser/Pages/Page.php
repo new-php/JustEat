@@ -14,7 +14,11 @@ abstract class Page extends BasePage
     public static function siteElements()
     {
         return [
-            '@element' => '#selector',
+            '@app-logo' => '#app-logo',
+            '@login-link' => '#login-link',
+            '@register-link' => '#register-link', // This link does not appear on the main page
+            '@help-link' => '#help-link',
+            '@account-link' => '#account-link',
         ];
     }
 }

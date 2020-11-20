@@ -24,15 +24,15 @@
             <div class="separator">
                 <hr>
             </div>
-            <input class="email-input" v-model="email" placeholder="Introduce tu email" type="email" required>
-            <input class="email-input password-input" v-model="password" placeholder="Introduce contraseña" type="password" required>
+            <input name="email" class="email-input" v-model="email" placeholder="Introduce tu email" type="email" required>
+            <input name="password" class="email-input password-input" v-model="password" placeholder="Introduce contraseña" type="password" required>
             <a class="forgot-password-link" href="/password/reset"><strong>¿Has olvidado tu contraseña?</strong></a>
             <div class="remember-me-container">
                 <input type="checkbox" v-model="rememberme">
                 <label class="remember-me-label" for="checkbox">Guardar sesión</label>
                 <p class="remember-me-text">No lo marques si compartes ordenador</p>
             </div>
-            <button type="submit" class="btn submit-button">
+            <button id="login" type="submit" class="btn submit-button">
                 <span class="submit-button-text"><strong>Inicia sesión</strong></span>
             </button>
             <span class="register">¿Nuevo en Just Eat? <a class="register-link" href="/register"><strong>Crear cuenta</strong></a></span>
@@ -81,7 +81,7 @@
                     window.axios.get('user')
                     .then(response => {
                         window.localStorage.setItem('username', response.data.data.name)
-                        window.location.href = '/restaurants';
+                        window.location.href = '/';
                     });
                 })
                 .catch((error) => {
