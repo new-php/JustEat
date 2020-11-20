@@ -13,7 +13,7 @@ services:
 addons:
   chrome: stable
 
-isntall:
+install:
 - cp .env.testing .env
 - mysql -e 'create database justeat;'
 - composer install --no-interaction --prefer-dist --no-suggest
