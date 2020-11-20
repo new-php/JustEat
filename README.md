@@ -149,15 +149,32 @@ php vendor/bin/phpunit --testsuite "testSuiteName"
 -------
 
 ### Dusk (TODO)
+In order to run dusk tests, you have to change your environment files first.
+```bash
+mv .env .env.backup
+
+mv .env.dusk .env 
+# Create a database for testing and configure the database name and credentials on .env file
+
+php artisan optimize
+
+php artisan migrate:fresh --seed
+```
+
+
 ```bash
 php artisan serve # Needs to be run in a different terminal
 
 # Run all tests
 php artisan dusk
 
+# Run tests by group
+php artisan dusk --group=GroupName
+
 # Run tests by name
 php artisan dusk --filter methodName
 ```
+Note: in order to make auth tests run successfully you need to run the OauthClientsSeeder and set the variables MIX_PASSPORT accordingly on your .env file, then compile the application assets
 
 -------
 

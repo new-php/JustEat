@@ -29,6 +29,7 @@ class AddRestaurantIdToProductCategoriesTable extends Migration
     public function down()
     {
         Schema::table('product_categories', function (Blueprint $table) {
+            $table->dropForeign('product_categories_restaurant_id_foreign');
             $table->dropColumn('restaurant_id');
         });
     }
