@@ -15,7 +15,7 @@ addons:
 
 install:
 - cp .env.testing .env
-- mysql -e 'create database justeat;'
+- mysql -e 'create database justeat_test;'
 - composer install --no-interaction --prefer-dist --no-suggest
 - php artisan key:generate
 - php artisan migrate:fresh

@@ -10,6 +10,7 @@ use App\Models\User;
 
 class LoginTest extends DuskTestCase
 {
+    use DatabaseMigrations;
     /**
      * Login fail
      *
@@ -137,6 +138,11 @@ class LoginTest extends DuskTestCase
     public function testLogin()
     {
         $user = User::factory()->create();
+
+        //inserir oauthclients
+        $this->artisan('passport:install');
+
+        \DB::table('oauth_clients')->where('password_client', 1)->update(['secret' => 'WzcCcKmUuZGpa8fq46MCZl6TDRKLoGmkEEimjaAq']);
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visit(new Login)
