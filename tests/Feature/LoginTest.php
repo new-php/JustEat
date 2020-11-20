@@ -9,6 +9,7 @@ use App\Models\User;
 
 class LoginTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * Login successful
      *
@@ -18,13 +19,17 @@ class LoginTest extends TestCase
     {
         $user = User::factory()->create();
 
+        $this->artisan('passport:install');
+
+        $client = \DB::table('oauth_clients')->where('password_client', 1)->first();
+
         $response = $this->post('/api/v1/oauth/token',
             [
                 'username' => $user->email,
                 'password' => 'password',
                 'grant_type' => 'password',
-                'client_id' => 2,
-                'client_secret' => 'WzcCcKmUuZGpa8fq46MCZl6TDRKLoGmkEEimjaAq',
+                'client_id' => $client->id,
+                'client_secret' => $client->secret,
             ],
             [
                 'Accept' => 'application/json',
@@ -50,13 +55,17 @@ class LoginTest extends TestCase
     {
         $user = User::factory()->create();
 
+        $this->artisan('passport:install');
+
+        $client = \DB::table('oauth_clients')->where('password_client', 1)->first();
+
         $response = $this->post('/api/v1/oauth/token',
             [
                 'username' => $user->email,
                 'password' => 'fail',
                 'grant_type' => 'password',
-                'client_id' => 2,
-                'client_secret' => 'WzcCcKmUuZGpa8fq46MCZl6TDRKLoGmkEEimjaAq',
+                'client_id' => $client->id,
+                'client_secret' => $client->secret,
             ],
             [
                 'Accept' => 'application/json',
