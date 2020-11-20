@@ -16,10 +16,11 @@ addons:
 install:
 - cp .env.testing .env
 - mysql -e 'create database justeat_test;'
-- composer install --no-interaction --prefer-dist --no-suggest
+- travis_retry composer install --no-interaction --prefer-dist --no-suggest
 - php artisan key:generate
 - php artisan migrate:fresh
 - php artisan dusk:chrome-driver
+- travis_retry npm install
 - npm run prod
 
 before_script:
