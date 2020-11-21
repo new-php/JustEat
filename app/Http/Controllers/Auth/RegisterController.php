@@ -95,7 +95,7 @@ class RegisterController extends Controller
         $token = $user->createToken('authToken');
 
         return $request->wantsJson()
-                    ? new JsonResponse(['data' => $user, 'access_token' => $token], 201)
+                    ? new JsonResponse(['data' => $user, 'access_token' => $token->accessToken], 201)
                     : redirect($this->redirectPath());
     }
 }
