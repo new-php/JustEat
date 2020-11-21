@@ -5,10 +5,11 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
 
 class RegisterTest extends TestCase
 {
-    use WithFaker;
+    use WithFaker, RefreshDatabase;
     /**
      * Register fail required validation
      *
@@ -81,9 +82,11 @@ class RegisterTest extends TestCase
      */
     public function testRegisterFailEmailUnique()
     {
+        $user = User::factory()->create();
+
         $response = $this->post('/api/v1/register',
             [
-                'email' => 'admin@justeat.com',
+                'email' => $user->email,
                 'password' => '12345678',
                 'password_confirmation' => '12345678',
             ],
@@ -175,6 +178,9 @@ class RegisterTest extends TestCase
     public function testRegister()
     {
         $email = $this->faker->email;
+
+        $this->artisan('passport:install');
+
         $response = $this->post('/api/v1/register',
             [
                 'email' => $email,
