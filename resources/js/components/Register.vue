@@ -32,7 +32,7 @@
                 <label class="remember-me-label" for="checkbox">Guardar sesión</label>
                 <p class="remember-me-text">No lo marques si compartes ordenador</p>
             </div>
-            <button type="submit" class="btn submit-button">
+            <button id="register" type="submit" class="btn submit-button">
                 <span class="submit-button-text"><strong>Inicia sesión</strong></span>
             </button>
             <div class="privacy-tos">
