@@ -5,12 +5,13 @@ namespace Tests\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Tests\Browser\Pages\Login;
+use Tests\Browser\Pages\LoginPage;
 use App\Models\User;
 
 class LoginTest extends DuskTestCase
 {
     use DatabaseMigrations;
+
     /**
      * Login fail
      *
@@ -23,7 +24,7 @@ class LoginTest extends DuskTestCase
         $user = User::factory()->create();
 
         $this->browse(function (Browser $browser) use ($user) {
-            $browser->visit(new Login)
+            $browser->visit(new LoginPage)
                     ->assertSee('Inicia sesión')
                     ->type('@email', $user->email)
                     ->type('@password', 'fail')
@@ -42,10 +43,8 @@ class LoginTest extends DuskTestCase
      */
     public function testResetPasswordLink()
     {
-        $user = User::factory()->create();
-
-        $this->browse(function (Browser $browser) use ($user) {
-            $browser->visit(new Login)
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new LoginPage)
                     ->assertSee('Inicia sesión')
                     ->clickLink('¿Has olvidado tu contraseña?')
                     ->assertPathIs('/password/reset');
@@ -61,10 +60,8 @@ class LoginTest extends DuskTestCase
      */
     public function testCreateAccountLink()
     {
-        $user = User::factory()->create();
-
-        $this->browse(function (Browser $browser) use ($user) {
-            $browser->visit(new Login)
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new LoginPage)
                     ->assertSee('Inicia sesión')
                     ->clickLink('Crear cuenta')
                     ->assertPathIs('/register');
@@ -80,10 +77,8 @@ class LoginTest extends DuskTestCase
      */
     public function testTermsAndConditionsLink()
     {
-        $user = User::factory()->create();
-
-        $this->browse(function (Browser $browser) use ($user) {
-            $browser->visit(new Login)
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new LoginPage)
                     ->assertSee('Inicia sesión')
                     ->clickLink('términos y condiciones')
                     ->assertPathIs('/login');
@@ -99,10 +94,8 @@ class LoginTest extends DuskTestCase
      */
     public function testPrivacyPolicyLink()
     {
-        $user = User::factory()->create();
-
-        $this->browse(function (Browser $browser) use ($user) {
-            $browser->visit(new Login)
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new LoginPage)
                     ->assertSee('Inicia sesión')
                     ->clickLink('política de privacidad')
                     ->assertPathIs('/login');
@@ -118,10 +111,8 @@ class LoginTest extends DuskTestCase
      */
     public function testCookiePolicyLink()
     {
-        $user = User::factory()->create();
-
-        $this->browse(function (Browser $browser) use ($user) {
-            $browser->visit(new Login)
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new LoginPage)
                     ->assertSee('Inicia sesión')
                     ->clickLink('política de cookies')
                     ->assertPathIs('/login');
@@ -139,13 +130,12 @@ class LoginTest extends DuskTestCase
     {
         $user = User::factory()->create();
 
-        //inserir oauthclients
         $this->artisan('passport:install');
 
         \DB::table('oauth_clients')->where('password_client', 1)->update(['secret' => 'WzcCcKmUuZGpa8fq46MCZl6TDRKLoGmkEEimjaAq']);
 
         $this->browse(function (Browser $browser) use ($user) {
-            $browser->visit(new Login)
+            $browser->visit(new LoginPage)
                     ->assertSee('Inicia sesión')
                     ->type('@email', $user->email)
                     ->type('@password', 'password')

@@ -4,7 +4,7 @@ namespace Tests\Browser\Pages;
 
 use Laravel\Dusk\Browser;
 
-class Login extends Page
+class RegisterPage extends Page
 {
     /**
      * Get the URL for the page.
@@ -13,7 +13,7 @@ class Login extends Page
      */
     public function url()
     {
-        return '/login';
+        return '/register';
     }
 
     /**
@@ -37,7 +37,8 @@ class Login extends Page
         return [
             '@email' => 'input[name=email]',
             '@password' => 'input[name=password]',
-            '@Login' => '#login',
+            '@password_confirmation' => 'input[name=password_confirmation]',
+            '@Register' => '#register',
         ];
     }
 }
