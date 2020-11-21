@@ -24,9 +24,9 @@
             <div class="separator">
                 <hr>
             </div>
-            <input class="email-input" v-model="email" placeholder="Introduce tu email" type="email" required>
-            <input class="email-input password-input" v-model="password" placeholder="Introduce contraseña" type="password" required>
-            <input class="email-input password-input" style="margin-top: 4px;" v-model="password_confirmation" placeholder="Confirmar contraseña" type="password" required>
+            <input name="email" class="email-input" v-model="email" placeholder="Introduce tu email" type="email" required>
+            <input name="password" class="email-input password-input" v-model="password" placeholder="Introduce contraseña" type="password" required>
+            <input name="password_confirmation" class="email-input password-input" style="margin-top: 4px;" v-model="password_confirmation" placeholder="Confirmar contraseña" type="password" required>
             <div class="remember-me-container">
                 <input type="checkbox" v-model="rememberme">
                 <label class="remember-me-label" for="checkbox">Guardar sesión</label>
