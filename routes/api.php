@@ -35,7 +35,8 @@ Route::prefix(config('api.version'))->group(function () {
 	Route::get('restaurants', 'RestaurantController@index');
 
     Route::middleware('auth:api')->group(function() {
-
+        
         Route::get('user', 'UserController@show')->name('user');
+        Route::post('order', 'OrderControllower@store')->name('order.new');
     });
 });
