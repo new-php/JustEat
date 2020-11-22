@@ -48,7 +48,6 @@ class OrderController extends Controller
         $order = Order::create([
             'user_id' => $user,
             'restaurant_id' => $request->restaurant_id,
-            'rider_id' => 0,         # TODO change rider_id assignment
             'details' => $request->details,
             'total' => $total,
             'status' => $status,
