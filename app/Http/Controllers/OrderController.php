@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Models\OrderItem;
+
 
 class OrderController extends Controller
 {
@@ -13,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return Order::all();
     }
 
     /**
@@ -27,42 +30,40 @@ class OrderController extends Controller
         $user = Auth::user();
         
         $validator = $request->validate([
-            'user_id' => 'required|alpha_num',
             'restaurant_id' => 'required|alpha_num',
             'details' => 'nullable|string',
-            'products' => 'required|array',
+            'products' => 'required|array|min:1',
             'products.*.id' => 'required|alpha_num',
-            'products.*.quantity' => 'required|alpha_num',
-            'products.*.price' => 'required|alpha_num'
-            ]);
-
-        # TODO assign rider_id
+            'products.*.quantity' => 'required|numeric',
+            'products.*.price' => 'required|numeric'
+        ]);
 
         $status = 'SELECTED';
         
         $total = 0;
-        foreach ($request->products as &$product) {
-            $total = $total + $product->price * $product->quantity;
-        }
+        foreach ($request->products as $product) {
+            $total += $product['price'] * $product['quantity'];
+        };
 
         $order = Order::create([
-            'user_id' => $request->user_id,
+            'user_id' => user,
             'restaurant_id' => $request->restaurant_id,
+            'rider_id' => 0,         # TODO change rider_id assignment
             'details' => $request->details,
             'total' => $total,
             'status' => $status,
         ]);
 
-        foreach ($request->products as &$product) {
+        foreach ($request->products as $product) {
             OrderItem::create([
                 'order_id' => $order->id,
                 'product_id' => $product->id,
-                'price' => $product->id,
+                'price' => $product->price,
                 'quantity' => $product->quantity
             ]);
-        }
+        };
 
-        return $order;
+        return response()->json($order, 201);
     }
 
     /**

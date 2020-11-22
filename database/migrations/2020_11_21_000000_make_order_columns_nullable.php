@@ -17,6 +17,7 @@ class MakeOrderColumnsNullable extends Migration
             $table->foreignId('address_id')->nullable()->change();
             $table->string('status')->nullable()->change();
             $table->string('delivery_mode')->nullable()->change();
+            $table->decimal('shipping', 8, 2)->nullable()->change();
         });
     }
 
@@ -31,6 +32,7 @@ class MakeOrderColumnsNullable extends Migration
             $table->foreignId('address_id')->nullable(false)->change();
             $table->string('status')->nullable(false)->change();
             $table->string('delivery_mode')->nullable(false)->change();
+            $table->decimal('shipping', 8, 2)->nullable(false)->change();
         });
     }
 }
