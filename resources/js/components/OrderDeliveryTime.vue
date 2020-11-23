@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white pt-4 full-height full-height-2">
+    <div class="bg-white pt-4">
         <div class="delivery-container" align="middle">
             <div class="delivery-title">
                 <span>Confirma la hora de entrega</span>

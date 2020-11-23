@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white pt-4 full-height">
+    <div class="bg-white pt-4">
         <div class="delivery-container" align="middle">
             <div class="delivery-title">
                 <span>Confirma los datos de entrega</span>
