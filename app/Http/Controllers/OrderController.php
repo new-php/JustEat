@@ -16,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return Order::all();
+        //
     }
 
     /**
@@ -33,9 +33,9 @@ class OrderController extends Controller
             'restaurant_id' => 'required|alpha_num',
             'details' => 'nullable|string',
             'products' => 'required|array|min:1',
-            'products.*.id' => 'required|alpha_num',
-            'products.*.quantity' => 'required|numeric',
-            'products.*.price' => 'required|numeric'
+            'products.*.id' => 'required|integer',
+            'products.*.quantity' => 'required|numeric|min:0',
+            'products.*.price' => 'required|numeric|min:0'
         ]);
 
         $status = 'SELECTED';

@@ -33,7 +33,6 @@ Route::prefix(config('api.version'))->group(function () {
 
 
     Route::get('restaurants', 'RestaurantController@index');
-    Route::get('orders', 'OrderController@index');
 
     Route::middleware('auth:api')->group(function() {
         Route::post('order', 'OrderController@store')->name('order.new');        
