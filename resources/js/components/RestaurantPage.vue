@@ -80,9 +80,10 @@
                   </h3>
               </div>
 
-              <div class="search-bar">
-                  <span><i class="fa fa-search search-icon" aria-hidden="true"></i></span>
+              <div class="search-bar" id="boxes">
+                  <i class="fa fa-search search-icon" aria-hidden="true"></i>
                   <input class="search-input" type="search" name="restaurants-searchbar" placeholder="Buscar un plato en el menú" v-model="search_input" debounce="500">
+
               </div>
 
               <div class="products-container">
@@ -107,13 +108,41 @@
                           <div class="product-info">
                               <div class="row">
                                   <div class="col-1 mr-3">{{ product.price }}€</div>
-                                  <div class="col-1 ml-3"><span><i class="fa fa-plus product-icon" aria-hidden="true"></i></span></div>
+                                  <div class="col-1 ml-3"><span><i class="fa fa-plus product-icon" aria-hidden="true" v-on:click="increase(product)"></i></span></div>
                               </div>
                           </div>
                       </section>
 
                   </section>
 
+              </div>
+          </div>
+          <div class="shopping-cart">
+              <h4><strong>Total del pedido</strong>   0.00€</h4>
+              <div class="card">
+                  <p> <center>Tienes que gastar {{min_amount}}€ o más para pedir a domicilio</center></p>
+                  <button class="btn-block btn-disabled order-confirm-button"> Hacer pedido </button>
+                  <a href="#" class="warning"><center>Si tú o alguien para el que estás pidiendo tiene una alergia o intolerancia a algún alimento, haz clic aquí</center></a>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btoggle btn-secondary active">
+                          <input type="radio" name="options" id="option1" autocomplete="off" checked> A domicilio {{rider_tax}}€
+                      </label>
+                      <label class="btn btoggle btn-secondary">
+                          <input type="radio" name="options" id="option2" autocomplete="off"> Para recoger
+                    </label>
+                  </div>
+                  <div class="squared">
+                      <ul>
+                          <li v-for="product in shopping_cart" :id="'shop-0'">
+                            {{product.name}}   {{product.price}}€
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="squared" v-if="shopping_cart.length">
+                      <p>Subtotal   {{total}}€</p>
+                      <p>Gastos de envío  {{rider_tax}}€</p>
+                      <p>Total {{total + rider_tax}}€</p>
+                  </div>
               </div>
           </div>
       </div>
@@ -132,6 +161,10 @@
     data() {
         return {
             search_input: "",
+            min_amount: 8.00,
+            rider_tax: 1.90,
+            shopping_cart: [],
+            total: 0,
         }
     },
     mounted() {
@@ -140,6 +173,12 @@
     watch: {
         search_input: function(val, oldVal) {
             console.log(val, oldVal);
+        }
+    },
+    methods: {
+        increase: function(product) {
+            this.shopping_cart.push(product);
+            this.total += parseFloat(product.price);
         }
     },
   };
