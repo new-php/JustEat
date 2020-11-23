@@ -81,8 +81,8 @@
               </div>
 
               <div class="search-bar" id="boxes">
-                  <input class="search-input" type="search" name="restaurants-searchbar" placeholder="Buscar un plato en el menú" v-model="search_input" debounce="500">
                   <i class="fa fa-search search-icon" aria-hidden="true"></i>
+                  <input class="search-input" type="search" name="restaurants-searchbar" placeholder="Buscar un plato en el menú" v-model="search_input" debounce="500">
 
               </div>
 

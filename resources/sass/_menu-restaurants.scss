@@ -107,16 +107,15 @@
                 width: 95%;
 
                 .search-icon {
-                    float: left;
+                    position: absolute;
                     color: #125FCA;
                     font-size: 1rem;
-                    padding: 0.5% 1.5%;
-                    right: 50px;
+                    padding: 0.5% 0.8%;
                 }
 
                 .search-input {
                     width: 100%;
-                    padding: 0.5% 2%;
+                    padding: 0.5% 5%;
                     background: #fff;
                     border-radius: 4px;
                     border: 0;
