@@ -85,7 +85,7 @@
                 <div class="restaurants-section">
                     <div class="search-bar">
                         <span><i class="fa fa-search search-icon" aria-hidden="true"></i></span>
-                        <input class="search-input" type="search" name="restaurants-searchbar" placeholder="Buscar restaurante o cocina" v-model="search_input" debounce="500">
+                        <input class="search-input" type="search" name="restaurants-searchbar" placeholder="Buscar restaurante o cocina" v-model="search_input" debounce="500" v-on:keyup="searchName(search_input)">
                     </div>
                     <div class="restaurants-open">
                         <svg class="restaurants-open-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
@@ -162,6 +162,7 @@
             restaurants_showing: [],
             categories_selected: [],
             filters_selected: [],
+            restaurants_prov: [],
             search_input: "",
         }
     },
@@ -240,6 +241,19 @@
         },
         goToRestaurant(restaurant) {
             window.location.href = "restaurants/" + restaurant.id;
+        },
+        searchName(input) {
+            console.log(event.key);
+            if(event.key == "Enter"){
+                this.restaurants_showing = this.restaurants.slice(0, this.restaurants.length);
+                this.restaurants_prov.splice(0, this.restaurants_prov.length);
+                for (let i = this.restaurants.length-1; i >= 0; i--) {
+                    if (this.restaurants[i].name.toLowerCase().includes(input.toLowerCase())) {
+                        this.restaurants_prov.push(this.restaurants[i]);
+                    }
+                }
+                this.restaurants_showing = this.restaurants_prov;
+            }
         }
     },
   };
