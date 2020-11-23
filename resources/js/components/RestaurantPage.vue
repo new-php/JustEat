@@ -87,7 +87,7 @@
               </div>
 
               <div class="products-container">
- 
+
                   <section class="product-card" v-for="(category) in product_categories" :key=category.id :id="'cat-' + category.id">
                       <div class="product-text">
                           <div class="product-name">
@@ -161,8 +161,8 @@
     data() {
         return {
             search_input: "",
-            min_amount: "8.00",
-            rider_tax: "1.90",
+            min_amount: 8.00,
+            rider_tax: 1.90,
             shopping_cart: [],
             total: 0,
         }
@@ -178,8 +178,7 @@
     methods: {
         increase: function(product) {
             this.shopping_cart.push(product);
-            total += product.price;
-            alert(total);
+            this.total += parseFloat(product.price);
         }
     },
   };
