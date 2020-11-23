@@ -56,7 +56,7 @@
 
         .filters {
             font-size: 1rem;
-            width: 25%;
+            width: 20%;
             padding-right: 1.5%;
             line-height: 1.43;
 
@@ -89,7 +89,7 @@
         }
 
         .products-section {
-            width: 73.8%;
+            width: 53.8%;
 
             .categories-filter {
                 margin-bottom: 3%;
@@ -104,9 +104,10 @@
             .search-bar {
                 box-shadow: 0 2px 5px 1px rgba(0,0,0,.1);
                 margin-bottom: 2.5%;
+                width: 95%;
 
                 .search-icon {
-                    position: absolute;
+                    float: left;
                     color: #125FCA;
                     font-size: 1rem;
                     padding: 0.5% 1.5%;
@@ -189,7 +190,7 @@
                 }
 
                 .product-info {
-                    width: 10%;
+                    width: 20%;
                     padding: 0.5%;
                     margin-right: 1%;
                     margin-left: 1%;
@@ -203,5 +204,47 @@
                 }
             }
         }
+
+
+        .shopping-cart {
+            width: 22.5%;
+            float: right;
+
+            .order-confirm-button {
+                width: 90%;
+                margin-left: auto;
+                margin-right: auto;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .btoggle {
+                background-color: gainsboro;
+                color: black;
+            }
+
+            .btoggle:active, .btoggle:focus {
+                background-color: white;
+                color: orange;
+            }
+
+            .warning {
+                color: blue;
+                text-decoration: underline;
+                margin-left: 10px;
+                margin-right: 10px;
+                padding-top: 10px;
+            }
+        }
     }
+}
+
+#boxes{
+    content: "";
+    display: table;
+    clear: left;
+}
+
+.squared{
+    border-top: 1px solid gainsboro;
 }

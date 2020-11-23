@@ -104,6 +104,10 @@
             .categories-reset {
                 float:right;
             }
+
+            .categories-right{
+                text-align: right;
+            }
         }
 
         .categories-available {
@@ -199,7 +203,6 @@
             margin-bottom: 2.5%;
 
             .search-icon {
-                position: absolute;
                 color: #125FCA;
                 font-size: 2rem;
                 padding: 1.5%;
