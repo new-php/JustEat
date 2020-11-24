@@ -52,8 +52,8 @@
                     <h5 class="title2">Comida a domicilio online cerca de ti</h5>
 
                     <div class="row justify-content-center my-4">
-                        <input id="autocomplete" class="form-control fdir" placeholder="Enter your address" type="text"></input>
-                        <button class="btn btn-default btndir" type="button" v-on:click="search()"><strong>Buscar restaurantes</strong></button>
+                        <input name="address" id="autocomplete" class="form-control fdir" placeholder="Enter your address" type="text"> </input>
+                        <button dusk="searchRest" class="btn btn-default btndir" type="button" v-on:click="search()"><strong>Buscar restaurantes</strong></button>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
         <div class="app-section pt-4">
             <div class="row">
                 <div>
-                    <span class="best-restaurants"><strong>Los mejores restaurantes</strong></span>
+                    <span dusk="searchBetterRest" class="best-restaurants"><strong>Los mejores restaurantes</strong></span>
                 </div>
             </div>
             <div class="row">
