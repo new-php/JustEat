@@ -30,7 +30,7 @@ class OrderController extends Controller
         $user = Auth::user();
         
         $validator = $request->validate([
-            'restaurant_id' => 'required|alpha_num',
+            'restaurant_id' => 'required|integer',
             'details' => 'nullable|string',
             'products' => 'required|array|min:1',
             'products.*.id' => 'required|integer',
