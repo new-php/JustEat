@@ -1,112 +1,184 @@
 <template>
-    <div class="container">
-        <div class="row" style="background:white">
-            <div class="col-md-2">
-            </div>
-            <div class="col-md-4 buffer-title">
-                <h3><b>¿Como te gustaría pagar?</b></h3>
-            </div>
-        </div>
-        <div class="row" style="background:white">
-            <div class="col-md-2">
-            </div>
-            <div class="col-md-4 buffer-title">
-                <div class="accordion" id="accordionExample">
-                    <div class="card">
-                        <div class="card-header" id="headingOne">
-                            <p class="mb-0">
-                            <input class="btn btn-link" type="radio" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Pagar con Tarjeta
-                            </p>
-                        </div>
-
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <div class="card-body">
-                                <div><img src="/JustEat/resources/views/img/visa_mc_amex.png"></div>
-                                <div class="buffer-text">
-                                    <label class="form-label form-text" for="Name"><b>Número de tarjeta</b></label>
-                                </div>
-                                <div class="form-square buffer-text">
-                                    <input class="form-input form-square-card" data-val="true" data-val-length="Longitud máxima de 20" data-val-length-max="20" data-val-required="Introduce tu número de tarjeta" data_test_id="card_number" id="card_number" maxlength="20" name="CardNumber" placeholder="XXXX-XXXX-XXXX-XXXX" type="text" :value="tarjeta">
-                                </div>
-                                <div class="buffer-text form-square">
-                                    <input type="checkbox" id="guardar" name="guardar" value="Guardar">
-                                    <label for="guardar"> Guardar esta tarjeta</label><br>
-                                </div>
-                                <div class="buffer-text form-square">
-                                    <label for="fecha_caducidad"><b>Fecha de caducidad</b></label><br>
-                                    <input type="month" id="fecha" name="fecha" class="form-square-card">
-                                </div>
-                                <div class="buffer-text">
-                                    <label class="form-label form-text" for="Name"><b>Código de seguridad</b></label>
-                                </div>
-                                <div class="buffer-text form-square">
-                                    <input class="form-input form-square-pin" data-val="true" data-val-length="Longitud máxima de 3" data-val-length-max="3" data-val-required="Introduce tu código de seguridad" data_test_id="sec_code" id="sec_code" maxlength="3" name="secCode" type="text" :value="pin">
-                                </div>
-                                <div class="buffer-text">
-                                    <label class="form-label form-text" for="Name"><b>Nombre del titular de la tarjeta</b></label>
-                                </div>
-                                <div class="form-square buffer-text">
-                                    <input class="form-input form-square-card" data-val="true" data-val-length="Longitud máxima de 40" data-val-length-max="40" data-val-required="Introduce el nombre del titular" data_test_id="titular" id="titular" maxlength="40" name="CardNumber" type="text" :value="titular">
-                                </div>
-                                <div class="buffer-text form-square">
-                                    <input type="checkbox" id="direccion" name="direccion" value="direccion">
-                                    <label for="direccion">Dirección de facturación:</label>
-                                    <p> {{ address }} (deselecciona<br>esta casilla para modificar esta dirección de facturación</p>
-                                </div>
-                                <div class="enquadrat">
-                                    <a href="#" class="special-a">Tengo un código de descuento</a>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-block button" autocomplete="off">Hacer mi pedido</button>
+    <div class="bg-white payment-page-container" align="middle">
+        <h3 class="my-3"><strong>¿Cómo te gustaría pagar?</strong></h3>
+        <div class="bg-white payment-container">
+            <div class="payment-type-container mr-2">
+                <div class="payment-type payment-type-bottom-line" v-for="payment in payments" :id="'payment-type-' + payment.id">
+                    <div class="payment-type-header" v-on:click="expand_collapse('payment-type-' + payment.id)">
+                        <div class="payment-type-header-text">
+                            <div id="radio" class="payment-type-radio">
+                                <div class="checked"></div>
                             </div>
+                            <span class="payment-type-label">{{ payment.type }} {{ payment.number }} {{ payment.exp }}</span>
                         </div>
+                        <i id="angle" class="payment-angle fa fa-angle-down" aria-hidden="true"></i>
                     </div>
-                    <div class="card">
-                        <div class="card-header" id="headingTwo">
-                            <p class="mb-0">
-                            <input class="btn btn-link" type="radio" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Pagar con PayPal
-                            </p>
+                    <div class="payment-type-body" id="payment-body">
+                        <div class="payment-type-card">
+                            <img v-if="payment.type == 'VISA'" src="/storage/images/visa.svg" class="card-image">
+                            <img v-if="payment.type == 'MASTERCARD'" src="/storage/images/mastercard.svg" class="card-image">
+                            <img v-if="payment.type == 'AMERICANEXPRESS'" src="/storage/images/americanexpress.svg" class="card-image">
+                            <span>{{ payment.type }}</span>
                         </div>
-
-                        <div id="collapseTwo" class="collapse form-square" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                            <div class="card-body form-square">
-                                <input type="checkbox" id="paypaldetails" name="paypaldetails" value="Paypaldetails">
-                                <label for="paypaldetails"> Guardar mis detalles de PayPal</label><br>
-                                <div class="enquadrat">
-                                    <a href="#" class="special-a">Tengo un código de descuento</a>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-block button" autocomplete="off">Hacer mi pedido</button>
+                        <div class="coupon-section">
+                            <a class="coupon-link" href="#" v-on:click="open_close_coupon"><strong>Tengo un código de descuento</strong></a>
+                            <div v-if="coupon_container_open" class="coupon-container">
+                                <input class="coupon-input" type="text" name="coupon">
+                                <button class="btn coupon-button" v-on:click="apply_coupon">Aplicar</button>
                             </div>
                         </div>
-
-
+                        <button class="btn pay-button" v-on:click="pay">Hacer mi pedido</button>
+                    </div>
+                </div>
+                <div class="payment-type payment-type-bottom-line" id="payment-type-new">
+                    <div class="payment-type-header" v-on:click="expand_collapse('payment-type-new')">
+                        <div class="payment-type-header-text">
+                            <div id="radio" class="payment-type-radio">
+                                <div class="checked"></div>
+                            </div>
+                            <span class="payment-type-label">Paga con tarjeta de débito o crédito</span>
+                        </div>
+                        <i id="angle" class="payment-angle fa fa-angle-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="payment-type-body" id="payment-body">
+                        <div class="payment-type-card">
+                            <img src="/storage/images/visa.svg" class="card-image">
+                            <img src="/storage/images/mastercard.svg" class="card-image">
+                            <img src="/storage/images/americanexpress.svg" class="card-image">
+                        </div>
+                        <div class="payment-card-info">
+                            <div class="payment-card-info-line">
+                                <span><strong>Número de tarjeta</strong></span>
+                                <input class="text-input" type="text" name="coupon">
+                            </div>
+                            <div class="payment-card-info-line">
+                                <input type="checkbox">
+                                <span>Guardar esta tarjeta</span>
+                            </div>
+                            <div class="payment-card-info-line">
+                                <span><strong>Fecha de caducidad</strong></span>
+                                <br>
+                                <select class="">
+                                    <option v-for="month in months">{{month}}</option>
+                                </select>
+                                <select class="">
+                                    <option v-for="year in years">{{year}}</option>
+                                </select>
+                            </div>
+                            <div class="payment-card-info-line">
+                                <span><strong>Código de seguridad</strong></span>
+                                <br>
+                                <div class="security-code-container">
+                                <input class="security-code-input" type="text" name="coupon">
+                                    <svg class="security-code-photo" xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 100 60">
+                                        <g id="Payment-badge-set">
+                                            <g id="Dark-Payment-badges" transform="translate(-130 -264)">
+                                                <g id="DinersClub-dark" transform="translate(130 264)">
+                                                    <path id="Rectangle" d="M4 0h92c2.2 0 4 1.8 4 4v52c0 2.2-1.8 4-4 4H4c-2.2 0-4-1.8-4-4V4c0-2.2 1.8-4 4-4z" fill="#c3c3c3"/>
+                                                    <path id="Fill-26" class="st1" d="M46.6 50.4zm0 0z"/>
+                                                </g>
+                                            </g>
+                                        </g>
+                                        <path d="M0 8.4h100v13H0z"/>
+                                        <path class="st1" d="M4.1 27.6h92.7v18.3H4.1z"/>
+                                        <text transform="translate(34.026 42.099)" font-size="15.229" font-family="Helvetica">123 456</text>
+                                        <path fill="none" stroke="#ec1100" stroke-width="2" stroke-miterlimit="10" d="M63.4 27.6h33.4v18.3H63.4z"/>
+                                    </svg>
+                                    <span class="security-code-text">El código de 3 dígitos de la <strong>parte posterior</strong> de tu tarjeta</span>
+                                </div>
+                            </div>
+                            <div class="payment-card-info-line">
+                                <span><strong>Nombre del titular de la tarjeta</strong></span>
+                                <input class="text-input" type="text" name="coupon">
+                            </div>
+                            <div class="payment-card-info-line">
+                                <input type="checkbox">
+                                <span class="payment-address">Dirección de facturación: {{ address }} (deselecciona esta casilla para modiificar esta dirección de facturación)</span>
+                            </div>
+                        </div>
+                        <div class="coupon-section">
+                            <a class="coupon-link" href="#" v-on:click="open_close_coupon"><strong>Tengo un código de descuento</strong></a>
+                            <div v-if="coupon_container_open" class="coupon-container">
+                                <input class="coupon-input" type="text" name="coupon">
+                                <button class="btn coupon-button" v-on:click="apply_coupon">Aplicar</button>
+                            </div>
+                        </div>
+                        <button class="btn pay-button" v-on:click="pay">Hacer mi pedido</button>
+                    </div>
+                </div>
+                <div class="payment-type payment-type-bottom-line" id="payment-type-paypal">
+                    <div class="payment-type-header" v-on:click="expand_collapse('payment-type-paypal')">
+                        <div class="payment-type-header-text">
+                            <div id="radio" class="payment-type-radio">
+                                <div class="checked"></div>
+                            </div>
+                            <span class="payment-type-label">PayPal</span>
+                        </div>
+                        <i id="angle" class="payment-angle fa fa-angle-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="payment-type-body" id="payment-body">
+                        <div class="payment-card-info">
+                            <div class="payment-card-info-line">
+                                <input type="checkbox">
+                                <span class="payment-address">Guardar mis detalles de PayPal</span>
+                            </div>
+                        </div>
+                        <div class="coupon-section">
+                            <a class="coupon-link" href="#" v-on:click="open_close_coupon"><strong>Tengo un código de descuento</strong></a>
+                            <div v-if="coupon_container_open" class="coupon-container">
+                                <input class="coupon-input" type="text" name="coupon">
+                                <button class="btn coupon-button" v-on:click="apply_coupon">Aplicar</button>
+                            </div>
+                        </div>
+                        <button class="btn pay-button" v-on:click="pay">Hacer mi pedido</button>
+                    </div>
+                </div>
+                <div class="payment-type" id="payment-type-cash">
+                    <div class="payment-type-header" v-on:click="expand_collapse('payment-type-cash')">
+                        <div class="payment-type-header-text">
+                            <div id="radio" class="payment-type-radio">
+                                <div class="checked"></div>
+                            </div>
+                            <span class="payment-type-label">Pagar con dinero en efectivo</span>
+                        </div>
+                        <i id="angle" class="payment-angle fa fa-angle-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="payment-type-body" id="payment-body">
+                        <button class="btn pay-button" v-on:click="pay">Hacer mi pedido</button>
                     </div>
                 </div>
             </div>
-
-
-            <div class="col-md-4 buffer-title">
-                <div class="card">
-                    <h4><b>Tu pedido</b></h4>
-                    <div><p>{{order1}}  {{price1}}</p></div>
-                    <div><p>{{order2}}  {{price2}}</p></div>
-
-                    <div class="enquadrat">
-                        <p><b>Subtotal {{result()}}€</b></p>
-                        <p>Coste de envío {{shipping}}</p>
-                        <h5><b>Total {{total()}}€</b></h5>
-                    </div>
-                    <div class="enquadrat text-center">
-                        <p>{{restaurant}}</p>
-                        <p>{{carrer}}</p>
-                    </div>
-                    <div class="enquadrat">
-                        <p class="buffer-text"><b>[MOTO] Entrega lo antes posible</b></p>
+            <div class="payment-type-container ml-2">
+                <div class="your-order payment-type-bottom-line payment-padding">
+                    <h4><strong>Tu pedido</strong></h4>
+                    <div class="order-price-item" v-for="item in order_items">
+                        <span v-if="item.quantity > 1">{{ item.quantity }} x {{ item.name }}</span>
+                        <span v-if="item.quantity <= 1">{{ item.name }}</span>
+                        <span>{{ item.price }}</span>
                     </div>
                 </div>
-                <div>
-                    <input type="checkbox" id="publicitat" name="publicitat" value="Publicitat">
-                    <label for="publicitat"> Te enviaremos emails, SMS o notificaciones</label>
-                    <p>para ponerte al día sobre fantásticos descuentos y servicios de Just Eat. Si prefieres que no lo hagamos, marca la casilla.</p>
+                <div class="your-order payment-type-bottom-line payment-padding">
+                    <div class="order-price-item mb-2 order-price-sub">
+                        <span><strong>Subtotal</strong></span>
+                        <span><strong>{{ this.subtotal() }}</strong></span>
+                    </div>
+                    <div class="order-price-item my-2">
+                        <span>Coste de envío</span>
+                        <span>{{ shipping }}</span>
+                    </div>
+                    <div class="order-price-item mt-2 order-price-total">
+                        <span><strong>Total</strong></span>
+                        <span><strong>{{ this.subtotal() }}</strong></span>
+                    </div>
+                </div>
+                <div class="order-restaurant payment-type-bottom-line payment-padding text-center">
+                    {{ restaurant }}, {{ address }}
+                </div>
+                <div class="order-delivery payment-padding">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                        <path fill="#2A3846" d="M18.729 13.737c1.733 0 3.143 1.411 3.143 3.144s-1.41 3.144-3.143 3.144a3.147 3.147 0 01-3.145-3.144 3.148 3.148 0 013.145-3.144zM14.373 4c.32 0 .616.152.803.405l.065.1 3.321 5.818a1 1 0 01-.073 1.103l-.088.1-3.919 3.918a1 1 0 01-.575.285l-.132.008h-4.63c.14.355.223.74.223 1.144a3.148 3.148 0 01-3.144 3.144 3.147 3.147 0 01-3.143-3.144c0-.323.053-.634.146-.927l.077-.217H3a1 1 0 01-.993-.883L2 14.737v-.959c0-1.41.5-2.703 1.326-3.72l.17-.2L3 9.86a1 1 0 01-.117-1.993L3 7.86h5.456c.755 0 1.433.42 1.77 1.094.426.861 1.138 2.29 1.241 2.472.418.744 1.586.67 2.095.422.738-.36 1.484-1.112 1.865-1.659.106-.153.313-.605.087-1.15l-.066-.138-1.656-2.9h-1.378a1 1 0 01-.117-1.994L12.414 4h1.96zm4.356 11.737c-.631 0-1.145.513-1.145 1.144a1.145 1.145 0 101.145-1.144zm-12.505 0a1.145 1.145 0 000 2.288 1.145 1.145 0 000-2.288z"></path>
+                    </svg>
+                    <strong>Entrega: {{ delivery }}</strong>
                 </div>
             </div>
         </div>
@@ -114,30 +186,80 @@
 </template>
 
 <script>
-  export default {
+export default {
     name: "PaymentMethod",
     data() {
         return {
             address: "Plaça de Tetuán, s/n, bajo 2",
-            order1: "3 x hamburguesa con patatas fritas",
-            price1: "12.80€",
-            order2: "2 x refresco grande",
-            price2: "3.60€",
-            shipping: "1.90€",
             restaurant: "Viva la burger",
-            carrer: "Carrer de l'Hamburguesa Feliç, 20, 08010"
+            delivery: "Lo antes posible",
+            order_items: [
+                {
+                    name: "Pizza",
+                    price: 8.00,
+                    quantity: 2,
+                }
+            ],
+            shipping: "1.90€",
+            payments: [
+                {
+                    id: 1,
+                    type: "VISA",
+                    number: "****1234",
+                    exp: "05/23",
+                },
+            ],
+            payment_selected: null,
+            coupon_container_open: false,
+            coupon_value: '',
+            months: ["MM", '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',],
+            years: ["YY", '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39'],
         }
     },
     mounted() {
       console.log("Example component mounted");
     },
     methods: {
-        result: function () {
-            return (parseFloat(this.price1) + parseFloat(this.price2)).toFixed(2);
+        expand_collapse: function(id) {
+            var element = $('#' + id);
+            if (id !== this.payment_selected) {
+                if (this.payment_selected != null) {
+                    var prev_element = $('#' + this.payment_selected);
+                    prev_element.find('#radio').removeClass('payment-type-radio-active');
+                    prev_element.find('#angle').removeClass('fa-angle-up').addClass('fa-angle-down');
+                    prev_element.find('#payment-body').css('display', 'none');
+                }
+                element.find('#radio').addClass('payment-type-radio-active');
+                element.find('#angle').addClass('fa-angle-up').removeClass('fa-angle-down');
+                element.find('#payment-body').css('display', 'block');
+                this.payment_selected = id;
+            } else {
+                element.find('#radio').removeClass('payment-type-radio-active');
+                element.find('#angle').removeClass('fa-angle-up').addClass('fa-angle-down');
+                element.find('#payment-body').css('display', 'none');
+                this.payment_selected = null;
+            }
         },
-        total: function () {
-            return (parseFloat(this.price1) + parseFloat(this.price2) + parseFloat(this.shipping)).toFixed(2);
-        }
+        open_close_coupon: function(evt) {
+            evt.preventDefault();
+            this.coupon_container_open = !this.coupon_container_open;
+            console.log(this.coupon_container_open);
+        },
+        apply_coupon: function(evt) {
+            evt.preventDefault();
+        },
+        pay: function(evt) {
+            evt.preventDefault();
+            window.location.href = "/";
+        },
+        subtotal: function() {
+            var subtotal = 0;
+            for (let i = 0; i < this.order_items.length; i++) {
+                subtotal += this.order_items[i].price * this.order_items[i].quantity;
+            }
+
+            return subtotal;
+        },
     }
-  };
+};
 </script>

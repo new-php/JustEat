@@ -1,0 +1,216 @@
+.payment-page-container {
+    max-width: 650px;
+    text-align: left;
+    margin: 0 auto;
+
+    .payment-container {
+        max-width: 650px;
+        display: flex;
+
+        .payment-type-container {
+            width: 50%;
+            height: fit-content;
+            box-shadow: 0 0 0 1px #c5ccd3;
+            border-radius: 3px;
+
+            .payment-type {
+                width: 100%;
+
+                .payment-type-header {
+                    display: flex;
+                    padding: 10px;
+                    justify-content: space-between;
+                    align-items: center;
+                    cursor: pointer;
+
+                    .payment-type-header-text {
+                        display: flex;
+
+                        .payment-type-radio {
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 10px;
+                            border: 1px solid #2a3846;
+                        }
+
+                        .payment-type-radio-active {
+                            border: 1px solid #125fca;
+
+                            .checked {
+                                width: 13px;
+                                height: 13px;
+                                border-radius: 10px;
+                                background: #125fca;
+                                margin: 2.7px;
+                            }
+                        }
+
+                        .payment-type-label {
+                            margin-left: 5px;
+                        }
+                    }
+
+                    .payment-angle {
+                        color: #125fca;
+                        font-size: 1.2rem;
+                        font-weight: bold;
+                    }
+                }
+
+                .payment-type-body {
+                    display: none;
+                    padding: 10px 18px;
+
+                    .payment-type-card {
+                        border-bottom: 1px solid #c5ccd3;
+                        text-align: left;
+                        padding-bottom: 10px;
+
+                        .card-image {
+                            width: 40px;
+                            margin-right: 10px;
+                        }
+                    }
+
+                    .payment-card-info {
+                        width: 100%;
+                        margin-top: 10px;
+                        text-align: left;
+
+                        .payment-card-info-line {
+                            width: 100%;
+                            margin-top: 17px;
+
+                            .text-input {
+                                width: 100%;
+                                padding: 7px 6px;
+                                border: 1px solid #5e6b77;
+                                border-radius: 2px;
+                            }
+
+                            .text-input:focus {
+                                outline: none;
+                                border: 1px solid #125fca;
+                            }
+
+                            .text-input:active {
+                                outline: none;
+                                border: 1px solid #125fca;
+                            }
+
+                            .security-code-container {
+                                display: flex;
+
+                                .security-code-input {
+                                    width: 60px;
+                                    padding: 7px 6px;
+                                    border: 1px solid #5e6b77;
+                                    border-radius: 2px;
+                                }
+
+                                .security-code-input:focus {
+                                    outline: none;
+                                    border: 1px solid #125fca;
+                                }
+
+                                .security-code-input:active {
+                                    outline: none;
+                                    border: 1px solid #125fca;
+                                }
+
+                                .security-code-photo {
+                                    width: 17%;
+                                    margin-left: 10px;
+                                }
+
+                                .security-code-text {
+                                    width: 50%;
+                                    font-size: 0.7rem;
+                                    margin-left: 10px;
+                                }
+
+                                .payment-address {
+                                    font-size: 0.8rem;
+                                }
+                            }
+                        }
+                    }
+
+                    .coupon-section {
+                        text-align: left;
+                        margin-top: 10px;
+                        border-bottom: 1px solid #c5ccd3;
+                        padding-bottom: 10px;
+
+                        .coupon-link {
+                            color: #125fca;
+                        }
+
+                        .coupon-container {
+                            width: 50%;
+
+                            .coupon-input {
+                                width: 100%;
+                                margin: 8px 0;
+                                padding: 7px 6px;
+                                border: 1px solid #5e6b77;
+                                border-radius: 2px;
+                            }
+
+                            .coupon-input:focus {
+                                outline: none;
+                                border: 1px solid #125fca;
+                            }
+
+                            .coupon-input:active {
+                                outline: none;
+                                border: 1px solid #125fca;
+                            }
+
+                            .coupon-button {
+                                width: 100%;
+                                font-size: 1.1rem;
+                                background-color: #e7f1fe;
+                                color: #125fca;
+                            }
+                        }
+                    }
+
+                    .pay-button {
+                        width: 100%;
+                        background: #f36d00;
+                        margin-top: 10px;
+                        color: white;
+                        font-size: 1.2rem;
+                    }
+
+                    .st1{fill:#fff}
+                }
+            }
+
+            .payment-type-bottom-line {
+                border-bottom: 1px solid #c5ccd3;
+            }
+
+            .payment-padding {
+                padding: 10px;
+            }
+
+            .your-order {
+
+                .order-price-item {
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                .order-price-sub {
+                    font-size: 1.1rem;
+                }
+
+                .order-price-total {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+}
