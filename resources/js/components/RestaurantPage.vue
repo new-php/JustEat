@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-            <div class="restaurant-menu">
+            <div class="restaurant-menu mx-3">
                 <div class="restaurant-info-container">
                     <div class="restaurant-basic-info">
                         <img :src="'/storage/' + restaurant.logo">
@@ -102,7 +102,7 @@
                 <main class="restaurant-products-container" v-if="tab_selected === 'menu'">
                     <section class="restaurant-products-category" v-for="category in restaurant.product_categories" :key="category.id" :id="'category-' + category.id">
                         <span class="restaurant-category-name"><strong>{{ category.name }}</strong></span>
-                        <div class="restaurant-product-item" v-for="product in category.products" :key="product.id">
+                        <div v-on:click="addProduct(product)" class="restaurant-product-item" v-for="product in category.products" :key="product.id">
                             <div class="restaurant-product-info">
                                 <div class="product-name my-1">
                                     <span><strong>{{ product.name }}</strong></span>
@@ -124,167 +124,68 @@
                 </div>
             </div>
             <div class="restaurant-cart">
-                the cart
+                <div id="cart" class="restaurant-cart-container">
+                    <div class="restaurant-cart-header">
+                        <span><strong>Tu pedido</strong></span>
+                    </div>
+                    <div class="restaurant-cart-allergy">
+                        <svg width="60px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                            <path fill="#125fca" d="M7.7 5a.3.3 0 1 1 .6 0v3.3a.3.3 0 1 1-.6 0V5zm.3 5.7a.7.7 0 1 1 0-1.4.7.7 0 0 1 0 1.4zm-5-8a.3.3 0 0 0-.3.3v10c0 .2.1.3.3.3h10a.3.3 0 0 0 .3-.3V3a.3.3 0 0 0-.3-.3H3zM3 2h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z">
+                            </path>
+                        </svg>
+                        <span>Si tú o alguien para el que estás pidiendo tiene una alergia o intolerancia a algún alimento, haz clic aquí.</span>
+
+                    </div>
+                    <div class="restaurant-cart-delivery-mode">
+                        <div id="home_delivery" v-on:click="setDelivery('home_delivery')" class="delivery-option delivery-option-selected">
+                            <svg width="25px" fill="#125fca" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                <path d="M1.7 6.7a.3.3 0 1 1 0-.7h3.7a1 1 0 0 1 .9.6l1.1 2.3a.3.3 0 1 1-.6.2L5.7 7a.3.3 0 0 0-.3-.2H1.7zm4.2 4a2 2 0 1 1-3.8 0h-.4a.3.3 0 0 1-.4-.4v-.6A3.7 3.7 0 0 1 5 6a.3.3 0 1 1 0 .7 3 3 0 0 0-3 3v.3h6.9l2.4-2.4-2.5-4.3H7.7a.3.3 0 1 1 0-.6H9l.3.1L12 7.5a.3.3 0 0 1-.1.4l-2.7 2.7a.3.3 0 0 1-.2 0H5.9zm-.7 0H2.8a1.3 1.3 0 1 0 2.4 0zm7.5 2.6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0-.6a1.3 1.3 0 1 0 0-2.7 1.3 1.3 0 0 0 0 2.7z">
+                                </path>
+                            </svg>
+                            <span>A domicilio</span>
+                        </div>
+                        <div id="pick_up" v-on:click="setDelivery('pick_up')" class="delivery-option">
+                            <svg width="20px" fill="#125fca" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M8.305 6.667L8.15 8.81a.417.417 0 1 1-.83-.059L7.5 6.22a.417.417 0 0 1 .416-.387h9.166c.219 0 .4.17.416.387l.77 10.775a1.25 1.25 0 0 1-1.25 1.338H8.75a.417.417 0 1 1 0-.833h8.27a.417.417 0 0 0 .417-.446l-.742-10.387h-8.39zm5.862-.834V4.167a1.667 1.667 0 0 0-3.334 0v1.666h3.334zM5.833 10H8.75a.417.417 0 1 1 0 .833h-.466l-.902 7.136a.417.417 0 0 1-.414.364H3.865a.417.417 0 0 1-.413-.364l-.903-7.136h-.466a.417.417 0 1 1 0-.833H5V8.09L3.455 6.544a.417.417 0 0 1 .59-.59L5.71 7.622a.417.417 0 0 1 .122.295V10zm1.611.833H3.389l.843 6.667h2.369l.843-6.667zM12.5 1.667a2.5 2.5 0 0 1 2.5 2.5V6.25c0 .23-.187.417-.417.417h-4.166A.417.417 0 0 1 10 6.25V4.167a2.5 2.5 0 0 1 2.5-2.5z">
+                                </path>
+                            </svg>
+                            <span>Para recoger</span>
+                        </div>
+                    </div>
+                    <div v-if="shopping_cart.products.length > 0" class="restaurant-cart-products">
+                        <div class="cart-item" v-for="product in shopping_cart.products">
+                            <div class="item-product">
+                                <div class="cart-item-quantity"><strong>{{ product.quantity }}</strong></div>
+                                <div class="cart-item-name">{{ product.name }}</div>
+                            </div>
+                            <div class="item-price">
+                                <svg v-on:click="removeProduct(product)" class="item-bin" width="20px" fill="#ff0f0f" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+                                    <path d="M7 7v15.75c0 .966.784 1.75 1.75 1.75h10.5A1.75 1.75 0 0021 22.75V7H7zm2.958-1.167a4.084 4.084 0 018.084 0h5.875a.583.583 0 010 1.167h-1.75v15.75a2.917 2.917 0 01-2.917 2.917H8.75a2.917 2.917 0 01-2.917-2.917V7h-1.75a.583.583 0 010-1.167h5.875zm1.184 0h5.716a2.918 2.918 0 00-5.716 0zm-.642 5.25v9.334a.583.583 0 101.167 0v-9.334a.583.583 0 00-1.167 0zm5.833 0v9.334a.583.583 0 001.167 0v-9.334a.583.583 0 10-1.167 0z">
+                                    </path>
+                                </svg>
+                                <div class="cart-item-price">{{ product.price }} €</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart-prices">
+                        <div v-if="shopping_cart.products.length > 0" class="restaurant-cart-price">
+                            <span><strong>Subtotal</strong></span>
+                            <span><strong>{{ this.shopping_cart.subtotal }} €</strong></span>
+                        </div>
+                        <div v-if="shopping_cart.products.length > 0" class="restaurant-cart-price">
+                            <span>Gastos de envío</span>
+                            <span>{{ this.shopping_cart.shipping }} €</span>
+                        </div>
+                        <div v-if="shopping_cart.products.length > 0" class="restaurant-cart-price">
+                            <span><strong>Total</strong></span>
+                            <span><strong>{{ this.shopping_cart.subtotal + this.shopping_cart.shipping }} €</strong></span>
+                        </div>
+                    </div>
+                    <button :disabled="shopping_cart.subtotal < restaurant.min_order_price" v-if="shopping_cart.products.length > 0" v-on:click="checkoutOrder()" class="btn pay-button"><strong>Pagar</strong></button>
+                </div>
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-  <!--<div>
-    <img :src="'/storage/' + restaurant.photo" class="image" alt="FotoHeather">
-
-    <div class="base-container">
-
-      <div class="heather-container">
-          <div class="row">
-
-              <div class="col-sm-2 h-icon"><img :src="'/storage/' + restaurant.logo" alt="p-and-c" width="70%" height="80%"></div>
-
-              <div class="col-md-5 h-rest">
-                  <div class="row">
-                      <h6>
-                          <a href="mainPage" class="link mx-3">Inicio</a>
-                          <span>></span>
-                          <span><a href="restaurants" class="link mx-2">{{ restaurant.postal_code }} {{ restaurant.city }}</a></span>
-                          <span>></span>
-                          <span><a href="#" class="link mx-2">{{ restaurant.name }}</a></span>
-                      </h6>
-                  </div>
-
-                  <div class="row">
-                      <h4 class="nameRest mx-3">{{ restaurant.name }}</h4>
-                  </div>
-
-                  <div class="restaurant-rating">
-                      <b-form-rating class="restaurant-star-rating" v-model="restaurant.average_rating" stars="6" size="sm" color="#FF8000" inline no-border readonly></b-form-rating>
-                      <a href="#">
-                          <span class="restaurant-num-ratings"><strong>({{restaurant.number_of_ratings}} opiniones)</strong></span>
-                      </a>
-                  </div>
-              </div>
-
-              <div class="col-md-5 h-info">
-                  <div class="row align-items-center">
-                      <div class="col-2">
-                          <i class="fa fa-shopping-bag icons mx-2" aria-hidden="true"></i>
-                      </div>
-                      <div class="col-3">
-                          <span>Para <br>Recoger</span>
-                      </div>
-                      <div class="col-2">
-                          <i class="fa fa-map-marker icons" aria-hidden="true"></i>
-                      </div>
-                      <div class="col-5">
-                          <p>{{ restaurant.address }} </p>
-                      </div>
-                  </div>
-              </div>
-
-          </div>
-      </div>
-
-      <div class="app-row">
-
-          <div class="filters">
-
-              <div class="categories-filter">
-                  <span><strong>Categorías</strong></span>
-              </div>
-
-              <div class="categories-available">
-                  <div v-for="(category) in product_categories" :key=category.id class="category" :id="'category-' + category.id">
-                      <a :href="'#cat-' + category.id" class="link">
-                          <span>{{category.name}}</span>
-                      </a>
-                  </div>
-              </div>
-
-          </div>
-
-          <div class="products-section">
-
-              <div class="categories-filter">
-                  <h3>
-                      <a href="#" class="link"><span><strong>Menu</strong></span></a>
-                      <a href="#" class="link"><span><strong>Opiniones</strong></span></a>
-                      <a href="#" class="link"><span><strong>Info</strong></span></a>
-                  </h3>
-              </div>
-
-              <div class="search-bar" id="boxes">
-                  <i class="fa fa-search search-icon" aria-hidden="true"></i>
-                  <input class="search-input" type="search" name="restaurants-searchbar" placeholder="Buscar un plato en el menú" v-model="search_input" debounce="500">
-
-              </div>
-
-              <div class="products-container">
-
-                  <section class="product-card" v-for="(category) in product_categories" :key=category.id :id="'cat-' + category.id">
-                      <div class="product-text">
-                          <div class="product-name">
-                              <h2>
-                                  <strong>{{category.name}}</strong>
-                                  <span><i class="fa fa-sort-asc product-cat-icon" aria-hidden="true"></i></span>
-                              </h2>
-                          </div>
-                      </div>
-
-                      <section class="product-card-cat" v-for="(product) in category.products" :key=product.id>
-                          <div class="product-text" >
-                              <div class="product-name">
-                                  {{product.name}}
-                                  <p class="description" v-if="!!product.description">{{product.description}}</p>
-                              </div>
-                          </div>
-                          <div class="product-info">
-                              <div class="row">
-                                  <div class="col-1 mr-3">{{ product.price }}€</div>
-                                  <div class="col-1 ml-3"><span><i class="fa fa-plus product-icon" aria-hidden="true" v-on:click="increase(product)"></i></span></div>
-                              </div>
-                          </div>
-                      </section>
-
-                  </section>
-
-              </div>
-          </div>
-          <div class="shopping-cart">
-              <h4><strong>Total del pedido</strong>   0.00€</h4>
-              <div class="card">
-                  <p> <center>Tienes que gastar {{min_amount}}€ o más para pedir a domicilio</center></p>
-                  <button class="btn-block btn-disabled order-confirm-button"> Hacer pedido </button>
-                  <a href="#" class="warning"><center>Si tú o alguien para el que estás pidiendo tiene una alergia o intolerancia a algún alimento, haz clic aquí</center></a>
-                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                      <label class="btn btoggle btn-secondary active">
-                          <input type="radio" name="options" id="option1" autocomplete="off" checked> A domicilio {{rider_tax}}€
-                      </label>
-                      <label class="btn btoggle btn-secondary">
-                          <input type="radio" name="options" id="option2" autocomplete="off"> Para recoger
-                    </label>
-                  </div>
-                  <div class="squared">
-                      <ul>
-                          <li v-for="product in shopping_cart" :id="'shop-0'">
-                            {{product.name}}   {{product.price}}€
-                          </li>
-                      </ul>
-                  </div>
-                  <div class="squared" v-if="shopping_cart.length">
-                      <p>Subtotal   {{total}}€</p>
-                      <p>Gastos de envío  {{rider_tax}}€</p>
-                      <p>Total {{total + rider_tax}}€</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-    </div>
-  </div>-->
 </template>
 
 <script>
@@ -303,15 +204,22 @@
             search_input: "",
             tab_selected: 'menu',
             sidebar_categories_offset: 0,
-            min_amount: 8.00,
-            rider_tax: 1.90,
-            shopping_cart: [],
-            total: 0,
+            cart_offset: 0,
+            cart_width: 0,
+            shopping_cart: {
+                products: [],
+                restaurant_id: null,
+                delivery_mode: 'home_delivery', //pick_up
+                subtotal: 0,
+                shipping: this.restaurant.price_delivery,
+            },
         }
     },
     mounted() {
         this.setCurrentSection();
         this.sidebar_categories_offset = $('#sidebar-categories').offset().top;
+        this.cart_offset = $('#cart').offset().top;
+        this.cart_width = $('#cart').outerWidth();
         window.addEventListener('scroll', this.handleScroll);
     },
     watch: {
@@ -341,6 +249,13 @@
                 $('#sidebar-categories').removeClass('sidebar_categories_fixed');
             }
 
+            if ((this.cart_offset - scrollTop) <= 24) {
+                $('#cart').addClass('cart_fixed');
+                $('#cart').css({'width': this.cart_width});
+            } else {
+                $('#cart').removeClass('cart_fixed');
+            }
+
             this.setCurrentSection();
         },
         setCurrentSection: function() {
@@ -368,10 +283,50 @@
                 }
             }
         },
-        increase: function(product) {
-            this.shopping_cart.push(product);
-            this.total += parseFloat(product.price);
+        setDelivery: function(type) {
+            this.shopping_cart.delivery_mode = type;
+            if (type === 'home_delivery') {
+                $('#home_delivery').addClass('delivery-option-selected');
+                $('#pick_up').removeClass('delivery-option-selected');
+            } else {
+                $('#pick_up').addClass('delivery-option-selected');
+                $('#home_delivery').removeClass('delivery-option-selected');
+            }
         },
+        addProduct: function(product) {
+            if (this.shopping_cart.products.length <= 0) {
+                this.shopping_cart.restaurant_id = this.restaurant.id;
+            }
+
+            if (this.shopping_cart.products.includes(product)) {
+                for (let i = 0; i < this.shopping_cart.products.length; i++) {
+                    if (product.id == this.shopping_cart.products[i].id) {
+                        this.shopping_cart.products[i].quantity += 1;
+                    }
+                }
+            } else {
+                product.quantity = 1;
+                this.shopping_cart.products.push(product);
+            }
+
+            this.shopping_cart.subtotal += parseFloat(product.price);
+        },
+        removeProduct: function(product) {
+            for (let i = 0; i < this.shopping_cart.products.length; i++) {
+                if (product.id == this.shopping_cart.products[i].id) {
+                    this.shopping_cart.products.splice(i, 1);
+                }
+            }
+
+            if (this.shopping_cart.products.length <= 0) {
+                this.shopping_cart.restaurant_id = null;
+            }
+        },
+        checkoutOrder: function() {
+            // Fem alguna comprovació, crida a l'endpoint
+
+            window.location.href = "/order/delivery-address";
+        }
     },
     computed: {
         username: function() {

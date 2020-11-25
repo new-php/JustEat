@@ -221,6 +221,7 @@
                     border-radius: 4px;
                     padding: 16px;
                     border: 1px solid #e2e6e9;
+                    cursor: pointer;
 
                     .restaurant-product-info {
                         width: 70%;
@@ -255,6 +256,142 @@
 
     .restaurant-cart {
         width: 33.33%;
+
+        .restaurant-cart-container {
+            text-align: left;
+            background: #FFF;
+            border: 1px solid #e2e6e9;
+            border-radius: 4px;
+            padding: 24px;
+            position: relative;
+
+            .restaurant-cart-header {
+                font-size: 1.5rem;
+                border-bottom: 1px solid #c5ccd3;
+                padding-bottom: 16px;
+            }
+
+            .restaurant-cart-allergy {
+                width: 100%;
+                display: flex;
+                background-color: #f1f2f4;
+                border-radius: 4px;
+                margin-top: 24px;
+                align-items: center;
+                color: #125fca;
+                padding: 16px;
+                line-height: 1rem;
+                cursor: pointer;
+
+                span {
+                    padding-left: 20px;
+                }
+            }
+
+            .restaurant-cart-allergy:hover {
+                text-decoration: underline;
+            }
+
+            .restaurant-cart-delivery-mode {
+                background-color: #e7f1fe;
+                border-radius: 28px;
+                display: flex;
+                height: 50px;
+                justify-content: space-around;
+                margin: 24px 0 8px;
+                padding: 3px;
+
+                .delivery-option {
+                    align-items: center;
+                    color: #125fca;
+                    display: flex;
+                    font-size: 12px;
+                    font-size: 0.7rem;
+                    line-height: 1.33;
+                    justify-content: center;
+                    transition-property: font-size,padding,width,background-color,border-radius;
+                    transition-duration: 75ms;
+                    width: 50%;
+                    cursor: pointer;
+                }
+
+                .delivery-option-selected {
+                    background-color: #fff;
+                    border-radius: 24px;
+                    font-size: 0.9rem;
+                    line-height: 1.43;
+                    font-weight: 600;
+                    width: 60%;
+                }
+            }
+
+            .restaurant-cart-products {
+                padding: 16px 0;
+                border-bottom: 1px solid #c5ccd3;
+
+                .cart-item {
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 10px 0;
+
+                    .item-product {
+                        display: flex;
+
+                        .cart-item-quantity {
+                            align-items: center;
+                            background-color: #e7f1fe;
+                            border-radius: 2px;
+                            color: #125fca;
+                            display: flex;
+                            height: 24px;
+                            justify-content: center;
+                            margin-right: 8px;
+                            width: 24px;
+                        }
+
+                        .cart-item-name {
+                            color: #125fca;
+                        }
+                    }
+
+                    .item-price {
+                        display: flex;
+                        align-items: center;
+
+                        .item-bin {
+                            cursor: pointer;
+                        }
+
+                        .cart-item-price {
+                            margin-left: 10px;
+                        }
+                    }
+                }
+            }
+
+            .cart-prices {
+                margin-top: 24px;
+
+                .restaurant-cart-price {
+                    display: flex;
+                    justify-content: space-between;
+                    padding-bottom: 16px;
+                }
+            }
+
+            .pay-button {
+                width: 100%;
+                background-color: #ff8000;
+                color: #FFF;
+                padding: 12px;
+                font-size: 1.1rem;
+            }
+        }
+
+        .cart_fixed {
+            position: fixed;
+            top: 20px;
+        }
     }
 }
 
