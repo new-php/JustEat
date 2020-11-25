@@ -43,10 +43,12 @@ class RestaurantsViewController extends Controller
         $restaurant->number_of_ratings = $restaurant->ratings->count();
         $restaurant->price_delivery = round($restaurant->deliveryZones->avg('delivery_price'), 2);
         $restaurant->min_order_price = round($restaurant->deliveryZones->avg('min_order_price'), 2);
+        $restaurant->min_delivery_time = $restaurant->deliveryZones->min('delivery_time');
+        $restaurant->max_delivery_time = $restaurant->deliveryZones->max('delivery_time');
 
-        $restaurant->load('categories', 'products', 'products.productCategories', 'deliveryZones', 'schedules');
+        $restaurant->load('categories', 'productCategories', 'productCategories.products', 'deliveryZones', 'schedules');
 
-        return view('restaurants.restaurant-page', ['restaurant' => $restaurant, 'product_categories' => $restaurant->productCategories->load('products')]);
+        return view('restaurants.restaurant-page', ['restaurant' => $restaurant]);
     }
 }
 

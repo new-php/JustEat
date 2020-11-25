@@ -1,0 +1,525 @@
+.restaurant-breadcrumb {
+    position: absolute;
+    max-width: 1272px;
+    margin: 0 auto;
+    z-index: 1;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    display: flex;
+    padding: 0;
+    align-items: center;
+
+    a {
+        color: white;
+        padding: 0 18px;
+        font-size: 1rem;
+    }
+
+    span {
+        color: white;
+        padding: 0 18px;
+        font-size: 1rem;
+    }
+
+    i {
+        font-size: 1.2rem;
+    }
+}
+
+.restaurant-image-section {
+    position: relative;
+    margin-bottom: -36px;
+
+    background-size: cover;
+    background-position-x: 50%;
+    overflow: hidden;
+
+    .restaurant-image-photo {
+        position: relative;
+        height: 420px;
+        z-index: 0;
+
+        .image-background {
+            width: 100%;
+            height: 100%;
+
+            background-size: cover;
+            background-position-x: 50%;
+            overflow: hidden;
+        }
+    }
+}
+
+.restaurant-full-info {
+    max-width: 1272px;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    padding: 2% 32px;
+    display: flex;
+    z-index: 1;
+    top: -110px;
+    color: #2a3846;
+
+    .restaurant-product-categories {
+        width: 16.67%;
+        margin-top: 170px;
+
+        .sidebar_categories_fixed {
+            position: fixed;
+            top: 50px;
+        }
+
+        .category-item {
+            font-size: 1rem;
+
+            .category-item-link {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                border-left: 1px solid #c5ccd3;
+                color: #2a3846;
+                display: block;
+                padding: 8px 16px;
+                text-decoration: none;
+            }
+
+            .category-item-link-active {
+                border-left: 2px solid #5e6b77;
+                font-weight: bold;
+                margin-left: -1px;
+            }
+        }
+    }
+
+    .restaurant-menu {
+        width: 50%;
+
+        .restaurant-info-container {
+            text-align: center;
+            background: #FFF;
+            border: 1px solid #e2e6e9;
+            border-radius: 4px;
+            padding: 16px;
+            position: relative;
+
+            .restaurant-basic-info {
+
+                img {
+                    width: 65px;
+                    position: relative;
+                    top: -60px;
+                    border: 1px solid #c5ccd3;
+                    border-radius: 2px;
+                }
+
+
+                .restaurant-info {
+                    top: -40px;
+                    position: relative;
+
+                    .restaurant-info-name {
+                        font-size: 2rem;
+                    }
+
+                    .restaurant-info-categories {
+                        margin-top: 10px;
+                        font-size: 1rem;
+
+                        span {
+                            padding: 8px;
+                        }
+                    }
+
+                    .restaurant-info-rating {
+                        margin-top: 5px;
+
+                        .restaurant-star-rating {
+
+                            .b-rating-star {
+                                padding: 0 1px;
+                                font-size: 0.9rem;
+                            }
+                        }
+
+                        .form-control:focus {
+                            border-color: inherit !important;
+                            box-shadow: inherit !important;
+                        }
+
+                        a {
+                            color: #125fca;
+                        }
+
+                    }
+
+                    .restaurant-info-address {
+                        margin-top: 15px;
+                    }
+                }
+            }
+
+            .restaurant-delivery-info {
+                max-width: 323px;
+                margin: 16px auto;
+                background-color: #f1f2f4;
+                box-shadow: 0 1px 2px #e2e6e9;
+
+                .restaurant-delivery-row {
+                    border-bottom: 1px solid #e2e6e9;
+                    display: flex;
+                    flex-wrap: nowrap;
+                    justify-content: space-between;
+                    min-height: 45px;
+                    padding: 14px 16px 0;
+                }
+            }
+        }
+
+        .restaurant-tabs {
+            text-align: center;
+            background: #FFF;
+            border: 1px solid #e2e6e9;
+            border-radius: 4px;
+            position: relative;
+            display: flex;
+            margin: 16px 0;
+
+            .restaurant-tab {
+                width: 50%;
+                padding: 16px;
+                cursor: pointer;
+                font-size: 1rem;
+            }
+
+            .restaurant-tab:hover {
+                font-weight: bold;
+                border-bottom: 2px solid #ff8000;
+            }
+
+            .restaurant-tab-selected {
+                font-weight: bold;
+                border-bottom: 2px solid #ff8000;
+            }
+        }
+
+        .restaurant-products-container {
+            margin: 30px 0;
+
+            .restaurant-products-category {
+                margin: 16px 0;
+
+                .restaurant-category-name {
+                    font-size: 1.5rem;
+                }
+
+                .restaurant-product-item {
+                    background: #FFF;
+                    display: flex;
+                    margin-bottom: 8px;
+                    border-radius: 4px;
+                    padding: 16px;
+                    border: 1px solid #e2e6e9;
+
+                    .restaurant-product-info {
+                        width: 70%;
+                        word-break: break-word;
+
+                        .product-name {
+                            font-size: 1.2rem;
+                        }
+                        .product-description {
+                            font-size: 1rem;
+                        }
+                        .product-price {
+                            font-size: 1rem;
+                            color: #125fca;
+                        }
+                    }
+
+                    .restaurant-product-image-container {
+                        width: 30%;
+                        text-align: end;
+                        border: 1px solid #c5ccd3;
+                        border-radius: 1px;
+
+                        img {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .restaurant-cart {
+        width: 33.33%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.image{
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+}
+
+.base-container {
+    width: 100%;
+    max-width: 1272px;
+    position: relative;
+    margin: 0 auto;
+    padding: 2%;
+
+    .heather-container{
+        margin-bottom: 2.5%;
+
+        .h-rest{
+
+            .link{
+                color: black;
+                margin-right: 5%;
+            }
+
+            .nameRest{
+                opacity: 50%;
+            }
+
+            .restaurant-rating {
+                border: none;
+
+                .restaurant-star-rating {
+                    padding: 0;
+                    height: auto;
+                }
+
+                .restaurant-num-ratings {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+
+        .h-info{
+
+            .icons{
+                font-size: 3rem;
+                padding: 8% 1.5%;
+            }
+        }
+
+
+    }
+
+    .app-row {
+        display: flex;
+        flex-wrap: wrap;
+
+        .filters {
+            font-size: 1rem;
+            width: 20%;
+            padding-right: 1.5%;
+            line-height: 1.43;
+
+            .categories-filter {
+                margin-right: 5%;
+
+            }
+
+            .categories-available {
+                font-size: 0.85rem;
+
+                .category {
+                    background: #FFF;
+                    padding: 3%;
+                    border-radius: 0;
+                    border: 0 solid #e2e6e9;
+                    margin: 0% 0;
+                    cursor: pointer;
+
+                    .link{
+                        color: black;
+                    }
+
+                }
+
+                .category:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .products-section {
+            width: 53.8%;
+
+            .categories-filter {
+                margin-bottom: 3%;
+
+                .link{
+                    color: black;
+                    margin-right: 5%;
+                }
+
+            }
+
+            .search-bar {
+                box-shadow: 0 2px 5px 1px rgba(0,0,0,.1);
+                margin-bottom: 2.5%;
+                width: 95%;
+
+                .search-icon {
+                    position: absolute;
+                    color: #125FCA;
+                    font-size: 1rem;
+                    padding: 0.5% 0.8%;
+                }
+
+                .search-input {
+                    width: 100%;
+                    padding: 0.5% 5%;
+                    background: #fff;
+                    border-radius: 4px;
+                    border: 0;
+                    outline: 0;
+                    font-size: 1rem;
+                    color: #2A3846;
+                }
+
+                .search-input:focus {
+                    outline: 2px solid #125FCA;
+                }
+            }
+
+            .products-container {
+                border-radius: 4px;
+                padding: 2.5%;
+                background: #FFF;
+
+                .product-card {
+                    box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
+                    border-top: 0.5px solid;
+                    border-bottom: 0.5px solid;
+                    border-top-color: rgba(145, 142, 142, .6);
+                    border-bottom-color: rgba(145, 142, 142, .6);
+                    background: #FFF;
+                    margin-top: 0.5%;
+                    position: relative;
+                    display: block;
+                    padding: 0.5%;
+                    cursor: pointer;
+
+                    .product-text {
+                        position: relative;
+                        left: 1%;
+                        width: 100%;
+                        padding-left: 0.5%;
+                        padding-top: 1%;
+                        display: inline-block;
+
+                        .product-name {
+                            font-size: 1.1rem;
+                        }
+
+                    }
+
+                    .product-icon {
+                        margin-top: 8%;
+                        margin-left: 5%;
+                    }
+
+                    .product-cat-icon {
+                        position: absolute;
+                        right: 30px;
+                    }
+                }
+
+                .product-card-cat {
+                    border-bottom: 0.5px;
+                    border-bottom-style: dotted;
+                    border-color: rgb(211, 205, 205);
+                    background: #FFF;
+                    margin: 0.5% 0;
+                    display: flex;
+                    padding: 0.5%;
+                    cursor: pointer;
+
+                    .description{
+                        font-size: small;
+                        opacity: 50%;
+                    }
+                }
+
+                .product-info {
+                    width: 20%;
+                    padding: 0.5%;
+                    margin-right: 1%;
+                    margin-left: 1%;
+                    font-size: 0.9rem;
+                    position: absolute;
+                    right: 10px;
+                }
+
+                .product:hover {
+                    font-weight: bold;
+                }
+            }
+        }
+
+
+        .shopping-cart {
+            width: 22.5%;
+            float: right;
+
+            .order-confirm-button {
+                width: 90%;
+                margin-left: auto;
+                margin-right: auto;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .btoggle {
+                background-color: gainsboro;
+                color: black;
+            }
+
+            .btoggle:active, .btoggle:focus {
+                background-color: white;
+                color: orange;
+            }
+
+            .warning {
+                color: blue;
+                text-decoration: underline;
+                margin-left: 10px;
+                margin-right: 10px;
+                padding-top: 10px;
+            }
+        }
+    }
+}
+
+#boxes{
+    content: "";
+    display: table;
+    clear: left;
+}
+
+.squared{
+    border-top: 1px solid gainsboro;
+}
+*/
