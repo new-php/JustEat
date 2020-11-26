@@ -325,8 +325,22 @@
         },
         checkoutOrder: function() {
             // Fem alguna comprovació, crida a l'endpoint
-
-            window.location.href = "/order/delivery-address";
+            window.axios.post('/order',
+                {
+                    restaurant_id: this.shopping_cart.restaurant_id,
+                    products: this.shopping_cart.products,
+                    delivery_mode: this.shopping_cart.delivery_mode,
+                },
+                {
+                    'Accept': 'application/json',
+                })
+                .then(response => {
+                    let order_id = response.data.id;
+                    window.location.href = '/order/' + order_id + '/delivery-address';
+                })
+                .catch((error) => {
+                    $('#form-errors').addClass("form-errors-active");
+                });
         }
     },
     computed: {
