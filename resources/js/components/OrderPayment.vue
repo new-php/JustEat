@@ -27,7 +27,7 @@
                                 <button class="btn coupon-button" v-on:click="apply_coupon">Aplicar</button>
                             </div>
                         </div>
-                        <button class="btn pay-button" v-on:click="pay">Hacer mi pedido</button>
+                        <button class="btn pay-button" v-on:click="pay" id="user-payment">Hacer mi pedido</button>
                     </div>
                 </div>
                 <div class="payment-type payment-type-bottom-line" id="payment-type-new">
@@ -103,7 +103,7 @@
                                 <button class="btn coupon-button" v-on:click="apply_coupon">Aplicar</button>
                             </div>
                         </div>
-                        <button class="btn pay-button" v-on:click="pay">Hacer mi pedido</button>
+                        <button class="btn pay-button" v-on:click="pay" id="new-payment">Hacer mi pedido</button>
                     </div>
                 </div>
                 <div class="payment-type payment-type-bottom-line" id="payment-type-paypal">
@@ -130,7 +130,7 @@
                                 <button class="btn coupon-button" v-on:click="apply_coupon">Aplicar</button>
                             </div>
                         </div>
-                        <button class="btn pay-button" v-on:click="pay">Hacer mi pedido</button>
+                        <button class="btn pay-button" v-on:click="pay" id="paypal-payment">Hacer mi pedido</button>
                     </div>
                 </div>
                 <div class="payment-type" id="payment-type-cash">
@@ -144,7 +144,7 @@
                         <i id="angle" class="payment-angle fa fa-angle-down" aria-hidden="true"></i>
                     </div>
                     <div class="payment-type-body" id="payment-body">
-                        <button class="btn pay-button" v-on:click="pay">Hacer mi pedido</button>
+                        <button class="btn pay-button" v-on:click="pay" id="cash-payment">Hacer mi pedido</button>
                     </div>
                 </div>
             </div>
@@ -190,6 +190,9 @@ export default {
     name: "PaymentMethod",
     data() {
         return {
+            order: {
+                id: 1
+            },
             address: "Plaça de Tetuán, s/n, bajo 2",
             restaurant: "Viva la burger",
             delivery: "Lo antes posible",
@@ -250,7 +253,25 @@ export default {
         },
         pay: function(evt) {
             evt.preventDefault();
-            window.location.href = "/";
+            var payed= true;
+            if(evt.currentTarget.id == "cash-payment"){
+                payed = false;
+            }
+            window.axios.put('/order/'+this.order.id+'/payment',
+                {
+                    payed: payed,
+                },
+                {
+                    'Accept': 'application/json',
+                }
+            )
+            .then(response => {
+                window.location.href = '/';
+            })
+            .catch((error) => {
+                //window.localStorage.removeItem('auth_token')
+                //Si es un error 401, es que el usuario no esta autentificado y entonces borramos el authtoken.
+            });
         },
         subtotal: function() {
             var subtotal = 0;
