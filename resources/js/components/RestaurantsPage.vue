@@ -268,7 +268,7 @@
             this.restaurants_showing = this.restaurants_filtered_by_categories.filter(value => this.restaurants_filtered_by_bar.includes(value))
         },
         goToRestaurant(restaurant) {
-            window.location.href = "restaurants/" + restaurant.id;
+            window.location.href = "/restaurants/" + restaurant.id;
         },
     },
   };
