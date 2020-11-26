@@ -121,7 +121,7 @@
               <h4><strong>Total del pedido</strong>   0.00€</h4>
               <div class="card">
                   <p> <center>Tienes que gastar {{min_amount}}€ o más para pedir a domicilio</center></p>
-                  <button class="btn-block btn-disabled order-confirm-button"> Hacer pedido </button>
+                  <button class="btn-block btn-disabled order-confirm-button" v-on:click="order()"> Hacer pedido </button>
                   <a href="#" class="warning"><center>Si tú o alguien para el que estás pidiendo tiene una alergia o intolerancia a algún alimento, haz clic aquí</center></a>
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
                       <label class="btn btoggle btn-secondary active">
@@ -132,9 +132,10 @@
                     </label>
                   </div>
                   <div class="squared">
-                      <ul>
-                          <li v-for="product in shopping_cart" :id="'shop-0'">
-                            {{product.name}}   {{product.price}}€
+                      <ul class="order-list">
+                          <li v-for="element in shopping_cart" :id="'shop-0'">
+                            <button class="fa fa-minus product-icon" aria-hidden="true" v-on:click="decrease(element._product)"></button>
+                            <span>{{element.quantity}} x {{element._product.name}}   {{element._product.price}}€</span>
                           </li>
                       </ul>
                   </div>
@@ -165,6 +166,7 @@
             rider_tax: 1.90,
             shopping_cart: [],
             total: 0,
+            products: [],
         }
     },
     mounted() {
@@ -176,10 +178,73 @@
         }
     },
     methods: {
-        increase: function(product) {
-            this.shopping_cart.push(product);
-            this.total += parseFloat(product.price);
+      increase: function(product) {
+        if(!this.shopping_cart.length <= 0){
+          var found = false;
+          for(let i = this.shopping_cart.length-1; i >= 0; i--){
+            if(this.shopping_cart[i]._product.name == product.name){
+              this.shopping_cart[i].quantity += 1;
+              i = 0;
+              found = true;
+            }
+          }
+          if(!found){
+            this.shopping_cart.push(
+              {
+                quantity: +1,
+                _product: product,
+              });
+          }
+        }else{
+          this.shopping_cart.push(
+              {
+                quantity: +1,
+                _product: product,
+              });
         }
+        this.total += parseFloat(product.price);
+      },
+      decrease(product){
+        if(!this.shopping_cart.length <= 0){
+          var found = false;
+          for(let i = this.shopping_cart.length-1; i >= 0; i--){
+            if(this.shopping_cart[i]._product.name == product.name){
+              if(this.shopping_cart[i].quantity == 1){
+                this.shopping_cart.splice(i,1);
+              }else{
+                this.shopping_cart[i].quantity -= 1;
+              }
+            }
+          }
+        }
+      },
+      order(){
+        if(this.shopping_cart.length > 0){
+          for(let i = this.shopping_cart.length-1; i >=0; i--){
+            this.products.push(
+              {
+                quantity: this.shopping_cart[i].quantity,
+                id: this.shopping_cart[i]._product.id,
+                price: this.shopping_cart[i]._product.price,
+              });
+          }
+          window.axios.post('order',
+            {
+              restaurant_id: this.restaurant.id,
+              details: "",
+              products: this.products,
+            },
+            {
+              'Accept': 'application/json',
+            }
+            ).then(response => {
+                window.location.href = '/order/delivery-address';
+              }
+            ).catch((error) => {
+              $('#form-errors').addClass("form-errors-active");
+          });
+        }
+      },
     },
   };
 </script>
