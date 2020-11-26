@@ -314,6 +314,7 @@
         removeProduct: function(product) {
             for (let i = 0; i < this.shopping_cart.products.length; i++) {
                 if (product.id == this.shopping_cart.products[i].id) {
+                    this.shopping_cart.subtotal -= parseFloat(this.shopping_cart.products[i].price) * parseInt(this.shopping_cart.products[i].quantity)
                     this.shopping_cart.products.splice(i, 1);
                 }
             }
