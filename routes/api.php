@@ -32,10 +32,10 @@ Route::prefix(config('api.version'))->group(function () {
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 
-	Route::get('restaurants', 'RestaurantController@index');
+    Route::get('restaurants', 'RestaurantController@index');
 
     Route::middleware('auth:api')->group(function() {
-
+        Route::post('order', 'OrderController@store')->name('order.new');        
         Route::get('user', 'UserController@show')->name('user');
     });
 });
