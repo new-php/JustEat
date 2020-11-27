@@ -61,7 +61,7 @@
         <div class="app-section pt-4">
             <div class="row">
                 <div>
-                    <span dusk="searchBetterRest" class="best-restaurants"><strong>Los mejores restaurantes</strong></span>
+                    <span class="best-restaurants"><strong>Los mejores restaurantes</strong></span>
                 </div>
             </div>
             <div class="row">

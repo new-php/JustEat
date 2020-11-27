@@ -9,7 +9,7 @@ use Tests\Browser\Pages\MainPage;
 
 class MainPageTest extends DuskTestCase
 {
-    
+
     use DatabaseMigrations;
 
 
@@ -24,10 +24,11 @@ class MainPageTest extends DuskTestCase
             $browser->visit(new mainPage)
                     ->assertSee('Pide lo que te pida el cuerpo')
                     ->assertSee('Comida a domicilio online cerca de ti')
-                    ->type('@address', 'Carrer del Congrés, Barcelona, España')
+                    ->type('@address', 'Carrer del Congrés Barcelona')
                     ->press('@searchRest')
-                    ->refresh()
-                    ->assertPathIs('/restaurants?address=Carrer del Congrés, 08031 Barcelona, España&zip=08031');
+                    /*->keys('#autocomplete', ['{ARROW_DOWN}']) // Testeig integració google places
+                    ->keys('#autocomplete', ['{ENTER}'])
+                    ->assertPathIs('/restaurants?address=' . urlencode('Carrer del Congrés, 08031 Barcelona, España') . '&zip=08031');*/
         });
     }
 
@@ -59,7 +60,7 @@ class MainPageTest extends DuskTestCase
             $browser->visit(new mainPage)
                     ->assertSee('Los mejores restaurantes')
                     ->assertSee('Pide comida a domicilio, o para recoger, en la mejor selección de restaurantes de España.')
-                    ->press('#searchBetterRest')
+                    ->clickLink('Encontrar un restaurante')
                     ->assertPathIs('/');
         });
     }
@@ -142,7 +143,6 @@ class MainPageTest extends DuskTestCase
                     ->assertSee('Pide lo que te pida el cuerpo')
                     ->assertSee('Comida a domicilio online cerca de ti')
                     ->clickLink('Para ti');
-                    //->assertPathIs('#');
         });
     }
 
@@ -158,24 +158,6 @@ class MainPageTest extends DuskTestCase
                     ->assertSee('Pide lo que te pida el cuerpo')
                     ->assertSee('Comida a domicilio online cerca de ti')
                     ->clickLink('Ayuda');
-                    //->assertPathIs('#');
         });
     }
-
-    /**
-     * photos
-     * @group mainPage
-     * @return void
-     */
-    public function testPhotos()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit(new mainPage)
-                ->attach('photo', storage_path('app/public/images/main-page-background.jpg'))
-                ->attach('photo', storage_path('app/public/images/main-page-screen.png'))
-                ->attach('photo', storage_path('app/public/images/mobile-app.png'));
-        });
-    }
-
-    
 }
