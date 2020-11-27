@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4d8c1ba88628d935223ba26342389a6e",
+    "content-hash": "e62f08fcccc0660f165ecad4956447d3",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6873,16 +6873,16 @@
         },
         {
             "name": "laravel/dusk",
-            "version": "v6.8.1",
+            "version": "v6.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/dusk.git",
-                "reference": "7c8f8b8b720cb455abc0ee1f018c996344ecb87e"
+                "reference": "13b22f13f4f18f9524e523ec5f06bbb3b2b3fdd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/dusk/zipball/7c8f8b8b720cb455abc0ee1f018c996344ecb87e",
-                "reference": "7c8f8b8b720cb455abc0ee1f018c996344ecb87e",
+                "url": "https://api.github.com/repos/laravel/dusk/zipball/13b22f13f4f18f9524e523ec5f06bbb3b2b3fdd9",
+                "reference": "13b22f13f4f18f9524e523ec5f06bbb3b2b3fdd9",
                 "shasum": ""
             },
             "require": {
@@ -6891,8 +6891,8 @@
                 "illuminate/console": "^6.0|^7.0|^8.0",
                 "illuminate/support": "^6.0|^7.0|^8.0",
                 "nesbot/carbon": "^2.0",
-                "php": "^7.2",
-                "php-webdriver/webdriver": "^1.8.1",
+                "php": "^7.2|^8.0",
+                "php-webdriver/webdriver": "^1.9.0",
                 "symfony/console": "^4.3|^5.0",
                 "symfony/finder": "^4.3|^5.0",
                 "symfony/process": "^4.3|^5.0",
@@ -6937,7 +6937,7 @@
                 "testing",
                 "webdriver"
             ],
-            "time": "2020-11-17T16:06:04+00:00"
+            "time": "2020-11-24T16:48:27+00:00"
         },
         {
             "name": "mockery/mockery",

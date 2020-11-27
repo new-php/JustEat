@@ -52,8 +52,8 @@
                     <h5 class="title2">Comida a domicilio online cerca de ti</h5>
 
                     <div class="row justify-content-center my-4">
-                        <input id="autocomplete" class="form-control fdir" placeholder="Enter your address" type="text"></input>
-                        <button class="btn btn-default btndir" type="button" v-on:click="search()"><strong>Buscar restaurantes</strong></button>
+                        <input name="address" id="autocomplete" class="form-control fdir" placeholder="Enter your address" type="text"> </input>
+                        <button dusk="searchRest" class="btn btn-default btndir" type="button" v-on:click="search()"><strong>Buscar restaurantes</strong></button>
                     </div>
                 </div>
             </div>
