@@ -65,6 +65,22 @@ class OrderController extends Controller
         return response()->json($order, 201);
     }
 
+    public function addAddress(Request $request, $id) {
+        $user = Auth::user();
+
+        $validator = $request->validate([
+            'address_id' => 'required|integer',
+            'details' => 'nullable|string',
+            'delivery_mode' => 'required|string'
+        ]);
+
+        $order = Order::findOrFail($id);
+        $order->update($request->all());
+        $order->update(['status' => 'ADDRESSED']);
+    
+        return response()->json($order, 200);
+    }
+
     /**
      * Display the specified resource.
      *
