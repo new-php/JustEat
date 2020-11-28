@@ -13,7 +13,7 @@ class GetUserTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Get Existing User
+     * Get Existing User while being auth'd
      *
      * @return void
      */
@@ -46,6 +46,11 @@ class GetUserTest extends TestCase
         $this->assertEquals($getResponse['data']['id'], $user['id']);
     }
 
+    /**
+     * Get current user without logging in, expecting redirection
+     * 
+     * @return void
+     */
     public function testGetUserWithNoUserLogged()
     {
         $getResponse = $this->get('/api/v1/user/');
