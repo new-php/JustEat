@@ -25,7 +25,7 @@ class MainPageTest extends DuskTestCase
                     ->assertSee('Pide lo que te pida el cuerpo')
                     ->assertSee('Comida a domicilio online cerca de ti')
                     ->type('@address', 'Carrer del Congrés Barcelona')
-                    ->press('@searchRest')
+                    ->press('@searchRest');
                     /*->keys('#autocomplete', ['{ARROW_DOWN}']) // Testeig integració google places
                     ->keys('#autocomplete', ['{ENTER}'])
                     ->assertPathIs('/restaurants?address=' . urlencode('Carrer del Congrés, 08031 Barcelona, España') . '&zip=08031');*/
