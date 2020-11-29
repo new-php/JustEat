@@ -37,6 +37,10 @@ Route::prefix(config('api.version'))->group(function () {
     Route::middleware('auth:api')->group(function() {
         Route::post('order', 'OrderController@store')->name('order.new');        
         Route::put('order/{id}/address', 'OrderController@addAddress')->name('order.address');
+<<<<<<< HEAD
+=======
+        Route::put('order/{id}/pay', 'OrderController@pay')->name('order.pay');
+>>>>>>> US-B11-Task11_Endpoint_pagament_order
         Route::get('user', 'UserController@show')->name('user');
     });
 });
