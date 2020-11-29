@@ -92,6 +92,15 @@ class OrderController extends Controller
         return response()->json($order, 200);
     }
 
+    public function pay(Request $request, $id) {
+        $user = Auth::user();
+
+        $order = Order::findOrFail($id);
+        $order->update(['status' => 'PAID - PROCESSING FOR DELIVERY']);
+    
+        return response()->json($order, 200);
+    }
+
     /**
      * Display the specified resource.
      *
