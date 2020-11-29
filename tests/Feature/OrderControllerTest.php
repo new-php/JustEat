@@ -212,4 +212,110 @@ class GetUserTest extends TestCase
 
         $response->assertStatus(401);
     }
+
+    /**
+     * Test adding delivery method
+     * 
+     * @return void
+     */
+    public function testDeliveryOk()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create();
+       
+        $response = $this->put('/api/v1/order/' . $order->id . '/delivery', [
+            'delivery_mode' => 'mock_delivery',
+            'details' => 'not_null_details',
+        ], [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(200);
+        $this->assertEquals("TIMED", json_decode($response->content())->status);
+        $this->assertEquals("mock_delivery", json_decode($response->content())->delivery_mode);
+        $this->assertEquals("not_null_details", json_decode($response->content())->details);
+    }
+
+    /**
+     * Test adding delivery method without details, should be ok
+     * 
+     * @return void
+     */
+    public function testDeliveryNoDetailsOk()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create();
+       
+        $response = $this->put('/api/v1/order/' . $order->id . '/delivery', [
+            'delivery_mode' => 'mock_delivery',
+        ], [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(200);
+        $this->assertEquals("TIMED", json_decode($response->content())->status);
+        $this->assertEquals("mock_delivery", json_decode($response->content())->delivery_mode);
+    }
+
+    /**
+     * Test adding delivery method without delivery_mode, should fail
+     * 
+     * @return void
+     */
+    public function testDeliveryNoModeFailk()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create();
+       
+        $response = $this->put('/api/v1/order/' . $order->id . '/delivery', [
+            'details' => 'not_null_details',
+        ], [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(422);
+    }
+    
+    /**
+     * Test adding delivery method with no auth, should fail
+     * 
+     * @return void
+     */
+    public function testDeliveryWithNoAuth()
+    {
+        $order = Order::factory()->create();
+       
+        $response = $this->put('/api/v1/order/' . $order->id . '/delivery', [
+            'delivery_mode' => 'mock_delivery',
+            'details' => 'not_null_details',
+        ], [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(401);
+    }    
 }

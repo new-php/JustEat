@@ -88,6 +88,7 @@ class OrderController extends Controller
 
         $validator = $request->validate([
             'details' => 'nullable|string',
+            'delivery_mode' => 'required|string'
         ]);
 
         $order = Order::findOrFail($id);
