@@ -38,6 +38,7 @@ Route::prefix(config('api.version'))->group(function () {
         Route::post('order', 'OrderController@store')->name('order.new');        
         Route::put('order/{id}/address', 'OrderController@addAddress')->name('order.address');
         Route::put('order/{id}/pay', 'OrderController@pay')->name('order.pay');
+        Route::put('order/{id}/delivery', 'OrderController@addDeliveryTime')->name('order.deliverytime');
         Route::get('user', 'UserController@show')->name('user');
     });
 });

@@ -31,7 +31,6 @@ class OrderController extends Controller
         
         $validator = $request->validate([
             'restaurant_id' => 'required|integer',
-            'details' => 'nullable|string',
             'products' => 'required|array|min:1',
             'products.*.id' => 'required|integer',
             'products.*.quantity' => 'required|numeric|min:0',
@@ -48,7 +47,6 @@ class OrderController extends Controller
         $order = Order::create([
             'user_id' => $user,
             'restaurant_id' => $request->restaurant_id,
-            'details' => $request->details,
             'total' => $total,
             'status' => $status,
         ]);
@@ -69,14 +67,27 @@ class OrderController extends Controller
         $user = Auth::user();
 
         $validator = $request->validate([
-            'address_id' => 'required|integer',
+            'address_id' => 'required|integer'
+        ]);
+
+        $order = Order::findOrFail($id);
+        $order->update($request->all());
+        $order->update(['status' => 'ADDRESSED']);
+    
+        return response()->json($order, 200);
+    }
+
+    public function addDeliveryTime(Request $request, $id) {
+        $user = Auth::user();
+
+        $validator = $request->validate([
             'details' => 'nullable|string',
             'delivery_mode' => 'required|string'
         ]);
 
         $order = Order::findOrFail($id);
         $order->update($request->all());
-        $order->update(['status' => 'ADDRESSED']);
+        $order->update(['status' => 'TIMED']);
     
         return response()->json($order, 200);
     }
