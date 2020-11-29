@@ -36,7 +36,7 @@ Route::prefix(config('api.version'))->group(function () {
 
     Route::middleware('auth:api')->group(function() {
         Route::post('order', 'OrderController@store')->name('order.new');        
-        Route::put('order', 'OrderController@addAddress')->name('order.address');
+        Route::put('order/{id}/address', 'OrderController@addAddress')->name('order.address');
         Route::get('user', 'UserController@show')->name('user');
     });
 });
