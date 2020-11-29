@@ -274,6 +274,33 @@ class GetUserTest extends TestCase
     }
 
     /**
+     * Test adding delivery method wrong orderId, should fail
+     * 
+     * @return void
+     */
+    public function testDeliveryWrongId()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create();
+       
+        $response = $this->put('/api/v1/order/200/delivery', [
+            'delivery_mode' => 'mock_delivery',
+        ], [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(404);
+    }
+
+    /**
      * Test adding delivery method without delivery_mode, should fail
      * 
      * @return void
@@ -317,5 +344,72 @@ class GetUserTest extends TestCase
         ]);
 
         $response->assertStatus(401);
-    }    
+    }   
+
+    /**
+     * Test paying method
+     * 
+     * @return void
+     */
+    public function testPayOk()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create();
+       
+        $response = $this->put('/api/v1/order/' . $order->id . '/pay', [], [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(200);
+        $this->assertEquals("PAID - PROCESSING FOR DELIVERY", json_decode($response->content())->status);
+    }
+
+    /**
+     * Test paying method wrong id, should fail
+     * 
+     * @return void
+     */
+    public function testPayWrongId()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create();
+       
+        $response = $this->put('/api/v1/order/300/pay', [], [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(404);
+    }
+
+    /**
+     * Test paying method with no auth, should fail
+     * 
+     * @return void
+     */
+    public function testPayWithNoAuth()
+    {
+        $order = Order::factory()->create();
+       
+        $response = $this->put('/api/v1/order/' . $order->id . '/pay', [], [
+            'Accept' => 'application/json',
+        ]);
+        
+        $response->assertStatus(401);
+    }
 }
