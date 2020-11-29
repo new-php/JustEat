@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\OrderItem;
 
@@ -28,6 +29,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
+        $userId = Auth::id();
         
         $validator = $request->validate([
             'restaurant_id' => 'required|integer',
@@ -45,22 +47,26 @@ class OrderController extends Controller
         };
 
         $order = Order::create([
-            'user_id' => $user,
+            'user_id' => $userId,
             'restaurant_id' => $request->restaurant_id,
             'total' => $total,
             'status' => $status,
         ]);
 
+        $products = array();
+
         foreach ($request->products as $product) {
-            OrderItem::create([
+            $order_item = OrderItem::create([
                 'order_id' => $order->id,
-                'product_id' => $product->id,
-                'price' => $product->price,
-                'quantity' => $product->quantity
+                'product_id' => $product['id'],
+                'price' => $product['price'],
+                'quantity' => $product['quantity']
             ]);
+
+            array_push($products, $order_item);
         };
 
-        return response()->json($order, 201);
+        return response()->json(array('order' => $order, 'products' => $products), 201);
     }
 
     public function addAddress(Request $request, $id) {
