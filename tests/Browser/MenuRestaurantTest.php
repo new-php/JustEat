@@ -18,7 +18,7 @@ class MenuRestaurantTest extends DuskTestCase
 
     /**
      * A Dusk test example.
-     *@group menuRestPage
+     * @group menuRestPage
      * @return void
      */
     public function testLinkInicio()
@@ -37,7 +37,7 @@ class MenuRestaurantTest extends DuskTestCase
 
     /**
      * A Dusk test example.
-     *@group menuRestPage
+     * @group menuRestPage
      * @return void
      */
     public function testLinkRestaurants()
@@ -56,7 +56,7 @@ class MenuRestaurantTest extends DuskTestCase
 
     /**
      * A Dusk test example.
-     *@group menuRestPage
+     * @group menuRestPage
      * @return void
      */
     public function testInfoRestaurant()
@@ -96,7 +96,7 @@ class MenuRestaurantTest extends DuskTestCase
 
     /**
      * A Dusk test example.
-     *@group menuRestPage
+     * @group menuRestPage
      * @return void
      */
     public function testOptionPages()
@@ -115,7 +115,7 @@ class MenuRestaurantTest extends DuskTestCase
 
     /**
      * A Dusk test example.
-     *@group menuRestPage
+     * @group menuRestPage
      * @return void
      */
     public function testProduct()
@@ -150,7 +150,7 @@ class MenuRestaurantTest extends DuskTestCase
     
     /**
      * A Dusk test example.
-     *@group menuRestPage
+     * @group menuRestPage
      * @return void
      */
     public function testPedido()
