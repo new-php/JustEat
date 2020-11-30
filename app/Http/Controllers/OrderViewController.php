@@ -3,21 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Order;
 
 class OrderViewController extends Controller
 {
-    public function deliveryAddressPage()
+    public function deliveryAddressPage(Order $order)
     {
-        return view('order.delivery-address');
+        if ($order->status != 'COMPLETED') {
+            return view('order.delivery-address', ['order' => $order]);
+        }
+
+        return redirect('/');
     }
 
-    public function deliveryTimePage()
+    public function deliveryTimePage(Order $order)
     {
-        return view('order.delivery-time');
+        if ($order->status != 'COMPLETED') {
+            return view('order.delivery-time', ['order' => $order]);
+        }
+
+        return redirect('/');
     }
 
-    public function paymentPage()
+    public function paymentPage(Order $order)
     {
-        return view('order.payment');
+        if ($order->status != 'COMPLETED') {
+            $order->load('restaurant', 'orderItems', 'address');
+            return view('order.payment', ['order' => $order]);
+        }
+
+        return redirect('/');
     }
 }

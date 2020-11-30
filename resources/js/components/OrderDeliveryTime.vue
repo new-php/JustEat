@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white pt-4 full-height full-height-2">
+    <div class="bg-white pt-4">
         <div class="delivery-container" align="middle">
             <div class="delivery-title">
                 <span>Confirma la hora de entrega</span>
@@ -8,13 +8,13 @@
                 <span>Hora de entrega</span>
             </div>
             <div class="delivery-input-container">
-                <select class="delivery-input bg-white">
+                <select v-model="deliveryTime" class="delivery-input bg-white">
                     <option v-for="item in items">{{item}}</option>
                 </select>
             </div>
             <div class="delivery-input-container">
                 <span>La entrega sin contacto ahora se aplica a todos los pedidos. Si tu pedido incluye alcohol, ten tu identificación lista para que la verifiquemos sin contacto. Si tienes alguna otra indicación, escríbela a continuación. <strong>No incluyas detalles sobre alergias.</strong></span>
-                <textarea class="delivery-input delivery-textarea" placeholder="Por ejemplo, 'Por favor, deja mi pedido en la puerta y llama al timbre para informarme de que ya ha llegado'. No incluyas aquí ninguna información relativa a alergias."></textarea>
+                <textarea class="delivery-input delivery-textarea" v-model="description" placeholder="Por ejemplo, 'Por favor, deja mi pedido en la puerta y llama al timbre para informarme de que ya ha llegado'. No incluyas aquí ninguna información relativa a alergias."></textarea>
             </div>
             <div class="delivery-allergies-container"><a class="delivery-allergies-link" href="#">Si tú o alguien para el que estás pidiendo tiene una alergia o intolerancia a algún alimento, haz clic aquí.</a></div>
             <div>
@@ -27,28 +27,44 @@
 <script>
   export default {
     name: "OrderTimeConfirm",
+    props: ['order'],
     data() {
         return {
-            username: 'Marc Soler Bages',
             items: [
                 "Lo antes posible",
                 "En una hora",
                 "En dos horas",
                 "Mañana"
-            ]
+            ],
+            deliveryTime: "Lo antes posible",
+            description: "",
         }
-    },
-    mounted() {
-      console.log("Example component mounted");
     },
     methods: {
         date_function: function(){
             return moment(todo.created_at).format('YYYY-MM-DD h:mm A');
         },
         goToPayment() {
-            window.location.href = "/order/payment";
-        }
+            window.axios.put('/order/' + this.order.id + '/delivery',
+                {
+                    delivery_time: this.deliveryTime,
+                    description: this.description,
+                },
+            )
+            .then(response => {
+                window.location.href = '/order/' + this.order.id + '/payment';
+            })
+            .catch((error) => {
+                if (error.response.status == 401) {
+                    window.localStorage.removeItem('auth_token')
+                    window.location.href = '/';
+                }
 
+                if (error.response.status == 403) {
+                    window.location.href = '/';
+                }
+            });
+        },
     }
   };
 </script>

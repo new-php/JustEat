@@ -33,16 +33,16 @@ class ChangeZipCodesToString extends Migration
      */
     public function down()
     {
-        Schema::table('string', function (Blueprint $table) {
-            $table->integer('postal_code')->change();
+        Schema::table('addresses', function (Blueprint $table) {
+            $table->string('postal_code')->change();
         });
 
         Schema::table('delivery_zones', function (Blueprint $table) {
-            $table->integer('postal_code')->change();
+            $table->string('postal_code')->change();
         });
 
         Schema::table('restaurants', function (Blueprint $table) {
-            $table->integer('postal_code')->change();
+            $table->string('postal_code')->change();
         });
     }
 }

@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PaymentMethod extends Model
 {
-    use CrudTrait;
+    use CrudTrait, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +26,7 @@ class PaymentMethod extends Model
     // protected $hidden = [];
     // protected $dates = [];
 
-    public function user() 
+    public function user()
     {
         return $this->belongsTo('App\Models\User');
     }

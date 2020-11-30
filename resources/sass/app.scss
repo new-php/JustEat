@@ -18,10 +18,11 @@
 @import 'login';
 @import 'mainpage';
 @import 'restaurants';
-@import 'menu-restaurants';
+@import 'restaurant';
 @import 'orderdelivery';
+@import 'orderpayment';
 
 body {
     user-select: none;
-    background-color: #F5F5F5;
+    background-color: #FFF;
 }

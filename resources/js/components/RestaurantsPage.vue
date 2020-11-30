@@ -96,7 +96,7 @@
                         <span class="restaurants-open-ordering">Ordenar por relevantes</span>
                     </div>
                     <div class="restaurants-container">
-                        <section class="restaurant-card" v-for="(restaurant) in restaurants_showing" :key=restaurant.id v-on:click="goToRestaurant(restaurant)">
+                        <section class="restaurant-card" v-for="(restaurant) in restaurants_showing" :key=restaurant.id :id="'restaurant-' + restaurant.id" v-on:click="goToRestaurant(restaurant)">
                             <div class="restaurant-image-container">
                                 <img draggable="false" class="restaurant-image" :src="'storage/' + restaurant.photo">
                             </div>
@@ -156,20 +156,40 @@
     ],
     created() {
         this.restaurants_showing = this.restaurants.slice(0, this.restaurants.length);
+        this.restaurants_filtered_by_categories = this.restaurants.slice(0, this.restaurants.length);
+        this.restaurants_filtered_by_bar = this.restaurants.slice(0, this.restaurants.length);
     },
     data() {
         return {
             restaurants_showing: [],
+            restaurants_filtered_by_categories: [],
+            restaurants_filtered_by_bar: [],
             categories_selected: [],
             filters_selected: [],
+            restaurants_prov: [],
             search_input: "",
         }
     },
-    mounted() {
-    },
     watch: {
         search_input: function(val, oldVal) {
-            console.log(val, oldVal);
+            if (val === oldVal) {
+                return;
+            }
+            if (val.length > oldVal.length) {
+                for (let i = this.restaurants_filtered_by_bar.length - 1; i >= 0; i--) {
+                    if (!this.restaurants_filtered_by_bar[i].name.toLowerCase().includes(val)) {
+                        this.restaurants_filtered_by_bar.splice(i,1);
+                    }
+                }
+            } else {
+                for (let i = 0; i < this.restaurants.length; i++) {
+                    if (this.restaurants[i].name.toLowerCase().includes(val) && !this.restaurants_filtered_by_bar.includes(this.restaurants[i])) {
+                        this.restaurants_filtered_by_bar.push(this.restaurants[i]);
+                    }
+                }
+            }
+
+            this.intersectRestaurants();
         }
     },
     methods: {
@@ -180,15 +200,17 @@
                 $("#mainCategory-" + this.categories_selected[i].id).removeClass("categories-active");
             }
             this.categories_selected = [];
-            this.restaurants_showing = this.restaurants.slice(0, this.restaurants.length);
+            this.restaurants_filtered_by_categories = this.restaurants.slice(0, this.restaurants.length);
+
+            this.intersectRestaurants();
         },
         resetFilters(evt) {
             evt.preventDefault();
             for (let i = 0; i < this.filters_selected.length; i++) {
                 $("#" + this.filters_selected[i]).removeClass("filter-active");
             }
-            this.categories_selected = [];
-            this.restaurants_showing = this.restaurants.slice(0, this.restaurants.length);
+            this.filters_selected = [];
+            //this.restaurants_showing = this.restaurants.slice(0, this.restaurants.length);
         },
         selectCategory(category) {
             if (!this.categories_selected.includes(category)) {
@@ -204,11 +226,13 @@
                 }
                 $("#category-" + category.id).removeClass("category-active");
                 $("#mainCategory-" + category.id).removeClass("categories-active");
-                this.restaurants_showing = this.restaurants.slice(0, this.restaurants.length);
+                this.restaurants_filtered_by_categories = this.restaurants.slice(0, this.restaurants.length);
                 for (let i = 0; i < this.categories_selected.length; i++) {
                     this.showForCategoryRestaurants(this.categories_selected[i]);
                 }
             }
+
+            this.intersectRestaurants();
         },
         selectFilter(filter) {
             if (!this.filters_selected.includes(filter)) {
@@ -226,21 +250,24 @@
         showForCategoryRestaurants(category) {
             var has_category = false;
 
-            for (let i = this.restaurants_showing.length-1; i >= 0; i--) {
+            for (let i = this.restaurants_filtered_by_categories.length-1; i >= 0; i--) {
                 has_category = false;
-                for (let j = 0; j < this.restaurants_showing[i].categories.length; j++) {
-                    if (this.restaurants_showing[i].categories[j].id == category.id) {
+                for (let j = 0; j < this.restaurants_filtered_by_categories[i].categories.length; j++) {
+                    if (this.restaurants_filtered_by_categories[i].categories[j].id == category.id) {
                         has_category = true;
                     }
                 }
                 if (!has_category) {
-                    this.restaurants_showing.splice(i,1);
+                    this.restaurants_filtered_by_categories.splice(i,1);
                 }
             }
         },
+        intersectRestaurants() {
+            this.restaurants_showing = this.restaurants_filtered_by_categories.filter(value => this.restaurants_filtered_by_bar.includes(value))
+        },
         goToRestaurant(restaurant) {
-            window.location.href = "restaurants/" + restaurant.id;
-        }
+            window.location.href = "/restaurants/" + restaurant.id;
+        },
     },
   };
 </script>

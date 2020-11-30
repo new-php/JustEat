@@ -92,8 +92,10 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
+        $token = $user->createToken('authToken');
+
         return $request->wantsJson()
-                    ? new JsonResponse(['data' => $user], 201)
+                    ? new JsonResponse(['data' => $user, 'access_token' => $token->accessToken], 201)
                     : redirect($this->redirectPath());
     }
 }
