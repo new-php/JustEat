@@ -6,6 +6,7 @@
 @endsection
 
 @section('content')
-<order-payment>
+<order-payment
+    :order="{{ json_encode($order) }}">
 </order-payment>
 @endsection
