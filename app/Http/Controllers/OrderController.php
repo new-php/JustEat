@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\OrderItem;
-
+use App\Models\Product;
 
 class OrderController extends Controller
 {
@@ -27,57 +28,135 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
-        
+        $user = auth('api')->user();
+
         $validator = $request->validate([
             'restaurant_id' => 'required|integer',
-            'details' => 'nullable|string',
             'products' => 'required|array|min:1',
             'products.*.id' => 'required|integer',
-            'products.*.quantity' => 'required|numeric|min:0',
-            'products.*.price' => 'required|numeric|min:0'
+            'products.*.quantity' => 'required|numeric|min:1',
+            'shipping' => 'required',
+            'delivery_mode' => 'required',
         ]);
 
-        $status = 'SELECTED';
-        
+        $products = [];
+
         $total = 0;
-        foreach ($request->products as $product) {
-            $total += $product['price'] * $product['quantity'];
-        };
+        foreach ($validator['products'] as $product) {
+            $db_product = Product::findOrFail($product['id']);
+            $db_product->quantity = $product['quantity'];
+            array_push($products, $db_product);
+
+            $total += $db_product->price * $db_product->quantity;
+        }
 
         $order = Order::create([
-            'user_id' => $user,
+            'user_id' => $user->id,
             'restaurant_id' => $request->restaurant_id,
-            'details' => $request->details,
+            'shipping' => $validator['shipping'],
             'total' => $total,
-            'status' => $status,
+            'delivery_mode' => $validator['delivery_mode'],
         ]);
 
-        foreach ($request->products as $product) {
-            OrderItem::create([
-                'order_id' => $order->id,
+        foreach ($products as $product) {
+            $order->orderItems()->create([
                 'product_id' => $product->id,
                 'price' => $product->price,
-                'quantity' => $product->quantity
+                'quantity' => $product->quantity,
             ]);
         };
 
-        return response()->json($order, 201);
+        return response()->json([
+            'data' => $order,
+        ], 201);
     }
 
-    public function addAddress(Request $request, $id) {
-        $user = Auth::user();
+    public function addAddress(Request $request, Order $order)
+    {
+        $user = auth('api')->user();
+
+        if (!$user->orders()->where('id', $order->id)->exists() || $order->status == 'COMPLETED') {
+            return response()->json([
+                "message" => 'Permission denied',
+            ], 403);
+        }
 
         $validator = $request->validate([
-            'address_id' => 'required|integer',
-            'details' => 'nullable|string',
-            'delivery_mode' => 'required|string'
+            'name' => 'required',
+            'phone' => 'required',
+            'address_line_1' => 'required',
+            'address_line_2' => '',
+            'details' => '',
+            'city' => 'required',
+            'post_code' => 'required',
         ]);
 
-        $order = Order::findOrFail($id);
-        $order->update($request->all());
-        $order->update(['status' => 'ADDRESSED']);
-    
+        $address = $user->addresses()->firstOrCreate([
+            'name' => $validator['name'],
+            'phone' => $validator['phone'],
+            'address_line_1' => $validator['address_line_1'],
+            'address_line_2' => $validator['address_line_2'],
+            'observations' => $validator['details'],
+            'city' => $validator['city'],
+            'postal_code' => $validator['post_code'],
+        ]);
+
+        $order->update([
+            'address_id' => $address->id,
+            'status' => 'ADDRESSED',
+        ]);
+
+        return response()->json([
+                'data' => $order,
+            ], 200);
+    }
+
+    public function addDeliveryTime(Request $request, Order $order)
+    {
+        $user = auth('api')->user();
+
+        if (!$user->orders()->where('id', $order->id)->exists() || $order->status == 'COMPLETED') {
+            return response()->json([
+                "message" => 'Permission denied',
+            ], 403);
+        }
+
+        $validator = $request->validate([
+            'delivery_time' => 'required|string',
+            'description' => 'nullable|string',
+        ]);
+
+        $order->update([
+            'delivery_time' => $validator['delivery_time'],
+            'details' => $validator['description'],
+            'status' => 'TIMED'
+        ]);
+
+        return response()->json([
+            'data' => $order,
+        ], 200);
+    }
+
+    public function pay(Request $request, Order $order)
+    {
+        $user = auth('api')->user();
+
+        if (!$user->orders()->where('id', $order->id)->exists() || $order->status == 'COMPLETED') {
+            return response()->json([
+                "message" => 'Permission denied',
+            ], 403);
+        }
+
+        $validator = $request->validate([
+            'payed' => 'required|boolean',
+        ]);
+
+        $order->update([
+            'payed' => $validator['payed'],
+            'order_status' => 'RECEIVED',
+            'status' => 'COMPLETED',
+        ]);
+
         return response()->json($order, 200);
     }
 

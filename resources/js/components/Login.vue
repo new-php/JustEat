@@ -56,9 +56,7 @@
         beforeCreate() {
             var token = window.localStorage.getItem('auth_token');
             if (token) {
-                if (token !== undefined && token !== "undefined") {
-                    window.location.href = "/";
-                }
+                window.location.href = "/";
             }
         },
         methods: {
@@ -71,9 +69,6 @@
                         client_id: process.env.MIX_PASSPORT_CLIENT_ID,
                         client_secret: process.env.MIX_PASSPORT_CLIENT_SECRET,
                     },
-                    {
-                        'Accept': 'application/json',
-                    }
                 )
                 .then(response => {
                     window.localStorage.setItem('auth_token', response.data.access_token);
