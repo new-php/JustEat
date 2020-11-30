@@ -67,7 +67,7 @@ class OrderController extends Controller
         };
 
         return response()->json([
-            'data' => $order,
+            'data' => $order->fresh(),
         ], 201);
     }
 
@@ -123,12 +123,12 @@ class OrderController extends Controller
 
         $validator = $request->validate([
             'delivery_time' => 'required|string',
-            'description' => 'nullable|string',
+            'description' => 'string',
         ]);
 
         $order->update([
             'delivery_time' => $validator['delivery_time'],
-            'details' => $validator['description'],
+            'details' => isset($validator['description']) ? $validator['description'] : null,
             'status' => 'TIMED'
         ]);
 

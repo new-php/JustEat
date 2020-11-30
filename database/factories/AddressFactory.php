@@ -30,6 +30,8 @@ class AddressFactory extends Factory
             'observations' => $this->faker->sentence,
             'city' => $this->faker->city,
             'postal_code' => $this->faker->postcode,
+            'name' => $this->faker->name,
+            'phone' => $this->faker->phoneNumber
         ];
     }
 }
