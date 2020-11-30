@@ -6,6 +6,13 @@ use Laravel\Dusk\Browser;
 
 class OrderPaymentPage extends Page
 {
+    protected $order_id;
+
+    public function __construct($order_id)
+    {
+        $this->order_id = $order_id;
+    }
+
     /**
      * Get the URL for the page.
      *
@@ -13,7 +20,7 @@ class OrderPaymentPage extends Page
      */
     public function url()
     {
-        return '/order/payment';
+        return '/order/' . $this->order_id . '/payment';
     }
 
     /**
@@ -34,5 +41,7 @@ class OrderPaymentPage extends Page
      */
     public function elements()
     {
+        return [
+        ];
     }
 }

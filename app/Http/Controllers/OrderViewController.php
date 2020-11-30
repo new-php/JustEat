@@ -29,7 +29,6 @@ class OrderViewController extends Controller
     {
         if ($order->status != 'COMPLETED') {
             $order->load('restaurant', 'orderItems', 'address');
-
             return view('order.payment', ['order' => $order]);
         }
 

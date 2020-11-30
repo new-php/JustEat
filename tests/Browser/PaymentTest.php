@@ -6,18 +6,23 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Tests\Browser\Pages\OrderPaymentPage;
+use App\Models\Order;
 
-
-class PaymentTest extends DuskTestCase {
+class PaymentTest extends DuskTestCase
+{
 	use DatabaseMigrations;
 
 	/**
 	 * Default Payment Radio
-	 *
+	 * @group payment
+     * @return void
 	 **/
-	public function testDefaultRadio(){
-        $this->browse(function (Browser $browser) {
-            $browser->visit(new OrderPaymentPage)
+	public function testDefaultRadio()
+    {
+        $order = Order::factory()->create();
+
+        $this->browse(function (Browser $browser) use ($order) {
+            $browser->visit(new OrderPaymentPage($order->id))
     		        ->click('@radio-default')
     		        ->assertSee('Tengo un código de descuento')
     		        ->assertDontSee('Número de tarjeta')
@@ -27,11 +32,15 @@ class PaymentTest extends DuskTestCase {
 
 	/**
 	 * Card Payment Radio
-	 *
+     * @group payment
+     * @return void
 	 **/
-	public function testCardRadio(){
-        $this->browse(function (Browser $browser) {
-            $browser->visit(new OrderPaymentPage)
+	public function testCardRadio()
+    {
+        $order = Order::factory()->create();
+
+        $this->browse(function (Browser $browser) use ($order) {
+            $browser->visit(new OrderPaymentPage($order->id))
 		            ->click('@radio-card')
 		            ->assertSee('Número de tarjeta');
         });
@@ -39,11 +48,15 @@ class PaymentTest extends DuskTestCase {
 
 	/**
 	 * Paypal Payment Radio
-	 *
+     * @group payment
+     * @return void
 	 **/
-	public function testPaypalRadio(){
-        $this->browse(function (Browser $browser) {
-            $browser->visit(new OrderPaymentPage)
+	public function testPaypalRadio()
+    {
+        $order = Order::factory()->create();
+
+        $this->browse(function (Browser $browser) use ($order) {
+            $browser->visit(new OrderPaymentPage($order->id))
 		            ->click('@radio-paypal')
 		            ->assertSee('Guardar mis detalles de PayPal');
         });
@@ -51,11 +64,15 @@ class PaymentTest extends DuskTestCase {
 
 	/**
 	 * Cash Payment Radio
-	 *
+     * @group payment
+     * @return void
 	 **/
-	public function testCashRadio(){
-        $this->browse(function (Browser $browser) {
-            $browser->visit(new OrderPaymentPage)
+	public function testCashRadio()
+    {
+        $order = Order::factory()->create();
+
+        $this->browse(function (Browser $browser) use ($order) {
+            $browser->visit(new OrderPaymentPage($order->id))
 		            ->click('@radio-cash')
 		            ->assertSee('Hacer mi pedido')
 		            ->assertDontSee('Tengo un código de descuento')
@@ -64,16 +81,17 @@ class PaymentTest extends DuskTestCase {
         });
 	}
 
-
-
-
 	/**
 	 * Default Payment Coupon
-	 *
+     * @group payment
+     * @return void
 	 **/
-	public function testDefaultCoupon(){
-		$this->browse(function (Browser $browser) {
-            $browser->visit(new OrderPaymentPage)
+	public function testDefaultCoupon()
+    {
+        $order = Order::factory()->create();
+
+		$this->browse(function (Browser $browser) use ($order) {
+            $browser->visit(new OrderPaymentPage($order->id))
                     ->click('@radio-default')
                     ->click('@default-coupon')
                     ->assertSee('Tengo un código de descuento')
@@ -85,11 +103,15 @@ class PaymentTest extends DuskTestCase {
 
 	/**
 	 * Card Payment Coupon
-	 *
+     * @group payment
+     * @return void
 	 **/
-	public function testCardCoupon(){
-		$this->browse(function (Browser $browser) {
-            $browser->visit(new OrderPaymentPage)
+	public function testCardCoupon()
+    {
+        $order = Order::factory()->create();
+
+        $this->browse(function (Browser $browser) use ($order) {
+            $browser->visit(new OrderPaymentPage($order->id))
                     ->click('@radio-card')
                     ->click('@card-coupon')
                     ->assertSee('Número de tarjeta')
@@ -99,11 +121,15 @@ class PaymentTest extends DuskTestCase {
 
 	/**
 	 * Paypal Payment Coupon
-	 *
+     * @group payment
+     * @return void
 	 **/
-	public function testPaypalCoupon(){
-		$this->browse(function (Browser $browser) {
-            $browser->visit(new OrderPaymentPage)
+	public function testPaypalCoupon()
+    {
+        $order = Order::factory()->create();
+
+        $this->browse(function (Browser $browser) use ($order) {
+            $browser->visit(new OrderPaymentPage($order->id))
                     ->click('@radio-paypal')
                     ->click('@paypal-coupon')
                     ->assertSee('Guardar mis detalles de PayPal')
