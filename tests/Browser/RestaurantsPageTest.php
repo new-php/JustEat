@@ -20,13 +20,13 @@ class RestaurantsPageTest extends DuskTestCase
      * @group restaurants
      * @return void
      */
-    public function testSelectHeaderCategoryAsign(){
-
+    public function testSelectHeaderCategoryAsign()
+    {
         $restaurant = Restaurant::factory()
             ->has(Category::factory()->count(1))
             ->create();
 
-        $this->browse(function (Browser $browser){
+        $this->browse(function (Browser $browser) use ($restaurant) {
             $browser->visit(new RestaurantsPage)
                     ->assertSee($restaurant->name)
                     ->click('#mainCategory-1')
@@ -36,20 +36,20 @@ class RestaurantsPageTest extends DuskTestCase
         });
     }
 
-     /**
+    /**
      * Press header category to select.
      *
      * @group restaurants
      * @return void
      */
-    public function testSelectHeaderCategoryUnAsign(){
-
+    public function testSelectHeaderCategoryUnAsign()
+    {
         $restaurant = Restaurant::factory()
             ->create();
         $category = Category::factory()
             ->create();
 
-        $this->browse(function (Browser $browser){
+        $this->browse(function (Browser $browser) use ($restaurant) {
             $browser->visit(new RestaurantsPage)
                     ->assertSee($restaurant->name)
                     ->click('#mainCategory-1')
@@ -65,13 +65,13 @@ class RestaurantsPageTest extends DuskTestCase
      * @group restaurants
      * @return void
      */
-    public function testSelectCategoryAsign(){
-
+    public function testSelectCategoryAsign()
+    {
         $restaurant = Restaurant::factory()
             ->has(Category::factory()->count(1))
             ->create();
 
-        $this->browse(function (Browser $browser){
+        $this->browse(function (Browser $browser) use ($restaurant) {
             $browser->visit(new RestaurantsPage)
                     ->assertSee($restaurant->name)
                     ->click('#category-1')
@@ -87,39 +87,20 @@ class RestaurantsPageTest extends DuskTestCase
      * @group restaurants
      * @return void
      */
-    public function testSelectCategoryUnAsign(){
-
+    public function testSelectCategoryUnAsign()
+    {
         $restaurant = Restaurant::factory()
             ->create();
         $category = Category::factory()
             ->create();
 
-        $this->browse(function (Browser $browser){
+        $this->browse(function (Browser $browser) use ($restaurant) {
             $browser->visit(new RestaurantsPage)
                     ->assertSee($restaurant->name)
                     ->click('#category-1')
                     ->assertDontSee($restaurant->name)
                     ->clickLink('Reiniciar')
                     ->assertSee($restaurant->name);
-        });
-    }
-
-    /**
-     * Reset selected filters.
-     *
-     * @group restaurants
-     * @return void
-     */
-    public function testResetFilters(){
-
-        $restaurant = Restaurant::factory()
-            ->create();
-        
-        $this->browse(function (Browser $browser){
-            $browser->visit(new RestaurantsPage)
-            ->assertDontSee($restaurant->name)
-            ->clickLink('Reiniciar')
-            ->assertSee($restaurant->name);
         });
     }
 
@@ -129,11 +110,12 @@ class RestaurantsPageTest extends DuskTestCase
      * @group restaurants
      * @return void
      */
-    public function testChangeAdress{
-        $this->browse(function (Browser $browser){
+    public function testChangeAdress()
+    {
+        $this->browse(function (Browser $browser) {
             $browser->visit(new RestaurantsPage)
             ->clickLink('cambiar dirección')
-            ->assertPathIs('/');                    
+            ->assertPathIs('/');
         });
     }
 
@@ -143,18 +125,18 @@ class RestaurantsPageTest extends DuskTestCase
      * @group restaurants
      * @return void
      */
-    public function testSearchBarMatch(){
-
+    public function testSearchBarMatch()
+    {
         $restaurant = Restaurant::factory()
             ->create([
             'name' => 'McKing',
         ]);
 
-        $this->browse(function (Browser $browser){
+        $this->browse(function (Browser $browser) use ($restaurant) {
             $browser->visit(new RestaurantsPage)
             ->assertSee($restaurant->name)
             ->type('restaurants-searchbar', 'McKing')
-            ->assertSee($restaurant->name);           
+            ->assertSee($restaurant->name);
         });
     }
 
@@ -164,18 +146,19 @@ class RestaurantsPageTest extends DuskTestCase
      * @group restaurants
      * @return void
      */
-    public function testSearchBarUnMatch(){
+    public function testSearchBarUnMatch()
+    {
 
         $restaurant = Restaurant::factory()
             ->create([
             'name' => 'McKing',
         ]);
 
-        $this->browse(function (Browser $browser){
+        $this->browse(function (Browser $browser) use ($restaurant) {
             $browser->visit(new RestaurantsPage)
             ->assertSee($restaurant->name)
             ->type('restaurants-searchbar', 'asddgghhgk')
-            ->assertDontSee($restaurant->name);           
+            ->assertDontSee($restaurant->name);
         });
     }
 
@@ -185,15 +168,15 @@ class RestaurantsPageTest extends DuskTestCase
      * @group restaurants
      * @return void
      */
-    public function testRestaurantsCards(){
-
+    public function testRestaurantsCards()
+    {
         $restaurant = Restaurant::factory()
             ->create();
 
-        $this->browse(function (Browser $browser){
+        $this->browse(function (Browser $browser) use ($restaurant) {
             $browser->visit(new RestaurantsPage)
             ->click('#restaurant-1')
-            ->assertPathIs('/restaurants/'.$restaurant->id);   
+            ->assertPathIs('/restaurants/'.$restaurant->id);
         });
     }
 
