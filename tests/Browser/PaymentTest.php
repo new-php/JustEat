@@ -5,7 +5,7 @@ namespace Tests\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Tests\Browser\Pages\OrderPayment;
+use Tests\Browser\Pages\OrderPaymentPage;
 
 
 class PaymentTest extends DuskTestCase {
@@ -16,10 +16,13 @@ class PaymentTest extends DuskTestCase {
 	 *
 	 **/
 	public function testDefaultRadio(){
-		$browser->click('@radio-default');
-		$browser->assertSee('Tengo un código de descuento');
-		$browser->assertDontSee('Número de tarjeta');
-		$browser->assertDontSee('Guardar mis detalles de PayPal');
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new OrderPaymentPage)
+    		        ->click('@radio-default')
+    		        ->assertSee('Tengo un código de descuento')
+    		        ->assertDontSee('Número de tarjeta')
+    		        ->assertDontSee('Guardar mis detalles de PayPal');
+        });
 	}
 
 	/**
@@ -27,8 +30,11 @@ class PaymentTest extends DuskTestCase {
 	 *
 	 **/
 	public function testCardRadio(){
-		$browser->click('@radio-card');
-		$browser->assertSee('Número de tarjeta');
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new OrderPaymentPage)
+		            ->click('@radio-card')
+		            ->assertSee('Número de tarjeta');
+        });
 	}
 
 	/**
@@ -36,8 +42,11 @@ class PaymentTest extends DuskTestCase {
 	 *
 	 **/
 	public function testPaypalRadio(){
-		$browser->click('@radio-paypal');
-		$browser->assertSee('Guardar mis detalles de PayPal');
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new OrderPaymentPage)
+		            ->click('@radio-paypal')
+		            ->assertSee('Guardar mis detalles de PayPal');
+        });
 	}
 
 	/**
@@ -45,11 +54,14 @@ class PaymentTest extends DuskTestCase {
 	 *
 	 **/
 	public function testCashRadio(){
-		$browser->click('@radio-cash');
-		$browser->assertSee('Hacer mi pedido');
-		$browser->assertDontSee('Tengo un código de descuento');
-		$browser->assertDontSee('Número de tarjeta');
-		$browser->assertDontSee('Guardar mis detalles de PayPal');
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new OrderPaymentPage)
+		            ->click('@radio-cash')
+		            ->assertSee('Hacer mi pedido')
+		            ->assertDontSee('Tengo un código de descuento')
+		            ->assertDontSee('Número de tarjeta')
+		            ->assertDontSee('Guardar mis detalles de PayPal');
+        });
 	}
 
 
@@ -60,12 +72,15 @@ class PaymentTest extends DuskTestCase {
 	 *
 	 **/
 	public function testDefaultCoupon(){
-		$browser->click('@radio-default');
-		$browser->click('@default-coupon')
-		$browser->assertSee('Tengo un código de descuento');
-		$browser->assertDontSee('Número de tarjeta');
-		$browser->assertDontSee('Guardar mis detalles de PayPal');
-		$browser->assertSee('Aplicar');
+		$this->browse(function (Browser $browser) {
+            $browser->visit(new OrderPaymentPage)
+                    ->click('@radio-default')
+                    ->click('@default-coupon')
+                    ->assertSee('Tengo un código de descuento')
+                    ->assertDontSee('Número de tarjeta')
+                    ->assertDontSee('Guardar mis detalles de PayPal')
+                    ->assertSee('Aplicar');
+        });
 	}
 
 	/**
@@ -73,10 +88,13 @@ class PaymentTest extends DuskTestCase {
 	 *
 	 **/
 	public function testCardCoupon(){
-		$browser->click('@radio-card');
-		$browser->click('@card-coupon');
-		$browser->assertSee('Número de tarjeta');
-		$browser->assertSee('Aplicar');
+		$this->browse(function (Browser $browser) {
+            $browser->visit(new OrderPaymentPage)
+                    ->click('@radio-card')
+                    ->click('@card-coupon')
+                    ->assertSee('Número de tarjeta')
+                    ->assertSee('Aplicar');
+        });
 	}
 
 	/**
@@ -84,9 +102,12 @@ class PaymentTest extends DuskTestCase {
 	 *
 	 **/
 	public function testPaypalCoupon(){
-		$browser->click('@radio-paypal');
-		$browser->click('@paypal-coupon');
-		$browser->assertSee('Guardar mis detalles de PayPal');
-		$browser->assertSee('Aplicar');
+		$this->browse(function (Browser $browser) {
+            $browser->visit(new OrderPaymentPage)
+                    ->click('@radio-paypal')
+                    ->click('@paypal-coupon')
+                    ->assertSee('Guardar mis detalles de PayPal')
+                    ->assertSee('Aplicar');
+        });
 	}
 }
