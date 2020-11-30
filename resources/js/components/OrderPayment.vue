@@ -6,7 +6,7 @@
                 <div class="payment-type payment-type-bottom-line" v-for="payment in payments" :id="'payment-type-' + payment.id">
                     <div class="payment-type-header" v-on:click="expand_collapse('payment-type-' + payment.id)">
                         <div class="payment-type-header-text">
-                            <div id="radio" class="payment-type-radio">
+                            <div id="radio" dusk="radio-default" class="payment-type-radio">
                                 <div class="checked"></div>
                             </div>
                             <span class="payment-type-label">{{ payment.type }} {{ payment.number }} {{ payment.exp }}</span>
@@ -21,7 +21,7 @@
                             <span>{{ payment.type }}</span>
                         </div>
                         <div class="coupon-section">
-                            <a class="coupon-link" href="#" v-on:click="open_close_coupon"><strong>Tengo un código de descuento</strong></a>
+                            <a class="coupon-link" dusk="default-coupon" href="#" v-on:click="open_close_coupon"><strong>Tengo un código de descuento</strong></a>
                             <div v-if="coupon_container_open" class="coupon-container">
                                 <input class="coupon-input" type="text" name="coupon">
                                 <button class="btn coupon-button" v-on:click="apply_coupon">Aplicar</button>
@@ -33,7 +33,7 @@
                 <div class="payment-type payment-type-bottom-line" id="payment-type-new">
                     <div class="payment-type-header" v-on:click="expand_collapse('payment-type-new')">
                         <div class="payment-type-header-text">
-                            <div id="radio" class="payment-type-radio">
+                            <div id="radio" dusk="radio-card" class="payment-type-radio">
                                 <div class="checked"></div>
                             </div>
                             <span class="payment-type-label">Paga con tarjeta de débito o crédito</span>
@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="coupon-section">
-                            <a class="coupon-link" href="#" v-on:click="open_close_coupon"><strong>Tengo un código de descuento</strong></a>
+                            <a class="coupon-link" dusk="card-coupon" href="#" v-on:click="open_close_coupon"><strong>Tengo un código de descuento</strong></a>
                             <div v-if="coupon_container_open" class="coupon-container">
                                 <input class="coupon-input" type="text" name="coupon">
                                 <button class="btn coupon-button" v-on:click="apply_coupon">Aplicar</button>
@@ -109,7 +109,7 @@
                 <div class="payment-type payment-type-bottom-line" id="payment-type-paypal">
                     <div class="payment-type-header" v-on:click="expand_collapse('payment-type-paypal')">
                         <div class="payment-type-header-text">
-                            <div id="radio" class="payment-type-radio">
+                            <div id="radio" dusk="radio-paypal" class="payment-type-radio">
                                 <div class="checked"></div>
                             </div>
                             <span class="payment-type-label">PayPal</span>
@@ -124,7 +124,7 @@
                             </div>
                         </div>
                         <div class="coupon-section">
-                            <a class="coupon-link" href="#" v-on:click="open_close_coupon"><strong>Tengo un código de descuento</strong></a>
+                            <a class="coupon-link" dusk="paypal-coupon" href="#" v-on:click="open_close_coupon"><strong>Tengo un código de descuento</strong></a>
                             <div v-if="coupon_container_open" class="coupon-container">
                                 <input class="coupon-input" type="text" name="coupon">
                                 <button class="btn coupon-button" v-on:click="apply_coupon">Aplicar</button>
@@ -136,7 +136,7 @@
                 <div class="payment-type" id="payment-type-cash">
                     <div class="payment-type-header" v-on:click="expand_collapse('payment-type-cash')">
                         <div class="payment-type-header-text">
-                            <div id="radio" class="payment-type-radio">
+                            <div id="radio" dusk="radio-cash" class="payment-type-radio">
                                 <div class="checked"></div>
                             </div>
                             <span class="payment-type-label">Pagar con dinero en efectivo</span>
