@@ -170,8 +170,6 @@
             search_input: "",
         }
     },
-    mounted() {
-    },
     watch: {
         search_input: function(val, oldVal) {
             if (val === oldVal) {

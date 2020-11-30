@@ -48,9 +48,19 @@ class AddressCrudController extends CrudController
             'model' => 'App\Models\User',
         ]);
         CRUD::addColumn([
+            'label' => 'Name',
+            'type' => 'text',
+            'name' => 'name',
+            ]);
+        CRUD::addColumn([
             'label' => 'Address name',
             'type' => 'text',
             'name' => 'address_name',
+            ]);
+        CRUD::addColumn([
+            'label' => 'Phone',
+            'type' => 'text',
+            'name' => 'phone',
             ]);
         CRUD::addColumn([
             'label' => 'Address line 1',
@@ -102,6 +112,16 @@ class AddressCrudController extends CrudController
             'type' => 'text',
             'name' => 'address_name',
             ]);
+        CRUD::addField([
+            'label' => 'Name',
+            'type' => 'text',
+            'name' => 'name',
+            ]);
+        CRUD::addField([
+            'label' => 'Phone',
+            'type' => 'text',
+            'name' => 'phone',
+        ]);
         CRUD::addField([
             'label' => 'Address line 1',
             'type' => 'text',

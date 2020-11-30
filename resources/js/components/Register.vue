@@ -57,9 +57,7 @@
         beforeCreate() {
             var token = window.localStorage.getItem('auth_token');
             if (token) {
-                if (token !== undefined && token !== "undefined") {
-                    window.location.href = "/";
-                }
+                window.location.href = "/";
             }
         },
         methods: {
@@ -70,9 +68,6 @@
                         password: this.password,
                         password_confirmation: this.password_confirmation,
                     },
-                    {
-                        'Accept': 'application/json',
-                    }
                 )
                 .then(response => {
                     window.localStorage.setItem('auth_token', response.data.access_token);

@@ -27,46 +27,44 @@
 <script>
   export default {
     name: "OrderTimeConfirm",
+    props: ['order'],
     data() {
         return {
-            order: {
-                id: 1
-            },
             items: [
                 "Lo antes posible",
                 "En una hora",
                 "En dos horas",
                 "Mañana"
             ],
-            deliveryTime: "",
+            deliveryTime: "Lo antes posible",
             description: "",
         }
-    },
-    mounted() {
-      console.log("Example component mounted");
     },
     methods: {
         date_function: function(){
             return moment(todo.created_at).format('YYYY-MM-DD h:mm A');
         },
         goToPayment() {
-            window.axios.put('/order/'+this.order.id+'/delivery-time',
+            window.axios.put('/order/' + this.order.id + '/delivery',
                 {
-                    deliveryTime: this.deliveryTime,
+                    delivery_time: this.deliveryTime,
                     description: this.description,
                 },
-                {
-                    'Accept': 'application/json',
-                }
             )
             .then(response => {
-                window.location.href = '/order/'+this.order.id+'/payment';
+                window.location.href = '/order/' + this.order.id + '/payment';
             })
             .catch((error) => {
-                //window.localStorage.removeItem('auth_token')
-                //Si es un error 401, es que el usuario no esta autentificado y entonces borramos el authtoken.
+                if (error.response.status == 401) {
+                    window.localStorage.removeItem('auth_token')
+                    window.location.href = '/';
+                }
+
+                if (error.response.status == 403) {
+                    window.location.href = '/';
+                }
             });
-        },     
+        },
     }
   };
 </script>

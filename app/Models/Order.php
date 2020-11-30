@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    use CrudTrait;
+    use CrudTrait, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -21,11 +22,14 @@ class Order extends Model
         'details',
         'shipping',
         'total',
+        'order_status',
         'status',
         'rider_id',
         'delivery_mode',
+        'delivery_time',
+        'payed',
     ];
-    
+
     protected $table = 'orders';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
