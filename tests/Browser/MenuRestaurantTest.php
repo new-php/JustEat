@@ -62,35 +62,23 @@ class MenuRestaurantTest extends DuskTestCase
     public function testInfoRestaurant()
     {
 
-        $category = Category::factory()->create([
-            'name' => 'Hamburguesas',
-            'image' => 'storage/app/public/images/main-page-background.jpg',
-        ]);
-
         $restaurant = Restaurant::factory()->create([
             'id' => 1,
             'name' => 'McDonalds',
-            'category' => $category,
             'address' => 'Avinguda de Rio de Janeiro, 42, Barcelona, 08016',
-            'min_delivery_time' => 1,
-            'max_delivery_time' => 2,
-            'price_delivery' => 3,
-            'min_order_price' => 5,
         ]);
+
+        $category = Category::factory()->create([
+            'name' => 'Hamburguesas',
+        ]);
+
+        $category->restaurants()->attach($restaurant->id);
 
         $this->browse(function (Browser $browser) use ($restaurant, $category) {
             $browser->visit(new RestaurantPage($restaurant->id))
                 ->assertSee($restaurant->name)
-                ->assertSee($restaurant->category->name)
-                ->assertSee($restaurant->address)
-                ->assertSee('Tiempo de entrega') 
-                ->assertSee($restaurant->min_delivery_time)
-                ->assertSee('-')
-                ->assertSee($restaurant->max_delivery_time)
-                ->assertSee($restaurant->price_delivery)
-                ->assertSee('€ gastos de envío')
-                ->assertSee('Pedido mínimo')
-                ->assertSee($restaurant->min_order_price);
+                ->assertSee($category->name)
+                ->assertSee($restaurant->address);
         });
     }
 
@@ -121,30 +109,31 @@ class MenuRestaurantTest extends DuskTestCase
     public function testProduct()
     {
 
-        $product_category = ProductCategory::factory()->create([
-            'name' => 'Top Ventas',
-        ]);
-
-        $product = Product::factory()->create([
-            'name' => 'McMenú CBO',
-            'price' => 8.25,
-            'description' => 'Bacon, cebolla, lechuga y pollo supreme',
-            'product_category' => $product_category->name,
-        ]);
-
         $restaurant = Restaurant::factory()->create([
             'id' => 1,
             'name' => 'McDonalds',
-            'product_categories' => $product_category,
-            'product' => $product,
         ]);
+
+        $product_category = ProductCategory::factory()->create([
+            'name' => 'Top Ventas',
+            'restaurant_id' => $restaurant->id,
+        ]);
+
+        $product = Product::factory()->create([
+            'restaurant_id' => $restaurant->id,
+            'name' => 'McMenú CBO',
+            'price' => 8.25,
+            'description' => 'Bacon, cebolla, lechuga y pollo supreme',
+        ]);
+
+        $product_category->products()->attach($product->id);
 
         $this->browse(function (Browser $browser) use ($restaurant, $product_category, $product) {
             $browser->visit(new RestaurantPage($restaurant->id))
-                ->assertSee($restaurant->product->product_category->name)
-                ->assertSee($restaurant->product->name)
-                ->assertSee($restaurant->product->description)
-                ->assertSee($restaurant->product->price);
+                ->assertSee($product_category->name)
+                ->assertSee($product->name)
+                ->assertSee($product->description)
+                ->assertSee($product->price);
         });
     }
     
