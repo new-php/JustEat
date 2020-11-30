@@ -6,6 +6,7 @@
 @endsection
 
 @section('content')
-<order-delivery-time>
+<order-delivery-time
+    :order="{{ json_encode($order) }}">
 </order-delivery-time>
 @endsection

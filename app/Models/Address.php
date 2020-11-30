@@ -17,7 +17,9 @@ class Address extends Model
      */
     protected $fillable = [
         'user_id',
+        'name',
         'address_name',
+        'phone',
         'address_line_1',
         'address_line_2',
         'observations',
@@ -32,12 +34,12 @@ class Address extends Model
     // protected $hidden = [];
     // protected $dates = [];
 
-    public function user() 
+    public function user()
     {
         return $this->belongsTo('App\Models\User');
     }
 
-    public function orders() 
+    public function orders()
     {
         return $this->hasMany('App\Models\Order');
     }

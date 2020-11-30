@@ -152,8 +152,6 @@
         return {
         }
     },
-    mounted() {
-    },
     methods: {
         search() {
             if (this.autocomplete.getPlace() !== undefined) {
