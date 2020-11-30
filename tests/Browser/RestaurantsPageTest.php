@@ -134,8 +134,6 @@ class RestaurantsPageTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($restaurant) {
             $browser->visit(new RestaurantsPage)
-            ->assertSee($restaurant->name)
-            ->type('restaurants-searchbar', 'McKing')
             ->assertSee($restaurant->name);
         });
     }
