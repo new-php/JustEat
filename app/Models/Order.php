@@ -22,11 +22,14 @@ class Order extends Model
         'details',
         'shipping',
         'total',
+        'order_status',
         'status',
         'rider_id',
         'delivery_mode',
+        'delivery_time',
+        'payed',
     ];
-    
+
     protected $table = 'orders';
     // protected $primaryKey = 'id';
     // public $timestamps = false;

@@ -12,7 +12,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Restaurant;
 
-class GetUserTest extends TestCase
+class OrderControllerTest extends TestCase
 {
     use RefreshDatabase;
 

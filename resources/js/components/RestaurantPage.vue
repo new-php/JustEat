@@ -330,16 +330,18 @@
                     restaurant_id: this.shopping_cart.restaurant_id,
                     products: this.shopping_cart.products,
                     delivery_mode: this.shopping_cart.delivery_mode,
+                    shipping: this.shopping_cart.shipping,
                 },
-                {
-                    'Accept': 'application/json',
-                })
+                )
                 .then(response => {
-                    let order_id = response.data.id;
+                    let order_id = response.data.data.id;
                     window.location.href = '/order/' + order_id + '/delivery-address';
                 })
                 .catch((error) => {
-                    $('#form-errors').addClass("form-errors-active");
+                    if (error.response.status == 401) {
+                        window.localStorage.removeItem('auth_token')
+                        window.location.href = '/';
+                    }
                 });
         }
     },
@@ -357,7 +359,3 @@
     }
   };
 </script>
-
-<style type="text/css">
-
-</style>

@@ -93,7 +93,7 @@
                             </div>
                             <div class="payment-card-info-line">
                                 <input type="checkbox">
-                                <span class="payment-address">Dirección de facturación: {{ address }} (deselecciona esta casilla para modiificar esta dirección de facturación)</span>
+                                <span class="payment-address">Dirección de facturación: {{ this.order.address }} (deselecciona esta casilla para modiificar esta dirección de facturación)</span>
                             </div>
                         </div>
                         <div class="coupon-section">
@@ -151,7 +151,7 @@
             <div class="payment-type-container ml-2">
                 <div class="your-order payment-type-bottom-line payment-padding">
                     <h4><strong>Tu pedido</strong></h4>
-                    <div class="order-price-item" v-for="item in order_items">
+                    <div class="order-price-item" v-for="item in order.orderItems">
                         <span v-if="item.quantity > 1">{{ item.quantity }} x {{ item.name }}</span>
                         <span v-if="item.quantity <= 1">{{ item.name }}</span>
                         <span>{{ item.price }}</span>
@@ -160,25 +160,25 @@
                 <div class="your-order payment-type-bottom-line payment-padding">
                     <div class="order-price-item mb-2 order-price-sub">
                         <span><strong>Subtotal</strong></span>
-                        <span><strong>{{ this.subtotal() }}</strong></span>
+                        <span><strong>{{ parseFloat(order.total).toFixed(2) }}</strong></span>
                     </div>
                     <div class="order-price-item my-2">
                         <span>Coste de envío</span>
-                        <span>{{ shipping }}</span>
+                        <span>{{ parseFloat(order.shipping).toFixed(2) }}</span>
                     </div>
                     <div class="order-price-item mt-2 order-price-total">
                         <span><strong>Total</strong></span>
-                        <span><strong>{{ this.subtotal() }}</strong></span>
+                        <span><strong>{{ (parseFloat(order.total) + parseFloat(order.shipping)).toFixed(2) }}</strong></span>
                     </div>
                 </div>
                 <div class="order-restaurant payment-type-bottom-line payment-padding text-center">
-                    {{ restaurant }}, {{ address }}
+                    {{ order.restaurant.name }}, {{ order.restaurant.address }}, {{ order.restaurant.postal_code }} {{ order.restaurant.city }}
                 </div>
                 <div class="order-delivery payment-padding">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
                         <path fill="#2A3846" d="M18.729 13.737c1.733 0 3.143 1.411 3.143 3.144s-1.41 3.144-3.143 3.144a3.147 3.147 0 01-3.145-3.144 3.148 3.148 0 013.145-3.144zM14.373 4c.32 0 .616.152.803.405l.065.1 3.321 5.818a1 1 0 01-.073 1.103l-.088.1-3.919 3.918a1 1 0 01-.575.285l-.132.008h-4.63c.14.355.223.74.223 1.144a3.148 3.148 0 01-3.144 3.144 3.147 3.147 0 01-3.143-3.144c0-.323.053-.634.146-.927l.077-.217H3a1 1 0 01-.993-.883L2 14.737v-.959c0-1.41.5-2.703 1.326-3.72l.17-.2L3 9.86a1 1 0 01-.117-1.993L3 7.86h5.456c.755 0 1.433.42 1.77 1.094.426.861 1.138 2.29 1.241 2.472.418.744 1.586.67 2.095.422.738-.36 1.484-1.112 1.865-1.659.106-.153.313-.605.087-1.15l-.066-.138-1.656-2.9h-1.378a1 1 0 01-.117-1.994L12.414 4h1.96zm4.356 11.737c-.631 0-1.145.513-1.145 1.144a1.145 1.145 0 101.145-1.144zm-12.505 0a1.145 1.145 0 000 2.288 1.145 1.145 0 000-2.288z"></path>
                     </svg>
-                    <strong>Entrega: {{ delivery }}</strong>
+                    <strong>Entrega: {{ order.delivery_time }}</strong>
                 </div>
             </div>
         </div>
@@ -188,22 +188,9 @@
 <script>
 export default {
     name: "PaymentMethod",
+    props: ['order'],
     data() {
         return {
-            order: {
-                id: 1
-            },
-            address: "Plaça de Tetuán, s/n, bajo 2",
-            restaurant: "Viva la burger",
-            delivery: "Lo antes posible",
-            order_items: [
-                {
-                    name: "Pizza",
-                    price: 8.00,
-                    quantity: 2,
-                }
-            ],
-            shipping: "1.90€",
             payments: [
                 {
                     id: 1,
@@ -218,9 +205,6 @@ export default {
             months: ["MM", '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',],
             years: ["YY", '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39'],
         }
-    },
-    mounted() {
-      console.log("Example component mounted");
     },
     methods: {
         expand_collapse: function(id) {
@@ -257,26 +241,29 @@ export default {
             if(evt.currentTarget.id == "cash-payment"){
                 payed = false;
             }
-            window.axios.put('/order/'+this.order.id+'/payment',
+            window.axios.put('/order/' + this.order.id + '/pay',
                 {
                     payed: payed,
                 },
-                {
-                    'Accept': 'application/json',
-                }
             )
             .then(response => {
                 window.location.href = '/';
             })
             .catch((error) => {
-                //window.localStorage.removeItem('auth_token')
-                //Si es un error 401, es que el usuario no esta autentificado y entonces borramos el authtoken.
+                if (error.response.status == 401) {
+                    window.localStorage.removeItem('auth_token')
+                    window.location.href = '/';
+                }
+
+                if (error.response.status == 403) {
+                    window.location.href = '/';
+                }
             });
         },
         subtotal: function() {
             var subtotal = 0;
-            for (let i = 0; i < this.order_items.length; i++) {
-                subtotal += this.order_items[i].price * this.order_items[i].quantity;
+            for (let i = 0; i < this.order.orderItems.length; i++) {
+                subtotal += this.order.orderItems[i].price * this.order.orderItems[i].quantity;
             }
 
             return subtotal;
