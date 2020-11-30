@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
@@ -45,9 +46,9 @@ class Category extends Model
     {
         $attribute_name = "image";
         // or use your own disk, defined in config/filesystems.php
-        $disk = 'public'; 
+        $disk = 'public';
         // destination path relative to the disk above
-        $destination_path = "images/categories"; 
+        $destination_path = "images/categories";
 
         // if the image was erased
         if ($value==null) {
@@ -74,7 +75,7 @@ class Category extends Model
             \Storage::disk($disk)->delete($this->{$attribute_name});
 
             // 4. Save the public path to the database
-            // but first, remove "public/" from the path, since we're pointing to it 
+            // but first, remove "public/" from the path, since we're pointing to it
             // from the root folder; that way, what gets saved in the db
             // is the public URL (everything that comes after the domain name)
             $public_destination_path = Str::replaceFirst('public/', '', $destination_path);

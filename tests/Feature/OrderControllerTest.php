@@ -47,15 +47,15 @@ class OrderControllerTest extends TestCase
             'products' => array(
                 array(
                     'id' => $product1->id,
-                    'price' => $product1->price,
                     'quantity' => 3
                 ),
                 array(
                     'id' => $product2->id,
-                    'price' => $product2->price,
                     'quantity' => 5
                 )
-            )
+            ),
+            'shipping' => 3.44,
+            'delivery_mode' => 'cool_delivery'
         );
 
         $response = $this->post('/api/v1/order/', $data, [
@@ -63,8 +63,7 @@ class OrderControllerTest extends TestCase
         ]);
 
         $response->assertStatus(201);
-        $this->assertEquals("SELECTED", json_decode($response->content())->order->status);
-        $this->assertEquals(2, sizeof(json_decode($response->content())->products));
+        $this->assertEquals("CREATED", json_decode($response->content())->data->status);
     }
 
     /**
@@ -153,18 +152,100 @@ class OrderControllerTest extends TestCase
             ['create-servers']
         );
 
-        $order = Order::factory()->create();
+        $order = Order::factory()->create([
+            'user_id' => $user->id,
+            'status' => 'SELECTED'
+        ]);
         $address = Address::factory()->create();
        
         $response = $this->put('/api/v1/order/' . $order->id . '/address', [
-            'address_id' => $address->id,
+            'name' => 'test',
+            'phone' => 'test',
+            'address_line_1' => 'test',
+            'address_line_2' => 'test',
+            'details' => 'test',
+            'city' => 'test',
+            'post_code' => 'test',
         ], [
             'Accept' => 'application/json',
         ]);
 
         $response->assertStatus(200);
-        $this->assertEquals("ADDRESSED", json_decode($response->content())->status);
-        $this->assertEquals($address->id, json_decode($response->content())->address_id);
+        $this->assertEquals("ADDRESSED", json_decode($response->content())->data->status);
+    }
+
+    /**
+     * Test adding address to an order that is not yours, should fail
+     * 
+     * @return void
+     */
+    public function testAddAddressOtherUsersOrder()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create([
+            'user_id' => $user->id + 1,
+            'status' => 'SELECTED'
+        ]);
+        $address = Address::factory()->create();
+       
+        $response = $this->put('/api/v1/order/' . $order->id . '/address', [
+            'name' => 'test',
+            'phone' => 'test',
+            'address_line_1' => 'test',
+            'address_line_2' => 'test',
+            'details' => 'test',
+            'city' => 'test',
+            'post_code' => 'test',
+        ], [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(403);
+    }
+
+    /**
+     * Test adding address to completed order
+     * 
+     * @return void
+     */
+    public function testAddAddressCompletedOrder()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create([
+            'user_id' => $user->id,
+            'status' => 'COMPLETED'
+        ]);
+        $address = Address::factory()->create();
+       
+        $response = $this->put('/api/v1/order/' . $order->id . '/address', [
+            'name' => 'test',
+            'phone' => 'test',
+            'address_line_1' => 'test',
+            'address_line_2' => 'test',
+            'details' => 'test',
+            'city' => 'test',
+            'post_code' => 'test',
+        ], [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(403);
     }
 
     /**
@@ -229,19 +310,84 @@ class OrderControllerTest extends TestCase
             ['create-servers']
         );
 
-        $order = Order::factory()->create();
+        $order = Order::factory()->create([
+            'user_id' => $user->id,
+            'status' => 'SELECTED'
+        ]);
        
         $response = $this->put('/api/v1/order/' . $order->id . '/delivery', [
-            'delivery_mode' => 'mock_delivery',
-            'details' => 'not_null_details',
+            'delivery_time' => 'mock_delivery',
+            'description' => 'not_null_details',
         ], [
             'Accept' => 'application/json',
         ]);
 
         $response->assertStatus(200);
-        $this->assertEquals("TIMED", json_decode($response->content())->status);
-        $this->assertEquals("mock_delivery", json_decode($response->content())->delivery_mode);
-        $this->assertEquals("not_null_details", json_decode($response->content())->details);
+        $this->assertEquals("TIMED", json_decode($response->content())->data->status);
+        $this->assertEquals("mock_delivery", json_decode($response->content())->data->delivery_time);
+        $this->assertEquals("not_null_details", json_decode($response->content())->data->details);
+    }
+
+    /**
+     * Test adding delivery method to an order that is not yours
+     * 
+     * @return void
+     */
+    public function testUnauthorizedDelivery()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create([
+            'user_id' => $user->id + 1,
+            'status' => 'SELECTED'
+        ]);
+       
+        $response = $this->put('/api/v1/order/' . $order->id . '/delivery', [
+            'delivery_time' => 'mock_delivery',
+            'description' => 'not_null_details',
+        ], [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(403);
+    }
+
+    /**
+     * Test adding delivery method when order is completed, should fail
+     * 
+     * @return void
+     */
+    public function testDeliveryCompletedOrder()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create([
+            'user_id' => $user->id,
+            'status' => 'COMPLETED'
+        ]);
+       
+        $response = $this->put('/api/v1/order/' . $order->id . '/delivery', [
+            'delivery_time' => 'mock_delivery',
+            'description' => 'not_null_details',
+        ], [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(403);
     }
 
     /**
@@ -260,17 +406,20 @@ class OrderControllerTest extends TestCase
             ['create-servers']
         );
 
-        $order = Order::factory()->create();
+        $order = Order::factory()->create([
+            'user_id' => $user->id,
+            'status' => 'SELECTED'
+        ]);
        
         $response = $this->put('/api/v1/order/' . $order->id . '/delivery', [
-            'delivery_mode' => 'mock_delivery',
+            'delivery_time' => 'mock_delivery',
         ], [
             'Accept' => 'application/json',
         ]);
 
         $response->assertStatus(200);
-        $this->assertEquals("TIMED", json_decode($response->content())->status);
-        $this->assertEquals("mock_delivery", json_decode($response->content())->delivery_mode);
+        $this->assertEquals("TIMED", json_decode($response->content())->data->status);
+        $this->assertEquals("mock_delivery", json_decode($response->content())->data->delivery_time);
     }
 
     /**
@@ -316,7 +465,10 @@ class OrderControllerTest extends TestCase
             ['create-servers']
         );
 
-        $order = Order::factory()->create();
+        $order = Order::factory()->create([
+            'user_id' => $user->id,
+            'status' => 'SELECTED'
+        ]);
        
         $response = $this->put('/api/v1/order/' . $order->id . '/delivery', [
             'details' => 'not_null_details',
@@ -362,14 +514,79 @@ class OrderControllerTest extends TestCase
             ['create-servers']
         );
 
-        $order = Order::factory()->create();
+        $order = Order::factory()->create([
+            'status' => 'SELECTED',
+            'user_id' => $user->id
+        ]);
        
-        $response = $this->put('/api/v1/order/' . $order->id . '/pay', [], [
+        $response = $this->put('/api/v1/order/' . $order->id . '/pay', [
+            'payed' => true,
+        ], [
             'Accept' => 'application/json',
         ]);
-
+            
         $response->assertStatus(200);
-        $this->assertEquals("PAID - PROCESSING FOR DELIVERY", json_decode($response->content())->status);
+        $this->assertEquals("COMPLETED", json_decode($response->content())->status);
+    }
+
+    /**
+     * Test paying method when order already paid, should not work
+     * 
+     * @return void
+     */
+    public function testPayAlreadyPaid()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create([
+            'status' => 'COMPLETED',
+            'user_id' => $user->id
+        ]);
+       
+        $response = $this->put('/api/v1/order/' . $order->id . '/pay', [
+            'payed' => true,
+        ], [
+            'Accept' => 'application/json',
+        ]);
+            
+        $response->assertStatus(403);
+    }
+
+    /**
+     * Test paying method when paying another's users order, should fail
+     * 
+     * @return void
+     */
+    public function testPayAnotherUsersOrder()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create([
+            'status' => 'SELECTED',
+            'user_id' => $user->id + 1
+        ]);
+       
+        $response = $this->put('/api/v1/order/' . $order->id . '/pay', [
+            'payed' => true,
+        ], [
+            'Accept' => 'application/json',
+        ]);
+            
+        $response->assertStatus(403);
     }
 
     /**

@@ -96,7 +96,7 @@
                         <span class="restaurants-open-ordering">Ordenar por relevantes</span>
                     </div>
                     <div class="restaurants-container">
-                        <section class="restaurant-card" v-for="(restaurant) in restaurants_showing" :key=restaurant.id v-on:click="goToRestaurant(restaurant)">
+                        <section class="restaurant-card" v-for="(restaurant) in restaurants_showing" :key=restaurant.id :id="'restaurant-' + restaurant.id" v-on:click="goToRestaurant(restaurant)">
                             <div class="restaurant-image-container">
                                 <img draggable="false" class="restaurant-image" :src="'storage/' + restaurant.photo">
                             </div>
