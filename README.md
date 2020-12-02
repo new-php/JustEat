@@ -1,6 +1,7 @@
 # JustEat
 [![CodeFactor](https://www.codefactor.io/repository/github/ub-es-2020/justeat/badge/develop)](https://www.codefactor.io/repository/github/ub-es-2020/justeat/overview/develop)
-[![Build Status](https://travis-ci.com/UB-ES-2020/JustEat.svg?branch=develop)](https://travis-ci.com/UB-ES-2020/JustEat)
+[![Build Status](https://travis-ci.org/UB-ES-2020/JustEat.svg?branch=develop)](https://travis-ci.org/UB-ES-2020/JustEat)
+[![Coverage Status](https://coveralls.io/repos/github/UB-ES-2020/JustEat/badge.svg)](https://coveralls.io/github/UB-ES-2020/JustEat)
 ## Requirements
 
 - Apache
