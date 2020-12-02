@@ -28,8 +28,8 @@ before_script:
   - php artisan serve -q &
 
 script:
-    - php artisan test
-    - php artisan dusk
+    - vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml
+    - php artisan dusk --coverage-clover ./tests/logs/clover.xml
 
 branches:
   only:
