@@ -10,6 +10,7 @@ use App\Models\Category;
 class MainPageTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * Asserting the main page view.
      *
