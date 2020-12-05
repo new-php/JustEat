@@ -36,6 +36,10 @@ class Order extends Model
     protected $guarded = ['id'];
     // protected $hidden = [];
     // protected $dates = [];
+    protected $casts = [
+        'shipping' => 'float',
+        'total' => 'float',
+    ];
 
     public function user()
     {
