@@ -42,7 +42,7 @@ class AddressController extends Controller
         $address = Address::create([
             'user_id' => $user->id,
             'address_name' => $validator['address_name'],
-            'name' => $validator['address_name'],
+            'name' => $validator['name'],
             'phone' => $validator['phone'],
             'address_line_1' => $validator['address_line_1'],
             'address_line_2' => isset($validator['address_line_2']) ? $validator['address_line_2'] : null,
@@ -74,9 +74,41 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Address $address)
     {
-        //
+        $user = auth('api')->user();
+
+        if (!$user->addresses()->where('id', $address->id)->exists()) {
+            return response()->json([
+                "message" => 'Permission denied',
+            ], 403);
+        }
+
+        $validator = $request->validate([
+            'address_name' => 'nullable|string',
+            'name' => 'nullable|string',
+            'phone' => 'nullable|string',
+            'address_line_1' => 'nullable|string',
+            'address_line_2' => 'nullable|string',
+            'observations' => 'nullable|string',
+            'city' => 'nullable|string',
+            'postal_code' => 'nullable|string'
+        ]);
+
+        $address->update([
+            'address_name' => isset($validator['address_name']) ? $validator['address_name'] : $address->address_name,
+            'name' => isset($validator['name']) ? $validator['name'] : $address->name,
+            'phone' => isset($validator['phone']) ? $validator['phone'] : $address->phone,
+            'address_line_1' => isset($validator['address_line_1']) ? $validator['address_line_1'] : $address->address_line_1,
+            'address_line_2' => isset($validator['address_line_2']) ? $validator['address_line_2'] : $address->address_line_2,
+            'observations' => isset($validator['observations']) ? $validator['observations'] : $address->observations,
+            'city' => isset($validator['city']) ? $validator['city'] : $address->city,
+            'postal_code' => isset($validator['postal_code']) ? $validator['postal_code'] : $address->postal_code,
+        ]);
+
+        return response()->json([
+            'data' => $address,
+        ], 200);
     }
 
     /**
