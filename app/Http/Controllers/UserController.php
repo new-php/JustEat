@@ -35,7 +35,11 @@ class UserController extends Controller
      */
     public function show()
     {
-        return ['data' => auth('api')->user()];
+        $user = auth('api')->user();
+
+        $user->load('addresses', 'paymentMethods');
+
+        return ['data' => $user];
     }
 
     /**
