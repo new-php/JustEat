@@ -27,7 +27,6 @@ class UserTest extends TestCase
             ->create();
 
         $response = $this->actingAs($user, 'api')->getJson('/api/v1/user');
-
         $response->assertStatus(200)
             ->assertJsonStructure(
                 [
@@ -36,6 +35,8 @@ class UserTest extends TestCase
                         'name',
                         'email',
                         'phone',
+                        'sms_offers',
+                        'email_offers',
                         'email_verified_at',
                         'updated_at',
                         'created_at',
@@ -73,6 +74,8 @@ class UserTest extends TestCase
                         'name' => $user->name,
                         'email' => $user->email,
                         'phone' => $user->phone,
+                        'sms_offers' => $user->sms_offers,
+                        'email_offers' => $user->email_offers,
                         'email_verified_at' => $user->email_verified_at,
                         'updated_at' => $user->updated_at,
                         'created_at' => $user->created_at,
@@ -94,10 +97,10 @@ class UserTest extends TestCase
                         ],
                         'payment_methods' => [
                             [
-                                'id' => $user->PaymentMethods()->first()->id,
-                                'user_id' => $user->PaymentMethods()->first()->user_id,
-                                'created_at' => $user->PaymentMethods()->first()->created_at,
-                                'updated_at' => $user->PaymentMethods()->first()->updated_at,
+                                'id' => $user->paymentMethods()->first()->id,
+                                'user_id' => $user->paymentMethods()->first()->user_id,
+                                'created_at' => $user->paymentMethods()->first()->created_at,
+                                'updated_at' => $user->paymentMethods()->first()->updated_at,
                             ],
                         ],
                     ],
@@ -144,6 +147,8 @@ class UserTest extends TestCase
                 'name' => 'test',
                 'email' => 'test@test.com',
                 'phone' => '1234',
+                'sms_offers' => false,
+                'email_offers' => false,
             ],
         );
 
@@ -155,6 +160,8 @@ class UserTest extends TestCase
                         'name',
                         'email',
                         'phone',
+                        'sms_offers',
+                        'email_offers',
                         'email_verified_at',
                         'updated_at',
                         'created_at',
@@ -192,6 +199,8 @@ class UserTest extends TestCase
                         'name' => 'test',
                         'email' => 'test@test.com',
                         'phone' => '1234',
+                        'sms_offers' => 0,
+                        'email_offers' => 0,
                         'email_verified_at' => $user->email_verified_at,
                         'updated_at' => $user->updated_at,
                         'created_at' => $user->created_at,
@@ -213,10 +222,10 @@ class UserTest extends TestCase
                         ],
                         'payment_methods' => [
                             [
-                                'id' => $user->PaymentMethods()->first()->id,
-                                'user_id' => $user->PaymentMethods()->first()->user_id,
-                                'created_at' => $user->PaymentMethods()->first()->created_at,
-                                'updated_at' => $user->PaymentMethods()->first()->updated_at,
+                                'id' => $user->paymentMethods()->first()->id,
+                                'user_id' => $user->paymentMethods()->first()->user_id,
+                                'created_at' => $user->paymentMethods()->first()->created_at,
+                                'updated_at' => $user->paymentMethods()->first()->updated_at,
                             ],
                         ],
                     ],
@@ -241,6 +250,8 @@ class UserTest extends TestCase
                 'name' => 'test',
                 'email' => 'test@test.com',
                 'phone' => '1234',
+                'sms_offers' => false,
+                'email_offers' => false,
             ],
         );
 
@@ -274,6 +285,8 @@ class UserTest extends TestCase
                 'name' => 'test',
                 'email' => 'test@test.com',
                 'phone' => '1234',
+                'sms_offers' => false,
+                'email_offers' => false,
             ],
         );
 
@@ -313,6 +326,8 @@ class UserTest extends TestCase
                 'name' => $param_invalid,
                 'email' => $param_invalid,
                 'phone' => $param_invalid,
+                'sms_offers' => "string",
+                'email_offers' => "string",
             ],
         );
 
@@ -324,6 +339,8 @@ class UserTest extends TestCase
                             'email' => [],
                             'name' => [],
                             'phone' => [],
+                            'sms_offers' => [],
+                            'email_offers' => [],
                         ],
                     'message',
                 ],
@@ -341,6 +358,12 @@ class UserTest extends TestCase
                             ],
                             'phone' => [
                                 'The phone may not be greater than 255 characters.',
+                            ],
+                            'sms_offers' => [
+                                'The sms offers field must be true or false.',
+                            ],
+                            'email_offers' => [
+                                'The email offers field must be true or false.',
                             ],
                         ],
                     'message' => 'The given data was invalid.',
