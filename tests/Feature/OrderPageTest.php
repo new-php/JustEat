@@ -72,4 +72,35 @@ class OrderPageTest extends TestCase
         $response->assertStatus(302)
             ->assertRedirect('/');
     }
+
+    /**
+     * Assert payment view
+     *
+     * @return void
+     */
+    public function testOrderPaymentPage()
+    {
+        $order = Order::factory()->create();
+
+        $response = $this->get('/order/' . $order->id . '/payment');
+
+        $response->assertStatus(200)
+            ->assertViewIs('order.payment')
+            ->assertViewHas('order', $order->load('restaurant', 'orderItems', 'address'));
+    }
+
+    /**
+     * Assert payment view fail
+     *
+     * @return void
+     */
+    public function testOrderPaymentPageFail()
+    {
+        $order = Order::factory(['status' => 'COMPLETED'])->create();
+
+        $response = $this->get('/order/' . $order->id . '/payment');
+
+        $response->assertStatus(302)
+            ->assertRedirect('/');
+    }
 }
