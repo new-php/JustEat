@@ -47,7 +47,23 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = auth('api')->user();
+
+        if ($user->id != $id) {
+            return response()->json([
+                'message' => 'Not authorized',
+            ], 403);
+        }
+
+        $validator = $request->validate([
+            'name' => 'nullable|max:255',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|max:255',
+        ]);
+
+        $user->update($validator);
+
+        return ['data' => $user->fresh()->load('addresses', 'paymentMethods')];
     }
 
     /**
