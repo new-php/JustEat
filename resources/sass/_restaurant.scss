@@ -252,6 +252,68 @@
                 }
             }
         }
+
+        .restaurant-info{
+            margin: 30px 0;
+
+            .restaurant-title-ubi{
+                font-size: 1.5rem;
+            }
+
+            .restaurant-title-info{
+                font-size: 1.5rem;
+            }
+
+            .schedules-title-container{
+                margin-top: 10%;
+                padding-top: 2%;
+                border-top: 0.5px solid #e2e6e9;
+
+                .restaurant-title-schedules{
+                    font-size: 1.5rem;
+                }
+
+            }
+
+            .restaurant-domicilio-container{
+                padding-top: 1%;
+
+                .schedule-container{
+                    border-bottom: 0.5px solid #e2e6e9;
+                    padding-top: 3%;
+                    padding-bottom: 3%;
+
+                    .time{
+                        float: right;
+                    }
+                }
+            }
+        }
+
+        .restaurant-tabs-schedules {
+            text-align: center;
+            background: #FFF;
+            border-bottom: 0.5px solid #e2e6e9;
+            position: relative;
+            display: flex;
+            margin: 16px 0;
+
+            .restaurant-tab-schedules {
+                width: 50%;
+                padding: 16px;
+                cursor: pointer;
+                font-size: 0.9rem;
+            }
+
+            .restaurant-tab-schedules:hover {
+                border-bottom: 2px solid #ff8000;
+            }
+
+            .restaurant-tab-schedules-selected {
+                font-weight: bold;
+                border-bottom: 2px solid #ff8000;
+            }
+        }
     }
 
     .restaurant-cart {
