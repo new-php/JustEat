@@ -117,9 +117,19 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Address $address)
     {
-        //
+        $user = auth('api')->user();
+
+        if (!$user->addresses()->where('id', $address->id)->exists()) {
+            return response()->json([
+                "message" => 'Permission denied',
+            ], 403);
+        }
+
+        $address->delete();
+
+        return response()->json([], 200);
     }
 
 }

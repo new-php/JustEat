@@ -286,4 +286,78 @@ class AddressControllerTest extends TestCase
         $response->assertStatus(404);
     }
 
+    /**
+     * Delete an address correctly
+     *
+     * @return void
+     */
+    public function testDeleteAddressOk()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $address = Address::factory()->create([
+            'user_id' => $user->id,
+        ]);
+
+
+        $response = $this->delete('/api/v1/address/' . $address->id);
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * Delete an address that isn't yours, should fail
+     *
+     * @return void
+     */
+    public function testDeleteOtherUsersAddress()
+    {
+        $user = User::factory()->create();
+        $user2 = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $address = Address::factory()->create([
+            'user_id' => $user2->id,
+        ]);
+
+
+        $response = $this->delete('/api/v1/address/' . $address->id);
+
+        $response->assertStatus(403);
+    }
+
+    /**
+     * Delete an address that isn't yours, should fail
+     *
+     * @return void
+     */
+    public function testDeleteNonExistingAddress()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $response = $this->delete('/api/v1/address/32');
+
+        $response->assertStatus(404);
+    }
+
 }

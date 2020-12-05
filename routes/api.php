@@ -41,7 +41,7 @@ Route::prefix(config('api.version'))->group(function () {
         Route::put('order/{order}/pay', 'OrderController@pay')->name('order.pay');
         Route::post('address', 'AddressController@store')->name('address.new');
         Route::put('address/{address}', 'AddressController@update')->name('address.put');
-
+        Route::delete('address/{address}', 'AddressController@destroy')->name('address.remove');
 
         Route::get('user', 'UserController@show')->name('user');
     });
