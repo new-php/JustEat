@@ -30,27 +30,29 @@ class AddressController extends Controller
 
         $validator = $request->validate([
             'address_name' => 'required|string',
+            'name' => 'required|string',
             'phone' => 'required|string',
             'address_line_1' => 'required|string',
             'address_line_2' => 'nullable|string',
             'observations' => 'nullable|string',
             'city' => 'required|string',
-            'postal_code' => 'required|integer'
+            'postal_code' => 'required|string'
         ]);
 
-        $order = Order::create([
+        $address = Address::create([
             'user_id' => $user->id,
             'address_name' => $validator['address_name'],
+            'name' => $validator['address_name'],
             'phone' => $validator['phone'],
             'address_line_1' => $validator['address_line_1'],
-            'address_line_2' => $validator['address_line_2'],
-            'observations' => $validator['observations'],
+            'address_line_2' => isset($validator['address_line_2']) ? $validator['address_line_2'] : null,
+            'observations' => isset($validator['observations']) ? $validator['observations'] : null,
             'city' => $validator['city'],
             'postal_code' => $validator['postal_code'],
         ]);
 
         return response()->json([
-            'data' => $order,
+            'data' => $address,
         ], 201);
     }
 
