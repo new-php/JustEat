@@ -41,4 +41,35 @@ class OrderPageTest extends TestCase
         $response->assertStatus(302)
             ->assertRedirect('/');
     }
+
+    /**
+     * Assert delivery time view
+     *
+     * @return void
+     */
+    public function testOrderDeliveryTimePage()
+    {
+        $order = Order::factory()->create();
+
+        $response = $this->get('/order/' . $order->id . '/delivery-time');
+
+        $response->assertStatus(200)
+            ->assertViewIs('order.delivery-time')
+            ->assertViewHas('order', $order);
+    }
+
+    /**
+     * Assert delivery time view fail
+     *
+     * @return void
+     */
+    public function testOrderDeliveryTimePageFail()
+    {
+        $order = Order::factory(['status' => 'COMPLETED'])->create();
+
+        $response = $this->get('/order/' . $order->id . '/delivery-time');
+
+        $response->assertStatus(302)
+            ->assertRedirect('/');
+    }
 }
