@@ -39,6 +39,7 @@ Route::prefix(config('api.version'))->group(function () {
         Route::put('order/{order}/address', 'OrderController@addAddress')->name('order.address');
         Route::put('order/{order}/delivery', 'OrderController@addDeliveryTime')->name('order.deliverytime');
         Route::put('order/{order}/pay', 'OrderController@pay')->name('order.pay');
+        Route::get('order/{order}', 'OrderController@show')->name('order.info');
         Route::post('address', 'AddressController@store')->name('address.new');
         Route::put('address/{address}', 'AddressController@update')->name('address.put');
 
