@@ -75,7 +75,7 @@ class OrderModelTest extends TestCase
     }
 
     /**
-     * Orders relationship
+     * Order Items relationship
      *
      * @return void
      */

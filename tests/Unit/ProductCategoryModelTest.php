@@ -26,7 +26,7 @@ class ProductCategoryModelTest extends TestCase
     }
 
     /**
-     * User relationship
+     * Restaurant relationship
      *
      * @return void
      */
