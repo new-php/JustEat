@@ -18,7 +18,7 @@ class OrderPageTest extends TestCase
      */
     public function testOrderDeliveryAddressPage()
     {
-        $order = Order::factory()->create();
+        $order = Order::factory(['status' => 'CREATED'])->create();
 
         $response = $this->get('/order/' . $order->id . '/delivery-address');
 
@@ -49,7 +49,7 @@ class OrderPageTest extends TestCase
      */
     public function testOrderDeliveryTimePage()
     {
-        $order = Order::factory()->create();
+        $order = Order::factory(['status' => 'ADDRESSED'])->create();
 
         $response = $this->get('/order/' . $order->id . '/delivery-time');
 
@@ -80,7 +80,7 @@ class OrderPageTest extends TestCase
      */
     public function testOrderPaymentPage()
     {
-        $order = Order::factory()->create();
+        $order = Order::factory(['status' => 'TIMED'])->create();
 
         $response = $this->get('/order/' . $order->id . '/payment');
 
