@@ -13,10 +13,10 @@ class AddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    /*public function index()
     {
         //
-    }
+    }*/
 
     /**
      * Store a newly created resource in storage.
@@ -24,7 +24,7 @@ class AddressController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){ 
+    public function store(Request $request){
 
         $user = auth('api')->user();
 
@@ -62,10 +62,10 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    /*public function show($id)
     {
         //
-    }
+    }*/
 
     /**
      * Update the specified resource in storage.
