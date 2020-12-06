@@ -19,7 +19,7 @@ class PaymentTest extends DuskTestCase
 	 **/
 	public function testDefaultRadio()
     {
-        $order = Order::factory()->create();
+        $order = Order::factory(['status' => 'TIMED'])->create();
 
         $this->browse(function (Browser $browser) use ($order) {
             $browser->visit(new OrderPaymentPage($order->id))
@@ -37,7 +37,7 @@ class PaymentTest extends DuskTestCase
 	 **/
 	public function testCardRadio()
     {
-        $order = Order::factory()->create();
+        $order = Order::factory(['status' => 'TIMED'])->create();
 
         $this->browse(function (Browser $browser) use ($order) {
             $browser->visit(new OrderPaymentPage($order->id))
@@ -53,7 +53,7 @@ class PaymentTest extends DuskTestCase
 	 **/
 	public function testPaypalRadio()
     {
-        $order = Order::factory()->create();
+        $order = Order::factory(['status' => 'TIMED'])->create();
 
         $this->browse(function (Browser $browser) use ($order) {
             $browser->visit(new OrderPaymentPage($order->id))
@@ -69,7 +69,7 @@ class PaymentTest extends DuskTestCase
 	 **/
 	public function testCashRadio()
     {
-        $order = Order::factory()->create();
+        $order = Order::factory(['status' => 'TIMED'])->create();
 
         $this->browse(function (Browser $browser) use ($order) {
             $browser->visit(new OrderPaymentPage($order->id))
@@ -88,7 +88,7 @@ class PaymentTest extends DuskTestCase
 	 **/
 	public function testDefaultCoupon()
     {
-        $order = Order::factory()->create();
+        $order = Order::factory(['status' => 'TIMED'])->create();
 
 		$this->browse(function (Browser $browser) use ($order) {
             $browser->visit(new OrderPaymentPage($order->id))
@@ -108,7 +108,7 @@ class PaymentTest extends DuskTestCase
 	 **/
 	public function testCardCoupon()
     {
-        $order = Order::factory()->create();
+        $order = Order::factory(['status' => 'TIMED'])->create();
 
         $this->browse(function (Browser $browser) use ($order) {
             $browser->visit(new OrderPaymentPage($order->id))
@@ -126,7 +126,7 @@ class PaymentTest extends DuskTestCase
 	 **/
 	public function testPaypalCoupon()
     {
-        $order = Order::factory()->create();
+        $order = Order::factory(['status' => 'TIMED'])->create();
 
         $this->browse(function (Browser $browser) use ($order) {
             $browser->visit(new OrderPaymentPage($order->id))

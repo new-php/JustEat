@@ -35,6 +35,7 @@ Route::prefix(config('api.version'))->group(function () {
     Route::get('restaurants', 'RestaurantController@index');
 
     Route::middleware('auth:api')->group(function() {
+        Route::get('orders', 'OrderController@index')->name('order.get_all');
         Route::post('order', 'OrderController@store')->name('order.new');
         Route::put('order/{order}/address', 'OrderController@addAddress')->name('order.address');
         Route::put('order/{order}/delivery', 'OrderController@addDeliveryTime')->name('order.deliverytime');
@@ -42,8 +43,9 @@ Route::prefix(config('api.version'))->group(function () {
         Route::get('order/{order}', 'OrderController@show')->name('order.info');
         Route::post('address', 'AddressController@store')->name('address.new');
         Route::put('address/{address}', 'AddressController@update')->name('address.put');
+        Route::delete('address/{address}', 'AddressController@destroy')->name('address.remove');
 
-
-        Route::get('user', 'UserController@show')->name('user');
+        Route::get('user', 'UserController@show')->name('user.get');
+        Route::put('user/{id}', 'UserController@update')->name('user.edit_info');
     });
 });

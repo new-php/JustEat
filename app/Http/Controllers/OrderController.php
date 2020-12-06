@@ -19,7 +19,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth('api')->user();
+
+        $orders = $user->orders()->with('restaurant', 'orderItems')->get();
+
+        return ['data' => $orders];
     }
 
     /**
