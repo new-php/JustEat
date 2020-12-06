@@ -6,8 +6,8 @@
 @endsection
 
 @section('content')
-<user-management-page>
-</user-management-page>
+<user-account>
+</user-account>
 @endsection
 
 @section('footer')
