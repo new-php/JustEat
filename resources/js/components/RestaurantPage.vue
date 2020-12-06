@@ -121,6 +121,60 @@
                     </section>
                 </main>
                 <div class="restaurant-more-info-container" v-if="tab_selected === 'info'">
+                    <section class="restaurant-info">
+
+                        <span class="restaurant-title-ubi"><strong>Dónde estamos</strong></span>
+                        <div class="restaurant-photo-ubi">
+                            <img draggable="false" :src="'storage/images/EjemploUbi.png'">
+                        </div>
+
+                        <span class="restaurant-title-info"><strong>Sobre nosotros</strong></span>
+                        <div>
+                            <!-- <p>{{ restaurant.description }}</p> -->
+                            <p>
+                                ¿Con ganas de comida americana? Estás en el sitio indicado. En el restaurante <br>
+                                McDonald's encontrarás una gran variedad de platos típicos americanos. ¡No lo dudes, <br>
+                                pide ahora en JUST EAT y disfruta de los mejores manjares de una de las gastronomías <br>
+                                más punteras!
+                            </p>
+                        </div>
+
+                        <div class="schedules-title-container">
+                            <span class="restaurant-title-schedules"><strong>Horario de apertura</strong></span>
+                        </div>
+
+                        <div class="restaurant-tabs-schedules">
+                            <div id="domicilio-tab" class="restaurant-tab-schedules restaurant-tab-schedules-selected" v-on:click="change_tab_2('domicilio')">
+                                A domicilio
+                            </div>
+                            <div id="recoger-tab" class="restaurant-tab-schedules" v-on:click="change_tab_2('recoger')">
+                                Para recoger
+                            </div>
+                        </div>
+
+                        <div class="restaurant-domicilio-container" v-if="tab_selected_2 === 'domicilio'">
+                            <section v-for="schedule in restaurant.schedules" :key="schedule.id">
+                                <div class="schedule-container">
+                                    {{schedule.weekday}}
+                                    <span class="time">
+                                        {{schedule.open}} - {{schedule.close}}
+                                    </span>
+                                </div>
+                            </section>
+                        </div>
+
+                        <div class="restaurant-domicilio-container" v-if="tab_selected_2 === 'recoger'">
+                            <section v-for="schedule in restaurant.schedules" :key="schedule.id">
+                                <div class="schedule-container">
+                                    {{schedule.weekday}}
+                                    <span class="time">
+                                        Cerrado
+                                    </span>
+                                </div>
+                            </section>
+                        </div>
+
+                    </section>
                 </div>
             </div>
             <div class="restaurant-cart">
@@ -203,6 +257,7 @@
         return {
             search_input: "",
             tab_selected: 'menu',
+            tab_selected_2: 'domicilio',
             sidebar_categories_offset: 0,
             cart_offset: 0,
             cart_width: 0,
@@ -237,6 +292,17 @@
                 $('#info-tab').addClass('restaurant-tab-selected');
                 $('#menu-tab').removeClass('restaurant-tab-selected');
                 this.tab_selected = 'info';
+            }
+        },
+        change_tab_2: function(tab2) {
+            if (tab2 === 'domicilio') {
+                $('#domicilio-tab').addClass('restaurant-tab-schedules-selected');
+                $('#recoger-tab').removeClass('restaurant-tab-schedules-selected');
+                this.tab_selected_2 = 'domicilio';
+            } else {
+                $('#recoger-tab').addClass('restaurant-tab-schedules-selected');
+                $('#domicilio-tab').removeClass('restaurant-tab-schedules-selected');
+                this.tab_selected_2 = 'recoger';
             }
         },
         handleScroll: function(event) {
