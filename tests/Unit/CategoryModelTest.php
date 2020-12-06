@@ -9,6 +9,8 @@ use App\Models\Restaurant;
 
 class CategoryModelTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * Restaurants relationship
      *
