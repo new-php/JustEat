@@ -70,7 +70,7 @@ class User extends Authenticatable
 
     public function restaurants()
     {
-        return $this->hasMany('App\Models\Restaurants');
+        return $this->hasMany('App\Models\Restaurant');
     }
 
     public function paymentMethods()
