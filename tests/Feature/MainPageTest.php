@@ -19,7 +19,6 @@ class MainPageTest extends TestCase
     public function testMainPage()
     {
         $category1 = Category::factory()->create();
-        $category2 = Category::factory()->create();
 
         $response = $this->get('/');
 
