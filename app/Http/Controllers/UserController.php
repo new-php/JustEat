@@ -63,6 +63,8 @@ class UserController extends Controller
             'name' => 'nullable|max:255',
             'email' => 'nullable|email|max:255',
             'phone' => 'nullable|max:255',
+            'sms_offers' => 'nullable|boolean',
+            'email_offers' => 'nullable|boolean',
         ]);
 
         $user->update($validator);
