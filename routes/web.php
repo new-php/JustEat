@@ -35,6 +35,8 @@ Route::get('/', 'HomeController@mainPage')->name('mainpage');
 Route::get('/restaurants', 'RestaurantsViewController@restaurantsPage')->name('restaurants');
 Route::get('/restaurants/{restaurant}', 'RestaurantsViewController@restaurantPage')->name('restaurant');
 
+Route::get('/account', 'UserViewController@userAccountPage')->name('user.account');
+
 /*
 |
 | Order Routes Views
