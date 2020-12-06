@@ -17,6 +17,7 @@ Vue.component('restaurants-page', require('./components/RestaurantsPage.vue').de
 Vue.component('order-delivery-address', require('./components/OrderDeliveryAddress.vue').default);
 Vue.component('order-delivery-time', require('./components/OrderDeliveryTime.vue').default);
 Vue.component('order-payment', require('./components/OrderPayment.vue').default);
+Vue.component('user-management-page', require('./components/UserManagementPage.vue').default);
 
 const app = new Vue({
     el: '#app',
