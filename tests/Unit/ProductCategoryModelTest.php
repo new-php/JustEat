@@ -20,7 +20,7 @@ class ProductCategoryModelTest extends TestCase
     public function testProductsRelationship()
     {
         $product_category = ProductCategory::factory()->create();
-        $products = Product::factory()->create();
+        $product = Product::factory()->create();
 
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $product_category->products);
     }
