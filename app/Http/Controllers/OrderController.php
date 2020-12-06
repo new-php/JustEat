@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\Address;
+use App\Models\Restaurant;
 
 class OrderController extends Controller
 {
@@ -170,9 +172,35 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        //
+        $user = auth('api')->user();
+
+        if (!$user->orders()->where('id', $order->id)->exists() || $order->status == 'COMPLETED') {
+            return response()->json([
+                "message" => 'Permission denied',
+            ], 403);
+        }
+
+        $address = Address::where('id', '=', $order->address_id)->get();
+        $restaurant = Restaurant::where('id', '=', $order->restaurant_id)->get();
+        $order_items = OrderItem::where('order_id', '=', $order->id)->get();
+        $products = array();
+
+        foreach ($order_items as &$order_item) {
+            $product = Product::where('id', '=', $order_item->product_id)->get();
+            array_push($products, $product);
+        }
+
+        return response()->json([
+            'data' => [
+                'order' => $order,
+                'address' => $address,
+                'restaurant' => $restaurant,
+                'order_items' => $order_items,
+                'products' => $products
+            ]
+            ], 200);
     }
 
     /**

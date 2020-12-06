@@ -804,4 +804,130 @@ class OrderTest extends TestCase
 
         $response->assertStatus(401);
     }
+
+    /**
+     * Test show method fails when showing another's users order
+     * 
+     * @return void
+     */
+    public function testShowAnotherUsersOrder()
+    {
+        $user = User::factory()->create();
+        $user2 = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create([
+            'status' => 'SELECTED',
+            'user_id' => $user2->id
+        ]);
+       
+        $response = $this->get('/api/v1/order/' . $order->id, [
+            'payed' => true,
+        ], [
+            'Accept' => 'application/json',
+        ]);
+            
+        $response->assertStatus(403);
+    }
+
+    /**
+     * Test show method wrong id, should fail
+     * 
+     * @return void
+     */
+    public function testShowWrongId()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create();
+       
+        $response = $this->get('/api/v1/order/300', [], [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(404);
+    }
+
+    /**
+     * Test show method
+     * 
+     * @return void
+     */
+    public function testShowMethod()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+        
+        $restaurant = Restaurant::factory()->create();
+        $address = Address::factory()->create([
+            'user_id' => $user->id,
+        ]);
+        $product1 = Product::factory()->create([
+            'restaurant_id' => $restaurant->id,
+            'price' => 12.33,
+        ]);
+        $product2 = Product::factory()->create([
+            'restaurant_id' => $restaurant->id,
+            'price' => 1.50,
+        ]);
+
+        $data = array(
+            'restaurant_id' => $restaurant->id,
+            'products' => array(
+                array(
+                    'id' => $product1->id,
+                    'quantity' => 3
+                ),
+                array(
+                    'id' => $product2->id,
+                    'quantity' => 5
+                )
+            ),
+            'shipping' => 3.44,
+            'delivery_mode' => 'cool_delivery'
+        );
+
+        $postResponse = $this->post('/api/v1/order/', $data, [
+            'Accept' => 'application/json',
+        ]);
+
+        $order_id = json_decode($postResponse->content())->data->id;
+
+        Order::where('id', $order_id)->update([
+            'address_id' => $address->id,
+        ]);
+
+        $response = $this->get('/api/v1/order/' . $order_id, [], [
+            'Accept' => 'application/json',
+        ]);
+
+        $this->assertEquals($order_id, json_decode($response->content())->data->order->id);
+        $this->assertEquals($user->id, json_decode($response->content())->data->order->user_id);;
+        $this->assertEquals($restaurant->id, json_decode($response->content())->data->order->restaurant_id);
+        $this->assertEquals($address->id, json_decode($response->content())->data->order->address_id);
+        $this->assertEquals(44.49, json_decode($response->content())->data->order->total);
+        $this->assertEquals($restaurant->id, array_values(json_decode($response->content())->data->restaurant)[0]->id);
+        $this->assertEquals($address->id, array_values(json_decode($response->content())->data->address)[0]->id);
+        $this->assertEquals(2, count(json_decode($response->content())->data->order_items));
+        $this->assertEquals(2, count(json_decode($response->content())->data->products));
+    }
 }
