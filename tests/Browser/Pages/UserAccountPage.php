@@ -4,7 +4,7 @@ namespace Tests\Browser\Pages;
 
 use Laravel\Dusk\Browser;
 
-class UserManagementPage extends Page
+class UserAccountPage extends Page
 {
     /**
      * Get the URL for the page.
@@ -13,7 +13,7 @@ class UserManagementPage extends Page
      */
     public function url()
     {
-        return '/user-management-page';
+        return '/account';
     }
 
     /**
