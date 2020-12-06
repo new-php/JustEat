@@ -13,7 +13,7 @@ class AddressModelTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * Address relationship
+     * User relationship
      *
      * @return void
      */
