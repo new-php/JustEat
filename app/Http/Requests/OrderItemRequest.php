@@ -27,7 +27,7 @@ class OrderItemRequest extends FormRequest
     {
         return [
             'order_id' => 'required',
-            'restaurant_id' => 'required',
+            'product_id' => 'required',
             'quantity' => 'required|numeric',
             'price' => 'required|numeric',
 

@@ -35,6 +35,7 @@ Route::prefix(config('api.version'))->group(function () {
     Route::get('restaurants', 'RestaurantController@index');
 
     Route::middleware('auth:api')->group(function() {
+        Route::get('orders', 'OrderController@index')->name('order.get_all');
         Route::post('order', 'OrderController@store')->name('order.new');
         Route::put('order/{order}/address', 'OrderController@addAddress')->name('order.address');
         Route::put('order/{order}/delivery', 'OrderController@addDeliveryTime')->name('order.deliverytime');
