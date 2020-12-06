@@ -43,6 +43,7 @@ Route::prefix(config('api.version'))->group(function () {
         Route::put('address/{address}', 'AddressController@update')->name('address.put');
 
 
-        Route::get('user', 'UserController@show')->name('user');
+        Route::get('user', 'UserController@show')->name('user.get');
+        Route::put('user/{id}', 'UserController@update')->name('user.edit_info');
     });
 });
