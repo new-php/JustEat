@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::prefix(config('api.version'))->group(function () {
     // Write routes here to be APP_URL/api/API_VERSION/...
 
@@ -30,9 +26,6 @@ Route::prefix(config('api.version'))->group(function () {
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
-
-
-    Route::get('restaurants', 'RestaurantController@index');
 
     Route::middleware('auth:api')->group(function() {
         Route::get('orders', 'OrderController@index')->name('order.get_all');

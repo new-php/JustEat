@@ -12,6 +12,8 @@ use App\Models\DeliveryZone;
 
 class RestaurantPageTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * Assert restaurants view
      *

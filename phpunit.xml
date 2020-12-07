@@ -19,6 +19,7 @@
         <exclude>
             <directory suffix=".php">./app/Http/Controllers/Admin</directory>
             <directory suffix=".php">./app/Http/Requests</directory>
+            <file>./app/Providers/BroadcastServiceProvider.php</file>
         </exclude>
     </coverage>
     <php>
