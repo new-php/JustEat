@@ -18,6 +18,8 @@ Vue.component('order-delivery-address', require('./components/OrderDeliveryAddre
 Vue.component('order-delivery-time', require('./components/OrderDeliveryTime.vue').default);
 Vue.component('order-payment', require('./components/OrderPayment.vue').default);
 Vue.component('user-account', require('./components/UserAccount.vue').default);
+Vue.component('user-information', require('./components/UserInformation.vue').default);
+
 
 const app = new Vue({
     el: '#app',
