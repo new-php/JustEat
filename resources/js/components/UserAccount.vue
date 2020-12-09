@@ -24,9 +24,7 @@
 
             <main class="restaurant-products-container" v-if="tab_selected === 'info-user'">  
                 <section>
-
-                    Hola
-
+                    <user-information :id="user.id" :name="user.name" :email="user.email" :phone="user.phone"></user-information>
                 </section>
             </main>
 
@@ -63,9 +61,20 @@
 
     data() {
         return {
+            user: "",
             tab_selected: 'info-user',
             name_tab_selected: 'Información de la cuenta'
         }
+    },
+
+    mounted(){
+        window.axios.get('user')
+            .then(response => {
+                this.user = response.data.data;
+            })
+            .catch(response => {
+                console.log(response);
+            });
     },
 
     methods: {
