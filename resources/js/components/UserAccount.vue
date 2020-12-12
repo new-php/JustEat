@@ -44,9 +44,7 @@
 
             <main class="restaurant-products-container" v-if="tab_selected === 'contacto'">
                 <section>
-
-                    Hey
-
+                    <user-contact :id="user.id" :sms_offers="user.sms_offers" :email_offers="user.email_offers"></user-contact>
                 </section>
             </main>
         </div>
@@ -71,7 +69,6 @@
                 this.user = response.data.data;
             })
             .catch(response => {
-                console.log(response);
             });
     },
 
