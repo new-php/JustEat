@@ -38,9 +38,7 @@
 
             <main class="restaurant-products-container" v-if="tab_selected === 'dir-reparto'">
                 <section>
-
-                    Hi
-
+                    <user-addresses :addresses="user.addresses"></user-addresses>
                 </section>
             </main>
 
