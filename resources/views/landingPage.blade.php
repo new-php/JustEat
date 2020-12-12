@@ -1,5 +1,3 @@
-@extends('layouts.app')
-
 <!DOCTYPE HTML>
 <html>
 	<head>
