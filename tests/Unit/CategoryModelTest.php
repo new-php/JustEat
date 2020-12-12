@@ -22,5 +22,7 @@ class CategoryModelTest extends TestCase
         $restaurant = Restaurant::factory()->create();
 
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $category->restaurants);
+
+        $category->delete();
     }
 }
