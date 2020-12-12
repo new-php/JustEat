@@ -54,6 +54,7 @@ class UserTest extends TestCase
                                 'postal_code',
                                 'created_at',
                                 'updated_at',
+                                'deleted_at',
                             ],
                         ],
                         'payment_methods' => [
@@ -93,6 +94,7 @@ class UserTest extends TestCase
                                 'postal_code' => $user->addresses()->first()->postal_code,
                                 'created_at' => $user->addresses()->first()->created_at,
                                 'updated_at' => $user->addresses()->first()->updated_at,
+                                'deleted_at'=> $user->addresses()->first()->deleted_at,
                             ],
                         ],
                         'payment_methods' => [
@@ -179,6 +181,7 @@ class UserTest extends TestCase
                                 'postal_code',
                                 'created_at',
                                 'updated_at',
+                                'deleted_at',
                             ],
                         ],
                         'payment_methods' => [
@@ -218,6 +221,7 @@ class UserTest extends TestCase
                                 'postal_code' => $user->addresses()->first()->postal_code,
                                 'created_at' => $user->addresses()->first()->created_at,
                                 'updated_at' => $user->addresses()->first()->updated_at,
+                                'deleted_at'=> $user->addresses()->first()->deleted_at,
                             ],
                         ],
                         'payment_methods' => [
