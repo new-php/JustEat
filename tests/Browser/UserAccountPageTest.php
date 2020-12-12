@@ -67,19 +67,28 @@ class UserAccountPageTest extends DuskTestCase
 
     /**
      * A Dusk test example.
-     * @group accListAddresses
+     * @group accListAddresses1
      * @return void
      */
     public function testSeeAddress()
     {
 
-        $address = Address::factory()->create([
-            'postal_code' => "08950",
-            'address_line_1' => "Carrer dels Caquis, 2, Bajos, 2, 08950, Espluguas de Llobregat",
-        ]);
+        $user = User::factory()->create();
 
-        $this->browse(function (Browser $browser) use ($address) {
-            $browser->visit(new UserAccountPage)   
+        $address = Address::factory()->create([
+            'user_id' => $user->id,
+        ]);
+        
+        $this->artisan('passport:install');
+
+        $token = $user->createToken('authToken')->accessToken;
+
+        $script = "window.localStorage.setItem('auth_token', '".$token."')";
+
+        $this->browse(function (Browser $browser) use ($address, $script) {
+            $browser->visit(new UserAccountPage) 
+                ->script($script);
+            $browser->visit(new UserAccountPage) 
                 ->click('#dir-reparto')            
                 ->assertSee($address->postal_code)
                 ->assertSee($address->address_line_1);

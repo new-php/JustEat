@@ -7,12 +7,10 @@
             fácilmente
         </p>
 
-        <section class="addresses" v-for="address in list_addresses" :key="address.id" :id="'address-' + address.id">
+        <section class="addresses" v-for="address in addresses" :key="address.id" :id="'address-' + address.id">
             <strong>{{address.postal_code}}</strong>
             <span>
-                <a href="/account" class="link-edit" id="link-edit">
-                    <strong>Editar <br></strong>
-                </a>
+                <strong class="link-edit" id="link-edit" v-on:click="goToAddress(address)">Editar <br></strong>
             </span>
 
 
@@ -35,21 +33,31 @@
         props: ['addresses'],
         data() {
             return {
-                list_addresses: this.addresses,
             }
         },
 
         methods: {
-            deleteAddress: function(product) {
-                for (let i = 0; i < this.list_addresses.length; i++) {
-                    if (product.id == this.list_addresses[i].id) {
-                        this.list_addresses.splice(i, 1);
+            deleteAddress: function(address) {
+                window.axios.delete('/address/' + address.id)
+                .then(response => {
+                    for (let i = 0; i < this.addresses.length; i++) {
+                        if (address.id == this.addresses[i].id) {
+                            this.addresses.splice(i, 1);
+                        }
                     }
-                }
+                })
+                .catch((error) => {
+                    if (error.response.status == 401) {
+                        window.localStorage.removeItem('auth_token')
+                        window.location.href = '/login';
+                    }
+                });
+            },
 
-                if (this.list_addresses.length <= 0) {
-                    this.list_addresses = null;
-                }
+
+
+            goToAddress(address) {
+                window.location.href = "/account/" + address.id;
             },
         },
 
