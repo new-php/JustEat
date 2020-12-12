@@ -40,6 +40,15 @@ class Restaurant extends Model
     // protected $hidden = [];
     // protected $dates = [];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function($obj) {
+            \Storage::disk('public')->delete($obj->photo);
+            \Storage::disk('public')->delete($obj->logo);
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo('App\Models\User');
