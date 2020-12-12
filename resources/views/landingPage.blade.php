@@ -283,7 +283,7 @@
 				</div>
 				<div class="col-md-2 text-center animate-box">
 					<div class="staff-entry">
-						<a href="#" class="staff-img" style="background-image: url(images/person3.jpg);"></a>
+						<a href="#" class="staff-img" style="background-image: url(images/oscar.jpeg);"></a>
 						<div class="desc">
 							<h3>Óscar Sementé Solà</h3>
 							<span>Frontend Dev</span>
