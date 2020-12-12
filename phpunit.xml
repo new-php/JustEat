@@ -23,6 +23,10 @@
             <file>./app/Http/Controllers/Auth/ConfirmPasswordController.php</file>
             <file>./app/Http/Controllers/Auth/LoginController.php</file>
             <file>./app/Http/Controllers/Auth/VerificationController.php</file>
+            <file>./app/Http/Middleware/Authenticate.php</file>
+            <file>./app/Http/Middleware/CheckIfAdmin.php</file>
+            <file>./app/Http/Middleware/RedirectIfAuthenticated.php</file>
+            <file>./app/Http/Middleware/TrustHosts.php</file>
         </exclude>
     </coverage>
     <php>
