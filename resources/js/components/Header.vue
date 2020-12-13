@@ -21,7 +21,7 @@
                             <strong>{{username}}</strong>
                         </a>
                         <div class="dropdown-content">
-                            <a href="/account?tab=info-user">Información de la cuenta</a>
+                            <a href="/account?tab=info-user"><p>Información de la cuenta</p></a>
                             <a href="/account?tab=pedidos"><p>Pedidos</p></a>
                             <a href="/account?tab=dir-reparto"><p>Crédito de la cuenta</p></a>
                             <!-- <a href="/account?tab="><p>Métodos de pago</p></a>
