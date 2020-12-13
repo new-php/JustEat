@@ -103,4 +103,20 @@ class OrderPageTest extends TestCase
         $response->assertStatus(302)
             ->assertRedirect('/');
     }
+
+    /**
+     * Assert Order view
+     *
+     * @return void
+     */
+    public function testOrderOrderPage()
+    {
+        $order = Order::factory(['status' => 'COMPLETED'])->create();
+
+        $response = $this->get('/order/' . $order->id);
+
+        $response->assertStatus(200)
+            ->assertViewIs('order.information')
+            ->assertViewHas('id', $order->id);
+    }
 }
