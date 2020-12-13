@@ -1,7 +1,7 @@
 <template>
-    <div class="order-background">
+    <div v-if="data_fetched" class="order-background">
         <form class="order-info-container" align="middle" >
-            <span class="order-date">{{order.created_at}}</span>
+            <span class="order-date">{{ new Date(order.created_at).getDate() }}/{{new Date(order.created_at).getMonth() + 1}}/{{new Date(order.created_at).getFullYear()}}</span>
             <span class="order-status"><strong>{{order.order_status}}</strong></span>
         </form>
         <section class="order-rating-container">
@@ -21,8 +21,8 @@
                 </div>
             </div>
             <div class="order-coment">
-                <textarea class="coment-field" id="coment" placeholder="Cuéntanos tu experiencia" v-model="order.details"></textarea>
-                <button id="save" v-on:click="send" type="submit" class="btn submit-button">
+                <textarea class="coment-field" id="coment" placeholder="Cuéntanos tu experiencia"></textarea>
+                <button id="save" type="submit" class="btn submit-button">
                     <span class="submit-button-text"><strong>Enviar</strong></span>
                 </button>
             </div>
@@ -32,15 +32,15 @@
             <section class="restaurant-section">
                 <div class="restaurant-info">
                     <div class="restaurant-logo-container">
-                        <img draggable="false" class="restaurant-logo" :src="'storage/' + restaurant.logo">
+                        <img draggable="false" class="restaurant-logo" :src="'storage/' + order.restaurant.logo">
                     </div>
                     <div class="restaurant-data">
                         <div class="restaurant-name">
-                            <strong>{{ restaurant.name }}</strong>
+                            <strong>{{ order.restaurant.name }}</strong>
                         </div>
                         <div class="restaurant-address">
-                            <div>{{ restaurant.address }}, {{ restaurant.city }}, {{ restaurant.postal_code }}</div>
-                            <div>{{ restaurant.phone }}</div>
+                            <div>{{ order.restaurant.address }}, {{ order.restaurant.city }}, {{ order.restaurant.postal_code }}</div>
+                            <div>{{ order.restaurant.phone }}</div>
                         </div>
                         <a href="">Ver la carta</a>
                     </div>
@@ -53,8 +53,8 @@
                 <div class="order-summary">
                     <div class="summary-label"><strong>Resumen del pedido</strong>
                     </div>
-                    <section class="products-list" v-for="(item) in order_items" :key=item.id :id="'order_item-' + item.id">
-                        <span class="item-info"><strong>{{item.quantity}}x {{products.find(element => element.id == item.product_id).name}}</strong>
+                    <section class="products-list" v-for="(item) in order.order_items" :key=item.id :id="'order_item-' + item.id">
+                        <span class="item-info"><strong>{{item.quantity}}x {{item.product.name}}</strong>
                         </span>
                         <span class="item-price">
                             <strong>{{ item.price }}€</strong>
@@ -96,15 +96,15 @@
                         <div class="user-info-label">
                             <strong>Dirección de entrega</strong>
                         </div>
-                        <div class="user-info-name"><strong>{{ address.name }}</strong>
+                        <div class="user-info-name"><strong>{{ order.address.name }}</strong>
                         </div>
                         <div class="user-info-address">
-                            <div>{{ address.address_line_1 }}, {{ address.city }}, {{ address.postal_code }}</div>
-                            <div>{{ address.phone }}</div>
+                            <div>{{ order.address.address_line_1 }}, {{ order.address.city }}, {{ order.address.postal_code }}</div>
+                            <div>{{ order.address.phone }}</div>
                         </div>
                     </div>
                 </div>
-                <div class="user-coment"> User coments</div>
+                <div class="user-coment"> <p>User coments</p></div>
             </section>
         </div>
 
@@ -117,132 +117,15 @@
         props: ["id"],
         data() {
             return {
+                data_fetched: false,
                 hardcoded_rating_1: 0,
                 hardcoded_rating_2: 0,
                 hardcoded_rating_3: 0,
-                username: "Don Quijote",
                 order: {
-                    id: 1,
-                    user_id: 23,
-                    address_id: 8,
-                    restaurant_id: 6,
-                    details: "",
-                    shipping: 1.60,
-                    total: 19.99,
-                    order_status: "RECEIVED",
-                    status: "COMPLETED",
-                    rider_id: "",
-                    delivery_mode: "",                            
-                    delivery_time: "",
-                    payed: "",
-                    created_at: "01/01/2020",
-                    updated_at: "",
                 },
-                address:
-                    {
-                        id: 8,
-                        user_id: 23,
-                        name: "Don Quijote",
-                        address_name: "Default",
-                        phone: "671714702",
-                        address_line_1: "Carrer de Mata, 3-5",
-                        address_line_2: "",
-                        observations: "",
-                        city: "Barcelona",
-                        postal_code: "08004",
-                    },
-                restaurant: {
-                    id: 6,
-                    user_id: 54,
-                    name: "TGB - The Good Burguer",
-                    email: "",
-                    photo: "",
-                    logo: "",
-                    phone: "938328944",
-                    address: "Carrer de Villarroel, 223",
-                    postal_code: "08036",
-                    city: "Barcelona",
-                    state: "Catalunya",
-                    country: "España",
-                    cif: "",
-                    created_at: "",
-                    updated_at: "",
-                },
-                order_items: [
-                    {
-                        id: 1,
-                        order_id: 1,
-                        product_id: 1,
-                        price: 10.00,
-                        quantity: 1,
-                        created_at: "", 
-                        updated_at: "",
-                    },
-                    {
-                        id: 2,
-                        order_id: 1,
-                        product_id: 2,
-                        price: 5.00,
-                        quantity: 1,
-                        created_at: "",
-                        updated_at: "",
-                    },
-                    {
-                        id: 3,
-                        order_id: 1,
-                        product_id: 3,
-                        price: 4.99,
-                        quantity: 1,
-                        created_at: "",
-                        updated_at: "",
-                    }],
-                products: [
-                    {
-                        id: 1,
-                        restaurant_id: 6,
-                        photo: "",
-                        description: "",
-                        name: "Mr Burguer",
-                        price: 10.00,
-                        available: "",
-                    },
-                    {
-                        id: 2,
-                        restaurant_id: 6,
-                        photo: "",
-                        description: "",
-                        name: "Batido helado choco",
-                        price: 5.00,
-                        available: "",
-                    },
-                    {
-                        id: 3,
-                        restaurant_id: 6,
-                        photo: "",
-                        description: "",
-                        name: "Patatas fritas",
-                        price: 4.99,
-                        available: "",
-                    }],
             }
         },
         methods:{
-            send(event) {
-                event.preventDefault();
-                window.axios.put('order/' + this.id,
-                    {
-                        order: this.order,
-                        address: this.address,
-                        restaurant: this.restaurant,
-                        order_items: this.order_items,
-                        products: this.products,
-                    },
-                )
-                .then(response => {
-                })
-                .catch((error) => {
-                });
-            },
             goToRestaurant() {
                 window.location.href = "/restaurants/" + this.restaurant.id;
             },
@@ -252,10 +135,7 @@
             window.axios.get('order/' + this.id)
             .then(response => {
                 this.order = response.data.data.order;
-                this.address = response.data.data.address;
-                this.restaurant = response.data.data.restaurant;
-                this.order_items = response.data.data.order_items;
-                this.products = response.data.data.products;
+                this.data_fetched = true;
             })
             .catch(response => {
                 if (error.response.status == 401) {

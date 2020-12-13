@@ -134,7 +134,7 @@
     .order-other-information{
         display: flex;
         justify-content: space-between;
-        
+
         .restaurant-section{
             margin: 15px;
             padding-left: 2.5%;
@@ -203,9 +203,6 @@
                     display: flex;
                     justify-content: space-between;
 
-                    .item-info{
-                    }
-
                     .item-price{
                         text-align: right;
                         width: 10%;
@@ -219,8 +216,6 @@
                     display: flex;
                     justify-content: space-between;
 
-                    .subtotal-label{
-                    }
                     .subtotal-price{
                         text-align: right;
                         width: 10%;
@@ -231,8 +226,6 @@
                     display: flex;
                     justify-content: space-between;
 
-                    .shipping-label{
-                    }
                     .shipping-price{
                         text-align: right;
                         width: 10%;

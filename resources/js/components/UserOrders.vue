@@ -13,7 +13,7 @@
                             <strong>{{ order.restaurant.name }}</strong>
                         </div>
                         <div class="order-date">
-                            {{ order.created_at }}
+                            {{ new Date(order.created_at).getDate() }}/{{new Date(order.created_at).getMonth() + 1}}/{{new Date(order.created_at).getFullYear()}}
                         </div>
                         <div class="order-price">
                             {{ order.total }}€
@@ -32,125 +32,6 @@
         data() {
             return {
                 orders: [
-                    {
-                        id: 1,
-                        user_id: 23,
-                        address_id: "",
-                        restaurant_id: 6,
-                        details: "",
-                        shipping: "",
-                        total: 19.99,
-                        order_status: "RECEIVED",
-                        status: "COMPLETED",
-                        rider_id: "",
-                        delivery_mode: "",                            
-                        delivery_time: "",
-                        payed: "",
-                        created_at: "01/01/2020",
-                        updated_at: "",
-                        restaurant: 
-                        {
-                            id: 6,
-                            user_id: 54,
-                            name: "TGB - The Good Burguer",
-                            email: "",
-                            photo: "",
-                            logo: "",
-                            phone: "",
-                            address: "",
-                            postal_code: "",
-                            city: "",
-                            state: "",
-                            country: "",
-                            cif: "",
-                            created_at: "",
-                            updated_at: "",
-                        },
-                        order_items: [
-                            {
-                                id: 1,
-                                order_id: 1,
-                                product_id: 1,
-                                price: 10.00,
-                                quantity: 1,
-                                created_at: "", 
-                                updated_at: "",
-                            },
-                            {
-                                id: 2,
-                                order_id: 1,
-                                product_id: 4,
-                                price: 5.00,
-                                quantity: 1,
-                                created_at: "",
-                                updated_at: "",
-                            },
-                            {
-                                id: 3,
-                                order_id: 1,
-                                product_id: 3,
-                                price: 4.99,
-                                quantity: 1,
-                                created_at: "",
-                                updated_at: "",
-                            }
-                        ],
-                    },
-                    {
-                        id: 2,
-                        user_id: 23,
-                        address_id: "",
-                        restaurant_id: 4,
-                        details: "",
-                        shipping: "",
-                        total: 14.99,
-                        order_status: "RECEIVED",
-                        status: "COMPLETED",
-                        rider_id: "",
-                        delivery_mode: "",                            
-                        delivery_time: "",
-                        payed: "",
-                        created_at: "25/05/2020",
-                        updated_at: "",
-                        restaurant: 
-                        {
-                            id: 4,
-                            user_id: 26,
-                            name: "Pans & Company",
-                            email: "",
-                            photo: "",
-                            logo: "",
-                            phone: "",
-                            address: "",
-                            postal_code: "",
-                            city: "",
-                            state: "",
-                            country: "",
-                            cif: "",
-                            created_at: "",
-                            updated_at: "",
-                        },
-                        order_items: [
-                            {
-                                id: 1,
-                                order_id: 2,
-                                product_id: 1,
-                                price: 10.00,
-                                quantity: 1,
-                                created_at: "", 
-                                updated_at: "",
-                            },
-                            {
-                                id: 2,
-                                order_id: 2,
-                                product_id: 3,
-                                price: 4.99,
-                                quantity: 1,
-                                created_at: "",
-                                updated_at: "",
-                            }
-                        ],
-                    }  
                 ],
             }
         },
@@ -158,6 +39,20 @@
             goToOrder(order) {
                 window.location.href = "/order/" + order.id;
             },
-        }
+        },
+        mounted(){
+            //get per l'order
+            window.axios.get('orders')
+            .then(response => {
+                this.orders = response.data.data;
+            })
+            .catch(response => {
+                if (error.response.status == 401) {
+                    window.localStorage.removeItem('auth_token');
+                    window.localStorage.removeItem('username');
+                    window.location.href = '/login';
+                }
+            });
+        },
     };
 </script>
