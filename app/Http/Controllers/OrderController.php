@@ -129,7 +129,7 @@ class OrderController extends Controller
 
         $validator = $request->validate([
             'delivery_time' => 'required|string',
-            'description' => 'string',
+            'description' => 'string|nullable',
         ]);
 
         $order->update([
