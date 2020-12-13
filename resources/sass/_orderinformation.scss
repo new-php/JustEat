@@ -1,0 +1,295 @@
+.order-background {
+    position: relative;
+    width: 100%;
+    max-width: 1272px;
+    margin: 0 auto;
+    background: #FFF;
+
+    .order-info-container {
+        min-width: 424px;
+        width: 100%;
+        margin: 24px auto;
+        text-align: center;
+        display: block;
+
+        .order-date {
+            display: block;
+            font-size: 1.14286rem;
+            color: #333;
+        }
+
+        .order-status{
+            display: block;
+            font-size: 3.42857rem;
+            color: #006631;
+        }
+    }
+
+    .order-rating-container{
+        margin: 15px;
+        padding: 2%;
+        border: 1px solid lightgray;
+        border-radius: 4px;
+
+
+        .user-name{
+            display: block;
+            font-size: 1.4rem;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .ratings-input{
+            display: flex;
+            justify-content: space-between;
+
+            padding-left: 2%;
+            padding-right: 2%;
+
+            .food-rating {
+                border: none;
+
+                strong{
+                    display: block;
+                    font-size: 20px;
+                }
+
+                .star-rating {
+                    display: block;
+                    padding: 0;
+                    height: auto;
+
+                    .b-rating-star {
+                        font-size: 20px;
+                        padding: 1px;
+                    }
+                }
+            }
+
+            .service-rating {
+                border: none;
+
+                strong{
+                    display: block;
+                    font-size: 20px;
+                }
+
+                .star-rating {
+                    display: block;
+                    padding: 0;
+                    height: auto;
+
+                    .b-rating-star {
+                        font-size: 20px;
+                        padding: 1px;
+                    }
+                }
+            }
+
+            .time-rating {
+                border: none;
+
+                strong{
+                    display: block;
+                    font-size: 20px;
+                }
+
+                .star-rating {
+                    display: block;
+                    padding: 0;
+                    height: auto;
+
+                    .b-rating-star {
+                        font-size: 20px;
+                        padding: 1px;
+                    }
+                }
+            }
+        }
+
+        .order-coment{
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5%;
+
+            .coment-field{
+                width: 66.66667%;
+                height: 100px;
+                padding: 0 5px;
+                overflow: auto;
+                resize: none;
+            }
+            .submit-button {
+                background-color: #e7f1fe;
+                width: 30%;
+                height: 100%;
+                color: #125fca;
+                padding: 7px;
+                font-size: 1rem;
+                align-self: flex-end;
+            }
+        }
+    }
+
+    .order-other-information{
+        display: flex;
+        justify-content: space-between;
+
+        .restaurant-section{
+            margin: 15px;
+            padding-left: 2.5%;
+            padding-right: 2.5%;
+
+            border: 1px solid lightgray;
+            border-radius: 4px;
+            width: 45%;
+
+            .restaurant-info{
+                display: flex;
+                .restaurant-logo-container {
+                    margin: 5px;
+
+                    .restaurant-logo {
+                        position: relative;
+                        top: 15%;
+                        left: -35%;
+                        width: 62%;
+                        border-radius: 4px;
+                    }
+                }
+
+                .restaurant-data{
+                    margin: 10px 5px;
+                    .restaurant-name {
+                        position: relative;
+                        padding-top: 5px;
+                        display: block;
+
+                        font-size: 20px;
+                    }
+
+                    .restaurant-address {
+                        padding-top: 5px;
+                        display: block;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            .separator {
+                position: relative;
+                text-align: center;
+                height: 10px;
+                margin: 8px 0;
+
+                hr {
+                    border-color: #c5ccd3;
+                    border: 0;
+                    border-top: 1px solid #c5ccd3;
+                }
+            }
+
+            .order-summary{
+
+                .summary-label{
+                    padding-top: 5px;
+                    display: block;
+
+                    font-size: 20px;
+                }
+
+                .products-list{
+                    margin: 5px 0;
+                    display: flex;
+                    justify-content: space-between;
+
+                    .item-price{
+                        text-align: right;
+                        width: 10%;
+                    }
+                }
+            }
+
+            .costs-section{
+
+                .subtotal{
+                    display: flex;
+                    justify-content: space-between;
+
+                    .subtotal-price{
+                        text-align: right;
+                        width: 10%;
+                    }
+                }
+
+                .shipping{
+                    display: flex;
+                    justify-content: space-between;
+
+                    .shipping-price{
+                        text-align: right;
+                        width: 10%;
+                    }
+                }
+            }
+
+            .order_price{
+                display: flex;
+                justify-content: space-between;
+                text-align: middle;
+
+                .order_price-label{
+                    font-size: 20px;
+                }
+                .order_price-price{
+                    text-align: right;
+                    font-size: 24px;
+                }
+            }
+        }
+
+        .user-section{
+            margin: 15px;
+            width: 45%;
+
+            .user-info{
+                display: flex;
+                border: 1px solid lightgray;
+                border-radius: 4px;
+                padding-left: 2.5%;
+                padding-right: 2.5%;
+                padding-bottom: 5%;
+
+                .address-icon{
+                    font-size: 20px;
+                    margin-right: 15px;
+                }
+
+                .user-address{
+                    .user-info-label{
+                        font-size: 20px;
+                    }
+
+                    .user-info-name{
+                        margin-top: 5%;
+                        font-size: 16px;
+                    }
+
+                    .user-info-address {
+                        padding-top: 5px;
+                        display: block;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            .user-coment{
+                visibility: hidden;
+                border: 1px solid lightgray;
+                border-radius: 4px;
+                padding-left: 2.5%;
+                padding-right: 2.5%;
+            }
+        }
+    }
+}

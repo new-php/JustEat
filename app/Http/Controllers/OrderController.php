@@ -176,7 +176,7 @@ class OrderController extends Controller
     {
         $user = auth('api')->user();
 
-        if (!$user->orders()->where('id', $order->id)->exists() || $order->status == 'COMPLETED') {
+        if (!$user->orders()->where('id', $order->id)->exists() || $order->status != 'COMPLETED') {
             return response()->json([
                 "message" => 'Permission denied',
             ], 403);
@@ -191,6 +191,8 @@ class OrderController extends Controller
             $product = Product::where('id', '=', $order_item->product_id)->get();
             array_push($products, $product);
         }
+
+        $order->load('address', 'restaurant', 'orderItems', 'orderItems.product');
 
         return response()->json([
             'data' => [

@@ -93,7 +93,7 @@
                             </div>
                             <div class="payment-card-info-line">
                                 <input type="checkbox">
-                                <span class="payment-address">Dirección de facturación: {{ this.order.address }} (deselecciona esta casilla para modiificar esta dirección de facturación)</span>
+                                <span class="payment-address">Dirección de facturación: {{ this.order.address.address_line_1 }} (deselecciona esta casilla para modiificar esta dirección de facturación)</span>
                             </div>
                         </div>
                         <div class="coupon-section">
@@ -247,7 +247,7 @@ export default {
                 },
             )
             .then(response => {
-                window.location.href = '/';
+                window.location.href = '/order/' + response.data.id;
             })
             .catch((error) => {
                 if (error.response.status == 401) {

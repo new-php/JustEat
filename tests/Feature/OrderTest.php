@@ -807,7 +807,7 @@ class OrderTest extends TestCase
 
     /**
      * Test show method fails when showing another's users order
-     * 
+     *
      * @return void
      */
     public function testShowAnotherUsersOrder()
@@ -826,19 +826,19 @@ class OrderTest extends TestCase
             'status' => 'SELECTED',
             'user_id' => $user2->id
         ]);
-       
+
         $response = $this->get('/api/v1/order/' . $order->id, [
             'payed' => true,
         ], [
             'Accept' => 'application/json',
         ]);
-            
+
         $response->assertStatus(403);
     }
 
     /**
      * Test show method wrong id, should fail
-     * 
+     *
      * @return void
      */
     public function testShowWrongId()
@@ -853,7 +853,7 @@ class OrderTest extends TestCase
         );
 
         $order = Order::factory()->create();
-       
+
         $response = $this->get('/api/v1/order/300', [], [
             'Accept' => 'application/json',
         ]);
@@ -863,7 +863,7 @@ class OrderTest extends TestCase
 
     /**
      * Test show method
-     * 
+     *
      * @return void
      */
     public function testShowMethod()
@@ -876,7 +876,7 @@ class OrderTest extends TestCase
             $user,
             ['create-servers']
         );
-        
+
         $restaurant = Restaurant::factory()->create();
         $address = Address::factory()->create([
             'user_id' => $user->id,
@@ -914,6 +914,7 @@ class OrderTest extends TestCase
 
         Order::where('id', $order_id)->update([
             'address_id' => $address->id,
+            'status' => 'COMPLETED',
         ]);
 
         $response = $this->get('/api/v1/order/' . $order_id, [], [

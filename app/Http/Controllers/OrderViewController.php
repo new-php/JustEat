@@ -26,6 +26,7 @@ class OrderViewController extends Controller
     }
 
     public function paymentPage(Order $order)
+
     {
         if ($order->status != 'COMPLETED') {
             $order->load('restaurant', 'orderItems', 'address');
@@ -34,4 +35,10 @@ class OrderViewController extends Controller
 
         return redirect('/');
     }
+
+    public function informationPage($id)
+    {
+        return view('order.information', ['id' => $id]);
+    }
+
 }

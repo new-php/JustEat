@@ -21,6 +21,8 @@ Vue.component('user-account', require('./components/UserAccount.vue').default);
 Vue.component('user-information', require('./components/UserInformation.vue').default);
 Vue.component('user-contact', require('./components/UserContact.vue').default);
 Vue.component('user-addresses', require('./components/UserAddresses.vue').default);
+Vue.component('user-orders', require('./components/UserOrders.vue').default);
+Vue.component('order-information', require('./components/OrderInformation.vue').default);
 
 
 const app = new Vue({
