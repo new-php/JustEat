@@ -15,7 +15,7 @@ class UserAccountPageTest extends DuskTestCase
     use DatabaseMigrations;
 
     /**
-     * A Dusk test example.
+     * 
      * @group account
      * @return void
      */
@@ -30,7 +30,7 @@ class UserAccountPageTest extends DuskTestCase
     }
 
     /**
-     * A Dusk test example.
+     * 
      * @group account
      * @return void
      */
@@ -50,7 +50,7 @@ class UserAccountPageTest extends DuskTestCase
     }
 
     /**
-     * A Dusk test example.
+     * 
      * @group accListAddresses
      * @return void
      */
@@ -66,72 +66,211 @@ class UserAccountPageTest extends DuskTestCase
     }
 
     /**
-     * A Dusk test example.
+     * 
      * @group accListAddresses
      * @return void
      */
     public function testSeeAddress()
     {
 
-        $address = Address::factory()->create([
-            'postal_code' => "08950",
-            'address_line_1' => "Carrer dels Caquis, 2, Bajos, 2, 08950, Espluguas de Llobregat",
-        ]);
+        $user = User::factory()->create();
 
-        $this->browse(function (Browser $browser) use ($address) {
-            $browser->visit(new UserAccountPage)   
-                ->click('#dir-reparto')            
-                ->assertSee($address->postal_code)
-                ->assertSee($address->address_line_1);
+        $address = Address::factory()->create([
+            'user_id' => $user->id,
+        ]);
+        
+        $this->artisan('passport:install');
+
+        $token = $user->createToken('authToken')->accessToken;
+
+        $script = "window.localStorage.setItem('auth_token', '".$token."')";
+
+        $this->browse(function (Browser $browser) use ($address, $script) {
+            $browser->visit(new UserAccountPage) 
+                ->script($script);
+            $browser->visit(new UserAccountPage) 
+                ->click('#dir-reparto')      
+                ->assertSee($address->address_name)      
+                ->assertSee($address->address_line_1)
+                ->assertSee($address->address_line_2);
         });
     }
 
     /**
-     * A Dusk test example.
+     * 
      * @group accListAddresses
      * @return void
      */
     public function testLinkEdit()
     {
 
-        $address = Address::factory()->create([
-            'postal_code' => "08950",
-            'address_line_1' => "Carrer dels Caquis, 2, Bajos, 2, 08950, Espluguas de Llobregat",
-        ]);
+        $user = User::factory()->create();
 
-        $this->browse(function (Browser $browser) use ($address) {
+        $address = Address::factory()->create([
+            'user_id' => $user->id,
+        ]);
+        
+        $this->artisan('passport:install');
+
+        $token = $user->createToken('authToken')->accessToken;
+
+        $script = "window.localStorage.setItem('auth_token', '".$token."')";
+
+        $this->browse(function (Browser $browser) use ($address, $script) {
+            $browser->visit(new UserAccountPage) 
+                ->script($script);
             $browser->visit(new UserAccountPage)   
                 ->click('#dir-reparto')            
-                ->assertSee($address->postal_code)
-                ->assertSee($address->address_line_1)
-                ->seeLink('#link-edit')
-                ->clickLink('Editar')
-                ->assertPathIs("/");
+                ->click('#link-edit')
+                ->assertSee('Editar dirección')
+                ->assertSee('Dirección')
+                ->assertSee('Ciudad')
+                ->assertSee('Código Postal')
+                ->assertSee('Elige un nombre para esta dirección')
+                ->assertSee('Casa')
+                ->assertSee('Trabajo')
+                ->assertSee('Añade tu propia dirección')
+                ->assertSee('Ciudad')
+                ->assertSee('Hecho')
+                ->assertSee('Cancelar');
         });
     }
 
     /**
-     * A Dusk test example.
+     * 
+     * @group accListAddresses
+     * @return void
+     */
+    public function testEditInputs()
+    {
+
+        $user = User::factory()->create();
+
+        $address = Address::factory()->create([
+            'user_id' => $user->id,
+        ]);
+        
+        $this->artisan('passport:install');
+
+        $token = $user->createToken('authToken')->accessToken;
+
+        $script = "window.localStorage.setItem('auth_token', '".$token."')";
+
+        $this->browse(function (Browser $browser) use ($address, $script) {
+            $browser->visit(new UserAccountPage) 
+                ->script($script);
+            $browser->visit(new UserAccountPage)   
+                ->click('#dir-reparto')            
+                ->click('#link-edit')
+                ->assertInputValue('#l1', $address->address_line_1)
+                ->assertInputValue('#l2', $address->address_line_2)
+                ->assertInputValue('#obs', $address->observations)
+                ->assertInputValue('#city', $address->city)
+                ->assertInputValue('#name', $address->address_name);
+        });
+    }
+
+    /**
+     * 
+     * @group accListAddresses
+     * @return void
+     */
+    public function testSaveButton()
+    {
+
+        $user = User::factory()->create();
+
+        $address = Address::factory()->create([
+            'user_id' => $user->id,
+        ]);
+        
+        $this->artisan('passport:install');
+
+        $token = $user->createToken('authToken')->accessToken;
+
+        $script = "window.localStorage.setItem('auth_token', '".$token."')";
+
+        $this->browse(function (Browser $browser) use ($address, $script) {
+            $browser->visit(new UserAccountPage) 
+                ->script($script);
+            $browser->visit(new UserAccountPage)   
+                ->click('#dir-reparto')            
+                ->click('#link-edit')
+                ->type('#name', 'Casa')
+                ->click('#btnOk')
+                ->refresh()
+                ->click('#dir-reparto')
+                ->click('#link-edit')
+                ->assertInputValue('#name', 'Casa');
+        });
+    }
+
+    /**
+     * 
+     * @group accListAddresses
+     * @return void
+     */
+    public function testCancelButtons()
+    {
+
+        $user = User::factory()->create();
+
+        $address = Address::factory()->create([
+            'user_id' => $user->id,
+        ]);
+        
+        $this->artisan('passport:install');
+
+        $token = $user->createToken('authToken')->accessToken;
+
+        $script = "window.localStorage.setItem('auth_token', '".$token."')";
+
+        $this->browse(function (Browser $browser) use ($address, $script) {
+            $browser->visit(new UserAccountPage) 
+                ->script($script);
+            $browser->visit(new UserAccountPage)   
+                ->click('#dir-reparto')            
+                ->click('#link-edit')
+                ->type('#name', 'Casa')
+                ->click('#btnCancel')
+                ->refresh()
+                ->click('#dir-reparto')
+                ->click('#link-edit')
+                ->assertInputValueIsNot('#name', 'Casa');
+        });
+    }
+
+    /**
+     * 
      * @group accListAddresses
      * @return void
      */
     public function testLinkDelete()
     {
 
-        $address = Address::factory()->create([
-            'postal_code' => "08950",
-            'address_line_1' => "Carrer dels Caquis, 2, Bajos, 2, 08950, Espluguas de Llobregat",
-        ]);
+        $user = User::factory()->create();
 
-        $this->browse(function (Browser $browser) use ($address) {
+        $address = Address::factory()->create([
+            'user_id' => $user->id,
+        ]);
+        
+        $this->artisan('passport:install');
+
+        $token = $user->createToken('authToken')->accessToken;
+
+        $script = "window.localStorage.setItem('auth_token', '".$token."')";
+
+        $this->browse(function (Browser $browser) use ($address, $script) {
+            $browser->visit(new UserAccountPage) 
+                ->script($script);
             $browser->visit(new UserAccountPage)   
                 ->click('#dir-reparto')            
-                ->assertSee($address->postal_code)
-                ->assertSee($address->address_line_1)
-                ->seeLink('#link-delete')
-                ->clickLink('Eliminar')
-                ->assertDontSee($address->postal_code)
-                ->assertDontSee($address->address_line_1);
+                ->click('#link-delete')
+                ->refresh()
+                ->click('#dir-reparto') 
+                ->assertDontSee($address->address_name)
+                ->assertDontSee($address->address_line_1)
+                ->assertDontSee($address->address_line_2);
         });
     }
 }
