@@ -80,8 +80,12 @@
                     });
                 })
                 .catch((error) => {
-                    window.localStorage.removeItem('auth_token')
                     $('#form-errors').addClass("form-errors-active");
+                    if (error.response.status == 401) {
+                        window.localStorage.removeItem('auth_token');
+                        window.localStorage.removeItem('username');
+                        window.location.href = '/login';
+                    }
                 });
             }
         }

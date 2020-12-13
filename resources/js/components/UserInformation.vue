@@ -22,8 +22,8 @@
                 <span>Número de teléfono</span>
                 <input name="phone" class="info-input" v-model="phone" placeholder="Introduce tu número de teléfono" type="text" value="phone_number" required>
             </div>
-            
-            
+
+
             <button id="save" v-on:click="save" type="submit" class="btn submit-button">
                 <span class="submit-button-text"><strong>Guardar cambios</strong></span>
             </button>
@@ -54,6 +54,11 @@
                 })
                 .catch((error) => {
                     $('#form-error').addClass("form-error-active");
+                    if (error.response.status == 401) {
+                        window.localStorage.removeItem('auth_token');
+                        window.localStorage.removeItem('username');
+                        window.location.href = '/login';
+                    }
                 });
             }
         }

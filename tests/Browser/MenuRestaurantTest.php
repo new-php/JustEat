@@ -10,6 +10,7 @@ use App\Models\Restaurant;
 use App\Models\Category;
 use App\Models\ProductCategory;
 use App\Models\Product;
+use App\Models\Schedule;
 
 class MenuRestaurantTest extends DuskTestCase
 {
@@ -157,4 +158,27 @@ class MenuRestaurantTest extends DuskTestCase
                 ->assertSee('Para recoger');
         });
     }
+
+    /**
+     * A Dusk test example.
+     * @group infoRest
+     * @return void
+     */
+    public function testInfoRest()
+    {
+
+        $restaurant = Restaurant::factory()->create([
+            'id' => 1,
+        ]);
+
+        $this->browse(function (Browser $browser) use ($restaurant) {
+            $browser->visit(new RestaurantPage($restaurant->id))
+                ->click('#info-tab')
+                ->assertSee('Dónde estamos')
+                ->assertSee('Sobre nosotros')
+                //->assertSee('$restaurant.description')
+                ->assertSee('Horario de apertura');      
+        });
+    }
+
 }
