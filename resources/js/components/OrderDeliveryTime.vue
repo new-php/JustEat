@@ -14,11 +14,10 @@
             </div>
             <div class="delivery-input-container">
                 <span>La entrega sin contacto ahora se aplica a todos los pedidos. Si tu pedido incluye alcohol, ten tu identificación lista para que la verifiquemos sin contacto. Si tienes alguna otra indicación, escríbela a continuación. <strong>No incluyas detalles sobre alergias.</strong></span>
-                <textarea class="delivery-input delivery-textarea" v-model="description" placeholder="Por ejemplo, 'Por favor, deja mi pedido en la puerta y llama al timbre para informarme de que ya ha llegado'. No incluyas aquí ninguna información relativa a alergias."></textarea>
+                <textarea dusk="details" class="delivery-input delivery-textarea" v-model="description" placeholder="Por ejemplo, 'Por favor, deja mi pedido en la puerta y llama al timbre para informarme de que ya ha llegado'. No incluyas aquí ninguna información relativa a alergias."></textarea>
             </div>
-            <div class="delivery-allergies-container"><a class="delivery-allergies-link" href="#">Si tú o alguien para el que estás pidiendo tiene una alergia o intolerancia a algún alimento, haz clic aquí.</a></div>
             <div>
-                <button type="submit" class="btn delivery-button mt-2" v-on:click="goToPayment()"><strong>Continuar con el pago</strong></button>
+                <button dusk="continuar-button" type="submit" class="btn delivery-button mt-2" v-on:click="goToPayment()"><strong>Continuar con el pago</strong></button>
             </div>
         </div>
     </div>
