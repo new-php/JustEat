@@ -30,9 +30,7 @@
 
             <main class="restaurant-products-container" v-if="tab_selected === 'pedidos'">
                 <section>
-
-                    Hello
-
+                    <user-orders></user-orders>
                 </section>
             </main>
 
@@ -59,7 +57,7 @@
         return {
             user: "",
             tab_selected: 'info-user',
-            name_tab_selected: 'Información de la cuenta'
+            name_tab_selected: 'Información de la cuenta',
         }
     },
 
@@ -69,6 +67,11 @@
                 this.user = response.data.data;
             })
             .catch(response => {
+                if (error.response.status == 401) {
+                    window.localStorage.removeItem('auth_token');
+                    window.localStorage.removeItem('username');
+                    window.location.href = '/login';
+                }
             });
     },
 
@@ -104,6 +107,18 @@
                 this.name_tab_selected = 'Preferencias de contacto';
             }
         },
+    },
+    computed: {
+        username: function() {
+            var username = window.localStorage.getItem('username');
+            if (username && username !== undefined && username !== "undefined") {
+                if (username != "null") {
+                    return username
+                } else {
+                    return "Mi Cuenta";
+                }
+            }
+        }
     },
     };
 </script>

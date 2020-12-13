@@ -45,3 +45,5 @@ Route::get('/account', 'UserViewController@userAccountPage')->name('user.account
 Route::get('/order/{order}/delivery-address', 'OrderViewController@deliveryAddressPage');
 Route::get('/order/{order}/delivery-time', 'OrderViewController@deliveryTimePage');
 Route::get('/order/{order}/payment', 'OrderViewController@paymentPage');
+
+Route::get('/order/{id}', 'OrderViewController@informationPage');
