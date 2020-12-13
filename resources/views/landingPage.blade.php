@@ -281,7 +281,7 @@
                         <a href="#" class="staff-img" style="background-image: url(/landing/img/oscar.jpeg);"></a>
                         <div class="desc">
                             <h3>Óscar Sementé Solà</h3>
-                            <span>Frontend Dev</span>
+                            <span>Full-Stack Dev</span>
                             <p>One of our team members</p>
                             <p>
                                 <ul class="colorlib-social-icons">
