@@ -30,9 +30,6 @@
     <!-- Bootstrap  -->
     <link rel="stylesheet" href="/landing/css/bootstrap.css">
 
-    <!-- Magnific Popup -->
-    <link rel="stylesheet" href="/landing/css/magnific-popup.css">
-
     <!-- Owl Carousel -->
     <link rel="stylesheet" href="/landing/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/landing/css/owl.theme.default.min.css">
