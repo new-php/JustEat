@@ -81,8 +81,9 @@
             })
             .catch(error => {
                 if (error.response.status == 401) {
-                    window.localStorage.removeItem('auth_token')
-                    window.location.href = '/';
+                    window.localStorage.removeItem('auth_token');
+                    window.localStorage.removeItem('username');
+                    window.location.href = '/login';
                 }
 
                 if (error.response.status == 403) {

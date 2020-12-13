@@ -33,8 +33,8 @@
                     <label class="check-label" for="email_offers">Email</label>
                 </div>
             </div>
-            
-            
+
+
             <button id="save" v-on:click="save" type="submit" class="btn submit-button">
                 <span class="submit-button-text"><strong>Guardar cambios</strong></span>
             </button>
@@ -64,6 +64,11 @@
                 })
                 .catch((error) => {
                     $('#form-error').addClass("form-error-active");
+                    if (error.response.status == 401) {
+                        window.localStorage.removeItem('auth_token');
+                        window.localStorage.removeItem('username');
+                        window.location.href = '/login';
+                    }
                 });
             }
         }
