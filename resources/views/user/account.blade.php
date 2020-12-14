@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-<user-account>
+<user-account tab="{{$tab}}">
 </user-account>
 @endsection
 

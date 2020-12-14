@@ -22,9 +22,9 @@
                 </div>
             </div>
 
-            <main class="restaurant-products-container" v-if="tab_selected === 'info-user'">  
+            <main class="restaurant-products-container" v-if="tab_selected === 'info-user'">
                 <section>
-                    <user-information :id="user.id" :name="user.name" :email="user.email" :phone="user.phone"></user-information>
+                    <user-information :user="user"></user-information>
                 </section>
             </main>
 
@@ -42,7 +42,7 @@
 
             <main class="restaurant-products-container" v-if="tab_selected === 'contacto'">
                 <section>
-                    <user-contact :id="user.id" :sms_offers="user.sms_offers" :email_offers="user.email_offers"></user-contact>
+                    <user-contact :user="user"></user-contact>
                 </section>
             </main>
         </div>
@@ -52,6 +52,8 @@
 <script>
     export default {
         name: "UserManagementPage",
+
+    props: ["tab"],
 
     data() {
         return {
@@ -73,17 +75,18 @@
                     window.location.href = '/login';
                 }
             });
+        this.change_tab(this.tab);
     },
 
     methods: {
         change_tab: function(tab) {
-            if (tab === 'info-user') {
-                $('#info-user').addClass('option-selected');
+            if (tab === 'contacto') {
+                $('#contacto').addClass('option-selected');
                 $('#pedidos').removeClass('option-selected');
                 $('#dir-reparto').removeClass('option-selected');
-                $('#contacto').removeClass('option-selected');
-                this.tab_selected = 'info-user';
-                this.name_tab_selected = 'Información de la cuenta';
+                $('#info-user').removeClass('option-selected');
+                this.tab_selected = 'contacto';
+                this.name_tab_selected = 'Preferencias de contacto';
             } else if(tab === 'pedidos'){
                 $('#pedidos').addClass('option-selected');
                 $('#info-user').removeClass('option-selected');
@@ -99,26 +102,15 @@
                 this.tab_selected = 'dir-reparto';
                 this.name_tab_selected = 'Direcciones de reparto';
             } else{
-                $('#contacto').addClass('option-selected');
+                $('#info-user').addClass('option-selected');
                 $('#pedidos').removeClass('option-selected');
                 $('#dir-reparto').removeClass('option-selected');
-                $('#info-user').removeClass('option-selected');
-                this.tab_selected = 'contacto';
-                this.name_tab_selected = 'Preferencias de contacto';
+                $('#contacto').removeClass('option-selected');
+                this.tab_selected = 'info-user';
+                this.name_tab_selected = 'Información de la cuenta';
             }
         },
-    },
-    computed: {
-        username: function() {
-            var username = window.localStorage.getItem('username');
-            if (username && username !== undefined && username !== "undefined") {
-                if (username != "null") {
-                    return username
-                } else {
-                    return "Mi Cuenta";
-                }
-            }
-        }
+
     },
     };
 </script>

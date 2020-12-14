@@ -10,7 +10,7 @@
                         </svg></a>
                     </div>
                     <div class="header-links">
-                        <a id="help-link" class="help-link" href="/help"><strong style="color: #FFF;">Ayuda</strong></a>
+                        <a id="help-link" class="help-link" href="#"><strong style="color: #FFF;">Ayuda</strong></a>
                         <a id="for-you-link" class="login-link" href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                 <g id="icon-/-gift" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -178,6 +178,11 @@
                 window.location.href = "/restaurants?address=" + formatted_address + "&zip=" + zip;
             }
         },
+        logout:function() {
+            window.localStorage.removeItem('auth_token');
+            window.localStorage.removeItem('username');
+            window.location.reload();
+        }
     },
     computed: {
         username: function() {
