@@ -9,7 +9,7 @@
                     </svg></a>
                 </div>
                 <div class="header-links">
-                    <a id="help-link" class="help-link" href="/help"><strong>Ayuda</strong></a>
+                    <a id="help-link" class="help-link" href="#"><strong>Ayuda</strong></a>
                     <a id="register-link" v-if="!username && login_form !== undefined" class="register-link" href="/register"><strong>Regístrate</strong></a>
                     <a id="login-link" v-if="!username && login_form === undefined" class="login-link" href="/login"><strong>Inicia sesión</strong></a>
                     <div class="dropdown">
