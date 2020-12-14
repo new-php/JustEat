@@ -22,9 +22,9 @@
                 </div>
             </div>
 
-            <main class="restaurant-products-container" v-if="tab_selected === 'info-user'">  
+            <main class="restaurant-products-container" v-if="tab_selected === 'info-user'">
                 <section>
-                    <user-information :id="user.id" :name="user.name" :email="user.email" :phone="user.phone"></user-information>
+                    <user-information :user="user"></user-information>
                 </section>
             </main>
 
@@ -42,7 +42,7 @@
 
             <main class="restaurant-products-container" v-if="tab_selected === 'contacto'">
                 <section>
-                    <user-contact :id="user.id" :sms_offers="user.sms_offers" :email_offers="user.email_offers"></user-contact>
+                    <user-contact :user="user"></user-contact>
                 </section>
             </main>
         </div>
@@ -107,18 +107,6 @@
                 this.name_tab_selected = 'Preferencias de contacto';
             }
         },
-    },
-    computed: {
-        username: function() {
-            var username = window.localStorage.getItem('username');
-            if (username && username !== undefined && username !== "undefined") {
-                if (username != "null") {
-                    return username
-                } else {
-                    return "Mi Cuenta";
-                }
-            }
-        }
     },
     };
 </script>
