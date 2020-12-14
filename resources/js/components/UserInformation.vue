@@ -12,15 +12,15 @@
 
             <div>
                 <span>Nombre</span>
-                <input name="name" class="info-input" v-model="name" placeholder="Introduce tu nombre completo" type="text" required>
+                <input name="name" class="info-input" v-model="user.name" placeholder="Introduce tu nombre completo" type="text" required>
             </div>
             <div>
                 <span>E-mail</span>
-                <input name="email" class="info-input" v-model="email" placeholder="Introduce tu email" type="email" value="email_holder" required>
+                <input name="email" class="info-input" v-model="user.email" placeholder="Introduce tu email" type="email" value="email_holder" required>
             </div>
             <div>
                 <span>Número de teléfono</span>
-                <input name="phone" class="info-input" v-model="phone" placeholder="Introduce tu número de teléfono" type="text" value="phone_number" required>
+                <input name="phone" class="info-input" v-model="user.phone" placeholder="Introduce tu número de teléfono" type="text" value="phone_number" required>
             </div>
 
 
@@ -34,7 +34,7 @@
 <script>
     export default {
         name: "UserInfo",
-        props: ['name', 'email', 'phone', 'id'],
+        props: ['user'],
         data() {
             return {
             }
@@ -42,11 +42,11 @@
         methods: {
             save(event) {
                 event.preventDefault();
-                window.axios.put('user/' + this.id,
+                window.axios.put('user/' + this.user.id,
                     {
-                        name: this.name,
-                        email: this.email,
-                        phone: this.phone,
+                        name: this.user.name,
+                        email: this.user.email,
+                        phone: this.user.phone,
                     },
                 )
                 .then(response => {

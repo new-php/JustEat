@@ -25,11 +25,11 @@
             <div class="check-block">
                 <h4>Recibe ofertas y descuentos por</h4>
                 <div class="form-check">
-                    <input id="sms_offers" type="checkbox" v-model="sms_offers">
+                    <input id="sms_offers" type="checkbox" v-model="user.sms_offers">
                     <label class="check-label" for="sms_offers">SMS</label>
                 </div>
                 <div class="form-check">
-                    <input id="email_offers" type="checkbox" v-model="email_offers">
+                    <input id="email_offers" type="checkbox" v-model="user.email_offers">
                     <label class="check-label" for="email_offers">Email</label>
                 </div>
             </div>
@@ -45,7 +45,7 @@
 <script>
     export default {
         name: "UserInfo",
-        props: ['sms_offers', 'email_offers', 'id'],
+        props: ['user'],
         data() {
             return {
             }
@@ -53,10 +53,10 @@
         methods: {
             save(event) {
                 event.preventDefault();
-                window.axios.put('user/' + this.id,
+                window.axios.put('user/' + this.user.id,
                     {
-                        sms_offers: this.sms_offers,
-                        email_offers: this.email_offers,
+                        sms_offers: this.user.sms_offers,
+                        email_offers: this.user.email_offers,
                     },
                 )
                 .then(response => {
