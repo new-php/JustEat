@@ -11,10 +11,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    /*public function index()
     {
         //
-    }
+    }*/
 
     /**
      * Store a newly created resource in storage.
@@ -22,10 +22,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    /*public function store(Request $request)
     {
         //
-    }
+    }*/
 
     /**
      * Display the specified resource.
@@ -35,7 +35,11 @@ class UserController extends Controller
      */
     public function show()
     {
-        return ['data' => auth('api')->user()];
+        $user = auth('api')->user();
+
+        $user->load('addresses', 'paymentMethods');
+
+        return ['data' => $user];
     }
 
     /**
@@ -47,7 +51,25 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = auth('api')->user();
+
+        if ($user->id != $id) {
+            return response()->json([
+                'message' => 'Not authorized',
+            ], 403);
+        }
+
+        $validator = $request->validate([
+            'name' => 'nullable|max:255',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|max:255',
+            'sms_offers' => 'nullable|boolean',
+            'email_offers' => 'nullable|boolean',
+        ]);
+
+        $user->update($validator);
+
+        return ['data' => $user->fresh()->load('addresses', 'paymentMethods')];
     }
 
     /**
@@ -56,8 +78,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    /*public function destroy($id)
     {
         //
-    }
+    }*/
 }

@@ -84,8 +84,8 @@ class AddressCrudController extends CrudController
             ]);
         CRUD::addColumn([
             'label' => 'ZIP Code',
-            'type' => 'number',
-            'name' => 'text',
+            'type' => 'text',
+            'name' => 'postal_code',
             ]);
     }
 
@@ -144,8 +144,8 @@ class AddressCrudController extends CrudController
             ]);
         CRUD::addField([
             'label' => 'ZIP Code',
-            'type' => 'number',
-            'name' => 'text',
+            'type' => 'text',
+            'name' => 'postal_code',
             ]);
     }
 

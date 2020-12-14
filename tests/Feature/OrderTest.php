@@ -9,12 +9,187 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Address;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Restaurant;
 
-class OrderControllerTest extends TestCase
+class OrderTest extends TestCase
 {
     use RefreshDatabase;
+
+    /**
+     * Get all orders from a user
+     *
+     * @return void
+     */
+    public function testGetOrders()
+    {
+        $user = User::factory()->create();
+
+        $restaurant = Restaurant::factory()->create();
+
+        $address = Address::factory(['user_id' => $user->id])->create();
+
+        $order = Order::factory(['user_id' => $user->id, 'restaurant_id' => $restaurant->id, 'address_id' => $address->id])
+            ->has(OrderItem::factory()->count(2))
+            ->create();
+            //dd($order);
+        $response = $this->actingAs($user, 'api')->getJson('api/v1/orders');
+
+        $response->assertStatus(200)
+            ->assertJsonStructure(
+                [
+                    'data' => [
+                        [
+                            'id',
+                            'user_id',
+                            'address_id',
+                            'restaurant_id',
+                            'details',
+                            'shipping',
+                            'total',
+                            'order_status',
+                            'status',
+                            'rider_id',
+                            'delivery_mode',
+                            'delivery_time',
+                            'payed',
+                            'created_at',
+                            'updated_at',
+                            'restaurant' => [
+                                'id',
+                                'user_id',
+                                'name',
+                                'email',
+                                'photo',
+                                'logo',
+                                'phone',
+                                'address',
+                                'postal_code',
+                                'city',
+                                'state',
+                                'country',
+                                'cif',
+                                'created_at',
+                                'updated_at',
+                            ],
+                            'order_items' => [
+                                [
+                                    'id',
+                                    'order_id',
+                                    'product_id',
+                                    'price',
+                                    'quantity',
+                                    'created_at',
+                                    'updated_at',
+                                ],
+                                [
+                                    'id',
+                                    'order_id',
+                                    'product_id',
+                                    'price',
+                                    'quantity',
+                                    'created_at',
+                                    'updated_at',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            )
+            ->assertExactJson(
+                [
+                    'data' => [
+                        [
+                            'id' => $order->id,
+                            'user_id' => $order->user_id,
+                            'address_id' => $order->address_id,
+                            'restaurant_id' => $order->restaurant_id,
+                            'details' => $order->details,
+                            'shipping' => $order->shipping,
+                            'total' => $order->total,
+                            'order_status' => $order->order_status,
+                            'status' => $order->status,
+                            'rider_id' => $order->rider_id,
+                            'delivery_mode' => $order->delivery_mode,
+                            'delivery_time' => $order->delivery_time,
+                            'payed' => $order->payed,
+                            'created_at' => $order->created_at,
+                            'updated_at' => $order->updated_at,
+                            'restaurant' => [
+                                'id' => $order->restaurant->id,
+                                'user_id' => $order->restaurant->user_id,
+                                'name' => $order->restaurant->name,
+                                'email' => $order->restaurant->email,
+                                'photo' => $order->restaurant->photo,
+                                'logo' => $order->restaurant->logo,
+                                'phone' => $order->restaurant->phone,
+                                'address' => $order->restaurant->address,
+                                'postal_code' => $order->restaurant->postal_code,
+                                'city' => $order->restaurant->city,
+                                'state' => $order->restaurant->state,
+                                'country' => $order->restaurant->country,
+                                'cif' => $order->restaurant->cif,
+                                'created_at' => $order->restaurant->created_at,
+                                'updated_at' => $order->restaurant->updated_at,
+                            ],
+                            'order_items' => [
+                                [
+                                    'id' => $order->orderItems[0]->id,
+                                    'order_id' => $order->orderItems[0]->order_id,
+                                    'product_id' => $order->orderItems[0]->product_id,
+                                    'price' => $order->orderItems[0]->price,
+                                    'quantity' => $order->orderItems[0]->quantity,
+                                    'created_at' => $order->orderItems[0]->created_at,
+                                    'updated_at' => $order->orderItems[0]->updated_at,
+                                ],
+                                [
+                                    'id' => $order->orderItems[1]->id,
+                                    'order_id' => $order->orderItems[1]->order_id,
+                                    'product_id' => $order->orderItems[1]->product_id,
+                                    'price' => $order->orderItems[1]->price,
+                                    'quantity' => $order->orderItems[1]->quantity,
+                                    'created_at' => $order->orderItems[1]->created_at,
+                                    'updated_at' => $order->orderItems[1]->updated_at,
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            );
+    }
+
+    /**
+     * Get all orders for unauthenticated user
+     *
+     * @return void
+     */
+    public function testGetOrdersUnauthenticated()
+    {
+        $user = User::factory()->create();
+
+        $restaurant = Restaurant::factory()->create();
+
+        $address = Address::factory(['user_id' => $user->id])->create();
+
+        $order = Order::factory(['user_id' => $user->id, 'restaurant_id' => $restaurant->id, 'address_id' => $address->id])
+            ->has(OrderItem::factory()->count(2))
+            ->create();
+
+        $response = $this->getJson('api/v1/orders');
+
+        $response->assertStatus(401)
+            ->assertJsonStructure(
+                [
+                    'message',
+                ],
+            )
+            ->assertExactJson(
+                [
+                    'message' => 'Unauthenticated.',
+                ],
+            );
+    }
 
     /**
      * Store a new order correctly
@@ -68,7 +243,7 @@ class OrderControllerTest extends TestCase
 
     /**
      * Store an order with no user fails
-     * 
+     *
      * @return void
      */
     public function testStoreOrderNoAuth()
@@ -108,7 +283,7 @@ class OrderControllerTest extends TestCase
 
     /**
      * Storing an order with no products fails
-     * 
+     *
      * @return void
      */
     public function testStoreOrderWithNoProducts()
@@ -138,7 +313,7 @@ class OrderControllerTest extends TestCase
 
     /**
      * Test adding address to existing order
-     * 
+     *
      * @return void
      */
     public function testAddAddressOk()
@@ -157,7 +332,7 @@ class OrderControllerTest extends TestCase
             'status' => 'SELECTED'
         ]);
         $address = Address::factory()->create();
-       
+
         $response = $this->put('/api/v1/order/' . $order->id . '/address', [
             'name' => 'test',
             'phone' => 'test',
@@ -176,7 +351,7 @@ class OrderControllerTest extends TestCase
 
     /**
      * Test adding address to an order that is not yours, should fail
-     * 
+     *
      * @return void
      */
     public function testAddAddressOtherUsersOrder()
@@ -195,7 +370,7 @@ class OrderControllerTest extends TestCase
             'status' => 'SELECTED'
         ]);
         $address = Address::factory()->create();
-       
+
         $response = $this->put('/api/v1/order/' . $order->id . '/address', [
             'name' => 'test',
             'phone' => 'test',
@@ -213,7 +388,7 @@ class OrderControllerTest extends TestCase
 
     /**
      * Test adding address to completed order
-     * 
+     *
      * @return void
      */
     public function testAddAddressCompletedOrder()
@@ -232,7 +407,7 @@ class OrderControllerTest extends TestCase
             'status' => 'COMPLETED'
         ]);
         $address = Address::factory()->create();
-       
+
         $response = $this->put('/api/v1/order/' . $order->id . '/address', [
             'name' => 'test',
             'phone' => 'test',
@@ -250,7 +425,7 @@ class OrderControllerTest extends TestCase
 
     /**
      * Test adding address to non-existing order
-     * 
+     *
      * @return void
      */
     public function testAddAddressToNonExistingOrder()
@@ -265,7 +440,7 @@ class OrderControllerTest extends TestCase
         );
 
         $address = Address::factory()->create();
-       
+
         $response = $this->put('/api/v1/order/404/address', [
             'address_id' => $address->id,
         ], [
@@ -277,14 +452,14 @@ class OrderControllerTest extends TestCase
 
     /**
      * Test adding address with no auth, should fail
-     * 
+     *
      * @return void
      */
     public function testAddAddressWithNoAuth()
     {
         $order = Order::factory()->create();
         $address = Address::factory()->create();
-       
+
         $response = $this->put('/api/v1/order/' . $order->id . '/address', [
             'address_id' => $address->id,
         ], [
@@ -296,7 +471,7 @@ class OrderControllerTest extends TestCase
 
     /**
      * Test adding delivery method
-     * 
+     *
      * @return void
      */
     public function testDeliveryOk()
@@ -314,7 +489,7 @@ class OrderControllerTest extends TestCase
             'user_id' => $user->id,
             'status' => 'SELECTED'
         ]);
-       
+
         $response = $this->put('/api/v1/order/' . $order->id . '/delivery', [
             'delivery_time' => 'mock_delivery',
             'description' => 'not_null_details',
@@ -330,7 +505,7 @@ class OrderControllerTest extends TestCase
 
     /**
      * Test adding delivery method to an order that is not yours
-     * 
+     *
      * @return void
      */
     public function testUnauthorizedDelivery()
@@ -348,7 +523,7 @@ class OrderControllerTest extends TestCase
             'user_id' => $user->id + 1,
             'status' => 'SELECTED'
         ]);
-       
+
         $response = $this->put('/api/v1/order/' . $order->id . '/delivery', [
             'delivery_time' => 'mock_delivery',
             'description' => 'not_null_details',
@@ -361,7 +536,7 @@ class OrderControllerTest extends TestCase
 
     /**
      * Test adding delivery method when order is completed, should fail
-     * 
+     *
      * @return void
      */
     public function testDeliveryCompletedOrder()
@@ -379,7 +554,7 @@ class OrderControllerTest extends TestCase
             'user_id' => $user->id,
             'status' => 'COMPLETED'
         ]);
-       
+
         $response = $this->put('/api/v1/order/' . $order->id . '/delivery', [
             'delivery_time' => 'mock_delivery',
             'description' => 'not_null_details',
@@ -392,7 +567,7 @@ class OrderControllerTest extends TestCase
 
     /**
      * Test adding delivery method without details, should be ok
-     * 
+     *
      * @return void
      */
     public function testDeliveryNoDetailsOk()
@@ -410,7 +585,7 @@ class OrderControllerTest extends TestCase
             'user_id' => $user->id,
             'status' => 'SELECTED'
         ]);
-       
+
         $response = $this->put('/api/v1/order/' . $order->id . '/delivery', [
             'delivery_time' => 'mock_delivery',
         ], [
@@ -424,7 +599,7 @@ class OrderControllerTest extends TestCase
 
     /**
      * Test adding delivery method wrong orderId, should fail
-     * 
+     *
      * @return void
      */
     public function testDeliveryWrongId()
@@ -439,7 +614,7 @@ class OrderControllerTest extends TestCase
         );
 
         $order = Order::factory()->create();
-       
+
         $response = $this->put('/api/v1/order/200/delivery', [
             'delivery_mode' => 'mock_delivery',
         ], [
@@ -451,7 +626,7 @@ class OrderControllerTest extends TestCase
 
     /**
      * Test adding delivery method without delivery_mode, should fail
-     * 
+     *
      * @return void
      */
     public function testDeliveryNoModeFailk()
@@ -469,7 +644,7 @@ class OrderControllerTest extends TestCase
             'user_id' => $user->id,
             'status' => 'SELECTED'
         ]);
-       
+
         $response = $this->put('/api/v1/order/' . $order->id . '/delivery', [
             'details' => 'not_null_details',
         ], [
@@ -478,16 +653,16 @@ class OrderControllerTest extends TestCase
 
         $response->assertStatus(422);
     }
-    
+
     /**
      * Test adding delivery method with no auth, should fail
-     * 
+     *
      * @return void
      */
     public function testDeliveryWithNoAuth()
     {
         $order = Order::factory()->create();
-       
+
         $response = $this->put('/api/v1/order/' . $order->id . '/delivery', [
             'delivery_mode' => 'mock_delivery',
             'details' => 'not_null_details',
@@ -496,11 +671,11 @@ class OrderControllerTest extends TestCase
         ]);
 
         $response->assertStatus(401);
-    }   
+    }
 
     /**
      * Test paying method
-     * 
+     *
      * @return void
      */
     public function testPayOk()
@@ -518,20 +693,20 @@ class OrderControllerTest extends TestCase
             'status' => 'SELECTED',
             'user_id' => $user->id
         ]);
-       
+
         $response = $this->put('/api/v1/order/' . $order->id . '/pay', [
             'payed' => true,
         ], [
             'Accept' => 'application/json',
         ]);
-            
+
         $response->assertStatus(200);
         $this->assertEquals("COMPLETED", json_decode($response->content())->status);
     }
 
     /**
      * Test paying method when order already paid, should not work
-     * 
+     *
      * @return void
      */
     public function testPayAlreadyPaid()
@@ -549,19 +724,19 @@ class OrderControllerTest extends TestCase
             'status' => 'COMPLETED',
             'user_id' => $user->id
         ]);
-       
+
         $response = $this->put('/api/v1/order/' . $order->id . '/pay', [
             'payed' => true,
         ], [
             'Accept' => 'application/json',
         ]);
-            
+
         $response->assertStatus(403);
     }
 
     /**
      * Test paying method when paying another's users order, should fail
-     * 
+     *
      * @return void
      */
     public function testPayAnotherUsersOrder()
@@ -579,19 +754,19 @@ class OrderControllerTest extends TestCase
             'status' => 'SELECTED',
             'user_id' => $user->id + 1
         ]);
-       
+
         $response = $this->put('/api/v1/order/' . $order->id . '/pay', [
             'payed' => true,
         ], [
             'Accept' => 'application/json',
         ]);
-            
+
         $response->assertStatus(403);
     }
 
     /**
      * Test paying method wrong id, should fail
-     * 
+     *
      * @return void
      */
     public function testPayWrongId()
@@ -606,7 +781,7 @@ class OrderControllerTest extends TestCase
         );
 
         $order = Order::factory()->create();
-       
+
         $response = $this->put('/api/v1/order/300/pay', [], [
             'Accept' => 'application/json',
         ]);
@@ -616,17 +791,144 @@ class OrderControllerTest extends TestCase
 
     /**
      * Test paying method with no auth, should fail
-     * 
+     *
      * @return void
      */
     public function testPayWithNoAuth()
     {
         $order = Order::factory()->create();
-       
+
         $response = $this->put('/api/v1/order/' . $order->id . '/pay', [], [
             'Accept' => 'application/json',
         ]);
-        
+
         $response->assertStatus(401);
+    }
+
+    /**
+     * Test show method fails when showing another's users order
+     *
+     * @return void
+     */
+    public function testShowAnotherUsersOrder()
+    {
+        $user = User::factory()->create();
+        $user2 = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create([
+            'status' => 'SELECTED',
+            'user_id' => $user2->id
+        ]);
+
+        $response = $this->get('/api/v1/order/' . $order->id, [
+            'payed' => true,
+        ], [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(403);
+    }
+
+    /**
+     * Test show method wrong id, should fail
+     *
+     * @return void
+     */
+    public function testShowWrongId()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $order = Order::factory()->create();
+
+        $response = $this->get('/api/v1/order/300', [], [
+            'Accept' => 'application/json',
+        ]);
+
+        $response->assertStatus(404);
+    }
+
+    /**
+     * Test show method
+     *
+     * @return void
+     */
+    public function testShowMethod()
+    {
+        $user = User::factory()->create();
+
+        $this->artisan('passport:install');
+
+        Passport::actingAs(
+            $user,
+            ['create-servers']
+        );
+
+        $restaurant = Restaurant::factory()->create();
+        $address = Address::factory()->create([
+            'user_id' => $user->id,
+        ]);
+        $product1 = Product::factory()->create([
+            'restaurant_id' => $restaurant->id,
+            'price' => 12.33,
+        ]);
+        $product2 = Product::factory()->create([
+            'restaurant_id' => $restaurant->id,
+            'price' => 1.50,
+        ]);
+
+        $data = array(
+            'restaurant_id' => $restaurant->id,
+            'products' => array(
+                array(
+                    'id' => $product1->id,
+                    'quantity' => 3
+                ),
+                array(
+                    'id' => $product2->id,
+                    'quantity' => 5
+                )
+            ),
+            'shipping' => 3.44,
+            'delivery_mode' => 'cool_delivery'
+        );
+
+        $postResponse = $this->post('/api/v1/order/', $data, [
+            'Accept' => 'application/json',
+        ]);
+
+        $order_id = json_decode($postResponse->content())->data->id;
+
+        Order::where('id', $order_id)->update([
+            'address_id' => $address->id,
+            'status' => 'COMPLETED',
+        ]);
+
+        $response = $this->get('/api/v1/order/' . $order_id, [], [
+            'Accept' => 'application/json',
+        ]);
+
+        $this->assertEquals($order_id, json_decode($response->content())->data->order->id);
+        $this->assertEquals($user->id, json_decode($response->content())->data->order->user_id);;
+        $this->assertEquals($restaurant->id, json_decode($response->content())->data->order->restaurant_id);
+        $this->assertEquals($address->id, json_decode($response->content())->data->order->address_id);
+        $this->assertEquals(44.49, json_decode($response->content())->data->order->total);
+        $this->assertEquals($restaurant->id, array_values(json_decode($response->content())->data->restaurant)[0]->id);
+        $this->assertEquals($address->id, array_values(json_decode($response->content())->data->address)[0]->id);
+        $this->assertEquals(2, count(json_decode($response->content())->data->order_items));
+        $this->assertEquals(2, count(json_decode($response->content())->data->products));
     }
 }

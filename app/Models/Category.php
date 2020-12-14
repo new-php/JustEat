@@ -49,14 +49,15 @@ class Category extends Model
         // destination path relative to the disk above
         $destination_path = "images/categories";
 
+        // Image cannot be null
         // if the image was erased
-        if ($value==null) {
+        /*if ($value==null) {
             // delete the image from disk
             \Storage::disk($disk)->delete($this->{$attribute_name});
 
             // set null in the database column
             $this->attributes[$attribute_name] = null;
-        }
+        }*/
 
         // if a base64 was sent, store it in the db
         if (Str::startsWith($value, 'data:image'))

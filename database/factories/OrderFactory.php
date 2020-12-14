@@ -31,9 +31,12 @@ class OrderFactory extends Factory
             'details' => $this->faker->sentence,
             'shipping' => $this->faker->numberBetween(0, 5),
             'total' => $this->faker->numberBetween(10, 50),
-            'status' => $this->faker->randomElement(['error', 'cancelled', 'received', 'preparing', 'prepared', 'picked', 'delivered']),
+            'order_status' => $this->faker->randomElement(['error', 'cancelled', 'received', 'preparing', 'prepared', 'picked', 'delivered']),
+            'status' => $this->faker->randomElement(['CREATED', 'ADDRESSED', 'TIMED', 'COMPLETED']),
             'rider_id' => User::factory(),
             'delivery_mode' => $this->faker->randomElement(['pick_up', 'home_delivery']),
+            'delivery_time' => $this->faker->randomElement(['Lo antes posible', 'En una hora']),
+            'payed' => $this->faker->numberBetween(0, 1),
         ];
     }
 }

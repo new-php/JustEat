@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::prefix(config('api.version'))->group(function () {
     // Write routes here to be APP_URL/api/API_VERSION/...
 
@@ -31,14 +27,18 @@ Route::prefix(config('api.version'))->group(function () {
     Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
     Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
-
-    Route::get('restaurants', 'RestaurantController@index');
-
     Route::middleware('auth:api')->group(function() {
+        Route::get('orders', 'OrderController@index')->name('order.get_all');
         Route::post('order', 'OrderController@store')->name('order.new');
         Route::put('order/{order}/address', 'OrderController@addAddress')->name('order.address');
         Route::put('order/{order}/delivery', 'OrderController@addDeliveryTime')->name('order.deliverytime');
         Route::put('order/{order}/pay', 'OrderController@pay')->name('order.pay');
-        Route::get('user', 'UserController@show')->name('user');
+        Route::get('order/{order}', 'OrderController@show')->name('order.info');
+        Route::post('address', 'AddressController@store')->name('address.new');
+        Route::put('address/{address}', 'AddressController@update')->name('address.put');
+        Route::delete('address/{address}', 'AddressController@destroy')->name('address.remove');
+
+        Route::get('user', 'UserController@show')->name('user.get');
+        Route::put('user/{id}', 'UserController@update')->name('user.edit_info');
     });
 });

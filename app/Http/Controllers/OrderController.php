@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\Address;
+use App\Models\Restaurant;
 
 class OrderController extends Controller
 {
@@ -17,7 +19,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth('api')->user();
+
+        $orders = $user->orders()->with('restaurant', 'orderItems')->get();
+
+        return ['data' => $orders];
     }
 
     /**
@@ -123,7 +129,7 @@ class OrderController extends Controller
 
         $validator = $request->validate([
             'delivery_time' => 'required|string',
-            'description' => 'string',
+            'description' => 'string|nullable',
         ]);
 
         $order->update([
@@ -166,9 +172,37 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        //
+        $user = auth('api')->user();
+
+        if (!$user->orders()->where('id', $order->id)->exists() || $order->status != 'COMPLETED') {
+            return response()->json([
+                "message" => 'Permission denied',
+            ], 403);
+        }
+
+        $address = Address::where('id', '=', $order->address_id)->get();
+        $restaurant = Restaurant::where('id', '=', $order->restaurant_id)->get();
+        $order_items = OrderItem::where('order_id', '=', $order->id)->get();
+        $products = array();
+
+        foreach ($order_items as &$order_item) {
+            $product = Product::where('id', '=', $order_item->product_id)->get();
+            array_push($products, $product);
+        }
+
+        $order->load('address', 'restaurant', 'orderItems', 'orderItems.product');
+
+        return response()->json([
+            'data' => [
+                'order' => $order,
+                'address' => $address,
+                'restaurant' => $restaurant,
+                'order_items' => $order_items,
+                'products' => $products
+            ]
+            ], 200);
     }
 
     /**
@@ -178,10 +212,10 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    /*public function update(Request $request, $id)
     {
         //
-    }
+    }*/
 
     /**
      * Remove the specified resource from storage.
@@ -189,9 +223,9 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    /*public function destroy($id)
     {
         //
-    }
+    }*/
 
 }

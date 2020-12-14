@@ -35,6 +35,10 @@ Route::get('/', 'HomeController@mainPage')->name('mainpage');
 Route::get('/restaurants', 'RestaurantsViewController@restaurantsPage')->name('restaurants');
 Route::get('/restaurants/{restaurant}', 'RestaurantsViewController@restaurantPage')->name('restaurant');
 
+Route::get('/account', 'UserViewController@userAccountPage')->name('user.account');
+
+Route::get('/landingpage', 'LandingPageController@landingPage')->name('landingpage');
+
 /*
 |
 | Order Routes Views
@@ -43,3 +47,5 @@ Route::get('/restaurants/{restaurant}', 'RestaurantsViewController@restaurantPag
 Route::get('/order/{order}/delivery-address', 'OrderViewController@deliveryAddressPage');
 Route::get('/order/{order}/delivery-time', 'OrderViewController@deliveryTimePage');
 Route::get('/order/{order}/payment', 'OrderViewController@paymentPage');
+
+Route::get('/order/{id}', 'OrderViewController@informationPage');
