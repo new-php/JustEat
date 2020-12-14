@@ -178,6 +178,11 @@
                 window.location.href = "/restaurants?address=" + formatted_address + "&zip=" + zip;
             }
         },
+        logout:function() {
+            window.localStorage.removeItem('auth_token');
+            window.localStorage.removeItem('username');
+            window.location.reload();
+        }
     },
     computed: {
         username: function() {
