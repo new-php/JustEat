@@ -44,8 +44,9 @@ sudo mysql_secure_installation
 ```
 You can follow this guide up to 2nd point and use the root user for development
 
-[MySQL Installation Guide](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04-es)
+[MySQL Installation Guide](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04-es) or Follow these [Guide on MySQL Installation](https://docs.vultr.com/how-to-install-mysql-on-ubuntu-24-04) 
 
+ 
 
 #### Install Composer ####
 ```bash
